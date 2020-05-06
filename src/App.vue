@@ -1,24 +1,69 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <center>
+
+    <VueMapbox
+      mapStyle="mapbox://styles/mapbox/dark-v10"
+      height="500px"
+      width="800px"
+      :center="center">
+
+        <template v-slot:loader> Carregando </template>
+
+          <vm-marker :center="[-45, -15]"></vm-marker>
+
+    </VueMapbox>
+     <button @click="drag = !drag"> draggable </button>
+    <button @click="center = [-55, -15]"> draggable </button>
+    <input type="text" v-model="label" />
+
+    <VueMapbox
+      mapStyle="mapbox://styles/mapbox/outdoors-v11"
+      height="500px"
+      width="800px">
+
+        <template v-slot:loader> Carregando </template>
+
+          <vm-marker color="red" :center="[-55, -11]"></vm-marker>
+
+    </VueMapbox>
+    </center>
+
+    <VmMarkerExample />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+//  import VueMapbox from './components/VueMapbox.vue'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      center: [-45, -15],
+      drag: true,
+      label: 'a'
+    }
+  },
+
   components: {
-    HelloWorld
+    VueMapbox: () => import('./components/VueMapbox.vue'),
+    VmMarker: () => import('./components/VmMarker.vue'),
+    VmMarkerExample: () => import('./docsExamples/VmMarkerExample.vue')
+  },
+
+  methods: {
+    alert: function () {
+      console.log('aaa')
+    }
   }
 }
 </script>
 
 <style lang="stylus">
 #app
-  font-family Avenir, Helvetica, Arial, sans-serif
+  font-family Avenir, Helvetica, Arial, sanssdfasdfa-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   text-align center

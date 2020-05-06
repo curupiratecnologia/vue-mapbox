@@ -1,0 +1,23 @@
+image: node:13
+
+cache:
+  paths:
+  - node_modules/
+
+#before_script:
+#  - bundle install --path vendor
+
+pages:
+  stage: deploy
+  script:
+  - npm install
+  - npm run build
+  - rm -rf public
+  - mv dist public
+  - mv styleguide public/docs
+  artifacts:
+    paths:
+    - public
+    - styleguide
+  only:
+  - master

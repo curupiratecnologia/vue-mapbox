@@ -1,0 +1,418 @@
+/* eslint-disable eqeqeq */
+<template>
+  <div class="vue-mapbox" :style="{ position:'relative', width: this.width, height: this.height }">
+    <div ref="mapabaselayer" id="mapaBaseLayer" class="map-layer mapbox-map-container">
+      <div v-if="mapLoaded">
+        <slot></slot>
+      </div>
+      <div v-if="showLoader && !mapLoaded" class="loader">
+        <!-- @slot Slot to show a custom loader it props showLoadder is set true  -->
+        <slot name="loader">
+          <!-- <div> <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> <br /> {{'Loading'}}... </div> -->
+        </slot>
+      </div>
+      <!-- <div v-if='$dev' style='position:fixed;bottom:0;left:0;font-size:9px;padding:0.4em;z-index:10;background:#00000066;color:white;'>zoom:{{$store.getters.zoom}}</div> -->
+    </div>
+  </div>
+</template>
+
+<script>
+
+import mapboxgl from 'mapbox-gl'
+import 'mapbox-gl/dist/mapbox-gl.css'
+
+// inicia os webworks etc antes, para performance de mapax construidos e destruidos
+mapboxgl.prewarm()
+
+// import { ScatterplotLayer, ArcLayer, HexagonLayer } from '@deck.gl/layers'
+// import { MapboxLayer } from '@deck.gl/mapbox'
+// import mapBaseStyle from './styles/cgeestyle'
+const nativeEventsTypes = [
+  'click',
+  'dblclick',
+  'mouseenter',
+  'mouseleave',
+  'mouseout',
+  'contextmenu',
+  'wheel',
+  'touchstart',
+  'touchend',
+  'touchmove',
+  'touchcancel',
+  'movestart',
+  'move',
+  'moveend',
+  'dragstart',
+  'drag',
+  'dragend',
+  'zoomstart',
+  'zoom',
+  'zoomend',
+  'rotatestart',
+  'rotate',
+  'rotateend',
+  'pitchstart',
+  'pitch',
+  'pitchend',
+  'boxzoomstart',
+  'boxzoomend',
+  'boxzoomcancel',
+  'webglcontextlost',
+  'webglcontextrestored',
+  'load',
+  'render',
+  'idle',
+  'error',
+  'data',
+  'styledata',
+  'sourcedata',
+  'dataloading',
+  'styledataloading',
+  'sourcedataloading',
+  'styleimagemissing']
+
+export default {
+
+  name: 'VueMapbox',
+  /**
+       * Access current mapbox instance using componentInstance.map
+    */
+  props: {
+    /**
+       * Mapa Width. In px or percent
+    */
+    width: {
+      type: [Number, String],
+      default: '100%'
+    },
+    /**
+       * Mapa Height. In px or percent
+    */
+    height: {
+      type: [Number, String],
+      default: '100%'
+    },
+    /**
+       * Show a Loader
+    */
+    showLoader: {
+      type: Boolean,
+      default: true
+    },
+
+    /**
+       * AcceToken for your account for mapbox, if you are uing it for server tiles. Can be blank if you use anothers sources.
+       * If you set to the vue client an process.env.VUE_APP_MAPBOX_ACCESS_TOKEN, it will be used too
+    */
+    accessToken: {
+      type: String,
+      default: ''
+    },
+    /**
+       * The map's Mapbox style. Can be a URL or the STYLE OBJECT itself . example mapbox://styles/mapbox/streets-v11.  more info at https://mapbox.com/mapbox-gl-style-spec/
+    */
+    mapStyle: {
+      type: [String, Object],
+      default: 'mapbox://styles/mapbox/outdoors-v11'
+    },
+    /**
+       * The minimum zoom level of the map (0-24).
+    */
+    minZoom: {
+      type: Number,
+      default: 0
+    },
+    /**
+       * The maximun zoom level of the map (0-24).
+    */
+    maxZoom: {
+      type: Number,
+      default: 24
+    },
+    /**
+       * Define Zoom level (0-24).
+    */
+    zoom: {
+      type: Number,
+      default: 3.8
+    },
+    /**
+       *  Define center array.
+    */
+    center: {
+      type: Array,
+      default: () => [-53.048889, -14.951209500045001]
+    },
+    /**
+       *  The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options.
+    */
+    bounds: {
+      type: Array,
+      default: () => []
+    },
+    /**
+       *  Other options to pass to mapbox. Will be merged here. See https://docs.mapbox.com/mapbox-gl-js/api/#map for all options.
+    */
+    otherOptions: {
+      type: Object,
+      default: () => ({})
+    },
+    /**
+       *  Object with images to load in format {'imagename':url,'image2name':url2}
+    */
+    icons: {
+      type: Object,
+      default: () => ({})
+    } // {'name':url,'name2':url2}
+
+  },
+
+  provide: function () {
+    return {
+      getMap: this.getMap,
+      mapLoaded: this.mapLoaded,
+      mapboxgl: mapboxgl,
+      MapboxVueInstance: this
+    }
+  },
+
+  data () {
+    return {
+      /**
+       *  Set When Map Style is Loaded
+     */
+      mapLoaded: false,
+      map: null
+    }
+  },
+
+  created () {
+    // make sure the html div to use in mapbox is loaded
+    this.$nextTick(() => {
+      this.createMap()
+      //  UIEvents.$on('resizeMapContainer', () => {
+      //    if (this.map) this.map.resize()
+      //  })
+    })
+  },
+
+  computed: {
+    myMap: function () {
+      return this.map
+    }
+  },
+
+  beforeUpdated () {
+    console.log('beforeUpdated dom vueMapbox')
+  },
+  updated () {
+    console.log('renderizaneo dom vueMapbox')
+  },
+
+  // destroyed () {
+  //   if (this.$store.getters.visibleMapBoxLayers == false) {
+  //     if (this.map) {
+  //       $('#openlayers').show()
+  //       const center = this.map.getCenter()
+  //       const zoom = this.map.getZoom()
+  //       // window.i3geoOL.getView().setZoom(zoom)
+  //       // window.i3geoOL.getView().setCenter([center.lng,center.lat]);
+  //     }
+  //     this.$nextTick(() => {
+  //       this.$store.commit('mapLoaded', false)
+  //       window.map = undefined
+  //       window.mapboxmap = undefined
+
+  //       $('.mapbox-map-container').remove()
+  //     })
+  //   }
+  // },
+
+  // watch: {
+  //   // call again the method if the route changes
+  //   $route: function (to, from) {
+  //     if (this.mapLoaded) { // just fly if map is loaded. If not it will fly automatic when map is loaded
+  //       setTimeout(() => {
+  //         this.flyToPage(to, 3000)
+  //       }, 800)
+  //     }
+  //   }
+  // },
+
+  methods: {
+
+    createMap: function () {
+      mapboxgl.prewarm()
+      if (this.accessToken !== '') {
+        mapboxgl.accessToken = this.accessToken
+      } else if (process.env.VUE_APP_MAPBOX_ACCESS_TOKEN) {
+        mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
+      }
+      this.map = new mapboxgl.Map({
+        ...this.otherOptions,
+        container: this.$refs.mapabaselayer,
+        refreshExpiredTiles: false,
+        antialias: true,
+        style: this.mapStyle,
+        center: this.center,
+        zoom: this.zoom
+        // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
+      })
+
+      this.setupEvents(this.$listeners, this.map, nativeEventsTypes)
+
+      this.map.on('load', () => {
+        const _this = this
+        /**
+         * Load Event - When Maps Load
+         *  @property {object} _this the component instance
+          * @property {object} map the mapbox instance
+         */
+        this.$emit('load', _this, this.map)
+        this.mapLoaded = true
+      })
+
+      // window.map = this.$options.map
+      // window.mapboxmap = this.$options.map
+
+      // if (!_.isEmpty(this.icons)) {
+      //   _.each(this.icons, (v, k) => {
+      //     this.$options.map.loadImage(v, (error, image) => {
+      //       if (error) console.warn(error)
+      //       this.$options.map.addImage(k, image)
+      //     })
+      //   })
+      // }
+
+      // this.setMapEvents()
+    },
+
+    getMap: function () {
+      return this.map
+    },
+
+    setupEvents: function (listners, element, theEventsOfElement) {
+      if (listners) {
+        Object.entries(listners).forEach((item) => {
+          let eventName = item[0]
+          const eventFunction = item[1]
+          let once = false
+
+          if (eventName.indexOf('~') === 0) {
+            once = true
+            eventName = eventName.substring(1)
+          }
+          if (theEventsOfElement.includes(eventName)) {
+            if (once) {
+              element.once(eventName, eventFunction)
+            } else {
+              element.on(eventName, eventFunction)
+            }
+          }
+        })
+      }
+    }
+
+    //   setMapEvents: function () {
+    //     var _map = this.$options.map
+    //     // var { MapboxLayer, HexagonLayer } = window.deck;
+    //     var _t = this
+
+    //     this.$options.map.on('style.load', function () {
+    //       setTimeout(() => {
+    //         _t.$store.commit('mapLoaded', true)
+    //       }, 100)
+
+    //       window.mapboxmap.flyTo({ pitch: 0, zoom: _t.zoom + 0.5, duration: 2000 })
+    //     })
+
+    //     this.$options.map.on('click', (e) => {
+    //       // allox coords copy when click on shift.
+    //       // need to disable on env
+    //       // if(event.shiftKey){
+    //       var coordnates = `[${e.lngLat.lng},${e.lngLat.lat}]`
+    //       $('body').append('<input id="clipboard" style="position:absolute;z-index:0;opacity:0"/>')
+    //       var copyText = document.getElementById('clipboard')
+    //       copyText.value = coordnates
+    //       /* Select the text field */
+    //       copyText.select()
+    //       /* Copy the text inside the text field */
+    //       document.execCommand('Copy')
+    //       /* Alert the copied text */
+    //       // alert("Copied the text: " + copyText.value);
+    //       $(copyText).remove()
+    //       // }
+    //     })
+
+    //     this.$options.map.on('zoomend', (e) => {
+    //       var map = e.target
+    //       var zoomStore = this.$store.getters.zoom
+    //       var zoomMap = map.getZoom()
+    //       if (zoomStore != zoomMap) { this.$store.commit('zoom', zoomMap) }
+    //     })
+    //   },
+
+    //   flyToPage: function (to, duration = 2000, force = false) {
+    //     to = to || this.$route
+    //     var camera = _.get(to, 'meta.camera', false)
+    //     var id = _.get(to, 'params.id', false)
+
+    //     var cameraSet = _.get(camera, id, camera)
+
+    //     if (this.$store.state.initialAnimationFinish === false) { cameraSet = { center: [-47.85927131478161, -15.799714225713075], pitch: 55.00000000000001, zoom: 6.30769269135277, bearing: 0 } }
+
+    //     if (!cameraSet) {
+    //       return
+    //     }
+
+    //     setTimeout(() => { // make sure we have a delay to finish any initial setup
+    //       if (this.map) {
+    //         this.map.resize() // resize because the first time container may be change and the map note
+    //         // just change if it is not moving
+    //         if (this.map.isMoving() && force == false) {
+    //           //   console.log("Map Moving, will not go to ");
+    //           return
+    //         } else {
+    //           // console.log("Map will fly");
+    //           this.map.flyTo({ ...cameraSet, duration: duration })
+    //         }
+
+    //         // tell the map has finish it first animation
+    //         setTimeout(() => {
+    //           if (this.$store.state.initialAnimationFinish == false) { this.$store.commit('initialAnimationFinish', true) }
+    //         }, duration)
+    //       }
+    //     }, 100)
+    //   }
+
+  }
+
+}
+
+</script>
+
+<style lang="stylus">
+
+    .loader{
+        position:fixed;
+        top:50%;
+        left:50%;
+        text-align:center;
+    }
+
+    .map-layer {
+        position: absolute !important;
+        left: 0px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width:100%;
+        // background:red;
+        z-index:3
+
+        .mapboxgl-canvas{
+            left:0;
+        }
+    }
+
+</style>
