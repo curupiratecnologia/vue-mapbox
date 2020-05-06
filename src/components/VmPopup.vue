@@ -1,33 +1,27 @@
 <template>
-    <div>
+    <div :style="{ maxHeight:myMaxHeight, overflow:'auto'}">
       <slot></slot>
     </div>
 </template>
 
 <script>
 
+const nativeEventsTypes = ['open', 'close']
+
 export default {
 
   name: 'VmPopup',
 
-  marker: false,
-
-  inject: ['getMap', 'mapboxgl'],
+  inject: ['getMap', 'mapboxgl', 'MapboxVueInstance'],
 
   props: {
     /**
-       Center of Marker- It is a Dynamic properties
-      */
-    center: {
-      type: Array,
-      default: () => [0, 0]
-    },
-    /**
-       Anchor of the marker -Options are 'center' , 'top' , 'bottom' , 'left' , 'right' , 'top-left' , 'top-right' , 'bottom-left' , and 'bottom-right' .
+       *A string indicating the part of the Popup that should be positioned closest to the coordinate set via Popup#setLngLat
+       *@values 'center' , 'top' , 'bottom' , 'left' , 'right' , 'top-left' , 'top-right' , 'bottom-left' , and 'bottom-right' .
       */
     anchor: {
       type: String,
-      default: 'center',
+      default: 'bottom',
       validator: function (value) {
         return [
           'center',
@@ -41,71 +35,182 @@ export default {
       }
     },
     /**
-       Color of the default marker, if default slot is not set
+      If true , show or open popup. use with .sync Modifier to change parent (Dynamic)
     */
-    color: {
-      type: String,
-      default: '#3FB1CE'
+    open: {
+      type: Boolean,
+      default: true
     },
     /**
-       Offset of market in pixels
+     Center of Popup (Dynamic)
     */
-    offset: {
+    center: {
       type: Array,
       default: () => [0, 0]
     },
     /**
-       Offset of market in pixels
+      If true , a close button will appear in the top right corner of the popup.
     */
-    draggable: {
+    closeButton: {
+      type: Boolean,
+      default: true
+    },
+    /**
+       If true , the popup will closed when the map is clicked.
+    */
+    closeOnClick: {
+      type: Boolean,
+      default: true
+    },
+    /**
+      If true , the popup will closed when the map moves.
+    */
+    closeOnMove: {
       type: Boolean,
       default: false
     },
     /**
-       * Marker width if a default slot html is set
+        pixel offset applied to the popup's location specified as:
     */
-    width: {
-      type: [Number, String],
-      default: '100%'
+    offset: {
+      type: [Number, Array],
+      default: 20
     },
     /**
-       *  * Marker height if a default slot html is set
+        Space-separated CSS class names to add to popup container
     */
-    height: {
+    className: {
+      type: String,
+      default: ''
+    },
+    /**
+       * A string that sets the CSS property of the popup's maximum width, eg '300px' . To ensure the popup resizes to fit its content, set this property to 'none' .
+    */
+    maxWidth: {
       type: [Number, String],
-      default: '100%'
+      default: '240px'
+    },
+    /**
+       * A string that sets the CSS property of the popup's maximum width, eg '300px' . To ensure the popup resizes to fit its content, set this property to 'none' .
+    */
+    maxHeight: {
+      type: [Number, String],
+      default: 'auto'
+    },
+    /**
+       * Tracks the popup anchor to the cursor position on screens with a pointer device (it will be hidden on touchscreens). Replaces the setLngLat behavior. For most use cases, set closeOnClick and closeButton to false.
+    */
+    trackPointer: {
+      type: Boolean,
+      default: false
     }
   },
 
-  mounted () {
-    const options = {
-      offset: this.offset,
-      color: this.color,
-      draggable: this.draggable
+  data () {
+    return {
+      popup: null
     }
-    if (this.$slots.default) {
-      options.element = this.$el
-      // console.log(el)
-    }
+  },
 
-    this.marker = new this.mapboxgl.Marker(options)
-      .setLngLat(this.center)
-      .addTo(this.getMap())
+  computed: {
+    myMaxHeight: function () {
+      let h = this.maxHeight
+      if (typeof h === 'number') {
+        h += 'px'
+      }
+      return h
+    },
+    myMaxWidth: function () {
+      let w = this.maxWidth
+      if (typeof w === 'number') {
+        w += 'px'
+      }
+      return w
+    }
+  },
+
+  async mounted () {
+    await this.$nextTick()
+    this.createPopup()
   },
 
   watch: {
     center: function (val) {
-      if (this.marker) { this.marker.setLngLat(val) }
+      this.setupPopup()
     },
-    draggable: function (val) {
-      if (this.marker) { this.marker.setDraggable(val) }
+    open: function (val) {
+      this.setupPopup()
+    },
+    trackPointer: function (val) {
+      this.setupPopup()
+    },
+    maxWidth: function (val) {
+      this.setupPopup()
     }
   },
 
   beforeDestroy () {
-    if (this.marker) {
-      this.marker.remove()
+    if (this.popup) {
+      this.popup.remove()
     }
+  },
+
+  methods: {
+
+    createPopup: function () {
+      const options = {
+        closeButton: this.closeButton,
+        closeOnMove: this.closeOnMove,
+        closeOnClick: this.closeOnClick,
+        anchor: this.anchor,
+        offset: this.offset,
+        className: this.className,
+        trackPointer: this.trackPointer,
+        maxWidth: this.maxWidth
+      }
+
+      this.popup = new this.mapboxgl.Popup(options)
+        .setLngLat(this.center)
+        .setDOMContent(this.$el)
+
+      this.popup.on('open', () => {
+        /**
+         * Update event. Can use .sync modifier to make 2 way data bind easer for the open props
+         *  @property {boolean} open true or false
+         */
+        this.$emit('update:open', true)
+      })
+      this.popup.on('close', () => {
+        this.$emit('update:open', false)
+      })
+
+      this.setupPopup()
+      this.MapboxVueInstance.setupEvents(this.$listeners, this.popup, nativeEventsTypes)
+    },
+
+    setupPopup: function () {
+      if (this.open) {
+        if (this.popup.isOpen() === false) { this.popup.addTo(this.getMap()) }
+      } else {
+        if (this.popup.isOpen() === true) { this.popup.remove() }
+      }
+
+      this.popup.setLngLat(this.center)
+
+      if (this.trackPointer) {
+        this.popup.trackPointer()
+      }
+
+      if (this.popup.getMaxWidth() !== this.myMaxWidth) {
+        this.popup.setMaxWidth(this.myMaxWidth)
+      }
+    },
+
+    docEvents: function () {
+      this.$emit('open')
+      this.$emit('close')
+    }
+
   }
 
 }

@@ -1,58 +1,43 @@
 
-Normal Marker
+
+Example Simple Popup
+
 ```vue
-    <VueMapbox
-      mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
-      width="100%"
-      :center="[-45, -15]">
-          <vm-marker :center="[-45, -15]"></vm-marker>
-
+<template>
+    <VueMapbox mapStyle="mapbox://styles/mapbox/outdoors-v11" :height="200" width="100%">
+        <VmPopup  
+          :center="[-45, -15]"
+          :closeButton="false" 
+          :closeOnClick="false" >
+            <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+        </VmPopup>
     </VueMapbox>
-
+</template>
 ```
 
-A custom marker, just set a child/default slot
-```vue
-    <VueMapbox
-      mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
-      width="100%"
-      :center="[-45, -15]">
-          <vm-marker 
-            color="red"
-            popUpContent="This is show in popup"
-            :center="[-45, -15]">
-                 <div style="background:blue">I'm a marker</div>
-          </vm-marker>
-
-    </VueMapbox>
-
-```
-
-
-Popup in Marker set via Props
+Example Complete Popup. See use of .sync modifier in evento to update the open props of parent.
 
 ```vue
 <template>
 <div>
-     <VueMapbox
-      mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
-      width="100%"
-      :center="[-45, -15]">
-          <vm-marker 
-            color="red"
-            :popUpContent="popupcontent"
-            :center="center">
-            
-          </vm-marker>
+    <VueMapbox
+      mapStyle="mapbox://styles/mapbox/outdoors-v11"
+      height="500px"
+      width="800px">
+
+        <VmPopup @open="abriu" @close="fechor" :center="center" :open.sync="open" :trackPointer="drag" :maxWidth="width" maxHeight="50px">
+           {{width}}    {{label}}
+        </VmPopup>
 
     </VueMapbox>
-    
-    <button @click="changecenter"> Change Center </button>
-    <input type="text" v-model="popupcontent">
-    {{popupcontent}}
+    </center>
+      <br />
+      Content: <input type="text" v-model="label" />
+      <button @click="changecenter"> Change center </button>
+      <button @click="open=!open"> Toogle Open </button>
+      <button @click="drag=!drag"> Toogle Traking </button>
+      <button @click="changeWidth"> chang MaxWidth </button>
+      <div> {{ event }}</div>
     </div>
 </template>
 <script>
@@ -60,75 +45,31 @@ Popup in Marker set via Props
 // You can also use 'export default {}' style module exports.
 export default {
   data() {
-    return { center: [-45, -15], popupcontent:"a popup via slot" }
+    return { 
+      center: [-45, -15],
+      drag: false,
+      open: true,
+      label: 'Here goes the pop up content. you can use any vue components as child of this.',
+      width: 200,
+      event:''
+    } 
   },
   methods: {
     changecenter() {
       this.center =  [ this.center[0]-1, this.center[1]-2]
+    },
+    changeWidth() {
+      this.width -= 20
+    },
+    abriu:function(e){
+      this.event ="open"
+      console.log(e)
+    },
+    fechor:function(e){
+      this.event ="close"
+      console.log(e)
     }
   }
 }
 </script>
-<style scoped>
-.wrapper {
-  padding: 10px;
-}
-.text-name {
-  color: red;
-}
-</style>
-```
-
-Popup in Marker set via Slots
-
-
-Popup in Marker set via Props
-
-```vue
-<template>
-<div>
-     <VueMapbox
-      mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
-      width="100%"
-      :center="[-45, -15]">
-          <vm-marker 
-            color="red"
-            :center="center">
-
-            <template v-slot:popup>
-                
-            </template>
-          
-          </vm-marker>
-
-    </VueMapbox>
-    
-    <button @click="changecenter"> Change Center </button>
-    <input type="text" v-model="popupcontent">
-    {{popupcontent}}
-    </div>
-</template>
-<script>
-
-// You can also use 'export default {}' style module exports.
-export default {
-  data() {
-    return { center: [-45, -15], popupcontent:"a popup via slot" }
-  },
-  methods: {
-    changecenter() {
-      this.center =  [ this.center[0]-1, this.center[1]-2]
-    }
-  }
-}
-</script>
-<style scoped>
-.wrapper {
-  padding: 10px;
-}
-.text-name {
-  color: red;
-}
-</style>
 ```

@@ -12,6 +12,7 @@ pages:
   script:
   - npm install
   - npm run build
+  - npm run styleguide:build
   - rm -rf public
   - mv dist public
   - mv styleguide public/docs

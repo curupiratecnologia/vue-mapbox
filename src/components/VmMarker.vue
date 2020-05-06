@@ -1,15 +1,19 @@
 <template>
+
     <div style="display:none;">
-      <div v-if="$slots.default"
+
+      <div v-if="$slots.marker"
           ref="marker">
          <!-- @slot html of marker -->
-        <slot></slot>
+        <slot name="marker"></slot>
       </div>
       <div v-if="$slots.popup" ref="popup">
         <!-- @slot html to show in popup -->
         <slot name="popup"></slot>
       </div>
+      <slot></slot>
     </div>
+
 </template>
 
 <script>
@@ -96,7 +100,8 @@ export default {
   data () {
     return {
       marker: null,
-      popup: null
+      popup: null,
+      ownPopup: false
     }
   },
 
@@ -126,9 +131,9 @@ export default {
     }
   },
 
-  updated () {
-    this.$nextTick(() => this.updateHtmlContent())
-  },
+  // updated () {
+  //   this.$nextTick(() => this.updateHtmlContent())
+  // },
 
   methods: {
     setupMarker: function () {
@@ -137,7 +142,7 @@ export default {
         color: this.color,
         draggable: this.draggable
       }
-      if (this.$slots.default) {
+      if (this.$slots.marker) {
         options.element = this.$refs.marker
       }
 
@@ -151,17 +156,34 @@ export default {
 
     setupPopup: function () {
       if (!this.marker) return
+
+      // check if have an popup as child component
+      this.$children.forEach(vnode => {
+        if (vnode.$options.name === 'VmPopup') {
+          this.popup = vnode.$data.popup
+        }
+      })
+
       const htmlcontent = this.getHtmlForPopup()
-      if (htmlcontent) {
-        this.popup = new this.mapboxgl.Popup().setHTML(htmlcontent)
+      if (!this.popup && htmlcontent) {
+        this.popup = new this.mapboxgl.Popup()
+        this.ownPopup = true
+      }
+
+      if (this.popup) {
         this.marker.setPopup(this.popup)
+        this.updateHtmlContent()
       }
     },
 
     updateHtmlContent: function () {
-      if (this.popup) {
+      if (this.popup && this.ownPopup) {
         const htmlcontent = this.getHtmlForPopup()
-        this.popup.setHTML(htmlcontent)
+        if (this.$slots.popup) {
+          this.popup.setDOMContent(htmlcontent)
+        } else {
+          this.popup.setHTML(htmlcontent)
+        }
       }
     },
 
@@ -171,12 +193,16 @@ export default {
         htmlcontent = this.popUpContent
       }
       if (this.$slots.popup) {
-        htmlcontent = this.$refs.popup.outerHTML
+        htmlcontent = this.$refs.popup
       }
       return htmlcontent
     },
 
     docEvents: function () {
+      /**
+        *  @property {object} _this the component instance
+        * @property {object} map the mapbox instance
+      */
       this.$emit('dragstart')
       this.$emit('drag')
       this.$emit('dragend')

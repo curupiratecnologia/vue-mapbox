@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 <template>
-  <div class="vue-mapbox" :style="{ position:'relative', width: this.width, height: this.height }">
+  <div class="vue-mapbox" :style="{ position:'relative', width: myWidth, height: myHeight }">
     <div ref="mapabaselayer" id="mapaBaseLayer" class="map-layer mapbox-map-container">
       <div v-if="mapLoaded">
         <slot></slot>
@@ -69,7 +69,8 @@ const nativeEventsTypes = [
   'dataloading',
   'styledataloading',
   'sourcedataloading',
-  'styleimagemissing']
+  'styleimagemissing'
+]
 
 export default {
 
@@ -199,7 +200,23 @@ export default {
   computed: {
     myMap: function () {
       return this.map
+    },
+ 
+    myHeight: function () {
+      let h = this.height
+      if (typeof h === 'number') {
+        h += 'px'
+      }
+      return h
+    },
+    myWidth: function () {
+      let w = this.width
+      if (typeof w === 'number') {
+        w += 'px'
+      }
+      return w
     }
+ 
   },
 
   beforeUpdated () {
@@ -291,7 +308,11 @@ export default {
       return this.map
     },
 
-    setupEvents: function (listners, element, theEventsOfElement) {
+    /**
+  * Automatic Setup Events from Mapbox Classes to Vue Instances
+  */
+
+    setupEvents: function (listners, MapboxElement, theEventsOfElement, VueInstance) {
       if (listners) {
         Object.entries(listners).forEach((item) => {
           let eventName = item[0]
@@ -304,14 +325,14 @@ export default {
           }
           if (theEventsOfElement.includes(eventName)) {
             if (once) {
-              element.once(eventName, eventFunction)
+              MapboxElement.once(eventName, eventFunction)
             } else {
-              element.on(eventName, eventFunction)
+              MapboxElement.on(eventName, eventFunction)
             }
           }
         })
       }
-    }
+    },
 
     //   setMapEvents: function () {
     //     var _map = this.$options.map
@@ -385,6 +406,50 @@ export default {
     //     }, 100)
     //   }
 
+    docEvents: function () {
+      this.$emit('click')
+      this.$emit('dblclick')
+      this.$emit('mouseenter')
+      this.$emit('mouseleave')
+      this.$emit('mouseout')
+      this.$emit('contextmenu')
+      this.$emit('wheel')
+      this.$emit('touchstart')
+      this.$emit('touchend')
+      this.$emit('touchmove')
+      this.$emit('touchcancel')
+      this.$emit('movestart')
+      this.$emit('move')
+      this.$emit('moveend')
+      this.$emit('dragstart')
+      this.$emit('drag')
+      this.$emit('dragend')
+      this.$emit('zoomstart')
+      this.$emit('zoom')
+      this.$emit('zoomend')
+      this.$emit('rotatestart')
+      this.$emit('rotate')
+      this.$emit('rotateend')
+      this.$emit('pitchstart')
+      this.$emit('pitch')
+      this.$emit('pitchend')
+      this.$emit('boxzoomstart')
+      this.$emit('boxzoomend')
+      this.$emit('boxzoomcancel')
+      this.$emit('webglcontextlost')
+      this.$emit('webglcontextrestored')
+      this.$emit('load')
+      this.$emit('render')
+      this.$emit('idle')
+      this.$emit('error')
+      this.$emit('data')
+      this.$emit('styledata')
+      this.$emit('sourcedata')
+      this.$emit('dataloading')
+      this.$emit('styledataloading')
+      this.$emit('sourcedataloading')
+      this.$emit('styleimagemissing')
+    }
   }
 
 }
