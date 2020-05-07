@@ -21,6 +21,8 @@
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
+import uniqueId from 'lodash/uniqueId'
+
 // inicia os webworks etc antes, para performance de mapax construidos e destruidos
 mapboxgl.prewarm()
 
@@ -183,17 +185,21 @@ export default {
        *  Set When Map Style is Loaded
      */
       mapLoaded: false,
-      map: null
+      map: null,
+      sources: null,
+      layers: null,
+      images: null
     }
   },
 
   created () {
+    this.sources = new Map() // {id:{type,data,instance}}
+    this.layers = new Map()
+    this.images = new Map()
+
     // make sure the html div to use in mapbox is loaded
     this.$nextTick(() => {
       this.createMap()
-      //  UIEvents.$on('resizeMapContainer', () => {
-      //    if (this.map) this.map.resize()
-      //  })
     })
   },
 
@@ -201,7 +207,6 @@ export default {
     myMap: function () {
       return this.map
     },
- 
     myHeight: function () {
       let h = this.height
       if (typeof h === 'number') {
@@ -216,7 +221,6 @@ export default {
       }
       return w
     }
- 
   },
 
   beforeUpdated () {
@@ -226,35 +230,11 @@ export default {
     console.log('renderizaneo dom vueMapbox')
   },
 
-  // destroyed () {
-  //   if (this.$store.getters.visibleMapBoxLayers == false) {
-  //     if (this.map) {
-  //       $('#openlayers').show()
-  //       const center = this.map.getCenter()
-  //       const zoom = this.map.getZoom()
-  //       // window.i3geoOL.getView().setZoom(zoom)
-  //       // window.i3geoOL.getView().setCenter([center.lng,center.lat]);
-  //     }
-  //     this.$nextTick(() => {
-  //       this.$store.commit('mapLoaded', false)
-  //       window.map = undefined
-  //       window.mapboxmap = undefined
-
-  //       $('.mapbox-map-container').remove()
-  //     })
-  //   }
-  // },
-
-  // watch: {
-  //   // call again the method if the route changes
-  //   $route: function (to, from) {
-  //     if (this.mapLoaded) { // just fly if map is loaded. If not it will fly automatic when map is loaded
-  //       setTimeout(() => {
-  //         this.flyToPage(to, 3000)
-  //       }, 800)
-  //     }
-  //   }
-  // },
+  beforeDestroy () {
+    if (this.map) {
+      this.map.remove()
+    }
+  },
 
   methods: {
 
@@ -288,20 +268,6 @@ export default {
         this.$emit('load', _this, this.map)
         this.mapLoaded = true
       })
-
-      // window.map = this.$options.map
-      // window.mapboxmap = this.$options.map
-
-      // if (!_.isEmpty(this.icons)) {
-      //   _.each(this.icons, (v, k) => {
-      //     this.$options.map.loadImage(v, (error, image) => {
-      //       if (error) console.warn(error)
-      //       this.$options.map.addImage(k, image)
-      //     })
-      //   })
-      // }
-
-      // this.setMapEvents()
     },
 
     getMap: function () {
@@ -309,9 +275,8 @@ export default {
     },
 
     /**
-  * Automatic Setup Events from Mapbox Classes to Vue Instances
-  */
-
+    * Automatic Setup Events from Mapbox Classes to Vue Instances
+    */
     setupEvents: function (listners, MapboxElement, theEventsOfElement, VueInstance) {
       if (listners) {
         Object.entries(listners).forEach((item) => {
@@ -331,6 +296,62 @@ export default {
             }
           }
         })
+      }
+    },
+
+    /**
+    * Create/Update Source
+    */
+    addSource: function (id, type, options) {
+      // if source name exist, create a randow one
+      if (this.sources.get(id)) {
+        id = uniqueId(id + type)
+      }
+
+      this.map.addSource(id, { type, ...options })
+      const sourceObject = this.map.getSource(id)
+
+      this.sources.set(id, { id, type, options, instance: sourceObject })
+      return this.sources.get(id)
+    },
+
+    /**
+    * Remove Source
+    */
+    removeSource: function (id) {
+      // if (this.sources.has(id)) {
+      //   this.sources.delete(id)
+      // }
+      // if (this.map && this.map.getSource(id)) {
+      //   this.map.removeSource(id)
+      // }
+    },
+
+    /**
+    * Create/Update Layer
+    */
+    addLayer: function (id, type, options) {
+      // // if layer name exist, create a randow one
+      if (this.layers.get(id)) {
+        id = uniqueId(id + type)
+      }
+
+      this.map.addLayer({ id: id, type: type, ...options })
+      const sourceObject = this.map.getLayer(id)
+
+      this.layers.set(id, { id, type, options, instance: sourceObject })
+      return id //{ id, type, options, instance: sourceObject }
+    },
+
+    /**
+    * Remove Source
+    */
+    removeLayer: function (id) {
+      if (this.layers.has(id)) {
+        this.layers.delete(id)
+      }
+      if (this.map.getLayer(id)) {
+        this.map.removeLayer(id)
       }
     },
 

@@ -46,7 +46,8 @@ export default {
       */
     center: {
       type: Array,
-      default: () => [0, 0]
+      default: () => [0, 0],
+      required: true
     },
     /**
       * Anchor of the marker - (Dynamic)
@@ -54,7 +55,7 @@ export default {
      */
     anchor: {
       type: String,
-      default: 'center',
+      default: 'bottom',
       validator: function (value) {
         return [
           'center',

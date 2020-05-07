@@ -23,6 +23,13 @@ module.exports = {
         'src/components/VmPopup.vue'
       ]
     },
+    {
+      name: 'Sources',
+      sectionDepth: 1,
+      components: [
+        'src/components/Source/vmSourceGeoJson.vue'
+      ]
+    },
     { name: 'Other components', sectionDepth: 1, components: 'src/components/VmPopup.vue' }
   ]
 
