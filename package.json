@@ -1,17 +1,23 @@
 {
   "name": "vue-mapbox",
   "version": "0.1.0",
+  "main": "dist/vue-mapbox.common.js",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "styleguide": "vue-cli-service styleguidist",
-    "styleguide:build": "vue-cli-service styleguidist:build"
+    "styleguide:build": "vue-cli-service styleguidist:build",
+    "build-lib": "npm run build-lib:library && npm run build-lib:plugin",
+    "build-lib:library": "rm -rf dist/* && vue-cli-service build --target lib --name vue-mapbox src/library-entry.js --dest dist/"
   },
   "dependencies": {
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
+    "@vue/babel-preset-jsx": "^1.1.2",
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
+    "vue-static": "0.0.5",
     "vuex": "^3.1.3"
   },
   "devDependencies": {

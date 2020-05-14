@@ -17,15 +17,11 @@
 </template>
 
 <script>
-
+import getOnlyMapboxProps from '@/utils/getOnlyMapboxProps'
 const nativeEventsTypes = ['click', 'dragstart', 'drag', 'dragend']
 
 export default {
 
-  /**
-   * The only true button.
-   * @displayName Marker
-   */
 
   /**
    * The only true button.
@@ -42,15 +38,17 @@ export default {
 
   props: {
     /**
-       Center of Marker (Dynamic)
+      * (Dynamic) Center of Marker
+      * @tags mapbox true
       */
     center: {
       type: Array,
       default: () => [0, 0],
       required: true
+
     },
     /**
-      * Anchor of the marker - (Dynamic)
+      * (Dynamic) Anchor of the marker
       * @values center , top , bottom , left , right , top-left , top-right , bottom-left , and bottom-right
      */
     anchor: {
@@ -69,32 +67,64 @@ export default {
       }
     },
     /**
-       Color of the default marker, if default slot is not set (Dynamic)
+       (Dynamic) Color of the default marker, if default slot is not set (Dynamic)
     */
     color: {
       type: String,
-      default: '#3FB1CE'
+      default: '#3FB1CE',
+      mapbox: true
     },
     /**
-       Offset of market in pixels
+      (Dynamic) Offset of market in pixels
     */
     offset: {
       type: Array,
-      default: () => [0, 0]
+      mapbox: true
     },
     /**
-       Offset of market in pixels
+      (Dynamic) Offset of market in pixels
     */
     draggable: {
       type: Boolean,
-      default: false
+      mapbox: true
     },
     /**
-       *  The  PopUp Content - If set via slot, this will be ignored (Dynamic)
+      (Dynamic) The rotation angle of the marker in degrees, relative to its respective rotationAlignment setting. A positive value will rotate the marker clockwise.
+    */
+    rotation: {
+      type: Number,
+      mapbox: true
+    },
+    /**
+      (Dynamic) map aligns the Marker to the plane of the map. viewport aligns the Marker to the plane of the viewport. auto automatically matches the value of rotationAlignment
+      @values map, viewport, auto
+    */
+    pitchAlignment: {
+      type: String,
+      validator: function (value) {
+        // O valor precisa corresponder a alguma dessas Strings
+        return ['map', 'viewport', 'auto'].indexOf(value) !== -1
+      },
+      mapbox: true
+    },
+
+    /**
+      (Dynamic) map aligns the Marker 's rotation relative to the map, maintaining a bearing as the map rotates. viewport aligns the Marker 's rotation relative to the viewport, agnostic to map rotations. auto is equivalent to viewport .
+      @values map, viewport, auto
+    */
+    rotationAlignment: {
+      type: String,
+      validator: function (value) {
+        // O valor precisa corresponder a alguma dessas Strings
+        return ['map', 'viewport', 'auto'].indexOf(value) !== -1
+      },
+      mapbox: true
+    },
+    /**
+       * (Dynamic) The PopUp Content - If set via slot, this will be ignored
     */
     popUpContent: {
-      type: String,
-      default: undefined
+      type: String
     }
   },
 
@@ -119,7 +149,19 @@ export default {
       if (this.marker) { this.marker.setDraggable(val) }
     },
     color: function (val) {
-      if (this.marker) { this.marker.setDraggable(val) }
+      if (this.marker) { this.setupMarker() }
+    },
+    offset: function (val) {
+      if (this.marker) { this.marker.setOffset(val) }
+    },
+    rotation: function (val) {
+      if (this.marker) { this.marker.setRotation(val) }
+    },
+    rotationAlignment: function (val) {
+      if (this.marker) { this.marker.setRotationAlignment(val) }
+    },
+    pitchAlignment: function (val) {
+      if (this.marker) { this.marker.setPitchAlignment(val) }
     },
     popUpContent: function (val) {
       if (this.marker) { this.updateHtmlContent() }
@@ -138,11 +180,10 @@ export default {
 
   methods: {
     setupMarker: function () {
-      const options = {
-        offset: this.offset,
-        color: this.color,
-        draggable: this.draggable
-      }
+      const options = getOnlyMapboxProps(this)
+
+      if (this.marker) this.marker.remove()
+
       if (this.$slots.marker) {
         options.element = this.$refs.marker
       }

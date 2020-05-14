@@ -35,6 +35,8 @@ const nativeEventsTypes = [
   'mouseenter',
   'mouseleave',
   'mouseout',
+  'mousedown',
+  'mouseup',
   'contextmenu',
   'wheel',
   'touchstart',
@@ -137,7 +139,7 @@ export default {
     */
     zoom: {
       type: Number,
-      default: 3.8
+      default: 4
     },
     /**
        *  Define center array.
@@ -172,7 +174,7 @@ export default {
 
   provide: function () {
     return {
-      getMap: this.getMap,
+      getMap: () => this.map,
       mapLoaded: this.mapLoaded,
       mapboxgl: mapboxgl,
       MapboxVueInstance: this
@@ -192,6 +194,16 @@ export default {
     }
   },
 
+  static () {
+    return {
+
+    }
+  },
+
+  beforeCreate () {
+
+  },
+
   created () {
     this.sources = new Map() // {id:{type,data,instance}}
     this.layers = new Map()
@@ -204,9 +216,7 @@ export default {
   },
 
   computed: {
-    myMap: function () {
-      return this.map
-    },
+
     myHeight: function () {
       let h = this.height
       if (typeof h === 'number') {
@@ -227,7 +237,7 @@ export default {
     console.log('beforeUpdated dom vueMapbox')
   },
   updated () {
-    console.log('renderizaneo dom vueMapbox')
+    console.log('Updated - renderizaneo dom vueMapbox')
   },
 
   beforeDestroy () {
@@ -275,9 +285,9 @@ export default {
     },
 
     /**
-    * Automatic Setup Events from Mapbox Classes to Vue Instances
+    * Automatic Setup Events from Mapbox Classes in Vue Instances
     */
-    setupEvents: function (listners, MapboxElement, theEventsOfElement, VueInstance) {
+    setupEvents: function (listners, MapboxElement, theEventsOfElement, layerId) {
       if (listners) {
         Object.entries(listners).forEach((item) => {
           let eventName = item[0]
@@ -290,9 +300,17 @@ export default {
           }
           if (theEventsOfElement.includes(eventName)) {
             if (once) {
-              MapboxElement.once(eventName, eventFunction)
+              if (layerId) {
+                MapboxElement.once(eventName, layerId, eventFunction)
+              } else {
+                MapboxElement.once(eventName, eventFunction)
+              }
             } else {
-              MapboxElement.on(eventName, eventFunction)
+              if (layerId) {
+                MapboxElement.on(eventName, layerId, eventFunction)
+              } else {
+                MapboxElement.on(eventName, eventFunction)
+              }
             }
           }
         })
@@ -304,7 +322,7 @@ export default {
     */
     addSource: function (id, type, options) {
       // if source name exist, create a randow one
-      if (this.sources.get(id)) {
+      if (this.map.getSource(id)) {
         id = uniqueId(id + type)
       }
 
@@ -340,7 +358,7 @@ export default {
       const sourceObject = this.map.getLayer(id)
 
       this.layers.set(id, { id, type, options, instance: sourceObject })
-      return id //{ id, type, options, instance: sourceObject }
+      return id // { id, type, options, instance: sourceObject }
     },
 
     /**

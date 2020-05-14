@@ -1,33 +1,63 @@
 <template>
   <div id="app">
     <center>
-
     <VueMapbox
+      mapStyle="mapbox://styles/mapbox/dark-v10"
+      height="500px"
+      width="800px"
+      :center="[-45, -15]">
+
+       <!-- <vmSource name="example" type="geojson" :options="{ data: currentGeoJson, generateId:true  }" > -->
+                              <vmLayer name="myLayer"
+                        :source="{type:'geojson',  generateId:true, data: 'http://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        type="fill"
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': fill, 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
+                         @dblclick="featureenter"
+                        >
+
+                       <template v-slot:popupHover>
+                             <vm-popup max-width="400px">
+                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
+                            </vm-popup>
+                        </template>
+
+                        <template v-slot:popupClick="slotProps">
+                          <VmPopup max-width="400px">
+                               <pre>{{ slotProps.features && slotProps.features[0] && slotProps.features[0].properties }}</pre>
+                              <h6>Here goes the pop up content while in <b>CLICK</b> a Feature.</h6>
+                          </VmPopup>
+                        </template>
+
+                 </vmLayer>
+
+       <!-- </vmSource> -->
+
+    </VueMapbox>
+
+     <button @click="fill = '#00ffff'"> change paint fill </button>
+    <!-- <VueMapbox
       height="500px"
       width="800px"
       :center="center">
 
         <template v-slot:loader> Carregando </template>
-          <vm-marker color="red" :center="[-45, -15]">
-            <div> fasdfasda </div>
-            <!-- <VmPopup>
-                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
-            </VmPopup> -->
-          </vm-marker>
 
-          <vmSourceGeoJson name="example" :geoJsonData="currentGeoJson" :tolerance="0.3" :generateId="true" promoteId="codarea">
-                <vmLayer name="myLayer"
+          <vmSourceGeoJson name="example" :geoJsonData="currentGeoJson" :tolerance="0.35" :generateId="true" promoteId="codarea">
+                <vmLayer name="myLayer3"
                         type="fill"
                         :paint="{ 'fill-color': '#ff7700', 'fill-opacity': [ 'case', ['boolean', ['feature-state', 'hover'], false], 1, 0.5 ] }"
                 />
-                <vmLayer name="myLayer"
+                <vmLayer name="myLayer23"
                         type="line"
                         :paint="{ 'line-color': '#333333' }"
                 />
           </vmSourceGeoJson>
 
-    </VueMapbox>
-     <button @click="mode = mode+1"> toogle geojson </button> {{ currentGeoJson }}
+    </VueMapbox> -->
+     <button @click="fill = '#00ffff'"> change paint fill </button>
     <button @click="center = [-55, -15]"> draggable </button>
     <input type="text" v-model="label" />
 
@@ -62,7 +92,8 @@ export default {
       drag: false,
       open: true,
       label: 'a',
-      mode: 0
+      mode: 0,
+      fill: '#ff7700'
 
     }
   },
@@ -70,8 +101,7 @@ export default {
   components: {
     VueMapbox: () => import('./components/VueMapbox.vue'),
     VmMarker: () => import('./components/VmMarker.vue'),
-    VmPopup: () => import('./components/VmPopup.vue'),
-    VmMarkerExample: () => import('./docsExamples/VmMarkerExample.vue')
+    VmPopup: () => import('./components/VmPopup.vue')
   },
 
   computed: {
@@ -79,6 +109,7 @@ export default {
       if (this.mode == 0) {
         return 'http://servicodados.ibge.gov.br/api/v2/malhas/?formato=application/vnd.geo+json&resolucao=5&qualidade=4'
       } else if (this.mode == 1) {
+        return this.geojson
       } else if (this.mode == 2) {
         return this.geojson2
       } else if (this.mode == 3) {
@@ -370,6 +401,9 @@ export default {
   methods: {
     alert: function () {
       console.log('aaa')
+    },
+    featureenter: function (e) {
+      console.log(e)
     }
   }
 }

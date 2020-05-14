@@ -157,6 +157,7 @@ export default {
 
   methods: {
 
+
     createPopup: function () {
       const options = {
         closeButton: this.closeButton,

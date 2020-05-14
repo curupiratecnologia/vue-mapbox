@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
-import _ from 'lodash'
+import forEach from 'lodash/forEach'
+import VueStatic from 'vue-static'
+Vue.use(VueStatic);
 
 Vue.config.productionTip = false
 
@@ -10,7 +12,7 @@ Vue.config.MapBoxAccessToken = 'pk.eyJ1IjoibGVjZWxlcyIsImEiOiJjajUyZXBzbXEwZjYxM
 
 function requireAllComponents (requireContext) {
   var keys = requireContext.keys()
-  _.forEach(keys, k => {
+  forEach(keys, k => {
     var modulo = requireContext(k)
     var nome = k.match(/([^/]*).vue$/)
     Vue.component(nome[1], modulo.default || modulo)
