@@ -165,12 +165,6 @@ export default {
     }
   },
 
-  static () {
-    return {
-
-    }
-  },
-
   render (h) {
     if (
       (this.hoverFeatures.length === 0 && this.selectedFeatures.length === 0) ||
