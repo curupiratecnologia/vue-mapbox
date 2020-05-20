@@ -11,7 +11,7 @@ This example show  dynamic paint props change clicling in the button
     <div>
       <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="400px" width="100%" :center="[-45, -15]">
 
-       <vmSource name="exampleSource" type="geojson" :options="{ data: 'http://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" >
+       <vmSource name="exampleSource" type="geojson" :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" >
                 <vmLayer name="myLayer"
                         type="fill"
                         @mousemove="callMethod"
@@ -149,7 +149,7 @@ If we use a VmPopup component inside this slots, it properties will be used as t
       <div>
       <VueMapbox v-once key="mymap" mapStyle="mapbox://styles/mapbox/dark-v10" height="400px" width="100%" :center="[-47, -15]" :zoom="5">
                  <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'http://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
                         type="fill"
                         :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
                         :paint-hover="{ 'fill-color': fill, 'fill-opacity': 1  }"

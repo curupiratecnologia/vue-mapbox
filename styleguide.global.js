@@ -18,7 +18,6 @@ function requireAllComponents (requireContext) {
 
 requireAllComponents(require.context('./src/components', true, /^\.\/.*\.vue$/))
 
-
 export default previewComponent => {
   return {
     render (createElement) {
