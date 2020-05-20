@@ -2,8 +2,7 @@
 
     <div style="display:none;">
 
-      <div v-if="$slots.marker"
-          ref="marker">
+      <div v-if="$slots.marker" ref="marker" @click="$emit('click',this)">
          <!-- @slot html of marker -->
         <slot name="marker"></slot>
       </div>
@@ -17,11 +16,12 @@
 </template>
 
 <script>
-import getOnlyMapboxProps from '@/utils/getOnlyMapboxProps'
+// TODO - change mouse cursor to pointer if marker have popup
+
+import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
 const nativeEventsTypes = ['click', 'dragstart', 'drag', 'dragend']
 
 export default {
-
 
   /**
    * The only true button.
@@ -96,6 +96,18 @@ export default {
       mapbox: true
     },
     /**
+      (Dynamic) min zoom of map tha will show the marker
+    */
+    minZoom: {
+      type: Number
+    },
+    /**
+      (Dynamic) min zoom of map tha will show the marker
+    */
+    maxZoom: {
+      type: Number
+    },
+    /**
       (Dynamic) map aligns the Marker to the plane of the map. viewport aligns the Marker to the plane of the viewport. auto automatically matches the value of rotationAlignment
       @values map, viewport, auto
     */
@@ -133,6 +145,13 @@ export default {
       marker: null,
       popup: null,
       ownPopup: false
+    }
+  },
+
+  created: function () {
+    this.visible = false
+    if (this.minZoom || this.maxZoom) {
+      this.getMap().on('zoom', this.markerVisible)
     }
   },
 
@@ -190,7 +209,8 @@ export default {
 
       this.marker = new this.mapboxgl.Marker(options)
         .setLngLat(this.center)
-        .addTo(this.getMap())
+
+      this.markerVisible()
 
       this.MapboxVueInstance.setupEvents(this.$listeners, this.marker, nativeEventsTypes)
       this.setupPopup()
@@ -218,6 +238,21 @@ export default {
       }
     },
 
+    markerVisible: function () {
+      // if (!this.minZoom && !this.maxZoom) return
+      const minZoom = this.minZoom ? this.minZoom : 0
+      const maxZoom = this.maxZoom ? this.maxZoom : 24
+      const zoom = this.getMap().getZoom()
+
+      if (zoom >= minZoom && zoom <= maxZoom && this.visible === false) {
+        this.marker.addTo(this.getMap())
+        this.visible = true
+      } else if (this.visible === true && (zoom < minZoom || zoom > maxZoom) ) {
+        this.marker.remove()
+        this.visible = false
+      }
+    },
+
     updateHtmlContent: function () {
       if (this.popup && this.ownPopup) {
         const htmlcontent = this.getHtmlForPopup()
@@ -242,8 +277,8 @@ export default {
 
     docEvents: function () {
       /**
-        *  @property {object} _this the component instance
-        * @property {object} map the mapbox instance
+      *  @property {object} _this the component instance
+      *  @property {object} map the mapbox instance
       */
       this.$emit('dragstart')
       this.$emit('drag')

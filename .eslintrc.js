@@ -16,6 +16,12 @@ module.exports = {
     'vue/no-unused-components' : "warn",
     'no-trailing-spaces': 'warn',
     'eqeqeq': 'warn',
-    'no-multiple-empty-lines': 'warn'
+    'no-multiple-empty-lines': 'warn',
+    'indent': 'warn',
+    'padded-blocks': 'warn',
+    'spaced-comment': 'warn',
+    'keyword-spacing': 'warn',
+    'keyword-spacing': 'warn',
+
   }
 }

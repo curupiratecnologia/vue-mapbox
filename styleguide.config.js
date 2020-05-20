@@ -60,7 +60,14 @@ module.exports = {
       ]
     },
     {
-      name: 'Sources',
+      name: 'Custom Markers',
+      sectionDepth: 1,
+      components:[
+        'src/components/Markers/VmMarkerDonut.vue'
+      ]
+    },
+    {
+      name: 'Custom Sources',
       sectionDepth: 1,
       components: [
         'src/components/Source/vmSourceGeoJson.vue'

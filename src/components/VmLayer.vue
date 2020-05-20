@@ -1,7 +1,7 @@
 
 <script>
-import getOnlyMapboxProps from '@/utils/getOnlyMapboxProps'
-import findVNodeChildren from '@/utils/findVNodeChildren'
+import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
+import findVNodeChildren from '../utils/findVNodeChildren'
 import findIndex from 'lodash/findIndex'
 import VmPopup from './VmPopup'
 
@@ -62,7 +62,8 @@ export default {
     */
     sourceLayer: {
       type: String,
-      mapbox: true
+      mapbox: true,
+      name: 'source-layer'
     },
     /**
        (Dynamic) Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance.
@@ -161,7 +162,143 @@ export default {
       selectedFeatures: [],
       hoverFeatures: [],
       hasChildPopup: null,
-      lastClick: null
+      lastClick: null,
+      hasFeatureHover: false,
+      hasFeatureClick: false
+    }
+  },
+
+  watch: {
+
+    minzoom: function (val) {
+      this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
+    },
+
+    maxzom: function (val) {
+      this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
+    },
+
+    filter: function (val) {
+      this.getMap().setFilter(this.layerId, val)
+    },
+
+    myPaint: function (newPaint, oldPaint) {
+      Object.entries(newPaint).forEach((item) => {
+        const key = item[0]
+        const value = item[1]
+        if (JSON.stringify(value) !== JSON.stringify(oldPaint[key])) {
+          this.getMap().setPaintProperty(this.layerId, key, value)
+        }
+      })
+    },
+
+    layout: function (newLayout, oldLayout) {
+      Object.entries(newLayout).forEach((item) => {
+        const key = item[0]
+        const value = item[1]
+        if (JSON.stringify(value) !== JSON.stringify(oldLayout[key])) {
+          this.getMap().setLayoutProperty(this.layerId, key, value)
+        }
+      })
+    },
+
+    selectedFeatures: function (val, oldVal) {
+      const map = this.getMap()
+      oldVal.forEach(feature => {
+        map.setFeatureState(
+          { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+          { click: false }
+        )
+      })
+
+      val.forEach(feature => {
+        map.setFeatureState(
+          { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+          { click: true }
+        )
+      })
+      /**
+       * Triggers when features selectes clicking on it
+       *
+       * @property {array} features array with all features selected
+       */
+      this.$emit('featureselect', val)
+    },
+
+    hoverFeatures: function (val, oldVal) {
+      const map = this.getMap()
+      if (oldVal.length > 0) {
+        oldVal.forEach(feature => {
+          map.setFeatureState(
+            { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+            { hover: false }
+          )
+        })
+      }
+
+      val.forEach(feature => {
+        map.setFeatureState(
+          { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+          { hover: true }
+        )
+      })
+      /**
+       * Triggers when features ar hover
+       *
+       * @property {array} features array with all features selected
+       */
+      this.$emit('featurehover', val)
+    }
+
+  },
+
+  created: function () {
+    this.popupOpen = false
+    const options = getOnlyMapboxProps(this)
+    if (!options.source) {
+      const source = this.getSource()
+      if (source && source.id) {
+        options.source = source.id
+      }
+    }
+    const mylayer = this.MapboxVueInstance.addLayer(this.name, this.type, { ...options, paint: this.myPaint })
+    // get source add after add layer, because of case where the source especification is set in props as option, withou an id
+    this.sourceId = this.getMap().getLayer(mylayer).source
+    this.layerId = mylayer
+    // bind listners set in component to mapbox events
+    this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId)
+  },
+
+  mounted: async function () {
+    await this.$nextTick()
+    this.setupLayerFeaturesEvents()
+  },
+
+  computed: {
+    myPaint: function () {
+      if (this.hasFeatureHover || this.hasFeatureClick) {
+        return this.getFinalFeatureStateForPaintOrLayout(this.paint, this.paintHover, this.paintClick)
+      }
+      return this.paint
+    },
+
+    myLayout: function () {
+      if (this.hasFeatureHover || this.hasFeatureClick) {
+        return this.getFinalFeatureStateForPaintOrLayout(this.layout, this.layoutHover, this.layoutClick)
+      }
+      return this.layout
+    },
+
+    layerInstance: function () {
+      return this.getMap().getLayer(this.id)
+    }
+
+  },
+
+  beforeDestroy () {
+    if (this.layerId) {
+      this.MapboxVueInstance.removeLayer(this.layerId)
+      this.layerId = null
     }
   },
 
@@ -181,7 +318,6 @@ export default {
     let popup
     let props = {}
     let popupKey
-
     // check for popupHover Slot
     if (has(this.$scopedSlots, 'popupHover')) {
       popupOver = this.$scopedSlots.popupHover({ features: this.hoverFeatures }) // [0]
@@ -237,16 +373,16 @@ export default {
       ...props
     }
     if (popupKey === 'layerPopupClick') {
-       this.popupOpen = true
+      this.popupOpen = true
       // when click in close of popup, deselect any selected layers
       const closeFunc = get(popupInstance, 'componentOptions.listeners.close')
       set(popupInstance.componentOptions, 'listeners.close', (e) => {
-        this.selectedFeatures = []
         this.popupOpen = false
+        this.selectedFeatures = []
+        this.hoverFeatures = []
         if (closeFunc) {
           closeFunc(e)
         }
-
       })
     }
     popupInstance.key = popupKey + this.layerId
@@ -257,136 +393,19 @@ export default {
     )
   },
 
-  watch: {
-
-    minzoom: function (val) {
-      this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
-    },
-
-    maxzom: function (val) {
-      this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
-    },
-
-    filter: function (val) {
-      this.getMap().setFilter(this.layerId, val)
-    },
-
-    myPaint: function (newPaint, oldPaint) {
-      Object.entries(newPaint).forEach((item) => {
-        const key = item[0]
-        const value = item[1]
-        if (JSON.stringify(value) !== JSON.stringify(oldPaint[key])) {
-          this.getMap().setPaintProperty(this.layerId, key, value)
-        }
-      })
-    },
-
-    layout: function (newLayout, oldLayout) {
-      Object.entries(newLayout).forEach((item) => {
-        const key = item[0]
-        const value = item[1]
-        if (JSON.stringify(value) !== JSON.stringify(oldLayout[key])) {
-          this.getMap().setLayoutProperty(this.layerId, key, value)
-        }
-      })
-    },
-
-    selectedFeatures: function (val, oldVal) {
-      const map = this.getMap()
-      oldVal.forEach(feature => {
-        map.setFeatureState(
-          { source: this.sourceId, id: feature.id },
-          { click: false }
-        )
-      })
-
-      val.forEach(feature => {
-        map.setFeatureState(
-          { source: this.sourceId, id: feature.id },
-          { click: true }
-        )
-      })
-      /**
-       * Triggers when features selectes clicking on it
-       *
-       * @property {array} features array with all features selected
-       */
-      this.$emit('featureselect', val)
-    },
-
-    hoverFeatures: function (val, oldVal) {
-      /**
-       * Triggers when features ar hover
-       *
-       * @property {array} features array with all features selected
-       */
-      this.$emit('featurehover', val)
-    }
-
-  },
-
-  created: function () {
-    this.popupOpen = false
-    const options = getOnlyMapboxProps(this)
-    if (!options.source) {
-      const source = this.getSource()
-      if (source && source.id) {
-        options.source = source.id
-      }
-    }
-    const mylayer = this.MapboxVueInstance.addLayer(this.name, this.type, { ...options, paint: this.myPaint })
-    // get source add after add layer, because of case where the source especification is set in props as option, withou an id
-    this.sourceId = this.getMap().getLayer(mylayer).source
-    this.layerId = mylayer
-    // bind listners set in component to mapbox events
-    this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId)
-    this.setupLayerFeaturesEvents()
-  },
-
-  mounted: async function () {
-    await this.$nextTick()
-  },
-
-  computed: {
-
-    myPaint: function () {
-      if (this.hasFeatureHover || this.hasFeatureClick) {
-        return this.getFinalFeatureStateForPaintOrLayout(this.paint, this.paintHover, this.paintClick)
-      }
-      return this.paint
-    },
-
-    myLayout: function () {
-      if (this.hasFeatureHover || this.hasFeatureClick) {
-        return this.getFinalFeatureStateForPaintOrLayout(this.layout, this.layoutHover, this.layoutClick)
-      }
-      return this.layout
-    },
-
-    hasFeatureHover: function () {
-      return (this.paintHover || this.layoutHover)
-    },
-
-    hasFeatureClick: function () {
-      return (this.paintClick || this.layoutClick)
-    },
-
-    layerInstance: function () {
-      return this.getMap().getLayer(this.id)
-    }
-
-  },
-
-  beforeDestroy () {
-    if (this.layerId) {
-      this.MapboxVueInstance.removeLayer(this.layerId)
-      this.layerId = null
-    }
-  },
-
   methods: {
 
     setupLayerFeaturesEvents: function () {
+      if (this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
+        this.hasFeatureHover = true
+      } else {
+        this.hasFeatureHover = false
+      }
+      if (this.paintClick || this.layoutClick || has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick')) {
+        this.hasFeatureClick = true
+      } else {
+        this.hasFeatureClick = false
+      }
       const map = this.getMap()
       if (this.hasFeatureHover) {
         map.off('mousemove', this.layerId, this.featureMouseMoveEvent)
@@ -404,54 +423,45 @@ export default {
     },
 
     featureMouseMoveEvent: function (e) {
-      //if click popup is open, i stop hover events
-      if(this.popupOpen) return false
-      const map = this.getMap()
+      // if click popup is open, i stop hover events
+      if (this.popupOpen) return false
+
+      // check if im the top most layer
+      // TODO - create event in mapbox instance to detect .capture.stop propagations etc, and implement this logic in the events
+      const features = this.getMap().queryRenderedFeatures(e.point)
+      if (get(features, '[0].layer.id') !== this.layerId) {
+        this.featureMouseLeaveEvent(e)
+        return false
+      }
+
       if (e.features.length > 0) {
         // if hovering the same feature, just return
         if (this.hoverFeatures.map(f => f.id).join('') === e.features.map(f => f.id).join('')) {
           return false
         }
-
         if (this.hasFeatureClick) { // if have click events, change cursor
           this.getMap().getCanvas().style.cursor = 'pointer'
         }
-        if (this.hoverFeatures.length > 0) {
-          this.hoverFeatures.forEach(feature => {
-            map.setFeatureState(
-              { source: this.sourceId, id: feature.id },
-              { hover: false }
-            )
-          })
-        }
         this.hoverFeatures = e.features
-        this.hoverFeatures.forEach(feature => {
-          map.setFeatureState(
-            { source: this.sourceId, id: e.features[0].id },
-            { hover: true }
-          )
-        })
       }
     },
 
     featureMouseLeaveEvent: function (e) {
-      if(this.popupOpen) return false
-      const map = this.getMap()
+      if (this.popupOpen) return false
       if (this.hasFeatureClick) { // if have click events, change cursor
         this.getMap().getCanvas().style.cursor = 'initial'
-      }
-      if (this.hoverFeatures.length > 0) {
-        this.hoverFeatures.forEach(feature => {
-          map.setFeatureState(
-            { source: this.sourceId, id: feature.id },
-            { hover: false }
-          )
-        })
       }
       this.hoverFeatures = []
     },
 
     featureMouseClickEvent: function (e) {
+      const features = this.getMap().queryRenderedFeatures(e.point)
+
+      // if clicked in another top most layer, is like clicking outside this
+      if (get(features, '[0].layer.id') !== this.layerId) {
+        this.selectedFeatures = []
+        return
+      }
       this.lastClick = e
       var featuresSelected = [...this.selectedFeatures]
       let featuresToAdd = [] // [...this.selectedFeatures]

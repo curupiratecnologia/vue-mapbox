@@ -2,8 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import forEach from 'lodash/forEach'
-import VueStatic from 'vue-static'
-Vue.use(VueStatic);
 
 Vue.config.productionTip = false
 
@@ -20,8 +18,9 @@ function requireAllComponents (requireContext) {
 }
 
 // requireAllComponents(require.context("./src/elements", true, /^\.\/.*\.vue$/));
-requireAllComponents(require.context('./components', false, /[A-Z]\w+\.(vue|js)$/))
-requireAllComponents(require.context('./components/Sources', false, /[A-Z]\w+\.(vue|js)$/))
+requireAllComponents(require.context('./components', true, /[A-Z]\w+\.(vue|js)$/))
+// requireAllComponents(require.context('./components/Sources', false, /[A-Z]\w+\.(vue|js)$/))
+// requireAllComponents(require.context('./components/Layers', false, /[A-Z]\w+\.(vue|js)$/))
 
 
 

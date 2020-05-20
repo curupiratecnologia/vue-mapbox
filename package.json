@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "styleguide": "vue-cli-service styleguidist",
     "styleguide:build": "vue-cli-service styleguidist:build",
-    "build-lib": "npm run build-lib:library && npm run build-lib:plugin",
+    "build-lib": "npm run build-lib:library",
     "build-lib:library": "rm -rf dist/* && vue-cli-service build --target lib --name vue-mapbox src/library-entry.js --dest dist/"
   },
   "dependencies": {
@@ -38,5 +38,10 @@
     "stylus-loader": "^3.0.2",
     "vue-cli-plugin-styleguidist": "~4.19.0",
     "vue-template-compiler": "^2.6.11"
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
 }

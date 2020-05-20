@@ -149,6 +149,13 @@ export default {
       default: () => [-53.048889, -14.951209500045001]
     },
     /**
+       * If true , the map's position (zoom, center latitude, center longitude, bearing, and pitch) will be synced with the hash fragment of the page's URL. For example, http://path/to/my/page.html#2.59/39.26/53.07/-24.1/60 . An additional string may optionally be provided to indicate a parameter-styled hash, e.g. http://path/to/my/page.html#map=2.59/39.26/53.07/-24.1/60&foo=bar , where foo is a custom parameter and bar is an arbitrary hash distinct from the map hash.
+    */
+    hash: {
+      type: [Boolean, String],
+      default: false
+    },
+    /**
        *  The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options.
     */
     bounds: {
@@ -165,7 +172,7 @@ export default {
     /**
        *  Object with images to load in format {'imagename':url,'image2name':url2}
     */
-    icons: {
+    images: {
       type: Object,
       default: () => ({})
     } // {'name':url,'name2':url2}
@@ -189,8 +196,7 @@ export default {
       mapLoaded: false,
       map: null,
       sources: null,
-      layers: null,
-      images: null
+      layers: null
     }
   },
 
@@ -207,7 +213,6 @@ export default {
   created () {
     this.sources = new Map() // {id:{type,data,instance}}
     this.layers = new Map()
-    this.images = new Map()
 
     // make sure the html div to use in mapbox is loaded
     this.$nextTick(() => {
@@ -262,9 +267,12 @@ export default {
         antialias: true,
         style: this.mapStyle,
         center: this.center,
-        zoom: this.zoom
+        zoom: this.zoom,
+        hash: this.hash
         // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
       })
+
+      this.addImages()
 
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes)
 
@@ -359,6 +367,28 @@ export default {
 
       this.layers.set(id, { id, type, options, instance: sourceObject })
       return id // { id, type, options, instance: sourceObject }
+    },
+
+    /**
+    Adde images in map
+    * @params {object} images.
+    */
+
+    addImages: function (images) {
+      if (!this.map) return
+      images = images || this.images
+      Object.entries(images).forEach((item) => {
+        const key = item[0]
+        const value = item[1]
+
+        // TODO - chek when is a htmlimage or other type
+        this.map.loadImage(value, (error, image) => {
+          if (error) {
+            console.error(error)
+          }
+          if (!this.map.hasImage(key)) this.map.addImage(key, image)
+        })
+      })
     },
 
     /**

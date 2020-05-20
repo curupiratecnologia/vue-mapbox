@@ -39,7 +39,16 @@ export default {
     */
     open: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    /**
+     * TODO
+      If we use the global popup of the map. if true, any new VmPopup instance will use the same popup, so a new poup will remove any previues.
+      If false, will create a new Popup.
+      */
+    global: {
+      type: Boolean,
+      default: false
     },
     /**
      Center of Popup (Dynamic)
@@ -157,8 +166,8 @@ export default {
 
   methods: {
 
-
     createPopup: function () {
+      console.log('popup created!')
       const options = {
         closeButton: this.closeButton,
         closeOnMove: this.closeOnMove,
