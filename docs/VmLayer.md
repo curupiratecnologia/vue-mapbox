@@ -91,14 +91,13 @@ We are able to select more than one feature when clicking with a modifier key, u
       <div>
       <VueMapbox v-once key="mymap" mapStyle="mapbox://styles/mapbox/dark-v10" height="400px" width="100%" :center="[-47, -15]" :zoom="5">
                 <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'http://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
                         type="fill"
                         :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
                         :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
                         :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
                         multipleFeatureSelectionOn="alt"
-                        @featurehover="featureover"
-                        @mousemove="featureenter"
+
                 />
     </VueMapbox>
     <br />
@@ -107,10 +106,7 @@ We are able to select more than one feature when clicking with a modifier key, u
     </div>
 </template>
 <script>
-// import VmLayer from '../src/components/VmLayer.vue'
-// You can also use 'export default {}' style module exports.
 export default {
-  // components:{ VmLayer },
   data() {
     return { 
       features: false,
@@ -119,20 +115,22 @@ export default {
     }
   },
   methods: {
-    featureenter: function( e ) {
-     console.log(e)
-    }
     featureover:function( features ) {
+ 
       if( Array.isArray(features) && features[0] && features[0].properties){
         this.features = features[0].properties
       }else{
         this.features = false
       }
+ 
     }
   }
 }
 </script>
 ```
+
+
+
 
 
 
