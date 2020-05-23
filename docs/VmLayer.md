@@ -18,7 +18,7 @@ This example show  dynamic paint props change clicling in the button
             <vm-layer name="myLayer"
                     type="fill"
                     @mousemove="callMethod"
-                    :paint="{ 'fill-color': color, 'fill-opacity': opacity  }"
+                    :paint="{ 'fill-color': color, 'fill-opacity': 1  }"
             ><vm-layer>
 
        </vm-source>
@@ -44,8 +44,7 @@ This example show  dynamic paint props change clicling in the button
 export default {
   data() {
     return { 
-      color: "red",
-      opacity: 1,
+      color: "#ff0000",
       center: [-45, -15],
       event:null
     }
@@ -61,7 +60,6 @@ export default {
         color += letters[Math.floor(Math.random() * 16)];
       }
       this.color =  color;
-      // this.center =  [ this.center[0]-1, this.center[1]-2]
     }
   }
 }
