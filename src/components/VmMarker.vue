@@ -3,48 +3,18 @@
 
 import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
 import findVNodeChildren from '../utils/findVNodeChildren'
-import findIndex from 'lodash/findIndex'
 import VmPopup from './VmPopup'
-
 import has from 'lodash/has'
 import get from 'lodash/get'
 import set from 'lodash/set'
 
 const nativeEventsTypes = ['dragstart', 'drag', 'dragend']
 
-// TODO - change mouse cursor to pointer if marker have popup
-var template = `<template>
-
-    <div style="display:none;">
-
-      <div v-if="$slots.marker" ref="marker" @click="$emit('click',this)">
-         <!-- @slot html of marker -->
-        <slot name="marker"></slot>
-      </div>
-      
-      <div v-if="$slots.popup" ref="popup">
-        <!-- @slot html to show in popup -->
-        <slot name="popup"></slot>
-      </div>
-      <div v-if="$slots.popupHover" ref="popup">
-        <!-- @slot html to show in popup -->
-        <slot name="popupHover"></slot>
-      </div>
-      <div v-if="$slots.popupClick" ref="popup">
-        <!-- @slot html to show in popup -->
-        <slot name="popupClick"></slot>
-      </div>
-
-      <slot></slot>
-    </div>
-
-</template>`
-
 export default {
 
   /**
    * The only true button.
-   * @description o MArker do asd fasd fuasd fausdf sdai
+   * @description o Marker do asd fasd fuasd fausdf sdai
    */
   /**
    * The only true button.
@@ -83,7 +53,8 @@ export default {
           'top-right',
           'bottom-left',
           'bottom-right'].indexOf(value) !== -1
-      }
+      },
+      mapbox: true
     },
     /**
        (Dynamic) Color of the default marker, if default slot is not set (Dynamic)
@@ -169,7 +140,8 @@ export default {
   data () {
     return {
       marker: null,
-      popupOpen: null
+      popupOpen: null,
+      visible: false
     }
   },
 
@@ -199,12 +171,13 @@ export default {
   },
 
   created: function () {
-    this.visible = false
+    console.log('marker created')
     this.popup = null
     this.markerElement = null
     this.eventsFunction = {}
     this.hasPopHover = false
     this.hasPopClick = false
+    this.closeTimeout = null
 
     if (this.minZoom || this.maxZoom) {
       this.getMap().on('zoom', this.markerVisibility)
@@ -212,8 +185,15 @@ export default {
   },
 
   async mounted () {
+    console.log('marker mounted')
     await this.$nextTick()
     this.setupMarker()
+  },
+
+  async updated () {
+    // console.log('marker updated')
+    // await this.$nextTick()
+    // this.setupMarker()
   },
 
   watch: {
@@ -224,6 +204,9 @@ export default {
       if (this.marker) { this.marker.setDraggable(val) }
     },
     color: function (val) {
+      if (this.marker) { this.setupMarker() }
+    },
+    anchor: function (val) {
       if (this.marker) { this.setupMarker() }
     },
     offset: function (val) {
@@ -256,14 +239,12 @@ export default {
   methods: {
 
     setupMarker: function () {
+      console.log('setupMarker')
       const options = getOnlyMapboxProps(this)
       if (this.marker) this.marker.remove()
+
       if (this.$slots.marker) {
         options.element = this.$refs.marker
-      }
-
-      if (this.getPopupClick) {
-           options.element.style.cursor='pointer'
       }
 
       this.marker = new this.mapboxgl.Marker(options).setLngLat(this.center)
@@ -282,7 +263,11 @@ export default {
 
     setupMarkerEvents: function () {
       if (!this.marker) return
+
       this.markerElement = this.marker.getElement()
+      if (this.getPopupClick) {
+        this.markerElement.style.cursor = 'pointer'
+      }
       Object.entries(this.$listeners).forEach((item) => {
         let eventName = item[0]
         const func = item[1]
@@ -322,13 +307,17 @@ export default {
 
     markerEventHover: function (e) {
       e.stopPropagation()
+      // if (!this.closeTimeout) {
+        clearTimeout(this.closeTimeout)
+        this.closeTimeout = null
+      // }
       if (!this.popupOpen) {
         this.popupOpen = 'hover'
       }
     },
     markerEventLeave: function (e) {
       if (this.popupOpen === 'hover') {
-        this.popupOpen = false
+        this.closeTimeout = setTimeout(() => { this.popupOpen = false }, 100)
       }
     },
     markerEventClick: function (e) {
@@ -373,6 +362,7 @@ export default {
   },
 
   render (h) {
+    console.log('marker render')
     const childrens = []
     let popup
     let popupKey
@@ -392,7 +382,7 @@ export default {
     } else if (this.popupOpen === 'hover') {
       popupProps = {
         center: this.center,
-        trackPointer: true,
+        trackPointer: false,
         closeButton: false,
         closeOnClick: false,
         open: true
@@ -406,6 +396,19 @@ export default {
       const popupFind = findVNodeChildren(popup, 'VmPopup')
       popupInstance = (popupFind) ? popupFind[0] : h(VmPopup, [popup])
       popupInstance.key = popupKey
+
+      // set default offset of popup
+      const markerHeight = this.markerElement.getBoundingClientRect().height
+      let popupYOffset
+      if (this.anchor.indexOf('bottom') > -1) {
+        popupYOffset = markerHeight
+      } else if (this.anchor === 'center') {
+        popupYOffset = (markerHeight / 2)
+      } else if (this.anchor.indexOf('top') > -1) {
+        popupYOffset = 4
+      }
+      popupProps.offset = [0, -(popupYOffset)]
+
       popupInstance.componentOptions.propsData = {
         ...popupProps,
         ...popupInstance.componentOptions.propsData
@@ -415,9 +418,12 @@ export default {
       if (this.popupOpen === 'click') {
         const closeFunc = get(popupInstance, 'componentOptions.listeners.close')
         set(popupInstance.componentOptions, 'listeners.close', (e) => {
-          this.popupOpen = false
-          if (closeFunc) {
-            closeFunc(e)
+          // just call close function if popup is close by user, not by min or max zoom removing it
+          if (this.visible === true) {
+            this.popupOpen = false
+            if (closeFunc) {
+              closeFunc(e)
+            }
           }
         })
       }
@@ -426,15 +432,32 @@ export default {
     if (this.$slots.marker) {
       childrens.push(h('div', { slot: 'marker', ref: 'marker' }, [this.$slots.marker]))
     }
-    if (popupInstance) {
+    if (popupInstance && this.visible) {
       childrens.push(popupInstance)
     }
 
+    // return null
+
     return h('div',
       {},
-      [...childrens,
-        ...this.$slots.default]
+      [...childrens]
     )
+
+    // just for documentatio
+    /**
+    @slot use to define a custom marker
+    */
+    const m = this.$slots.marker
+    /**
+    @slot popup to show when hover a marker. Can be used with popupClick too.
+      with Scoped slot receives a metadata properties
+    */
+    const y = this.$slots.popupHover
+    /**
+    @slot popup to show when click a marker. Can be used with popupClick too.
+      with Scoped slot receives a metadata properties
+    */
+    const z = this.$slots.popupClick
   }
 
 }
