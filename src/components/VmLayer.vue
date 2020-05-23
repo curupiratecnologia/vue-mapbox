@@ -302,97 +302,6 @@ export default {
     }
   },
 
-  render (h) {
-    if (
-      (this.hoverFeatures.length === 0 && this.selectedFeatures.length === 0) ||
-      (!has(this.$scopedSlots, 'popupHover') &&
-        !has(this.$scopedSlots, 'popupClick') &&
-        !has(this.$slots, 'popupHover') &&
-        !has(this.$slots, 'popupClick'))
-    ) {
-      return null
-    }
-    // create the popupElement
-    let popupOver
-    let popupClick
-    let popup
-    let props = {}
-    let popupKey
-    // check for popupHover Slot
-    if (has(this.$scopedSlots, 'popupHover')) {
-      popupOver = this.$scopedSlots.popupHover({ features: this.hoverFeatures }) // [0]
-    } else if (has(this.$slots, 'popupHover')) {
-      popupOver = this.$slots.popupHover
-    }
-    // check for popupClick Slot
-    if (has(this.$scopedSlots, 'popupClick')) {
-      popupClick = this.$scopedSlots.popupClick({ features: this.selectedFeatures }) // [0]
-    } else if (has(this.$slots, 'popupClick')) {
-      popupClick = this.$slots.popupClick
-    }
-
-    if (!popupOver && !popupClick) {
-      return null
-    }
-
-    if (this.lastClick && this.selectedFeatures.length > 0 && popupClick) {
-      popup = popupClick
-      popupKey = 'layerPopupClick'
-      props = {
-        center: [this.lastClick.lngLat.lng, this.lastClick.lngLat.lat],
-        trackPointer: false,
-        closeOnClick: true,
-        closeButton: true,
-        open: true
-      }
-    } else if (this.hoverFeatures.length > 0 && popupOver) {
-      popup = popupOver
-      popupKey = 'layerPopupOver'
-      props = {
-        trackPointer: true,
-        closeButton: false,
-        closeOnClick: false,
-        open: true
-      }
-    } else {
-      return null
-    }
-
-    let popupInstance
-    // check if popup is the content type of popup, if not create one
-    const popupFind = findVNodeChildren(popup, 'VmPopup')
-    if (popupFind) {
-      popupInstance = popupFind[0]
-    } else {
-      popupInstance = h(VmPopup, [popup])
-    }
-
-    // setup popupinstance data
-    popupInstance.componentOptions.propsData = {
-      ...popupInstance.componentOptions.propsData,
-      ...props
-    }
-    if (popupKey === 'layerPopupClick') {
-      this.popupOpen = true
-      // when click in close of popup, deselect any selected layers
-      const closeFunc = get(popupInstance, 'componentOptions.listeners.close')
-      set(popupInstance.componentOptions, 'listeners.close', (e) => {
-        this.popupOpen = false
-        this.selectedFeatures = []
-        this.hoverFeatures = []
-        if (closeFunc) {
-          closeFunc(e)
-        }
-      })
-    }
-    popupInstance.key = popupKey + this.layerId
-
-    return h(
-      'div',
-      [popupInstance]
-    )
-  },
-
   methods: {
 
     setupLayerFeaturesEvents: function () {
@@ -541,6 +450,97 @@ export default {
       this.$emit('touchcancel')
     }
 
+  },
+
+  render (h) {
+    if (
+      (this.hoverFeatures.length === 0 && this.selectedFeatures.length === 0) ||
+      (!has(this.$scopedSlots, 'popupHover') &&
+        !has(this.$scopedSlots, 'popupClick') &&
+        !has(this.$slots, 'popupHover') &&
+        !has(this.$slots, 'popupClick'))
+    ) {
+      return null
+    }
+    // create the popupElement
+    let popupOver
+    let popupClick
+    let popup
+    let props = {}
+    let popupKey
+    // check for popupHover Slot
+    if (has(this.$scopedSlots, 'popupHover')) {
+      popupOver = this.$scopedSlots.popupHover({ features: this.hoverFeatures }) // [0]
+    } else if (has(this.$slots, 'popupHover')) {
+      popupOver = this.$slots.popupHover
+    }
+    // check for popupClick Slot
+    if (has(this.$scopedSlots, 'popupClick')) {
+      popupClick = this.$scopedSlots.popupClick({ features: this.selectedFeatures }) // [0]
+    } else if (has(this.$slots, 'popupClick')) {
+      popupClick = this.$slots.popupClick
+    }
+
+    if (!popupOver && !popupClick) {
+      return null
+    }
+
+    if (this.lastClick && this.selectedFeatures.length > 0 && popupClick) {
+      popup = popupClick
+      popupKey = 'layerPopupClick'
+      props = {
+        center: [this.lastClick.lngLat.lng, this.lastClick.lngLat.lat],
+        trackPointer: false,
+        closeOnClick: true,
+        closeButton: true,
+        open: true
+      }
+    } else if (this.hoverFeatures.length > 0 && popupOver) {
+      popup = popupOver
+      popupKey = 'layerPopupOver'
+      props = {
+        trackPointer: true,
+        closeButton: false,
+        closeOnClick: false,
+        open: true
+      }
+    } else {
+      return null
+    }
+
+    let popupInstance
+    // check if popup is the content type of popup, if not create one
+    const popupFind = findVNodeChildren(popup, 'VmPopup')
+    if (popupFind) {
+      popupInstance = popupFind[0]
+    } else {
+      popupInstance = h(VmPopup, [popup])
+    }
+
+    // setup popupinstance data
+    popupInstance.componentOptions.propsData = {
+      ...popupInstance.componentOptions.propsData,
+      ...props
+    }
+    if (popupKey === 'layerPopupClick') {
+      this.popupOpen = true
+      // when click in close of popup, deselect any selected layers
+      const closeFunc = get(popupInstance, 'componentOptions.listeners.close')
+      set(popupInstance.componentOptions, 'listeners.close', (e) => {
+        this.popupOpen = false
+        this.selectedFeatures = []
+        this.hoverFeatures = []
+        if (closeFunc) {
+          closeFunc(e)
+        }
+      })
+    }
+    popupInstance.key = popupKey + this.layerId
+
+    return h(
+      'div',
+      [popupInstance]
+    )
   }
 
 }

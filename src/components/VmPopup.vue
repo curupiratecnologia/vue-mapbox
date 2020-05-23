@@ -193,7 +193,9 @@ export default {
       this.popup.on('close', () => {
         this.$emit('update:open', false)
       })
-
+      this.popup.on('close', () => {
+      console.log("chamou fechou do popup")
+      })
       this.setupPopup()
       this.MapboxVueInstance.setupEvents(this.$listeners, this.popup, nativeEventsTypes)
     },

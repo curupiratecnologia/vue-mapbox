@@ -1,154 +1,136 @@
 <template>
   <div id="app">
     <center>
-    <VueMapbox
-      mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="700px"
-      width="900px"
-      :images="images"
-      :center="[-45, -15]">
+      <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images"
+        :center="[-45, -15]">
 
-      <vmLayer name="myLayer"
-                        :source="{
-                            type:'vector',
-                            tiles:[`http://167.99.58.243/tile/estado/{z}/{x}/{y}.mvt`],
-                            minzoom: 0,
-                            maxzoom: 20,
-                        }"
-                        source-layer="estado"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-        >
-           <template #popupHover>
-                             <vm-popup max-width="400px">
-                              <h6> POPUP ESTADOSSSSS ****************************</h6>
-                            </vm-popup>
-                        </template>
-        </VmLayer> 
+        <!-- <vmLayer name="myLayer" :source="{
+            type:'vector',
+            tiles:[`http://167.99.58.243/tile/estado/{z}/{x}/{y}.mvt`],
+            minzoom: 0,
+            maxzoom: 20,
+           }" source-layer="estado" type="fill" :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+          :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
+          :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }">
+          <template #popupHover>
+            <vm-popup max-width="400px">
+              <h6> POPUP ESTADOSSSSS ****************************</h6>
+            </vm-popup>
+          </template>
+        </VmLayer>
 
-                   <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'http://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': fill, 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-                        multipleFeatureSelectionOn="alt"
-                        @dblclick="featureenter"
-                        >
+        <vmLayer name="myLayer"
+          :source="{type:'geojson',  generateId:true, data: 'http://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+          type="fill" :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+          :paint-hover="{ 'fill-color': fill, 'fill-opacity': 1  }"
+          :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }" multipleFeatureSelectionOn="alt"
+          @dblclick="featureenter">
 
-                       <template v-slot:popupHover>
-                             <vm-popup max-width="400px">
-                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
-                            </vm-popup>
-                        </template>
+          <template v-slot:popupHover>
+            <vm-popup max-width="400px">
+              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
+            </vm-popup>
+          </template>
 
-                        <template v-slot:popupClick="slotProps">
-                          <VmPopup max-width="400px">
-                           
-                              <h6>click the slots props of everythink </h6>
-                          </VmPopup>
-                        </template>
+          <template v-slot:popupClick="slotProps">
+            <VmPopup max-width="400px">
 
-                 </vmLayer> 
+              <h6>click the slots props of everythink </h6>
+            </VmPopup>
+          </template>
 
-                 <VmSource name="estudosdecaso" type="geojson" :options="{ data: 'geojson/estudosdecaso.json', generateId:true, promoteId:'id' }">
-                   <VmLayer type="line"
-                    :maxzoom="24"
-                    :minzoom="9"
-                    :filter = "['==', '$type', 'LineString']"
-                    :paint="{
+        </vmLayer>
+
+        <VmSource name="estudosdecaso" type="geojson"
+          :options="{ data: 'geojson/estudosdecaso.json', generateId:true, promoteId:'id' }">
+          <VmLayer type="line" :maxzoom="24" :minzoom="9" :filter="['==', '$type', 'LineString']" :paint="{
                         'line-color':'white',
                         'line-dasharray':[3,3],
 
                     }">
-                      <template v-slot:popupHover>
-                             <vm-popup max-width="400px">
-                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
-                            </vm-popup>
-                        </template>
+            <template v-slot:popupHover>
+              <vm-popup max-width="400px">
+                <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
+              </vm-popup>
+            </template>
 
+          </VmLayer>
 
-                    </VmLayer> 
-
-                    <VmLayer type="symbol"
-                    name="estudosdecaso"
-                    :maxzoom="24"
-                    :minzoom="0"
-                    :filter = "['==', '$type', 'Point']"
-                    :paint="{
-                    }"
-                    :layout="{
+          <VmLayer type="symbol" name="estudosdecaso" :maxzoom="24" :minzoom="0" :filter="['==', '$type', 'Point']"
+            :paint="{
+                    }" :layout="{
                         'icon-anchor':['match',['get','type'],'circle', 'center','marker','bottom', 'center'],
                         'icon-size': [ 'interpolate', ['linear'], ['zoom'], 9, 0.7, 12, 0.8],
                         'icon-image':['get','icon'],
                         'icon-offset':['match',['get','type'],'circle', ['literal',[0,0]],'marker',['literal',[0,12]], ['literal',[0,0]] ],
                         'icon-allow-overlap' : true,
-                    }"
-                    >
-                         <template v-slot:popupHover="slotProps">
-                            <!-- <pre>{{slotProps}}</pre> -->
-                            hover marker
-                         </template>
+                    }">
+            <template v-slot:popupHover="slotProps">
 
-                         <template v-slot:popupClick="slotProps">
-                          <VmPopup max-width="400px">
-                           
-                              <h6>click symbol</h6>
-                          </VmPopup>
-                        </template>
+              hover marker
+            </template>
 
-                    </VmLayer>
-             </VmSource>
+            <template v-slot:popupClick="slotProps">
+              <VmPopup max-width="400px">
 
+                <h6>click symbol</h6>
+              </VmPopup>
+            </template>
 
-    </VueMapbox>
+          </VmLayer>
+        </VmSource>  -->
 
 
+<!-- 
+        <VmMarkerDonut :center="[-45, -15]" :dataSet="[1,2,3,4,5,6]"
+          :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']">
+          <VmPopup >
+            <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+          </VmPopup>
+        </VmMarkerDonut>
+
+        <VmMarkerDonut :center="[-43, -14]" :dataSet="[100,20,3,47,5,600]"
+          :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']">
+          <VmPopup >
+            <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+          </VmPopup>
+        </VmMarkerDonut> -->
+
+        <!-- <vm-marker :center="[-45, -15]"  >
+          <template #marker>
+              <div style="background:blue"> lalalalalaal </div>
+           </template>
+
+            <template #popupHover>
+             ée, em cima do marker
+           </template>
+            <template #popupClick>
+             eeeee, clicamos no popup
+           </template>
+          <vm-popup >
+            <h6> popup normal</h6>
+          </vm-popup>
+        </vm-marker> -->
 
 
+        <vm-marker :center="[-42, -15]"  >
+          <vm-popup :open="true">
+            <h6> popup normal</h6>
+          </vm-popup>
+        </vm-marker>
 
-     <button @click="fill = '#00ffff'"> change paint fill </button>
-    <!-- <VueMapbox
-      height="500px"
-      width="800px"
-      :center="center">
+      </VueMapbox>
 
-        <template v-slot:loader> Carregando </template>
+      <button @click="fill = '#00ffff'"> change paint fill </button>
+      <button @click="fill = '#00ffff'"> change paint fill </button>
+      <button @click="center = [-55, -15]"> changecenter </button>
+      <input type="text" v-model="label" />
 
-          <vmSourceGeoJson name="example" :geoJsonData="currentGeoJson" :tolerance="0.35" :generateId="true" promoteId="codarea">
-                <vmLayer name="myLayer3"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': [ 'case', ['boolean', ['feature-state', 'hover'], false], 1, 0.5 ] }"
-                />
-                <vmLayer name="myLayer23"
-                        type="line"
-                        :paint="{ 'line-color': '#333333' }"
-                />
-          </vmSourceGeoJson>
-
-    </VueMapbox> -->
-     <button @click="fill = '#00ffff'"> change paint fill </button>
-    <button @click="center = [-55, -15]"> changecenter </button>
-    <input type="text" v-model="label" />
-
-    <!-- <VueMapbox
-      mapStyle="mapbox://styles/mapbox/outdoors-v11"
-      height="500px"
-      width="800px">
-
-        <template v-slot:loader> Carregando </template>
-
-        <VmPopup :center="[-55, -11]" :open="open" :trackPointer="drag">
-               {{label}}
-        </VmPopup>
-    </VueMapbox> -->
     </center>
 
-      <input type="text" v-model="label" />
-      <button @click="open=!open"> Toogle Open </button>
-      <button @click="drag=!drag"> Toogle Traking </button>
+    <input type="text" v-model="label" />
+    <button @click="open=!open"> Toogle Open </button>
+    <button @click="drag=!drag"> Toogle Traking </button>
   </div>
 </template>
 

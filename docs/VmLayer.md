@@ -11,21 +11,24 @@ This example show  dynamic paint props change clicling in the button
     <div>
       <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="400px" width="100%" :center="[-45, -15]">
 
-       <vmSource name="exampleSource" type="geojson" :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" >
-                <vmLayer name="myLayer"
-                        type="fill"
-                        @mousemove="callMethod"
-                        :paint="{ 'fill-color': color, 'fill-opacity': opacity  }"
-                />
-       </vmSource>
+       <vm-source name="exampleSource" 
+                 type="geojson" 
+                 :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" >
+            
+            <vm-layer name="myLayer"
+                    type="fill"
+                    @mousemove="callMethod"
+                    :paint="{ 'fill-color': color, 'fill-opacity': opacity  }"
+            ><vm-layer>
+
+       </vm-source>
 
         <!-- Source can be refered too -->
-        <vmLayer name="myLayer2"
-                  source="exampleSource"
-                        type="line"
-                        :paint="{ 'line-color': '#333333' }"
-        />
-
+        <vm-layer name="myLayer2"
+                 source="exampleSource"
+                 type="line"
+                 :paint="{ 'line-color': '#333333' }"
+         ><vm-layer>
 
     </VueMapbox>
     <br/>
@@ -37,10 +40,8 @@ This example show  dynamic paint props change clicling in the button
 </template>
 
 <script>
-// import VmLayer from '../src/components/VmLayer.vue'
-// You can also use 'export default {}' style module exports.
+
 export default {
-  // components:{ VmLayer },
   data() {
     return { 
       color: "red",

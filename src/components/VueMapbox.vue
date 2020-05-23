@@ -212,7 +212,10 @@ export default {
 
   created () {
     this.sources = new Map() // {id:{type,data,instance}}
-    this.layers = new Map()
+    this.layers = new Map() //
+    // this.images = new Map() //
+    this.layersGroups = new Map() //
+    this.eventsOnMap = new Map() //
 
     // make sure the html div to use in mapbox is loaded
     this.$nextTick(() => {

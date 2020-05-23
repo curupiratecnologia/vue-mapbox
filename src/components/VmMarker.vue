@@ -1,4 +1,19 @@
-<template>
+
+<script>
+
+import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
+import findVNodeChildren from '../utils/findVNodeChildren'
+import findIndex from 'lodash/findIndex'
+import VmPopup from './VmPopup'
+
+import has from 'lodash/has'
+import get from 'lodash/get'
+import set from 'lodash/set'
+
+const nativeEventsTypes = ['dragstart', 'drag', 'dragend']
+
+// TODO - change mouse cursor to pointer if marker have popup
+var template = `<template>
 
     <div style="display:none;">
 
@@ -6,20 +21,24 @@
          <!-- @slot html of marker -->
         <slot name="marker"></slot>
       </div>
+      
       <div v-if="$slots.popup" ref="popup">
         <!-- @slot html to show in popup -->
         <slot name="popup"></slot>
       </div>
+      <div v-if="$slots.popupHover" ref="popup">
+        <!-- @slot html to show in popup -->
+        <slot name="popupHover"></slot>
+      </div>
+      <div v-if="$slots.popupClick" ref="popup">
+        <!-- @slot html to show in popup -->
+        <slot name="popupClick"></slot>
+      </div>
+
       <slot></slot>
     </div>
 
-</template>
-
-<script>
-// TODO - change mouse cursor to pointer if marker have popup
-
-import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
-const nativeEventsTypes = ['click', 'dragstart', 'drag', 'dragend']
+</template>`
 
 export default {
 
@@ -99,13 +118,13 @@ export default {
       (Dynamic) min zoom of map tha will show the marker
     */
     minZoom: {
-      type: Number
+      type: [String, Number]
     },
     /**
       (Dynamic) min zoom of map tha will show the marker
     */
     maxZoom: {
-      type: Number
+      type: [String, Number]
     },
     /**
       (Dynamic) map aligns the Marker to the plane of the map. viewport aligns the Marker to the plane of the viewport. auto automatically matches the value of rotationAlignment
@@ -137,21 +156,58 @@ export default {
     */
     popUpContent: {
       type: String
+    },
+
+    /**
+       * Metadata, that can be used in popup scoped slots
+    */
+    metadata: {
+      type: Object
     }
   },
 
   data () {
     return {
       marker: null,
-      popup: null,
-      ownPopup: false
+      popupOpen: null
+    }
+  },
+
+  computed: {
+    getPopupHover: function () {
+      if (has(this.$scopedSlots, 'popupHover')) {
+        return this.$scopedSlots.popupHover({ metadata: this.metadata }) // [0]
+      } else if (has(this.$slots, 'popupHover')) {
+        return this.$slots.popupHover
+      }
+      return false
+    },
+    getPopupClick: function () {
+      const popupFind = findVNodeChildren(this.$slots.default, 'VmPopup')
+      if (has(this.$scopedSlots, 'popupClick')) {
+        return this.$scopedSlots.popupClick({ metadata: this.metadata }) // [0]
+      } else if (has(this.$slots, 'popupClick')) {
+        return this.$slots.popupClick
+      } else if (popupFind) {
+        return popupFind[0]
+      } else if (this.popUpContent) {
+        return this.popUpContent
+      }
+
+      return false
     }
   },
 
   created: function () {
     this.visible = false
+    this.popup = null
+    this.markerElement = null
+    this.eventsFunction = {}
+    this.hasPopHover = false
+    this.hasPopClick = false
+
     if (this.minZoom || this.maxZoom) {
-      this.getMap().on('zoom', this.markerVisible)
+      this.getMap().on('zoom', this.markerVisibility)
     }
   },
 
@@ -198,47 +254,93 @@ export default {
   // },
 
   methods: {
+
     setupMarker: function () {
       const options = getOnlyMapboxProps(this)
-
       if (this.marker) this.marker.remove()
-
       if (this.$slots.marker) {
         options.element = this.$refs.marker
       }
 
-      this.marker = new this.mapboxgl.Marker(options)
-        .setLngLat(this.center)
+      if (this.getPopupClick) {
+           options.element.style.cursor='pointer'
+      }
 
-      this.markerVisible()
+      this.marker = new this.mapboxgl.Marker(options).setLngLat(this.center)
+      this.markerElement = this.marker.getElement()
 
+      this.markerVisibility()
       this.MapboxVueInstance.setupEvents(this.$listeners, this.marker, nativeEventsTypes)
-      this.setupPopup()
+      this.setupPopupEvents()
+      this.setupMarkerEvents()
+
+      // if have a instance of popup, check iff is props is open, so we set
+      if (get(this.getPopupClick, 'componentOptions.propsData.open') === true) {
+        this.popupOpen = 'click'
+      }
     },
 
-    setupPopup: function () {
+    setupMarkerEvents: function () {
       if (!this.marker) return
-
-      // check if have an popup as child component
-      this.$children.forEach(vnode => {
-        if (vnode.$options.name === 'VmPopup') {
-          this.popup = vnode.$data.popup
+      this.markerElement = this.marker.getElement()
+      Object.entries(this.$listeners).forEach((item) => {
+        let eventName = item[0]
+        const func = item[1]
+        let once = false
+        let capture = false
+        let passive = false
+        const modifier = eventName.substr(0, 2).replace(/[^a-z]/, '')
+        if (modifier === '~') {
+          once = true
         }
+        if (modifier === '!') {
+          capture = true
+        }
+        if (modifier === '&') {
+          passive = true
+        }
+        if (modifier === '~!') {
+          once = true
+          capture = true
+        }
+        eventName = eventName.replace(/^[^a-z]/, '')
+        const eventFunc = func
+        this.markerElement.addEventListener(eventName, (e) => eventFunc(e), { capture, once, passive })
       })
+    },
 
-      const htmlcontent = this.getHtmlForPopup()
-      if (!this.popup && htmlcontent) {
-        this.popup = new this.mapboxgl.Popup()
-        this.ownPopup = true
+    setupPopupEvents: function () {
+      this.markerElement = this.marker.getElement()
+      if (this.getPopupHover) {
+        this.markerElement.addEventListener('mousemove', this.markerEventHover, { capture: true })
+        this.markerElement.addEventListener('mouseleave', this.markerEventLeave, { capture: true })
       }
-
-      if (this.popup) {
-        this.marker.setPopup(this.popup)
-        this.updateHtmlContent()
+      if (this.getPopupClick) {
+        this.markerElement.addEventListener('click', this.markerEventClick, { capture: true })
       }
     },
 
-    markerVisible: function () {
+    markerEventHover: function (e) {
+      e.stopPropagation()
+      if (!this.popupOpen) {
+        this.popupOpen = 'hover'
+      }
+    },
+    markerEventLeave: function (e) {
+      if (this.popupOpen === 'hover') {
+        this.popupOpen = false
+      }
+    },
+    markerEventClick: function (e) {
+      e.stopPropagation()
+      if (this.popupOpen === 'click') {
+        this.popupOpen = false
+      } else {
+        this.popupOpen = 'click'
+      }
+    },
+
+    markerVisibility: function () {
       // if (!this.minZoom && !this.maxZoom) return
       const minZoom = this.minZoom ? this.minZoom : 0
       const maxZoom = this.maxZoom ? this.maxZoom : 24
@@ -247,32 +349,10 @@ export default {
       if (zoom >= minZoom && zoom <= maxZoom && this.visible === false) {
         this.marker.addTo(this.getMap())
         this.visible = true
-      } else if (this.visible === true && (zoom < minZoom || zoom > maxZoom) ) {
+      } else if (this.visible === true && (zoom < minZoom || zoom > maxZoom)) {
         this.marker.remove()
         this.visible = false
       }
-    },
-
-    updateHtmlContent: function () {
-      if (this.popup && this.ownPopup) {
-        const htmlcontent = this.getHtmlForPopup()
-        if (this.$slots.popup) {
-          this.popup.setDOMContent(htmlcontent)
-        } else {
-          this.popup.setHTML(htmlcontent)
-        }
-      }
-    },
-
-    getHtmlForPopup: function () {
-      let htmlcontent
-      if (this.popUpContent) {
-        htmlcontent = this.popUpContent
-      }
-      if (this.$slots.popup) {
-        htmlcontent = this.$refs.popup
-      }
-      return htmlcontent
     },
 
     docEvents: function () {
@@ -283,8 +363,78 @@ export default {
       this.$emit('dragstart')
       this.$emit('drag')
       this.$emit('dragend')
+      this.$emit('click')
+      this.$emit('mouseleave')
+      this.$emit('mousemove')
+      this.$emit('mouseover')
+      this.$emit('**alldivmouseevents**')
     }
 
+  },
+
+  render (h) {
+    const childrens = []
+    let popup
+    let popupKey
+    let popupProps = {}
+    let popupInstance
+
+    if (this.popupOpen === 'click') {
+      popupProps = {
+        center: this.center,
+        trackPointer: false,
+        closeOnClick: true,
+        closeButton: true,
+        open: true
+      }
+      popup = this.getPopupClick
+      popupKey = 'markerPopupClick'
+    } else if (this.popupOpen === 'hover') {
+      popupProps = {
+        center: this.center,
+        trackPointer: true,
+        closeButton: false,
+        closeOnClick: false,
+        open: true
+      }
+      popup = this.getPopupHover
+      popupKey = 'markerPopupHover'
+    }
+
+    if (popup) {
+      // check if popup is the content type of popup, if not create one
+      const popupFind = findVNodeChildren(popup, 'VmPopup')
+      popupInstance = (popupFind) ? popupFind[0] : h(VmPopup, [popup])
+      popupInstance.key = popupKey
+      popupInstance.componentOptions.propsData = {
+        ...popupProps,
+        ...popupInstance.componentOptions.propsData
+      }
+
+      // if close popup, updade opemn props
+      if (this.popupOpen === 'click') {
+        const closeFunc = get(popupInstance, 'componentOptions.listeners.close')
+        set(popupInstance.componentOptions, 'listeners.close', (e) => {
+          this.popupOpen = false
+          if (closeFunc) {
+            closeFunc(e)
+          }
+        })
+      }
+    }
+
+    if (this.$slots.marker) {
+      childrens.push(h('div', { slot: 'marker', ref: 'marker' }, [this.$slots.marker]))
+    }
+    if (popupInstance) {
+      childrens.push(popupInstance)
+    }
+
+    return h('div',
+      {},
+      [...childrens,
+        ...this.$slots.default]
+    )
   }
 
 }
