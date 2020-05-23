@@ -177,10 +177,8 @@ If we use a VmPopup component inside this slots, it properties will be used as t
     </div>
 </template>
 <script>
-// import VmLayer from '../src/components/VmLayer.vue'
-// You can also use 'export default {}' style module exports.
+
 export default {
-  // components:{ VmLayer },
   data() {
     return { 
       features: false,
