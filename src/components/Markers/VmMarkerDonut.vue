@@ -1,7 +1,7 @@
 
 <script>
+import set from 'lodash/set'
 import getValueFromZoomArray from '../../utils/getValueFromZoomArray'
-
 import VmMarker from '../VmMarker'
 
 /*
@@ -9,10 +9,10 @@ import VmMarker from '../VmMarker'
 */
 export default {
   name: 'VmMarkerDonut',
-  inject: ['getMap', 'mapboxgl', 'MapboxVueInstance', 'getSource'],
+  inject: ['getMap', 'mapboxgl', 'MapboxVueInstance'],
 
   props: {
-   
+
     /**
     Radius in pixel. leave blank for automatic
     */
@@ -77,31 +77,13 @@ export default {
   },
 
   mounted () {
-    this.$nextTick( () => this.scaleMarker() )
+    this.$nextTick(() => this.scaleMarker())
   },
 
   beforeDestroy () {
     if (this.zoomScale && this.getMap()) {
       this.getMap().off('zoom', this.scaleMarker)
     }
-  },
-
-  render (h) {
-    const svg = createDonutChart(this.dataSet, this.dataColor, this.myradius, this.chartWidth, parseInt(this.fontSize))
-    return h(VmMarker,
-      {
-        props: { ...this.$attrs, ...this.$props },
-        on: { ...this.$listeners }
-
-      },
-      [h('div', {
-        slot: 'marker',
-        ref: 'marker',
-        domProps: {
-          innerHTML: svg
-        }
-      }), this.$slots.default ]
-    )
   },
 
   methods: {
@@ -112,6 +94,47 @@ export default {
       this.$refs.marker.style.transform = `scale(${currentScale})`
       this.$refs.marker.style.transformOrigin = 'center'
     }
+  },
+
+  render (h) {
+    const svg = createDonutChart(this.dataSet, this.dataColor, this.myradius, this.chartWidth, parseInt(this.fontSize))
+
+    const children = []
+
+    const markerDonut = h('div', {
+      slot: 'marker',
+      ref: 'marker',
+      domProps: {
+        innerHTML: svg
+      }
+    })
+
+    children.push(markerDonut)
+
+    Object.entries(this.$slots).forEach((item) => {
+      const key = item[0]
+      const value = item[1]
+      // set(value,'data.slot',key)
+      children.push(
+        h('div', {
+          slot: key,
+          ref: key
+        }, value)
+      )
+    })
+
+    // get all slots all slots and scoped slots
+
+    return h(VmMarker,
+      {
+        props: { ...this.$attrs, ...this.$props },
+        on: { ...this.$listeners }
+
+      }, [
+        ...children,
+        this.$slots.default
+      ]
+    )
   }
 
 }
