@@ -96,6 +96,7 @@ We are able to select more than one feature when clicking with a modifier key, u
                         :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
                         :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
                         multipleFeatureSelectionOn="alt"
+                        @featureselect="featureselect"
 
                 />
     </VueMapbox>
@@ -114,7 +115,7 @@ export default {
     }
   },
   methods: {
-    featureover:function( features ) {
+    featureselect:function( features ) {
  
       if( Array.isArray(features) && features[0] && features[0].properties){
         this.features = features[0].properties
@@ -151,7 +152,7 @@ If we use a VmPopup component inside this slots, it properties will be used as t
                         :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
                         type="fill"
                         :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': fill, 'fill-opacity': 1  }"
+                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
                         :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
                         multipleFeatureSelectionOn="alt"
                         >

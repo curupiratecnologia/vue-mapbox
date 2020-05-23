@@ -3,7 +3,7 @@ Normal Marker
 ```vue
     <VueMapbox
       mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
+      height="350px"
       width="100%"
       :center="[-45, -15]">
           <vm-marker :center="[-45, -15]"></vm-marker>
@@ -12,14 +12,17 @@ Normal Marker
 
 ```
 
-A custom marker, just set a child/default slot
+A custom marker, just set a child/default slot.
+
+We can set a min and max zoom to markers, just like layers.
 ```vue
     <VueMapbox
       mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
+      height="350px"
       width="100%"
       :center="[-45, -15]">
           <vm-marker 
+            max-zoom="9"
             color="red"
             popUpContent="This is show in popup"
             :center="[-45, -15]">
@@ -40,13 +43,17 @@ A custom marker, just set a child/default slot
 ### Popups in marker
 
 
-We can ease set a Hover and a Click popup, using slots, like 
+We can set a popup to be show on hover, using the slot popupHover, or in click, using popupClick or just using Vmpopup inside marker tag.
+
+We can use popupHover and popupClick with diferent content at the same time, like the example below
+
+
 ```vue
 <template>
 <div>
      <VueMapbox
       mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
+      height="350px"
       width="100%"
       :center="[-45, -15]">
           <vm-marker 
@@ -101,7 +108,7 @@ Popup in Marker set via Props
 <div>
      <VueMapbox
       mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
+      height="350px"
       width="100%"
       :center="[-45, -15]">
           <vm-marker 
@@ -157,7 +164,7 @@ Or a Popup Componente inside Marker
 <div>
      <VueMapbox
       mapStyle="mapbox://styles/mapbox/dark-v10"
-      height="200px"
+      height="350px"
       width="100%"
       :center="[-45, -15]">
           <vm-marker 

@@ -61,7 +61,7 @@ export default {
 
 
 
-Donut Markers with popup
+Donut Markers with popup.
 ```vue
     <VueMapbox
       mapStyle="mapbox://styles/mapbox/dark-v10"
@@ -75,9 +75,16 @@ Donut Markers with popup
               </VmPopup>
          </VmMarkerDonut>
          <VmMarkerDonut :center="[-43, -14]"  :dataSet="[100,20,3,47,5,600]"  :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']" >
-             <VmPopup :open="false">
+            <template v-slot:popupHover>
+           
                   <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
-              </VmPopup>
+   
+            </template>
+            <template v-slot:popupClick>
+           
+                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+   
+            </template>
          </VmMarkerDonut>
         
     </VueMapbox>
