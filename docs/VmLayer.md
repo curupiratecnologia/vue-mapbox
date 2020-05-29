@@ -19,7 +19,8 @@ This example show  dynamic paint props change clicling in the button
                     type="fill"
                     @mousemove="callMethod"
                     :paint="{ 'fill-color': color, 'fill-opacity': 1  }"
-            ><vm-layer>
+            >
+            </vm-layer>
 
        </vm-source>
 
@@ -28,7 +29,8 @@ This example show  dynamic paint props change clicling in the button
                  source="exampleSource"
                  type="line"
                  :paint="{ 'line-color': '#333333' }"
-         ><vm-layer>
+         >
+         </vm-layer>
 
     </VueMapbox>
     <br/>
