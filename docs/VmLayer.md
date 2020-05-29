@@ -174,7 +174,6 @@ If we use a VmPopup component inside this slots, it properties will be used as t
                  </vmLayer>
     </VueMapbox>
     <br />
-    <b> Feature Hover properties </b> <pre>{{features}}</pre>
     </div>
 </template>
 <script>
@@ -195,3 +194,47 @@ export default {
 
 
 
+
+
+### Layers Order
+
+The order of layer follow the "html" insertion of layers, just like div.
+Even with layer add after, using v-if etc, will appers in order that they are set in html tree.
+
+You can set the propx zIndex to define a order
+
+``` vue
+<template>
+      <div>
+      <VueMapbox  key="mymap" mapStyle="mapbox://styles/mapbox/dark-v10" height="400px" width="100%" :center="[-47, -15]" :zoom="5">
+              
+        <vm-source name="sourceInfo" type="geojson" :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" />
+
+           <vm-layer name="myLayer1" key="p1" :zIndex="order+0"  type="line" source="sourceInfo" :paint="{ 'line-color': '#0000FF' }"></vm-layer>
+           <vm-layer name="myLayer2" type="fill" source="sourceInfo" :paint="{ 'fill-color': '#009933', 'fill-opacity': 0.7  }"></vm-layer>
+           <vm-layer name="myLayer3" type="fill" source="sourceInfo" :paint="{ 'fill-color': '#009933', 'fill-opacity': 0.7  }"></vm-layer>
+    </VueMapbox>
+    <br />  
+    {{order}}
+    
+      <button @click="changeIndex"> changeIndex </button>
+    </div>
+</template>
+<script>
+
+export default {
+  data() {
+    return { 
+      show: false,
+      order: 1
+    }
+  },
+  methods: {
+    changeIndex:function(){
+      this.order = this.order+1
+      if(this.order>3) this.order = 0
+    }
+  }
+}
+</script>
+```

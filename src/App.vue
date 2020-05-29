@@ -4,133 +4,69 @@
       <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images"
         :center="[-45, -15]">
 
-        <!-- <vmLayer name="myLayer" :source="{
-            type:'vector',
-            tiles:[`http://167.99.58.243/tile/estado/{z}/{x}/{y}.mvt`],
-            minzoom: 0,
-            maxzoom: 20,
-           }" source-layer="estado" type="fill" :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-          :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
-          :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }">
-          <template #popupHover>
-            <vm-popup max-width="400px">
-              <h6> POPUP ESTADOSSSSS ****************************</h6>
-            </vm-popup>
-          </template>
-        </VmLayer>
-
-        <vmLayer name="myLayer"
-          :source="{type:'geojson',  generateId:true, data: 'http://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
-          type="fill" :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-          :paint-hover="{ 'fill-color': fill, 'fill-opacity': 1  }"
-          :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }" multipleFeatureSelectionOn="alt"
-          @dblclick="featureenter">
-
-          <template v-slot:popupHover>
-            <vm-popup max-width="400px">
-              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
-            </vm-popup>
-          </template>
-
-          <template v-slot:popupClick="slotProps">
-            <VmPopup max-width="400px">
-
-              <h6>click the slots props of everythink </h6>
-            </VmPopup>
-          </template>
-
-        </vmLayer>
-
-        <VmSource name="estudosdecaso" type="geojson"
-          :options="{ data: 'geojson/estudosdecaso.json', generateId:true, promoteId:'id' }">
-          <VmLayer type="line" :maxzoom="24" :minzoom="9" :filter="['==', '$type', 'LineString']" :paint="{
+                    <VmSource name="estudosdecaso" type="geojson" :options="{ data: '/geojson/estudosdecaso.json', generateId:true, promoteId:'id' }">
+                    <VmLayer type="line"
+                    :maxzoom="24"
+                    :minzoom="9.1"
+                    :filter = "['==', '$type', 'LineString']"
+                    :paint="{
                         'line-color':'white',
                         'line-dasharray':[3,3],
 
                     }">
-            <template v-slot:popupHover>
-              <vm-popup max-width="400px">
-                <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
-              </vm-popup>
-            </template>
 
-          </VmLayer>
+                    </VmLayer>
 
-          <VmLayer type="symbol" name="estudosdecaso" :maxzoom="24" :minzoom="0" :filter="['==', '$type', 'Point']"
-            :paint="{
-                    }" :layout="{
-                        'icon-anchor':['match',['get','type'],'circle', 'center','marker','bottom', 'center'],
-                        'icon-size': [ 'interpolate', ['linear'], ['zoom'], 9, 0.7, 12, 0.8],
-                        'icon-image':['get','icon'],
-                        'icon-offset':['match',['get','type'],'circle', ['literal',[0,0]],'marker',['literal',[0,12]], ['literal',[0,0]] ],
-                        'icon-allow-overlap' : true,
-                    }">
-            <template v-slot:popupHover="slotProps">
+                    <VmLayer type="symbol"
+                        :maxzoom="24"
+                        :minzoom="0"
+                        :filter = "['==', '$type', 'Point']"
+                        :paint="{
+                        }"
+                        :layout="{
+                            'icon-anchor':['match',['get','type'],'circle', 'center','marker','bottom', 'center'],
+                            'icon-size': [ 'interpolate', ['linear'], ['zoom'], 9, 0.7, 12, 0.8],
+                            'icon-image':['get','icon'],
+                            'icon-offset':['match',['get','type'],'circle', ['literal',[0,0]],'marker',['literal',[0,12]], ['literal',[0,0]] ],
+                            'icon-allow-overlap' : true,
+                        }"
+                        >
+                         <template v-slot:popupClick="slotProps">
+                            <pre></pre>
+                         </template>
 
-              hover marker
-            </template>
+                    </VmLayer>
+             </VmSource>
 
-            <template v-slot:popupClick="slotProps">
-              <VmPopup max-width="400px">
+              <vmLayer name="myLayer"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        type="fill"
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
+                        >
 
-                <h6>click symbol</h6>
-              </VmPopup>
-            </template>
+                       <template v-slot:popupHover>
+                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
+                        </template>
 
-          </VmLayer>
-        </VmSource>  -->
-
-
-<!-- 
-        <VmMarkerDonut :center="[-45, -15]" :dataSet="[1,2,3,4,5,6]"
-          :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']">
-          <VmPopup >
-            <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
-          </VmPopup>
-        </VmMarkerDonut>
-
-        <VmMarkerDonut :center="[-43, -14]" :dataSet="[100,20,3,47,5,600]"
-          :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']">
-          <VmPopup >
-            <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
-          </VmPopup>
-        </VmMarkerDonut> -->
-
-        <!-- <vm-marker :center="[-45, -15]"  >
-          <template #marker>
-              <div style="background:blue"> lalalalalaal </div>
-           </template>
-
-            <template #popupHover>
-             ée, em cima do marker
-           </template>
-            <template #popupClick>
-             eeeee, clicamos no popup
-           </template>
-          <vm-popup >
-            <h6> popup normal</h6>
-          </vm-popup>
-        </vm-marker> -->
+                        <template v-slot:popupClick="slotProps">
+                          <VmPopup max-width="400px">
+                               <pre>{{ slotProps.features && slotProps.features[0] && slotProps.features[0].properties }}</pre>
+                              <h6>Here goes the pop up content while in <b>CLICK</b> a Feature.</h6>
+                          </VmPopup>
+                        </template>
 
 
-        <vm-marker :center="[-42, -15]"  >
-          <vm-popup :open="true">
-            <h6> popup normal</h6>
-          </vm-popup>
-        </vm-marker>
+                 </vmLayer>
 
       </VueMapbox>
 
-      <button @click="fill = '#00ffff'"> change paint fill </button>
-      <button @click="fill = '#00ffff'"> change paint fill </button>
-      <button @click="center = [-55, -15]"> changecenter </button>
-      <input type="text" v-model="label" />
-
     </center>
 
-    <input type="text" v-model="label" />
-    <button @click="open=!open"> Toogle Open </button>
-    <button @click="drag=!drag"> Toogle Traking </button>
+    <button @click="show=!show"> Toogle marker Popup </button> {{show}}
+
   </div>
 </template>
 
@@ -142,6 +78,7 @@ export default {
   name: 'App',
   data () {
     return {
+      show: true,
       center: [-45, -15],
       drag: false,
       open: true,
@@ -153,11 +90,11 @@ export default {
     }
   },
 
-  components: {
-    VueMapbox: () => import('./components/VueMapbox.vue'),
-    VmMarker: () => import('./components/VmMarker.vue'),
-    VmPopup: () => import('./components/VmPopup.vue')
-  },
+  // components: {
+  //   VueMapbox: () => import('./components/VueMapbox.vue'),
+  //   VmMarker: () => import('./components/VmMarker.vue'),
+  //   VmPopup: () => import('./components/VmPopup.vue')
+  // },
 
   computed: {
     images: function () {

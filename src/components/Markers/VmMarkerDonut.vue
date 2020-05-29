@@ -93,27 +93,116 @@ export default {
       const currentScale = getValueFromZoomArray(this.zoomScale, zoom)
       this.$refs.marker.style.transform = `scale(${currentScale})`
       this.$refs.marker.style.transformOrigin = 'center'
+    },
+
+    createDonutChart: function (dataSet, dataColor, raio, chartWidth, fontSize) {
+      var offsets = []
+      var counts = dataSet
+      var total = 0
+      for (var i = 0; i < counts.length; i++) {
+        offsets.push(total)
+        total += counts[i]
+      }
+
+      fontSize = (fontSize || (total >= 1000 ? 20 : total >= 100 ? 18 : total >= 10 ? 16 : 14))
+      var r = raio || (total >= 1000 ? 50 : total >= 100 ? 32 : total >= 10 ? 24 : 18)
+      var r0
+      if (typeof chartWidth === 'string' && chartWidth.indexOf('%') > 0) {
+        r0 = Math.round(r * (1 - (parseInt(chartWidth) / 100)))
+        // var r0 = Math.round(r * 0.8)
+      } else {
+        r0 = parseInt(chartWidth)
+      }
+
+      var w = r * 2
+
+      var html = '<div><svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w + '" text-anchor="middle" style="font: ' + fontSize + 'px sans-serif">'
+
+      for (i = 0; i < counts.length; i++) {
+        html += this.donutSegment(
+          offsets[i] / total,
+          (offsets[i] + counts[i]) / total,
+          r,
+          r0,
+          dataColor[i]
+        )
+      }
+      html += '<circle cx="' + r + '" cy="' + r + '" r="' + r0 + '" fill="white" /><text dominant-baseline="central" transform="translate(' + r + ', ' + r + ')">' +
+      total.toLocaleString() + '</text></svg></div>'
+
+      return html
+    },
+
+    donutSegment: function (start, end, r, r0, color) {
+      if (end - start === 1) end -= 0.00001
+      var a0 = 2 * Math.PI * (start - 0.25)
+      var a1 = 2 * Math.PI * (end - 0.25)
+      var x0 = Math.cos(a0)
+      var y0 = Math.sin(a0)
+      var x1 = Math.cos(a1)
+      var y1 = Math.sin(a1)
+      var largeArc = end - start > 0.5 ? 1 : 0
+
+      return [
+        '<path d="M',
+        r + r0 * x0,
+        r + r0 * y0,
+        'L',
+        r + r * x0,
+        r + r * y0,
+        'A',
+        r,
+        r,
+        0,
+        largeArc,
+        1,
+        r + r * x1,
+        r + r * y1,
+        'L',
+        r + r0 * x1,
+        r + r0 * y1,
+        'A',
+        r0,
+        r0,
+        0,
+        largeArc,
+        0,
+        r + r0 * x0,
+        r + r0 * y0,
+        '" fill="' + color + '" />'
+      ].join(' ')
     }
   },
 
   render (h) {
-    const svg = createDonutChart(this.dataSet, this.dataColor, this.myradius, this.chartWidth, parseInt(this.fontSize))
+    const svg = this.createDonutChart(this.dataSet, this.dataColor, this.myradius, this.chartWidth, parseInt(this.fontSize))
 
     const children = []
 
     const markerDonut = h('div', {
+      style: { 
+        position: 'relative',
+        textAlign: 'center' 
+      },
       slot: 'marker',
-      ref: 'marker',
-      domProps: {
-        innerHTML: svg
-      }
-    })
+      ref: 'marker'
+    },
+    [
+      h('div', {
+        domProps: {
+          innerHTML: svg
+        }
+      }),
+      this.$slots.marker
+    ]
+    )
 
     children.push(markerDonut)
 
     Object.entries(this.$slots).forEach((item) => {
       const key = item[0]
       const value = item[1]
+      if (key == 'marker') return
       // set(value,'data.slot',key)
       children.push(
         h('div', {
@@ -127,7 +216,7 @@ export default {
 
     return h(VmMarker,
       {
-        props: { ...this.$attrs, ...this.$props },
+        props: { ...this.$attrs, ...this.$props, anchor: 'center' },
         on: { ...this.$listeners }
 
       }, [
@@ -139,83 +228,6 @@ export default {
 
 }
 
-function createDonutChart (dataSet, dataColor, raio, chartWidth, fontSize) {
-  var offsets = []
-  var counts = dataSet
-  var total = 0
-  for (var i = 0; i < counts.length; i++) {
-    offsets.push(total)
-    total += counts[i]
-  }
-
-  fontSize = (fontSize || (total >= 1000 ? 20 : total >= 100 ? 18 : total >= 10 ? 16 : 14))
-  var r = raio || (total >= 1000 ? 50 : total >= 100 ? 32 : total >= 10 ? 24 : 18)
-  var r0
-  if (typeof chartWidth === 'string' && chartWidth.indexOf('%') > 0) {
-    r0 = Math.round(r * (1 - (parseInt(chartWidth) / 100)))
-    // var r0 = Math.round(r * 0.8)
-  } else {
-    r0 = parseInt(chartWidth)
-  }
-
-  var w = r * 2
-
-  var html = '<div><svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w + '" text-anchor="middle" style="font: ' + fontSize + 'px sans-serif">'
-
-  for (i = 0; i < counts.length; i++) {
-    html += donutSegment(
-      offsets[i] / total,
-      (offsets[i] + counts[i]) / total,
-      r,
-      r0,
-      dataColor[i]
-    )
-  }
-  html += '<circle cx="' + r + '" cy="' + r + '" r="' + r0 + '" fill="white" /><text dominant-baseline="central" transform="translate(' + r + ', ' + r + ')">' +
-  total.toLocaleString() + '</text></svg></div>'
-
-  return html
-}
-
-function donutSegment (start, end, r, r0, color) {
-  if (end - start === 1) end -= 0.00001
-  var a0 = 2 * Math.PI * (start - 0.25)
-  var a1 = 2 * Math.PI * (end - 0.25)
-  var x0 = Math.cos(a0)
-  var y0 = Math.sin(a0)
-  var x1 = Math.cos(a1)
-  var y1 = Math.sin(a1)
-  var largeArc = end - start > 0.5 ? 1 : 0
-
-  return [
-    '<path d="M',
-    r + r0 * x0,
-    r + r0 * y0,
-    'L',
-    r + r * x0,
-    r + r * y0,
-    'A',
-    r,
-    r,
-    0,
-    largeArc,
-    1,
-    r + r * x1,
-    r + r * y1,
-    'L',
-    r + r0 * x1,
-    r + r0 * y1,
-    'A',
-    r0,
-    r0,
-    0,
-    largeArc,
-    0,
-    r + r0 * x0,
-    r + r0 * y0,
-    '" fill="' + color + '" />'
-  ].join(' ')
-}
 </script>
 
 <docs>

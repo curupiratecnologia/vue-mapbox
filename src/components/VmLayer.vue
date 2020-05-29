@@ -29,7 +29,7 @@ export default {
 
   name: 'VmLayer',
 
-  inject: ['getMap', 'mapboxgl', 'MapboxVueInstance', 'getSource'],
+  inject: { getMap: 'getMap', mapboxgl: 'mapboxgl', MapboxVueInstance: 'MapboxVueInstance', getSource: { from: 'getSource', default: null } },
 
   props: {
     /**
@@ -134,6 +134,18 @@ export default {
       type: Object
     },
     /**
+       (Dynamic) If Number, is order of the layer. Can set the Name of the layer to put after
+    */
+    zIndex: {
+      type: [Number, String]
+    },
+    /**
+       (Dynamic) If Number, is order of the layer. Can set the Name of the layer to put after
+    */
+    order: {
+      type: [Number, String]
+    },
+    /**
       * (Dynamic) Any child popup will be show on feature click or hover
       * @values click, hover
     */
@@ -177,6 +189,11 @@ export default {
     maxzom: function (val) {
       this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
     },
+    zIndex: function (val) {
+      console.log(val)
+      this.$nextTick(() => this.MapboxVueInstance.updateLayerOrder() )
+    },
+
 
     filter: function (val) {
       this.getMap().setFilter(this.layerId, val)
@@ -253,6 +270,7 @@ export default {
   },
 
   created: function () {
+    this.created_at = new Date() // created at is used to set layer order
     this.popupOpen = false
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
@@ -261,16 +279,36 @@ export default {
         options.source = source.id
       }
     }
-    const mylayer = this.MapboxVueInstance.addLayer(this.name, this.type, { ...options, paint: this.myPaint })
-    // get source add after add layer, because of case where the source especification is set in props as option, withou an id
-    this.sourceId = this.getMap().getLayer(mylayer).source
-    this.layerId = mylayer
-    // bind listners set in component to mapbox events
-    this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId)
+    this.options = options
+
+    // check if source exist,
+    if (typeof this.options.source === 'string') {
+      if (this.getMap().getSource(this.options.source)) {
+        this.addLayer()
+      } else {
+        // add layer when a source with name is added
+        const func = (e) => {
+          console.log(e)
+          if (e.dataType == 'source' && e.sourceId === this.options.source) {
+            this.addLayer()
+            this.getMap().off('sourcedata', func)
+          }
+        }
+
+        this.getMap().on('sourcedata', func)
+      }
+    } else {
+      this.addLayer()
+    }
+
+
+    // if not, wait it to loaded an show it
   },
 
   mounted: async function () {
     await this.$nextTick()
+  
+
     this.setupLayerFeaturesEvents()
   },
 
@@ -295,14 +333,31 @@ export default {
 
   },
 
-  beforeDestroy () {
+  destroyed () {
     if (this.layerId) {
+      console.log('destroying ' + this.layerId)
       this.MapboxVueInstance.removeLayer(this.layerId)
-      this.layerId = null
+      // check if the source of layer is a Object/ownSource,and remove it too
+      if (typeof this.source === 'object') {
+        this.getMap().removeSource(this.layerId)
+      }
     }
   },
 
   methods: {
+
+    addLayer: function () {
+      const mylayer = this.MapboxVueInstance.addLayer(this.name, this.type, { ...this.options, paint: this.myPaint })
+      this.layerId = mylayer
+      // get source add after add layer, because of case where the source especification is set in props as option, withou an id
+      this.sourceId = this.getMap().getLayer(mylayer).source
+
+      // this.MapboxVueInstance.updateLayerOrder()
+      // bind listners set in component to mapbox events
+      this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId, this.created_at, this.zIndex)
+
+
+    },
 
     setupLayerFeaturesEvents: function () {
       if (this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
@@ -316,7 +371,7 @@ export default {
         this.hasFeatureClick = false
       }
       const map = this.getMap()
-      if (this.hasFeatureHover) {
+      if (this.hasFeatureHover || this.hasFeatureClick) {
         map.off('mousemove', this.layerId, this.featureMouseMoveEvent)
         map.off('mouseleave', this.layerId, this.featureMouseLeaveEvent)
         map.on('mousemove', this.layerId, this.featureMouseMoveEvent)
@@ -351,15 +406,19 @@ export default {
         if (this.hasFeatureClick) { // if have click events, change cursor
           this.getMap().getCanvas().style.cursor = 'pointer'
         }
-        this.hoverFeatures = e.features
+
+        if(this.hasFeatureHover){
+            this.hoverFeatures = e.features
+        }
       }
     },
 
     featureMouseLeaveEvent: function (e) {
-      if (this.popupOpen) return false
+     
       if (this.hasFeatureClick) { // if have click events, change cursor
-        this.getMap().getCanvas().style.cursor = 'initial'
+        this.getMap().getCanvas().style.removeProperty('cursor')
       }
+       if (this.popupOpen) return false
       this.hoverFeatures = []
     },
 
@@ -453,6 +512,7 @@ export default {
   },
 
   render (h) {
+    const emptyElm = null // h('div')
     if (
       (this.hoverFeatures.length === 0 && this.selectedFeatures.length === 0) ||
       (!has(this.$scopedSlots, 'popupHover') &&
@@ -460,7 +520,7 @@ export default {
         !has(this.$slots, 'popupHover') &&
         !has(this.$slots, 'popupClick'))
     ) {
-      return null
+      return emptyElm
     }
     // create the popupElement
     let popupOver
@@ -482,7 +542,7 @@ export default {
     }
 
     if (!popupOver && !popupClick) {
-      return null
+      return emptyElm
     }
 
     if (this.lastClick && this.selectedFeatures.length > 0 && popupClick) {
@@ -505,7 +565,7 @@ export default {
         open: true
       }
     } else {
-      return null
+      return emptyElm
     }
 
     let popupInstance

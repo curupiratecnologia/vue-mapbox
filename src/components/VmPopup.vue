@@ -112,6 +112,26 @@ export default {
     trackPointer: {
       type: Boolean,
       default: false
+    },
+    /**
+       * The color or background of the popup
+    */
+    color: {
+      type: String,
+      default: 'white'
+    },
+    /**
+       * The color of the popup
+    */
+    textColor: {
+      type: String,
+      default: 'black'
+    },
+    /**
+       * In cases you want to set  a diferente color for the arrow. if null, will use the color propr
+    */
+    arrowColor: {
+      type: String
     }
   },
 
@@ -155,6 +175,9 @@ export default {
     },
     maxWidth: function (val) {
       this.setupPopup()
+    },
+    color: function (val) {
+      this.setupPopup()
     }
   },
 
@@ -194,7 +217,7 @@ export default {
         this.$emit('update:open', false)
       })
       this.popup.on('close', () => {
-      console.log("chamou fechou do popup")
+        console.log('chamou fechou do popup')
       })
       this.setupPopup()
       this.MapboxVueInstance.setupEvents(this.$listeners, this.popup, nativeEventsTypes)
@@ -216,6 +239,15 @@ export default {
       if (this.popup.getMaxWidth() !== this.myMaxWidth) {
         this.popup.setMaxWidth(this.myMaxWidth)
       }
+
+      const popupElement = this.popup.getElement()
+      if (popupElement) {
+        const content = popupElement.querySelector('.mapboxgl-popup-content')
+        const arrow = popupElement.querySelector('.mapboxgl-popup-tip')
+        content.style.backgroundColor = this.color
+        content.style.color = this.textColor
+        arrow.style.borderTopColor = this.arrowColor || this.color
+      }
     },
 
     docEvents: function () {
@@ -228,3 +260,9 @@ export default {
 }
 
 </script>
+
+<style lang="stylus">
+      .mapboxgl-popup-close-button{
+        color: currentColor !important;
+      }
+</style>

@@ -17,9 +17,13 @@
 </template>
 
 <script>
-
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
+
+import findVNodeChildren from '../utils/findVNodeChildren'
+import get from 'lodash/get'
+import has from 'lodash/has'
+import orderBy from 'lodash/orderBy'
 
 import uniqueId from 'lodash/uniqueId'
 
@@ -244,8 +248,21 @@ export default {
   beforeUpdated () {
     console.log('beforeUpdated dom vueMapbox')
   },
+
+  mounted () {
+    console.log('Mounted - Mounted dom vueMapbox')
+
+    // this.$nextTick(() => {
+    //   this.updateLayerOrder()
+    // })
+  },
+
   updated () {
-    console.log('Updated - renderizaneo dom vueMapbox')
+    console.log('Updated - updated dom vueMapbox')
+
+    // this.$nextTick(() => {
+    //   this.updateLayerOrder()
+    // })
   },
 
   beforeDestroy () {
@@ -359,7 +376,7 @@ export default {
     /**
     * Create/Update Layer
     */
-    addLayer: function (id, type, options) {
+    addLayer: function (id, type, options, createdAt, zIndex) {
       // // if layer name exist, create a randow one
       if (this.layers.get(id)) {
         id = uniqueId(id + type)
@@ -368,8 +385,106 @@ export default {
       this.map.addLayer({ id: id, type: type, ...options })
       const sourceObject = this.map.getLayer(id)
 
-      this.layers.set(id, { id, type, options, instance: sourceObject })
-      return id // { id, type, options, instance: sourceObject }
+      this.layers.set(id, { id, type, options, instance: sourceObject, createdAt, zIndex })
+
+      this.$nextTick(() =>
+        this.updateLayerOrder()
+      )
+
+      return id
+    },
+
+    /**
+    * Update All Layers Order
+    */
+    updateLayerOrder: function () {
+      console.log('UPDATE LAYER ORDER ==============================================================================')
+      const findLayers = (VNode, bag) => {
+        bag = bag || []
+
+        if (Array.isArray(VNode)) {
+          VNode.forEach(node => {
+            findLayers(node, bag)
+          })
+          return bag
+        }
+
+
+        // I will allways get the component instance
+        let VNodeInstance
+
+        if( VNode.constructor.name === 'VNode') {
+          VNodeInstance = get(VNode, 'componentInstance')
+        } else if ( VNode.constructor.name === 'VueComponent') {
+          VNodeInstance = VNode
+        }
+
+
+        if ((get(VNodeInstance, '$options.name', get(VNodeInstance, 'componentOptions.Ctor.options.name')) === 'VmLayer')) {
+          bag.push(VNodeInstance)
+          console.log( get(VNodeInstance, '$props.name') )
+        }
+        // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
+        // if (!children) children = get(VNode, 'componentInstance.$children')
+        // if (!children) 
+        let children = get(VNodeInstance, '$children')
+        if (Array.isArray(children)) {
+          children.forEach(node => {
+            findLayers(node, bag)
+          })
+        }
+        // if (has(VNodeInstance, '$slots')) {
+        //   const mySlots = Object.keys(VNodeInstance.$slots)
+        //   mySlots.forEach(slotName => {
+        //     findLayers(VNodeInstance.$slots[slotName], bag)
+        //   })
+        // }
+        // if (has(VNodeInstance, '$scopedSlots')) {
+        //   const mySlots = Object.keys(VNodeInstance.$scopedSlots)
+        //   mySlots.forEach(slotName => {
+        //     findLayers(VNodeInstance.$scopedSlots[slotName](), bag)
+        //   })
+        // }
+        return bag
+      }
+
+      const layerInstances = findLayers(this.$slots.default)
+
+      if (!layerInstances || layerInstances.length === 1) {
+        return
+      }
+
+      // make layers with order
+      let layersId = layerInstances.map((layer, i) => {
+        const component = layer.componentInstance || layer
+        const id = get(component, '$data.layerId')
+        const zIndex = get(component, '$props.zIndex')
+        let index = i
+        if (zIndex) {
+          index = parseInt(zIndex) + (index / 10)
+        }
+        return { id, index }
+      })
+
+      layersId = orderBy(layersId, ['index'], ['asc'])
+      for (let i = layersId.length; i > 1; i--) {
+        const currentLayer = layersId[i - 1].id
+        if (i === layersId.length) {
+          this.map.moveLayer(currentLayer)
+          console.log('move ' + currentLayer + ' to topmost')
+        } else {
+          const topLayer = layersId[i].id
+          console.log('move ' + currentLayer + ' bo beneth ' + topLayer)
+          this.map.moveLayer(currentLayer, topLayer)
+        }
+      }
+    },
+
+    /**
+    * Update Layers Index
+    */
+    moveLayer: function (id, zIndex) {
+      // // if layer name exist, create a randow one
     },
 
     /**
@@ -404,6 +519,9 @@ export default {
       if (this.map.getLayer(id)) {
         this.map.removeLayer(id)
       }
+      this.$nextTick(() =>
+        this.updateLayerOrder()
+      )
     },
 
     //   setMapEvents: function () {

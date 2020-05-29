@@ -1,6 +1,23 @@
 
 <script>
 
+// TODO - refatorar logica. confuso demais em casos onde adiciono ou removo v-slots/chilcher no marker
+// Exemplo
+//     <vm-marker :center="[-45,-15]">
+//                    <template v-if="show" v-slot:popupClick>
+//                        <VmPopup
+//                        color="red"
+//                        >
+//                        <ul>
+//                            <li v-for='tema in [1,2,3,4]'>
+//                               o tema é o tema - {{tema}}
+//                            </li>
+//                        </ul>
+//                        </VmPopup>
+//                    </template>
+//              </vm-marker>
+//
+
 import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
 import findVNodeChildren from '../utils/findVNodeChildren'
 import VmPopup from './VmPopup'
@@ -146,28 +163,7 @@ export default {
   },
 
   computed: {
-    getPopupHover: function () {
-      if (has(this.$scopedSlots, 'popupHover')) {
-        return this.$scopedSlots.popupHover({ metadata: this.metadata }) // [0]
-      } else if (has(this.$slots, 'popupHover')) {
-        return this.$slots.popupHover
-      }
-      return false
-    },
-    getPopupClick: function () {
-      const popupFind = findVNodeChildren(this.$slots.default, 'VmPopup')
-      if (has(this.$scopedSlots, 'popupClick')) {
-        return this.$scopedSlots.popupClick({ metadata: this.metadata }) // [0]
-      } else if (has(this.$slots, 'popupClick')) {
-        return this.$slots.popupClick
-      } else if (popupFind) {
-        return popupFind[0]
-      } else if (this.popUpContent) {
-        return this.popUpContent
-      }
 
-      return false
-    }
   },
 
   created: function () {
@@ -184,19 +180,25 @@ export default {
     }
   },
 
-  async mounted () {
+  mounted () {
     console.log('marker mounted')
-    await this.$nextTick()
-    this.setupMarker()
+    this.$nextTick(() => this.createMarker())
   },
 
   async updated () {
     // console.log('marker updated')
     // await this.$nextTick()
     // this.setupMarker()
+    // this.$nextTick(() => this.setupMarker())
   },
 
   watch: {
+
+    visible: function (val, oldval) {
+      if (val === false && oldval === true && this.popupOpen === 'hover') {
+        this.popupOpen = false
+      }
+    },
     center: function (val) {
       if (this.marker) { this.marker.setLngLat(val) }
     },
@@ -238,7 +240,7 @@ export default {
 
   methods: {
 
-    setupMarker: function () {
+    createMarker: function () {
       console.log('setupMarker')
       const options = getOnlyMapboxProps(this)
       if (this.marker) this.marker.remove()
@@ -246,17 +248,23 @@ export default {
       if (this.$slots.marker) {
         options.element = this.$refs.marker
       }
-
       this.marker = new this.mapboxgl.Marker(options).setLngLat(this.center)
+
+      this.MapboxVueInstance.setupEvents(this.$listeners, this.marker, nativeEventsTypes)
+      this.setupMarkerEvents()
+
+      this.$nextTick(() => this.setupMarker())
+    },
+
+    setupMarker: function () {
       this.markerElement = this.marker.getElement()
 
       this.markerVisibility()
-      this.MapboxVueInstance.setupEvents(this.$listeners, this.marker, nativeEventsTypes)
+
       this.setupPopupEvents()
-      this.setupMarkerEvents()
 
       // if have a instance of popup, check iff is props is open, so we set
-      if (get(this.getPopupClick, 'componentOptions.propsData.open') === true) {
+      if (get(this.getPopupClick(), 'componentOptions.propsData.open') === true) {
         this.popupOpen = 'click'
       }
     },
@@ -265,9 +273,7 @@ export default {
       if (!this.marker) return
 
       this.markerElement = this.marker.getElement()
-      if (this.getPopupClick) {
-        this.markerElement.style.cursor = 'pointer'
-      }
+
       Object.entries(this.$listeners).forEach((item) => {
         let eventName = item[0]
         const func = item[1]
@@ -296,21 +302,21 @@ export default {
 
     setupPopupEvents: function () {
       this.markerElement = this.marker.getElement()
-      if (this.getPopupHover) {
+      if (this.hasPopupHover()) {
         this.markerElement.addEventListener('mousemove', this.markerEventHover, { capture: true })
-        this.markerElement.addEventListener('mouseleave', this.markerEventLeave, { capture: true })
+        this.markerElement.addEventListener('mouseleave', this.markerEventLeave, { capture: false })
       }
-      if (this.getPopupClick) {
+      if (this.hasPopupClick()) {
         this.markerElement.addEventListener('click', this.markerEventClick, { capture: true })
       }
     },
 
     markerEventHover: function (e) {
       e.stopPropagation()
-      // if (!this.closeTimeout) {
-        clearTimeout(this.closeTimeout)
-        this.closeTimeout = null
-      // }
+
+      clearTimeout(this.closeTimeout)
+      this.closeTimeout = null
+
       if (!this.popupOpen) {
         this.popupOpen = 'hover'
       }
@@ -344,6 +350,45 @@ export default {
       }
     },
 
+    getPopupHover: function () {
+      if (has(this.$scopedSlots, 'popupHover')) {
+        return this.$scopedSlots.popupHover({ metadata: this.metadata }) // [0]
+      } else if (has(this.$slots, 'popupHover')) {
+        return this.$slots.popupHover
+      }
+      return false
+    },
+
+    getPopupClick: function () {
+      const popupFind = findVNodeChildren(this.$slots.default, 'VmPopup')
+      if (has(this.$scopedSlots, 'popupClick')) {
+        return this.$scopedSlots.popupClick({ metadata: this.metadata }) // [0]
+      } else if (has(this.$slots, 'popupClick')) {
+        return this.$slots.popupClick
+      } else if (popupFind) {
+        return popupFind[0]
+      } else if (this.popUpContent) {
+        return this.popUpContent
+      }
+
+      return false
+    },
+
+    hasPopupHover: function () {
+      if (has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
+        return true
+      }
+      return false
+    },
+
+    hasPopupClick: function () {
+      const popupFind = findVNodeChildren(this.$slots.default, 'VmPopup')
+      if (has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick') || popupFind) {
+        return true
+      }
+      return false
+    },
+
     docEvents: function () {
       /**
       *  @property {object} _this the component instance
@@ -369,6 +414,14 @@ export default {
     let popupProps = {}
     let popupInstance
 
+    if (this.marker) {
+      if (this.hasPopupClick()) {
+        this.marker.getElement().style.cursor = 'pointer'
+      } else {
+        this.marker.getElement().style.cursor = 'hand'
+      }
+    }
+
     if (this.popupOpen === 'click') {
       popupProps = {
         center: this.center,
@@ -377,7 +430,7 @@ export default {
         closeButton: true,
         open: true
       }
-      popup = this.getPopupClick
+      popup = this.getPopupClick()
       popupKey = 'markerPopupClick'
     } else if (this.popupOpen === 'hover') {
       popupProps = {
@@ -387,7 +440,7 @@ export default {
         closeOnClick: false,
         open: true
       }
-      popup = this.getPopupHover
+      popup = this.getPopupHover()
       popupKey = 'markerPopupHover'
     }
 
@@ -401,7 +454,7 @@ export default {
       const markerHeight = this.markerElement.getBoundingClientRect().height
       let popupYOffset
       if (this.anchor.indexOf('bottom') > -1) {
-        popupYOffset = markerHeight
+        popupYOffset = markerHeight + 15
       } else if (this.anchor === 'center') {
         popupYOffset = (markerHeight / 2)
       } else if (this.anchor.indexOf('top') > -1) {
