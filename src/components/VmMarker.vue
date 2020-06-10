@@ -448,6 +448,12 @@ export default {
       // check if popup is the content type of popup, if not create one
       const popupFind = findVNodeChildren(popup, 'VmPopup')
       popupInstance = (popupFind) ? popupFind[0] : h(VmPopup, [popup])
+
+      // TODO - verificar pq quando recebe o vnode e quando recebe a instancia.
+      // as vezes consigo reutilizar a instancia
+      if (popupInstance && popupInstance.$vnode) {
+        popupInstance = popupInstance.$vnode
+      }
       popupInstance.key = popupKey
 
       // set default offset of popup

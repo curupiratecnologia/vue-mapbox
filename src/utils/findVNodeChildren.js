@@ -48,90 +48,89 @@ export default function (Node, componentNameToFind, depthLevel = 1, slots = [], 
   // }
 
 
-  const findLayers = (VNode, bag) => {
-    bag = bag || []
-    if (Array.isArray(VNode)) {
-      VNode.forEach(node => {
-        findLayers(node, bag)
-      })
-      return bag
-    }
-    if ((get(VNode, '$options.name', get(VNode, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
-      bag.push(VNode)
-      console.log(VNode.componentOptions.propsData.name)
-    }
-    const children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
-    if (Array.isArray(children)) {
-      children.forEach(node => {
-        findLayers(node, bag)
-      })
-    }
-    if (has(VNode, '$slots')) {
-      const mySlots = Object.keys(VNode.$slots)
-      mySlots.forEach(slotName => {
-        findLayers(VNode.$slots[slotName], bag)
-      })
-    }
-    if (has(VNode, '$scopedSlots')) {
-      const mySlots = Object.keys(VNode.$scopedSlots)
-      mySlots.forEach(slotName => {
-        findLayers(VNode.$scopedSlots[slotName](), bag)
-      })
-    }
-    return bag
-  }
-
-  // check for it
-  // findInstance(Node)
-
   // const findLayers = (VNode, bag) => {
   //   bag = bag || []
-    
   //   if (Array.isArray(VNode)) {
   //     VNode.forEach(node => {
   //       findLayers(node, bag)
   //     })
   //     return bag
   //   }
-
-
-  //   // I will allways get the component instance
-  //   let VNodeInstance
-
-  //   if( get(VNode,'constructor.name') === 'VNode') {
-  //     VNodeInstance = get(VNode, 'componentInstance')
-  //   } else if (  get(VNode,'constructor.name') === 'VueComponent') {
-  //     VNodeInstance = VNode
+  //   if ((get(VNode, '$options.name', get(VNode, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
+  //     bag.push(VNode)
+  //     console.log(VNode.componentOptions.propsData.name)
   //   }
-
-
-  //   if ((get(VNodeInstance, '$options.name', get(VNodeInstance, 'componentOptions.Ctor.options.name')) === 'VmLayer')) {
-  //     bag.push(VNodeInstance)
-  //     console.log( get(VNodeInstance, '$props.name') )
-  //   }
-  //   // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
-  //   // if (!children) children = get(VNode, 'componentInstance.$children')
-  //   // if (!children) 
-  //   let children = get(VNodeInstance, '$children')
+  //   const children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
   //   if (Array.isArray(children)) {
   //     children.forEach(node => {
   //       findLayers(node, bag)
   //     })
   //   }
-  //   // if (has(VNodeInstance, '$slots')) {
-  //   //   const mySlots = Object.keys(VNodeInstance.$slots)
-  //   //   mySlots.forEach(slotName => {
-  //   //     findLayers(VNodeInstance.$slots[slotName], bag)
-  //   //   })
-  //   // }
-  //   // if (has(VNodeInstance, '$scopedSlots')) {
-  //   //   const mySlots = Object.keys(VNodeInstance.$scopedSlots)
-  //   //   mySlots.forEach(slotName => {
-  //   //     findLayers(VNodeInstance.$scopedSlots[slotName](), bag)
-  //   //   })
-  //   // }
+  //   if (has(VNode, '$slots')) {
+  //     const mySlots = Object.keys(VNode.$slots)
+  //     mySlots.forEach(slotName => {
+  //       findLayers(VNode.$slots[slotName], bag)
+  //     })
+  //   }
+  //   if (has(VNode, '$scopedSlots')) {
+  //     const mySlots = Object.keys(VNode.$scopedSlots)
+  //     mySlots.forEach(slotName => {
+  //       findLayers(VNode.$scopedSlots[slotName](), bag)
+  //     })
+  //   }
   //   return bag
   // }
+
+  // check for it
+  // findInstance(Node)
+
+  const findLayers = (VNode, bag) => {
+    bag = bag || []
+    
+    if (Array.isArray(VNode)) {
+      VNode.forEach(node => {
+        findLayers(node, bag)
+      })
+      return bag
+    }
+
+
+  //   // I will allways get the component instance
+    let VNodeInstance
+
+    if( get(VNode, 'componentInstance') ) {
+      VNodeInstance = get(VNode, 'componentInstance')
+    } else {
+      VNodeInstance = VNode
+    }
+
+    if ((get(VNodeInstance, '$options.name', get(VNodeInstance, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
+      bag.push(VNodeInstance)
+      console.log( get(VNodeInstance, '$props.name') )
+    }
+    // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
+    // if (!children) children = get(VNode, 'componentInstance.$children')
+    // if (!children) 
+    const children = get(VNodeInstance, '$children') || get(VNodeInstance, 'children')
+    if (Array.isArray(children)) {
+      children.forEach(node => {
+        findLayers(node, bag)
+      })
+    }
+    if (has(VNodeInstance, '$slots')) {
+      const mySlots = Object.keys(VNodeInstance.$slots)
+      mySlots.forEach(slotName => {
+        findLayers(VNodeInstance.$slots[slotName], bag)
+      })
+    }
+    if (has(VNodeInstance, '$scopedSlots')) {
+      const mySlots = Object.keys(VNodeInstance.$scopedSlots)
+      mySlots.forEach(slotName => {
+        findLayers(VNodeInstance.$scopedSlots[slotName](), bag)
+      })
+    }
+    return bag
+  }
 
   foundInstances = findLayers(Node)
   if (foundInstances.length === 0) {

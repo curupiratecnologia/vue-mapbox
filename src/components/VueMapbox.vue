@@ -413,9 +413,9 @@ export default {
         // I will allways get the component instance
         let VNodeInstance
 
-        if( VNode.constructor.name === 'VNode') {
+        if( get(VNode, 'componentInstance') ) {
           VNodeInstance = get(VNode, 'componentInstance')
-        } else if ( VNode.constructor.name === 'VueComponent') {
+        } else {
           VNodeInstance = VNode
         }
 

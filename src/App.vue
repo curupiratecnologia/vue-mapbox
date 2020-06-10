@@ -4,7 +4,7 @@
       <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images"
         :center="[-45, -15]">
 
-                    <VmSource name="estudosdecaso" type="geojson" :options="{ data: '/geojson/estudosdecaso.json', generateId:true, promoteId:'id' }">
+                    <!-- <VmSource name="estudosdecaso" type="geojson" :options="{ data: '/geojson/estudosdecaso.json', generateId:true, promoteId:'id' }">
                     <VmLayer type="line"
                     :maxzoom="24"
                     :minzoom="9.1"
@@ -20,6 +20,7 @@
                     <VmLayer type="symbol"
                         :maxzoom="24"
                         :minzoom="0"
+                        z-index="100"
                         :filter = "['==', '$type', 'Point']"
                         :paint="{
                         }"
@@ -45,6 +46,7 @@
                         :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
                         :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
                         multipleFeatureSelectionOn="alt"
+
                         >
 
                        <template v-slot:popupHover>
@@ -58,8 +60,85 @@
                           </VmPopup>
                         </template>
 
+                 </vmLayer> -->
 
-                 </vmLayer>
+           <vm-layer
+                name="bioma-fill"
+                :source="{
+                   type:'vector',
+                   tiles:[`http://167.99.58.243/tile/tipologia_mobilidade/{z}/{x}/{y}.mvt`],
+                   minzoom: 0,
+                   maxzoom: 24
+                }"
+                sourceLayer="tipologia_mobilidade"
+                type="fill"
+                :classes='[
+  {
+    "value": 1,
+    "property": "vlr_agrup_simil_cidreg",
+    "fill-color": "#FAE9DF",
+    "description": "Taxas elevadas de tempo de deslocamento entre casa e trabalho, com taxas acima da média nacional de motorização (veículos por mil habitantes) e número baixo de óbitos relacionados à acidentes de transito, relativos à população total. A infraestrutura local (acesso pavimentação, calçamento, meio-fio e rampas) apresenta índices relativamente altos. "
+  },
+  {
+    "value": 2,
+    "property": "vlr_agrup_simil_cidreg",
+    "fill-color": "#F0B0B4",
+    "description": "Maiores índices do país em termos de acesso à pavimentação, calçamento e meio-fio, porém com acesso muito baixo à rampas para cadeirantes. Apresentam um número reduzido de óbitos, relacionados à acidentes de trânsito, com baixo tempo de deslocamento entre casa e trabalho, no entanto, a taxa de motorização é bastante elevada, se considerada a realidade brasileira."
+  },
+  {
+    "value": 3,
+    "property": "vlr_agrup_simil_cidreg",
+    "fill-color": "#E36597",
+    "description": "Valores mais baixos do Brasil para os índices de acesso à infraestrutura de mobilidade em termos de acesso à pavimentação, calçamento, meio-fio com acesso e rampas para cadeirantes. Taxas de óbitos e motorização são variadas em torno da mediana do país. Tempos de deslocamento casa trabalho tendem a ser relativamente baixos."
+  },
+  {
+    "value": 4,
+    "property": "vlr_agrup_simil_cidreg",
+    "fill-color": "#B62280",
+    "description": "Taxa de  motorização baixa e com número reduzido de óbitos relacionados a acidentes de trânsito para o cenário brasileiro. No entanto, o tempo de deslocamento casa-trabalho, está entre os mais elevados do país.  Infraestrutura de acesso à rampas para cadeirante é muito baixa, com as demais (acesso pavimentação, calçamento e meio-fio) variando na faixa mediana."
+  },
+  {
+    "value": 5,
+    "property": "vlr_agrup_simil_cidreg",
+    "fill-color": "#731770",
+    "description": "Índices de óbitos relacionados a acidentes de trânsito muito elevados, com taxas de motorização (veículos por mil habitantes) medianas e um baixo tempos de deslocamento casa-trabalho. As taxas de acesso à rampas para cadeirante são muito baixas,  com as demais infraestruturas (acesso pavimentação, calçamento e meio-fio) variando um pouco acima da mediana. "
+  },
+  {
+    "value": 6,
+    "property": "vlr_agrup_simil_cidreg",
+    "fill-color": "#651053",
+    "description": "Infraestrutura geral com índices muito bons de acesso pavimentação, calçamento, meio-fio e rampas para cadeirantes. Números reduzidos de índices de óbitos relacionados a acidentes de trânsito, com tempo de deslocamento casa-trabalho baixo, porém com elevado índice de motorização (veículos por mil habitantes)."
+  }
+]'
+               
+                fill-color="#ff3333"
+                :paint="{'fill-opacity': 1 }"
+                :layout="{'visibility': 'visible' }"
+                :paint-hover="{  'fill-color': '#ff4499', 'fill-opacity': 0.8 }"
+            >
+            <template #popupHover="slotProps">
+                <b> {{ slotProps.features[0].properties }} </b>
+             </template>
+
+            </vm-layer>
+
+              <VmMarkerDonut :center="[-45, -15]"  :dataSet="[1,2,3,4,5,6]"  :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']" >
+             <VmPopup :open="true">
+                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+              </VmPopup>
+         </VmMarkerDonut>
+         <VmMarkerDonut :center="[-43, -14]"  :dataSet="[100,20,3,47,5,600]"  :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']" >
+            <template v-slot:popupHover>
+
+                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+
+            </template>
+            <template v-slot:popupClick>
+
+                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+
+            </template>
+         </VmMarkerDonut>
 
       </VueMapbox>
 
