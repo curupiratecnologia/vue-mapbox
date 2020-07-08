@@ -5,7 +5,8 @@
   "module": "src/library-entry.js",
   "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service build --target lib --name vue-mapbox src/library-entry.js --dest dist/ --watch",
+    "serve:lib": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "styleguide": "vue-cli-service styleguidist",
