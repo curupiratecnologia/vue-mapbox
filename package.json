@@ -2,7 +2,8 @@
   "name": "vue-mapbox",
   "version": "0.1.0",
   "main": "dist/vue-mapbox.umd.js",
-  "module": "src/library-entry.js",
+  "module": "dist/vue-mapbox.umd.js",
+  
   "private": false,
   "scripts": {
     "serve": "vue-cli-service build --target lib --name vue-mapbox src/library-entry.js --dest dist/ --watch",
