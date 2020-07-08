@@ -755,7 +755,7 @@ export default {
     @params {string} kind - one of paint, // TODO paint-hover, paint-click, layout, layout-hover, layout-click
     */
     mountPaintLayoutObject: function (kind) {
-      const finalPaintLayout = this.$props[kind]
+      const finalPaintLayout = this.$props[kind] || {}
 
       const propertiesForKind = []
       // get all the props for the paint/layout
@@ -785,16 +785,16 @@ export default {
           const expression = []
           /// check type. string we will use mach, number we will use betweem
           // if (typeof get(propertiesInClasses[0], 'value') === 'string') {
-            const property = propertiesInClasses[0].property
-            expression.push('match')
-            expression.push(['get', property])
-            propertiesInClasses.forEach(prop => {
-              expression.push(prop.value)
-              expression.push(get(prop, paintKeyKebab))
-            })
-            expression.push(paintValue)
-            paintValue = expression
-          }
+          const property = propertiesInClasses[0].property
+          expression.push('match')
+          expression.push(['get', property])
+          propertiesInClasses.forEach(prop => {
+            expression.push(prop.value)
+            expression.push(get(prop, paintKeyKebab))
+          })
+          expression.push(paintValue)
+          paintValue = expression
+        }
         // }
         if (paintValue) {
           finalPaintLayout[paintKeyKebab] = paintValue

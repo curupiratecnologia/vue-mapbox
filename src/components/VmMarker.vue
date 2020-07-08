@@ -167,7 +167,7 @@ export default {
   },
 
   created: function () {
-    console.log('marker created')
+    console.count('marker created')
     this.popup = null
     this.markerElement = null
     this.eventsFunction = {}
@@ -181,7 +181,7 @@ export default {
   },
 
   mounted () {
-    console.log('marker mounted')
+    console.count('marker mounted')
     this.$nextTick(() => this.createMarker())
   },
 
@@ -229,8 +229,14 @@ export default {
   },
 
   beforeDestroy () {
+    console.count("remove marker")
+    this.getMap().off('zoom', this.markerVisibility)
     if (this.marker) {
+          console.count("really remove marker")
       this.marker.remove()
+    }else{
+          console.count("no marker to remove")
+    
     }
   },
 

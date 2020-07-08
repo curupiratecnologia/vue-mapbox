@@ -110,7 +110,7 @@
     "description": "Infraestrutura geral com índices muito bons de acesso pavimentação, calçamento, meio-fio e rampas para cadeirantes. Números reduzidos de índices de óbitos relacionados a acidentes de trânsito, com tempo de deslocamento casa-trabalho baixo, porém com elevado índice de motorização (veículos por mil habitantes)."
   }
 ]'
-               
+
                 fill-color="#ff3333"
                 :paint="{'fill-opacity': 1 }"
                 :layout="{'visibility': 'visible' }"
@@ -122,29 +122,106 @@
 
             </vm-layer>
 
-              <VmMarkerDonut :center="[-45, -15]"  :dataSet="[1,2,3,4,5,6]"  :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']" >
-             <VmPopup :open="true">
-                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
-              </VmPopup>
-         </VmMarkerDonut>
-         <VmMarkerDonut :center="[-43, -14]"  :dataSet="[100,20,3,47,5,600]"  :dataColor="['#05bc5d','#050337','#b7d89d','#de84a2','#8e3529','#b123f3']" >
-            <template v-slot:popupHover>
 
-                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
 
-            </template>
-            <template v-slot:popupClick>
+      <div  v-for="(feature,i) in geojson.features"  :key="JSON.stringify(feature)">
+        <VmMarkerDonut
+                
+                    @click.native="showPopup"
+                    :center="feature.geometry.coordinates"
+                    :dataSet="feature.properties.dataSet"
+                    :dataColor="feature.properties.colorSet"
+                    :maxZoom="6"
+                    :minZoom="0"
+                  
+                >
+                    <template #marker>
+                        <div v-if="feature.properties.nome">
+                            <div style='text-align:center; font-size:8px;line-height:8px;font-weight:bold; margin-top:8px;opacity:0.8'>
+                            <div style='text-align:center; font-size:6px;font-weight:bolder; line-height:6px;margin:0; letter-spacing:0.3px;text-shadow:1px 1px 1px 4px white' v-if="feature.properties.tipoRegiao == 'cidade_regiao'"> CIDADE REGIÃO DE</div>
+                            <div style="margin:0;margin-top:2px;font-weight:bolder;letter-spacing:0.2px;color:white"> 0-3 {{ feature.properties.nome.toUpperCase() }}</div>
+                            </div>
+                        </div>
+                    </template>
 
-                  <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>
+                    <template #popupHover>
+                         <vm-popup 
+                         className='popup-cluster'
+                         color="#00000099">
+                            <ul class='popup-cluster--list'>
+                                <li v-for='tema in feature.properties.temas'
+                                    :key="tema.nome"
+                                    class='popup-cluster--list-item'
+                                    :style="{background:tema.cor}"
+                                    >
+                                    <div class='popup-cluster--list-item--icon'>
+                                    </div>
+                                    <div class='popup-cluster--list-item--name'>
+                                        {{tema.nome}}
+                                    </div>
+                                    <div class='popup-cluster--list-item--total'>
+                                       {{tema.total}}
+                                    </div>
 
-            </template>
-         </VmMarkerDonut>
+                                </li>
+                            </ul>
+                        </vm-popup>
+                    </template>
+                </VmMarkerDonut>
+        </div>
+      <!-- <div  v-for="(feature,i) in geojson.features"  :key="JSON.stringify(feature)+1">
+        <VmMarkerDonut
+                
+                    @click.native="showPopup"
+                    :center="feature.geometry.coordinates"
+                    :dataSet="feature.properties.dataSet"
+                    :dataColor="feature.properties.colorSet"
+                    :maxZoom="20"
+                    :minZoom="6.5"
+                  
+                >
+                    <template #marker>
+                        <div v-if="feature.properties.nome">
+                            <div style='text-align:center; font-size:8px;line-height:8px;font-weight:bold; margin-top:8px;opacity:0.8'>
+                            <div style='text-align:center; font-size:6px;font-weight:bolder; line-height:6px;margin:0; letter-spacing:0.3px;text-shadow:1px 1px 1px 4px white' v-if="feature.properties.tipoRegiao == 'cidade_regiao'"> CIDADE REGIÃO DE</div>
+                            <div style="margin:0;margin-top:2px;font-weight:bolder;letter-spacing:0.2px; color:white"> 4-10 {{ feature.properties.nome.toUpperCase() }}</div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template #popupHover>
+                         <vm-popup 
+                         className='popup-cluster'
+                         color="#00000099">
+                            <ul class='popup-cluster--list'>
+                                <li v-for='tema in feature.properties.temas'
+                                    :key="tema.nome"
+                                    class='popup-cluster--list-item'
+                                    :style="{background:tema.cor}"
+                                    >
+                                    <div class='popup-cluster--list-item--icon'>
+                                    </div>
+                                    <div class='popup-cluster--list-item--name'>
+                                        {{tema.nome}}
+                                    </div>
+                                    <div class='popup-cluster--list-item--total'>
+                                       {{tema.total}}
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </vm-popup>
+                    </template>
+                </VmMarkerDonut>
+        </div> -->
 
       </VueMapbox>
 
     </center>
 
-    <button @click="show=!show"> Toogle marker Popup </button> {{show}}
+    <button @click="geojson=geojson1"> Geojson1</button> 
+    <button @click="geojson=geojson2"> Geojson2 </button> 
+    <button @click="geojson=geojson3"> Geojson Vazio </button> 
 
   </div>
 </template>
@@ -164,9 +241,401 @@ export default {
       label: 'a',
       mode: 0,
       fill: '#ff7700',
-      dataSet: [100, 4, 7]
+      dataSet: [100, 4, 7],
+
+      geojson1: {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Rio de Janeiro',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                }
+              },
+              geocod: '33',
+              colorSet: [
+                '#984593'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -42.0711523406202,
+                -22.0720646645004
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'São Paulo',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                }
+              },
+              geocod: '35',
+              colorSet: [
+                '#984593'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -49.1831841692549,
+                -22.5736727410571
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Paraná',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                }
+              },
+              geocod: '41',
+              colorSet: [
+                '#984593'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -51.8183643619047,
+                -24.6344451045557
+              ]
+            }
+          }
+        ]
+      },
+
+      geojson2: {
+
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Pará',
+              temas: {
+                6: {
+                  nome: 'Soluções Baseadas na Natureza (NBS)',
+                  total: 1,
+                  cor: '#f97566'
+                }
+              },
+              geocod: '15',
+              colorSet: [
+                '#f97566'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -52.0029177013392,
+                -3.64654901351252
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Minas Gerais',
+              temas: {
+                6: {
+                  nome: 'Soluções Baseadas na Natureza (NBS)',
+                  total: 1,
+                  cor: '#f97566'
+                }
+              },
+              geocod: '31',
+              colorSet: [
+                '#f97566'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -45.2120202503997,
+                -18.6336315895962
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Esprito Santo',
+              temas: {
+                6: {
+                  nome: 'Soluções Baseadas na Natureza (NBS)',
+                  total: 1,
+                  cor: '#f97566'
+                }
+              },
+              geocod: '32',
+              colorSet: [
+                '#f97566'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -40.4467034518567,
+                -19.6054031735828
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Rio de Janeiro',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                },
+                6: {
+                  nome: 'Soluções Baseadas na Natureza (NBS)',
+                  total: 3,
+                  cor: '#f97566'
+                }
+              },
+              geocod: '33',
+              colorSet: [
+                '#984593',
+                '#f97566'
+              ],
+              dataSet: [
+                1,
+                3
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -42.0711523406202,
+                -22.0720646645004
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'São Paulo',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                },
+                6: {
+                  nome: 'Soluções Baseadas na Natureza (NBS)',
+                  total: 1,
+                  cor: '#f97566'
+                }
+              },
+              geocod: '35',
+              colorSet: [
+                '#984593',
+                '#f97566'
+              ],
+              dataSet: [
+                1,
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -49.1831841692549,
+                -22.5736727410571
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Paraná',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                }
+              },
+              geocod: '41',
+              colorSet: [
+                '#984593'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -51.8183643619047,
+                -24.6344451045557
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Distrito Federal',
+              temas: {
+                6: {
+                  nome: 'Soluções Baseadas na Natureza (NBS)',
+                  total: 1,
+                  cor: '#f97566'
+                }
+              },
+              geocod: '53',
+              colorSet: [
+                '#f97566'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -47.7808785770608,
+                -15.7754886310227
+              ]
+            }
+          }
+        ]
+
+      },
+
+        geojson3: {
+
+        type: 'FeatureCollection',
+        features: []
+
+      },
+
+
+      geojson:{}
 
     }
+  },
+
+  created:function(){
+    this.geojson = this.geojson1
   },
 
   // components: {
