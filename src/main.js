@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store'
 import forEach from 'lodash/forEach'
 
 Vue.config.productionTip = false
@@ -25,6 +24,5 @@ requireAllComponents(require.context('./components', true, /[A-Z]\w+\.(vue|js)$/
 
 
 new Vue({
-  store,
   render: h => h(App)
 }).$mount('#app')
