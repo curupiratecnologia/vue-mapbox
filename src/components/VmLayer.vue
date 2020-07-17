@@ -464,12 +464,24 @@ export default {
 
   watch: {
 
+    source: function (val) {
+      if (typeof val === 'object') {
+        debugger
+        const source = this.getMap().getLayer(this.layerId).source
+        this.MapboxVueInstance.updateSource(source, val.type, { ...val })
+      }
+    },
+
     minzoom: function (val) {
-      this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
+      if (this.layerExist()) {
+        this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
+      }
     },
 
     maxzom: function (val) {
-      this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
+      if (this.layerExist()) {
+        this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
+      }
     },
     zIndex: function (val) {
       console.log(val)
@@ -485,7 +497,9 @@ export default {
         const key = item[0]
         const value = item[1]
         if (JSON.stringify(value) !== JSON.stringify(oldPaint[key])) {
-          this.getMap().setPaintProperty(this.layerId, key, value)
+          if (this.layerExist()) {
+            this.getMap().setPaintProperty(this.layerId, key, value)
+          }
         }
       })
     },
@@ -495,7 +509,9 @@ export default {
         const key = item[0]
         const value = item[1]
         if (JSON.stringify(value) !== JSON.stringify(oldLayout[key])) {
-          this.getMap().setLayoutProperty(this.layerId, key, value)
+          if (this.layerExist()) {
+            this.getMap().setLayoutProperty(this.layerId, key, value)
+          }
         }
       })
     },
@@ -595,22 +611,34 @@ export default {
       this.MapboxVueInstance.removeLayer(this.layerId)
       // check if the source of layer is a Object/ownSource,and remove it too
       if (typeof this.source === 'object') {
-        this.getMap().removeSource(this.layerId)
+        this.getMap().removeSource(this.sourceId)
       }
     }
   },
 
   methods: {
 
-    addLayer: function () {
-      const mylayer = this.MapboxVueInstance.addLayer(this.name, this.type, { ...this.options, paint: this.myPaint, layout: this.myLayout })
-      this.layerId = mylayer
-      // get source add after add layer, because of case where the source especification is set in props as option, withou an id
-      this.sourceId = this.getMap().getLayer(mylayer).source
+    layerExist: function () {
+      const layer = this.getMap().getLayer(this.layerId)
+      if (!layer) return false
+      return true
+    },
 
-      // this.MapboxVueInstance.updateLayerOrder()
-      // bind listners set in component to mapbox events
-      this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId, this.created_at, this.zIndex)
+    addLayer: function () {
+      try {
+        const mylayer = this.MapboxVueInstance.addLayer(this.name, this.type, { ...this.options, paint: this.myPaint, layout: this.myLayout })
+        this.layerId = mylayer
+        // get source add after add layer, because of case where the source especification is set in props as option, withou an id
+        this.sourceId = this.getMap().getLayer(mylayer).source
+
+        // this.MapboxVueInstance.updateLayerOrder()
+        // bind listners set in component to mapbox events
+        this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId, this.created_at, this.zIndex)
+      } catch (e) {
+        console.error('Error adding Layer ' + this.name)
+        console.error(e)
+        this.$destroy()
+      }
     },
 
     setupLayerFeaturesEvents: function () {

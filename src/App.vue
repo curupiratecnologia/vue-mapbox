@@ -1,46 +1,17 @@
 <template>
   <div id="app">
     <center>
-      <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images"
-        :center="[-45, -15]">
+      <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-                    <!-- <VmSource name="estudosdecaso" type="geojson" :options="{ data: '/geojson/estudosdecaso.json', generateId:true, promoteId:'id' }">
-                    <VmLayer type="line"
-                    :maxzoom="24"
-                    :minzoom="9.1"
-                    :filter = "['==', '$type', 'LineString']"
-                    :paint="{
-                        'line-color':'white',
-                        'line-dasharray':[3,3],
+              <vm-source
+                                    name="painel_solucao_compartilhada_solucao_info"
+                                    type='vector'
+                                    :options="{ type:'vector', tiles:[`http://rspangea.mma.gov.br/tile/painel_solucao_compartilhada_solucao_info/{z}/{x}/{y}.mvt?ano_referencia=${ano}`], minzoom: 1, maxzoom: 24, }" >
 
-                    }">
-
-                    </VmLayer>
-
-                    <VmLayer type="symbol"
-                        :maxzoom="24"
-                        :minzoom="0"
-                        z-index="100"
-                        :filter = "['==', '$type', 'Point']"
-                        :paint="{
-                        }"
-                        :layout="{
-                            'icon-anchor':['match',['get','type'],'circle', 'center','marker','bottom', 'center'],
-                            'icon-size': [ 'interpolate', ['linear'], ['zoom'], 9, 0.7, 12, 0.8],
-                            'icon-image':['get','icon'],
-                            'icon-offset':['match',['get','type'],'circle', ['literal',[0,0]],'marker',['literal',[0,12]], ['literal',[0,0]] ],
-                            'icon-allow-overlap' : true,
-                        }"
-                        >
-                         <template v-slot:popupClick="slotProps">
-                            <pre></pre>
-                         </template>
-
-                    </VmLayer>
-             </VmSource>
-
-              <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                </vm-source>
+<vmLayer name="myLayer"
+                        source="painel_solucao_compartilhada_solucao_info"
+                        sourceLayer="painel_solucao_compartilhada_solucao_info"
                         type="fill"
                         :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
                         :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
@@ -60,168 +31,45 @@
                           </VmPopup>
                         </template>
 
-                 </vmLayer> -->
+                 </vmLayer>
 
-           <vm-layer
-                name="bioma-fill"
-                :source="{
-                   type:'vector',
-                   tiles:[`http://167.99.58.243/tile/tipologia_mobilidade/{z}/{x}/{y}.mvt`],
-                   minzoom: 0,
-                   maxzoom: 24
-                }"
-                sourceLayer="tipologia_mobilidade"
-                type="fill"
-                :classes='[
-  {
-    "value": 1,
-    "property": "vlr_agrup_simil_cidreg",
-    "fill-color": "#FAE9DF",
-    "description": "Taxas elevadas de tempo de deslocamento entre casa e trabalho, com taxas acima da média nacional de motorização (veículos por mil habitantes) e número baixo de óbitos relacionados à acidentes de transito, relativos à população total. A infraestrutura local (acesso pavimentação, calçamento, meio-fio e rampas) apresenta índices relativamente altos. "
-  },
-  {
-    "value": 2,
-    "property": "vlr_agrup_simil_cidreg",
-    "fill-color": "#F0B0B4",
-    "description": "Maiores índices do país em termos de acesso à pavimentação, calçamento e meio-fio, porém com acesso muito baixo à rampas para cadeirantes. Apresentam um número reduzido de óbitos, relacionados à acidentes de trânsito, com baixo tempo de deslocamento entre casa e trabalho, no entanto, a taxa de motorização é bastante elevada, se considerada a realidade brasileira."
-  },
-  {
-    "value": 3,
-    "property": "vlr_agrup_simil_cidreg",
-    "fill-color": "#E36597",
-    "description": "Valores mais baixos do Brasil para os índices de acesso à infraestrutura de mobilidade em termos de acesso à pavimentação, calçamento, meio-fio com acesso e rampas para cadeirantes. Taxas de óbitos e motorização são variadas em torno da mediana do país. Tempos de deslocamento casa trabalho tendem a ser relativamente baixos."
-  },
-  {
-    "value": 4,
-    "property": "vlr_agrup_simil_cidreg",
-    "fill-color": "#B62280",
-    "description": "Taxa de  motorização baixa e com número reduzido de óbitos relacionados a acidentes de trânsito para o cenário brasileiro. No entanto, o tempo de deslocamento casa-trabalho, está entre os mais elevados do país.  Infraestrutura de acesso à rampas para cadeirante é muito baixa, com as demais (acesso pavimentação, calçamento e meio-fio) variando na faixa mediana."
-  },
-  {
-    "value": 5,
-    "property": "vlr_agrup_simil_cidreg",
-    "fill-color": "#731770",
-    "description": "Índices de óbitos relacionados a acidentes de trânsito muito elevados, com taxas de motorização (veículos por mil habitantes) medianas e um baixo tempos de deslocamento casa-trabalho. As taxas de acesso à rampas para cadeirante são muito baixas,  com as demais infraestruturas (acesso pavimentação, calçamento e meio-fio) variando um pouco acima da mediana. "
-  },
-  {
-    "value": 6,
-    "property": "vlr_agrup_simil_cidreg",
-    "fill-color": "#651053",
-    "description": "Infraestrutura geral com índices muito bons de acesso pavimentação, calçamento, meio-fio e rampas para cadeirantes. Números reduzidos de índices de óbitos relacionados a acidentes de trânsito, com tempo de deslocamento casa-trabalho baixo, porém com elevado índice de motorização (veículos por mil habitantes)."
-  }
-]'
+      </VueMapbox>
 
-                fill-color="#ff3333"
-                :paint="{'fill-opacity': 1 }"
-                :layout="{'visibility': 'visible' }"
-                :paint-hover="{  'fill-color': '#ff4499', 'fill-opacity': 0.8 }"
-            >
-            <template #popupHover="slotProps">
-                <b> {{ slotProps.features[0].properties }} </b>
-             </template>
+            <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-            </vm-layer>
+              <vmLayer name="myLayer"
+                        :source="{
+                          id:'outrosource',
+                          type:'vector',
+                          tiles:[`http://rspangea.mma.gov.br/tile/painel_solucao_compartilhada_solucao_info/{z}/{x}/{y}.mvt?ano_referencia=${ano}`]
+                        }"
+                        sourceLayer="painel_solucao_compartilhada_solucao_info"
+                        type="fill"
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
 
+                        >
 
+                       <template v-slot:popupHover>
+                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
+                        </template>
 
-      <div  v-for="(feature,i) in geojson.features"  :key="JSON.stringify(feature)">
-        <VmMarkerDonut
-                
-                    @click.native="showPopup"
-                    :center="feature.geometry.coordinates"
-                    :dataSet="feature.properties.dataSet"
-                    :dataColor="feature.properties.colorSet"
-                    :maxZoom="6"
-                    :minZoom="0"
-                  
-                >
-                    <template #marker>
-                        <div v-if="feature.properties.nome">
-                            <div style='text-align:center; font-size:8px;line-height:8px;font-weight:bold; margin-top:8px;opacity:0.8'>
-                            <div style='text-align:center; font-size:6px;font-weight:bolder; line-height:6px;margin:0; letter-spacing:0.3px;text-shadow:1px 1px 1px 4px white' v-if="feature.properties.tipoRegiao == 'cidade_regiao'"> CIDADE REGIÃO DE</div>
-                            <div style="margin:0;margin-top:2px;font-weight:bolder;letter-spacing:0.2px;color:white"> 0-3 {{ feature.properties.nome.toUpperCase() }}</div>
-                            </div>
-                        </div>
-                    </template>
+                        <template v-slot:popupClick="slotProps">
+                          <VmPopup max-width="400px">
+                               <pre>{{ slotProps.features && slotProps.features[0] && slotProps.features[0].properties }}</pre>
+                              <h6>Here goes the pop up content while in <b>CLICK</b> a Feature.</h6>
+                          </VmPopup>
+                        </template>
 
-                    <template #popupHover>
-                         <vm-popup 
-                         className='popup-cluster'
-                         color="#00000099">
-                            <ul class='popup-cluster--list'>
-                                <li v-for='tema in feature.properties.temas'
-                                    :key="tema.nome"
-                                    class='popup-cluster--list-item'
-                                    :style="{background:tema.cor}"
-                                    >
-                                    <div class='popup-cluster--list-item--icon'>
-                                    </div>
-                                    <div class='popup-cluster--list-item--name'>
-                                        {{tema.nome}}
-                                    </div>
-                                    <div class='popup-cluster--list-item--total'>
-                                       {{tema.total}}
-                                    </div>
-
-                                </li>
-                            </ul>
-                        </vm-popup>
-                    </template>
-                </VmMarkerDonut>
-        </div>
-      <!-- <div  v-for="(feature,i) in geojson.features"  :key="JSON.stringify(feature)+1">
-        <VmMarkerDonut
-                
-                    @click.native="showPopup"
-                    :center="feature.geometry.coordinates"
-                    :dataSet="feature.properties.dataSet"
-                    :dataColor="feature.properties.colorSet"
-                    :maxZoom="20"
-                    :minZoom="6.5"
-                  
-                >
-                    <template #marker>
-                        <div v-if="feature.properties.nome">
-                            <div style='text-align:center; font-size:8px;line-height:8px;font-weight:bold; margin-top:8px;opacity:0.8'>
-                            <div style='text-align:center; font-size:6px;font-weight:bolder; line-height:6px;margin:0; letter-spacing:0.3px;text-shadow:1px 1px 1px 4px white' v-if="feature.properties.tipoRegiao == 'cidade_regiao'"> CIDADE REGIÃO DE</div>
-                            <div style="margin:0;margin-top:2px;font-weight:bolder;letter-spacing:0.2px; color:white"> 4-10 {{ feature.properties.nome.toUpperCase() }}</div>
-                            </div>
-                        </div>
-                    </template>
-
-                    <template #popupHover>
-                         <vm-popup 
-                         className='popup-cluster'
-                         color="#00000099">
-                            <ul class='popup-cluster--list'>
-                                <li v-for='tema in feature.properties.temas'
-                                    :key="tema.nome"
-                                    class='popup-cluster--list-item'
-                                    :style="{background:tema.cor}"
-                                    >
-                                    <div class='popup-cluster--list-item--icon'>
-                                    </div>
-                                    <div class='popup-cluster--list-item--name'>
-                                        {{tema.nome}}
-                                    </div>
-                                    <div class='popup-cluster--list-item--total'>
-                                       {{tema.total}}
-                                    </div>
-
-                                </li>
-                            </ul>
-                        </vm-popup>
-                    </template>
-                </VmMarkerDonut>
-        </div> -->
+                 </vmLayer>
 
       </VueMapbox>
 
     </center>
 
-    <button @click="geojson=geojson1"> Geojson1</button> 
-    <button @click="geojson=geojson2"> Geojson2 </button> 
-    <button @click="geojson=geojson3"> Geojson Vazio </button> 
+    ano <input type="text" v-model="ano">
 
   </div>
 </template>
@@ -242,6 +90,7 @@ export default {
       mode: 0,
       fill: '#ff7700',
       dataSet: [100, 4, 7],
+      ano: 2018,
 
       geojson1: {
         type: 'FeatureCollection',
@@ -621,20 +470,19 @@ export default {
 
       },
 
-        geojson3: {
+      geojson3: {
 
         type: 'FeatureCollection',
         features: []
 
       },
 
-
-      geojson:{}
+      geojson: {}
 
     }
   },
 
-  created:function(){
+  created: function () {
     this.geojson = this.geojson1
   },
 

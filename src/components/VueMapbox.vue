@@ -1,4 +1,4 @@
-/* eslint-disable eqeqeq */
+/* eslint-disable eqeqeq */``
 <template>
   <div class="vue-mapbox" :style="{ position:'relative', width: myWidth, height: myHeight }">
     <div ref="mapabaselayer" id="mapaBaseLayer" class="map-layer mapbox-map-container">
@@ -11,7 +11,7 @@
           <!-- <div> <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i> <br /> {{'Loading'}}... </div> -->
         </slot>
       </div>
-      <!-- <div v-if='$dev' style='position:fixed;bottom:0;left:0;font-size:9px;padding:0.4em;z-index:10;background:#00000066;color:white;'>zoom:{{$store.getters.zoom}}</div> -->
+      <div v-if='devMode' style='position:absolute;bottom:0;font-size:9px;padding:0.4em;z-index:10;background:#00000066;color:white;'>{{ camera }}</div>
     </div>
   </div>
 </template>
@@ -164,7 +164,22 @@ export default {
     */
     bounds: {
       type: Array,
-      default: () => []
+      default: undefined
+    },
+    /**
+       *  The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options.
+    */
+    maxBounds: {
+      type: Array,
+      default: undefined
+    },
+    /**
+       * camera padding. will be user for all bounds, fly etc
+       * @values number or {top,left,right,bottom}
+    */
+    padding: {
+      type: [Object, Number],
+      default: 0
     },
     /**
        *  Other options to pass to mapbox. Will be merged here. See https://docs.mapbox.com/mapbox-gl-js/api/#map for all options.
@@ -179,6 +194,13 @@ export default {
     images: {
       type: Object,
       default: () => ({})
+    }, // {'name':url,'name2':url2}
+    /**
+       *  show cameras attributes
+    */
+    devMode: {
+      type: Boolean,
+      default: false
     } // {'name':url,'name2':url2}
 
   },
@@ -200,7 +222,8 @@ export default {
       mapLoaded: false,
       map: null,
       sources: null,
-      layers: null
+      layers: null,
+      camera: ''
     }
   },
 
@@ -242,6 +265,18 @@ export default {
         w += 'px'
       }
       return w
+    }
+  },
+
+  watch: {
+    bounds: function (val) {
+      // var newCameraTransform = this.map.cameraForBounds(val, {
+      //   padding: { top: 10, bottom: 25, left: 15, right: 5 }
+      // })
+      this.map.fitBounds(val, { padding: this.padding })
+    },
+    maxBounds: function (val) {
+      this.map.setMaxBounds(val)
     }
   },
 
@@ -288,11 +323,13 @@ export default {
         style: this.mapStyle,
         center: this.center,
         zoom: this.zoom,
-        hash: this.hash
+        hash: this.hash,
+        bounds: this.bounds,
+        maxBounds: this.maxBounds
         // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
       })
 
-      this.addImages()
+      this.addPropsImages()
 
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes)
 
@@ -305,6 +342,29 @@ export default {
          */
         this.$emit('load', _this, this.map)
         this.mapLoaded = true
+      })
+
+      if (this.devMode) {
+        this.map.on('moveend', () => {
+          this.camera = this.map.getZoom()
+        })
+      }
+
+      this.map.on('styledata', () => {
+        console.log('A styledata event occurred.')
+      //   this.updateLayerOrder()
+      })
+      this.map.on('sourcedata', () => {
+        console.log('A sourcedata event occurred.')
+      //   this.updateLayerOrder()
+      })
+      this.map.on('sourcedataloading', () => {
+        console.log('A sourcedataloading event occurred.')
+      //   this.updateLayerOrder()
+      })
+
+      this.map.on('styledata', function () {
+        console.log('A styledata event occurred.')
       })
     },
 
@@ -320,6 +380,10 @@ export default {
         Object.entries(listners).forEach((item) => {
           let eventName = item[0]
           const eventFunction = item[1]
+
+          const eventFinal = (e) => {
+            eventFunction(e, this.map, this)
+          }
           let once = false
 
           if (eventName.indexOf('~') === 0) {
@@ -329,15 +393,15 @@ export default {
           if (theEventsOfElement.includes(eventName)) {
             if (once) {
               if (layerId) {
-                MapboxElement.once(eventName, layerId, eventFunction)
+                MapboxElement.once(eventName, layerId, eventFinal)
               } else {
-                MapboxElement.once(eventName, eventFunction)
+                MapboxElement.once(eventName, eventFinal)
               }
             } else {
               if (layerId) {
-                MapboxElement.on(eventName, layerId, eventFunction)
+                MapboxElement.on(eventName, layerId, eventFinal)
               } else {
-                MapboxElement.on(eventName, eventFunction)
+                MapboxElement.on(eventName, eventFinal)
               }
             }
           }
@@ -374,6 +438,40 @@ export default {
     },
 
     /**
+    * Update Source
+    */
+    updateSource: function (sourceid, type, options) {
+      debugger
+      if (this.sources.has(sourceid)) {
+        this.sources.delete(sourceid)
+      }
+
+      // apago todos os layers que tem esse source
+      const layers = this.map.getStyle().layers
+      layers.forEach(layer => {
+        if (layer.source === sourceid) {
+          this.map.removeLayer(layer.id)
+        }
+      })
+      // apago o source
+      this.map.removeSource(sourceid)
+      // adiciono o novo source no com mesmo is
+      const source = this.addSource(sourceid, type, options)
+      // adiciono os layer novamente
+      layers.forEach((layer, i) => {
+        if (layer.source === sourceid) {
+          const beforeLayer = layers?.[i - 1]
+          if (beforeLayer) {
+            this.map.addLayer(layer, beforeLayer.id)
+          } else {
+            this.map.addLayer(layer)
+          }
+        }
+      })
+      return source
+    },
+
+    /**
     * Create/Update Layer
     */
     addLayer: function (id, type, options, createdAt, zIndex) {
@@ -390,6 +488,12 @@ export default {
       this.$nextTick(() =>
         this.updateLayerOrder()
       )
+
+      //when idle because some time the layer get time to be added
+      this.map.once('idle', () => {
+        console.log('A styledata event occurred.')
+        this.updateLayerOrder()
+      })
 
       return id
     },
@@ -409,25 +513,23 @@ export default {
           return bag
         }
 
-
         // I will allways get the component instance
         let VNodeInstance
 
-        if( get(VNode, 'componentInstance') ) {
+        if (get(VNode, 'componentInstance')) {
           VNodeInstance = get(VNode, 'componentInstance')
         } else {
           VNodeInstance = VNode
         }
 
-
         if ((get(VNodeInstance, '$options.name', get(VNodeInstance, 'componentOptions.Ctor.options.name')) === 'VmLayer')) {
           bag.push(VNodeInstance)
-          console.log( get(VNodeInstance, '$props.name') )
+          console.log(get(VNodeInstance, '$props.name'))
         }
         // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
         // if (!children) children = get(VNode, 'componentInstance.$children')
-        // if (!children) 
-        let children = get(VNodeInstance, '$children')
+        // if (!children)
+        const children = get(VNodeInstance, '$children')
         if (Array.isArray(children)) {
           children.forEach(node => {
             findLayers(node, bag)
@@ -469,6 +571,15 @@ export default {
       layersId = orderBy(layersId, ['index'], ['asc'])
       for (let i = layersId.length; i > 1; i--) {
         const currentLayer = layersId[i - 1].id
+
+        if (!this.map.getLayer(currentLayer)) {
+          continue
+          // this.$nextTick(() =>
+          //   this.updateLayerOrder()
+          // )
+        //  return false
+        }
+
         if (i === layersId.length) {
           this.map.moveLayer(currentLayer)
           console.log('move ' + currentLayer + ' to topmost')
@@ -492,20 +603,29 @@ export default {
     * @params {object} images.
     */
 
-    addImages: function (images) {
+    addPropsImages: function (images) {
       if (!this.map) return
       images = images || this.images
       Object.entries(images).forEach((item) => {
         const key = item[0]
         const value = item[1]
+        this.addImage(key, value)
+      })
+    },
 
-        // TODO - chek when is a htmlimage or other type
-        this.map.loadImage(value, (error, image) => {
-          if (error) {
-            console.error(error)
-          }
-          if (!this.map.hasImage(key)) this.map.addImage(key, image)
-        })
+    /**
+    Add images in map
+    * @params {object} images.
+    */
+
+    addImage: function (key, url) {
+      if (!this.map) return
+      // TODO - chek when is a htmlimage or other type
+      this.map.loadImage(url, (error, image) => {
+        if (error) {
+          console.error(error)
+        }
+        if (!this.map.hasImage(key)) this.map.addImage(key, image)
       })
     },
 

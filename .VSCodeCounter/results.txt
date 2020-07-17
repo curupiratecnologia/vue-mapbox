@@ -1,0 +1,151 @@
+Date : 2020-07-16 13:41:32
+Directory : /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox
+Total : 96 files,  94166 codes, 18093 comments, 14508 blanks, all 126767 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         46 |     52,333 |     17,429 |     13,703 |     83,465 |
+| JSON       |         11 |     38,117 |         36 |          8 |     38,161 |
+| Vue        |         18 |      3,028 |        624 |        590 |      4,242 |
+| Markdown   |         10 |        624 |          1 |        189 |        814 |
+| HTML       |          4 |         36 |          1 |         12 |         49 |
+| YAML       |          1 |         19 |          2 |          4 |         25 |
+| Properties |          1 |          5 |          0 |          1 |          6 |
+| CSS        |          4 |          4 |          0 |          0 |          4 |
+| Stylus     |          1 |          0 |          0 |          1 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                               | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                  |         96 |     94,166 |     18,093 |     14,508 |    126,767 |
+| dist                                                                                               |          4 |     30,470 |     13,761 |      8,955 |     53,186 |
+| docs                                                                                               |          7 |        567 |          1 |        163 |        731 |
+| generate-glyphs                                                                                    |          4 |        265 |          4 |         37 |        306 |
+| generate-glyphs/noto-sans                                                                          |          1 |         89 |          0 |          1 |         90 |
+| library-dist                                                                                       |         12 |      7,724 |      1,683 |      2,224 |     11,631 |
+| library-dist/css                                                                                   |          2 |          2 |          0 |          0 |          2 |
+| plugin-dist                                                                                        |         12 |      7,728 |      1,659 |      2,224 |     11,611 |
+| plugin-dist/css                                                                                    |          2 |          2 |          0 |          0 |          2 |
+| public                                                                                             |          8 |     21,993 |          1 |          5 |     21,999 |
+| public/geojson                                                                                     |          7 |     21,977 |          0 |          4 |     21,981 |
+| src                                                                                                |         38 |      9,206 |        925 |        866 |     10,997 |
+| src/components                                                                                     |         10 |      2,024 |        559 |        450 |      3,033 |
+| src/components/Layers                                                                              |          2 |         46 |         18 |         26 |         90 |
+| src/components/Markers                                                                             |          1 |        177 |         27 |         32 |        236 |
+| src/components/Sources                                                                             |          1 |         89 |         34 |         17 |        140 |
+| src/mixins                                                                                         |          6 |        563 |         44 |        104 |        711 |
+| src/oldProjectsFile                                                                                |         14 |      5,998 |        226 |        239 |      6,463 |
+| src/oldProjectsFile/MapStyles                                                                      |          4 |      4,684 |         97 |         16 |      4,797 |
+| src/oldProjectsFile/iControl                                                                       |          8 |        560 |         59 |        114 |        733 |
+| src/oldProjectsFile/iControl/layers                                                                |          7 |        530 |         59 |        107 |        696 |
+| src/oldProjectsFile/mixins                                                                         |          2 |        754 |         70 |        109 |        933 |
+| src/store                                                                                          |          1 |         13 |          0 |          3 |         16 |
+| src/utils                                                                                          |          3 |         88 |         87 |         24 |        199 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                           | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/.editorconfig                                           | Properties |          5 |          0 |          1 |          6 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/.eslintrc.js                                            | JavaScript |         26 |          0 |          2 |         28 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/.gitlab-ci.yml                                          | YAML       |         19 |          2 |          4 |         25 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/CONTRIBUTE.md                                           | Markdown   |          2 |          0 |          1 |          3 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/README.md                                               | Markdown   |         20 |          0 |          8 |         28 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/babel.config.js                                         | JavaScript |          5 |          0 |          1 |          6 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/dist/demo.html                                          | HTML       |          6 |          0 |          3 |          9 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/dist/vue-mapbox.common.js                               | JavaScript |     10,148 |      4,587 |      2,984 |     17,719 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/dist/vue-mapbox.umd.js                                  | JavaScript |     10,158 |      4,587 |      2,984 |     17,729 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/dist/vue-mapbox.umd.min.js                              | JavaScript |     10,158 |      4,587 |      2,984 |     17,729 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/docs/VmLayer.md                                         | Markdown   |        179 |          1 |         61 |        241 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/docs/VmMarker.md                                        | Markdown   |        170 |          0 |         42 |        212 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/docs/VmMarkerDonut.md                                   | Markdown   |         84 |          0 |         31 |        115 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/docs/VmPopup.md                                         | Markdown   |         67 |          0 |          9 |         76 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/docs/VmSource.md                                        | Markdown   |         47 |          0 |          8 |         55 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/docs/VueMapbox.md                                       | Markdown   |         18 |          0 |         11 |         29 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/docs/introduction.md                                    | Markdown   |          2 |          0 |          1 |          3 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/generate-glyphs/README.md                               | Markdown   |         35 |          0 |         17 |         52 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/generate-glyphs/generate.js                             | JavaScript |        130 |          4 |         18 |        152 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/generate-glyphs/noto-sans/fonts.json                    | JSON       |         89 |          0 |          1 |         90 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/generate-glyphs/package.json                            | JSON       |         11 |          0 |          1 |         12 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/css/1.e6bc587c.css                         | CSS        |          1 |          0 |          0 |          1 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/css/2.e9d9738c.css                         | CSS        |          1 |          0 |          0 |          1 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/demo.html                                  | HTML       |          7 |          0 |          4 |         11 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.common.1.js                     | JavaScript |      1,825 |        439 |        532 |      2,796 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.common.2.js                     | JavaScript |        305 |        181 |         96 |        582 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.common.js                       | JavaScript |      1,721 |        220 |        482 |      2,423 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.umd.1.js                        | JavaScript |      1,825 |        439 |        532 |      2,796 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.umd.2.js                        | JavaScript |        305 |        181 |         96 |        582 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.umd.js                          | JavaScript |      1,731 |        220 |        482 |      2,433 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.umd.min.1.js                    | JavaScript |          1 |          1 |          0 |          2 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.umd.min.2.js                    | JavaScript |          1 |          1 |          0 |          2 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/library-dist/vue-mapbox.umd.min.js                      | JavaScript |          1 |          1 |          0 |          2 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/package-lock.json                                       | JSON       |     16,025 |          0 |          1 |     16,026 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/package.json                                            | JSON       |         15 |         36 |          1 |         52 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/css/1.e6bc587c.css                          | CSS        |          1 |          0 |          0 |          1 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/css/2.e9d9738c.css                          | CSS        |          1 |          0 |          0 |          1 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/demo.html                                   | HTML       |          7 |          0 |          4 |         11 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.common.1.js                      | JavaScript |      1,825 |        439 |        532 |      2,796 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.common.2.js                      | JavaScript |        305 |        181 |         96 |        582 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.common.js                        | JavaScript |      1,723 |        208 |        482 |      2,413 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.umd.1.js                         | JavaScript |      1,825 |        439 |        532 |      2,796 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.umd.2.js                         | JavaScript |        305 |        181 |         96 |        582 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.umd.js                           | JavaScript |      1,733 |        208 |        482 |      2,423 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.umd.min.1.js                     | JavaScript |          1 |          1 |          0 |          2 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.umd.min.2.js                     | JavaScript |          1 |          1 |          0 |          2 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/plugin-dist/vue-mapbox.umd.min.js                       | JavaScript |          1 |          1 |          0 |          2 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/geojson/estudosdecaso.json                       | JSON       |      4,959 |          0 |          0 |      4,959 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/geojson/geojson.example.json                     | JSON       |        155 |          0 |          0 |        155 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/geojson/geojson2.example.json                    | JSON       |        116 |          0 |          0 |        116 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/geojson/municipio.json                           | JSON       |      5,579 |          0 |          1 |      5,580 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/geojson/municipio_zoom_6.json                    | JSON       |      5,577 |          0 |          1 |      5,578 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/geojson/municipio_zoom_8.json                    | JSON       |      5,579 |          0 |          1 |      5,580 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/geojson/municipio_zoom_teste.json                | JSON       |         12 |          0 |          1 |         13 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/public/index.html                                       | HTML       |         16 |          1 |          1 |         18 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/App.vue                                             | Vue        |        474 |          6 |         33 |        513 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/Layers/VmLayerClustersDonuts.vue         | Vue        |         23 |          9 |         13 |         45 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/Layers/VmLayerVector.vue                 | Vue        |         23 |          9 |         13 |         45 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/Markers/VmMarkerDonut.vue                | Vue        |        177 |         27 |         32 |        236 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/Sources/VmSourceGeoJson.vue              | Vue        |         89 |         34 |         17 |        140 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/VmImage.vue                              | Vue        |         19 |          6 |          2 |         27 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/VmLayer.vue                              | Vue        |        617 |        117 |        187 |        921 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/VmMarker.vue                             | Vue        |        369 |         98 |         63 |        530 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/VmPopup.vue                              | Vue        |        191 |         52 |         26 |        269 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/VmSource.vue                             | Vue        |         63 |         11 |         16 |         90 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/components/VueMapbox.vue                            | Vue        |        453 |        196 |         81 |        730 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/library-entry.js                                    | JavaScript |         27 |          0 |          3 |         30 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/main.js                                             | JavaScript |         19 |          3 |          9 |         31 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/mian.stylus                                         | Stylus     |          0 |          0 |          1 |          1 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/mixins/animacaoAdicionaCamada.js                    | JavaScript |         21 |          4 |          7 |         32 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/mixins/mapboxLayer.js                               | JavaScript |        327 |         26 |         53 |        406 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/mixins/mapboxLayer.min.js                           | JavaScript |          1 |          0 |          1 |          2 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/mixins/static.js                                    | JavaScript |          0 |          0 |          1 |          1 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/mixins/threeBoxLayer.js                             | JavaScript |        212 |         14 |         41 |        267 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/mixins/threeBoxLayer.min.js                         | JavaScript |          2 |          0 |          1 |          3 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/MapStyles/cgeestyle.js              | JavaScript |        331 |         17 |          8 |        356 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/MapStyles/dark.js                   | JavaScript |      3,691 |          0 |          1 |      3,692 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/MapStyles/mapabase_style.js         | JavaScript |        312 |         77 |          6 |        395 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/MapStyles/mapbox_undercover.js      | JavaScript |        350 |          3 |          1 |        354 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/elevation.js               | JavaScript |         30 |          0 |          7 |         37 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/layers/mapbox-arclayer.vue | Vue        |         60 |          1 |         17 |         78 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/layers/mapbox-fill.vue     | Vue        |        113 |          0 |         16 |        129 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/layers/mapbox-geojson.vue  | Vue        |         23 |         48 |         16 |         87 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/layers/mapbox-layer.vue    | Vue        |          9 |          0 |          7 |         16 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/layers/mapbox-line.vue     | Vue        |        108 |          0 |         16 |        124 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/layers/mapbox-popup.vue    | Vue        |        125 |         10 |         26 |        161 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/iControl/layers/mapbox-wms.vue      | Vue        |         92 |          0 |          9 |        101 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/mixins/deckglLayerMixin.js          | JavaScript |        338 |         20 |         49 |        407 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/oldProjectsFile/mixins/mapboxLayerMixin.js          | JavaScript |        416 |         50 |         60 |        526 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/store/index.js                                      | JavaScript |         13 |          0 |          3 |         16 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/utils/findVNodeChildren.js                          | JavaScript |         48 |         75 |         18 |        141 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/utils/getOnlyMapboxProps.js                         | JavaScript |         13 |          6 |          2 |         21 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/src/utils/getValueFromZoomArray.js                      | JavaScript |         27 |          6 |          4 |         37 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/styleguide.config.js                                    | JavaScript |         58 |         19 |          8 |         85 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/styleguide.global.js                                    | JavaScript |         22 |          1 |          5 |         28 |
+| /Users/le/PROJETOS/SIGWEBPANGEA/vue-mapbox/vue.config.js                                           | JavaScript |         16 |          1 |          2 |         19 |
+| Total                                                                                              |            |     94,166 |     18,093 |     14,508 |    126,767 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

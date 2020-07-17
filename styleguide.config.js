@@ -6,7 +6,7 @@ module.exports = {
   assetsDir: path.join(__dirname, 'public'),
   components: 'src/components/**/*.vue',
   require: [path.join(__dirname, 'styleguide.global.js')],
-  skipComponentsWithoutExample: true,
+  skipComponentsWithoutExample: false,
   pagePerSection: true,
   usageMode: 'expand',
   updateDocs (docs) {
@@ -56,6 +56,7 @@ module.exports = {
         'src/components/VmMarker.vue',
         'src/components/VmPopup.vue',
         'src/components/VmSource.vue',
+        'src/components/VmImage.vue',
         'src/components/VmLayer.vue'
       ]
     },

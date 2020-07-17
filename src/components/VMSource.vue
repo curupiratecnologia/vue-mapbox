@@ -60,6 +60,8 @@ export default {
     '$props.options': function (val) {
       if (this.type === 'geojson' && val && val.data) {
         this.source.instance.setData(val.data)
+      } else {
+        this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, { ...this.$props.options })
       }
     }
   },
@@ -77,7 +79,7 @@ export default {
 
   beforeDestroy () {
     if (this.source) {
-      this.MapboxVueInstance.removeSource(this.source.id)
+      // this.MapboxVueInstance.removeSource(this.source.id)
       this.source = null
     }
   }
