@@ -11246,12 +11246,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"55d06db8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=63fc083a&
-var VueMapboxvue_type_template_id_63fc083a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"55d06db8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=ae032d94&
+var VueMapboxvue_type_template_id_ae032d94_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=63fc083a&
+// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=ae032d94&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -11810,9 +11810,12 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     // })
   },
   updated: function updated() {
-    console.log('Updated - updated dom vueMapbox'); // this.$nextTick(() => {
-    //   this.updateLayerOrder()
-    // })
+    var _this4 = this;
+
+    console.log('Updated - updated dom vueMapbox');
+    this.$nextTick(function () {
+      _this4.updateLayerOrder();
+    });
   },
   beforeDestroy: function beforeDestroy() {
     if (this.map) {
@@ -11821,7 +11824,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
   },
   methods: {
     createMap: function createMap() {
-      var _this4 = this;
+      var _this5 = this;
 
       mapbox_gl_default.a.prewarm();
 
@@ -11846,21 +11849,21 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       this.addPropsImages();
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes);
       this.map.on('load', function () {
-        var _this = _this4;
+        var _this = _this5;
         /**
          * Load Event - When Maps Load
          *  @property {object} _this the component instance
           * @property {object} map the mapbox instance
          */
 
-        _this4.$emit('load', _this, _this4.map);
+        _this5.$emit('load', _this, _this5.map);
 
-        _this4.mapLoaded = true;
+        _this5.mapLoaded = true;
       });
 
       if (this.devMode) {
         this.map.on('moveend', function () {
-          _this4.camera = _this4.map.getZoom();
+          _this5.camera = _this5.map.getZoom();
         });
       }
 
@@ -11885,7 +11888,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * Automatic Setup Events from Mapbox Classes in Vue Instances
     */
     setupEvents: function setupEvents(listners, MapboxElement, theEventsOfElement, layerId) {
-      var _this5 = this;
+      var _this6 = this;
 
       if (listners) {
         Object.entries(listners).forEach(function (item) {
@@ -11893,7 +11896,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
           var eventFunction = item[1];
 
           var eventFinal = function eventFinal(e) {
-            eventFunction(e, _this5.map, _this5);
+            eventFunction(e, _this6.map, _this6);
           };
 
           var once = false;
@@ -11959,7 +11962,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * Update Source
     */
     updateSource: function updateSource(sourceid, type, options) {
-      var _this6 = this;
+      var _this7 = this;
 
       debugger;
 
@@ -11971,7 +11974,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       var layers = this.map.getStyle().layers;
       layers.forEach(function (layer) {
         if (layer.source === sourceid) {
-          _this6.map.removeLayer(layer.id);
+          _this7.map.removeLayer(layer.id);
         }
       }); // apago o source
 
@@ -11984,9 +11987,9 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
           var beforeLayer = layers === null || layers === void 0 ? void 0 : layers[i - 1];
 
           if (beforeLayer) {
-            _this6.map.addLayer(layer, beforeLayer.id);
+            _this7.map.addLayer(layer, beforeLayer.id);
           } else {
-            _this6.map.addLayer(layer);
+            _this7.map.addLayer(layer);
           }
         }
       });
@@ -11997,7 +12000,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * Create/Update Layer
     */
     addLayer: function addLayer(id, type, options, createdAt, zIndex) {
-      var _this7 = this;
+      var _this8 = this;
 
       // // if layer name exist, create a randow one
       if (this.layers.get(id)) {
@@ -12018,13 +12021,15 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         zIndex: zIndex
       });
       this.$nextTick(function () {
-        return _this7.updateLayerOrder();
-      }); //when idle because some time the layer get time to be added
+        return _this8.updateLayerOrder();
+      }); // when idle because some time the layer get time to be added
 
       this.map.once('idle', function () {
         console.log('A styledata event occurred.');
 
-        _this7.updateLayerOrder();
+        _this8.$nextTick(function () {
+          return _this8.updateLayerOrder();
+        });
       });
       return id;
     },
@@ -12141,7 +12146,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * @params {object} images.
     */
     addPropsImages: function addPropsImages(images) {
-      var _this8 = this;
+      var _this9 = this;
 
       if (!this.map) return;
       images = images || this.images;
@@ -12149,7 +12154,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         var key = item[0];
         var value = item[1];
 
-        _this8.addImage(key, value);
+        _this9.addImage(key, value);
       });
     },
 
@@ -12158,7 +12163,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * @params {object} images.
     */
     addImage: function addImage(key, url) {
-      var _this9 = this;
+      var _this10 = this;
 
       if (!this.map) return; // TODO - chek when is a htmlimage or other type
 
@@ -12167,7 +12172,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
           console.error(error);
         }
 
-        if (!_this9.map.hasImage(key)) _this9.map.addImage(key, image);
+        if (!_this10.map.hasImage(key)) _this10.map.addImage(key, image);
       });
     },
 
@@ -12175,7 +12180,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * Remove Source
     */
     removeLayer: function removeLayer(id) {
-      var _this10 = this;
+      var _this11 = this;
 
       if (this.layers.has(id)) {
         this.layers.delete(id);
@@ -12186,7 +12191,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       }
 
       this.$nextTick(function () {
-        return _this10.updateLayerOrder();
+        return _this11.updateLayerOrder();
       });
     },
     //   setMapEvents: function () {
@@ -12407,7 +12412,7 @@ function normalizeComponent (
 
 var VueMapbox_component = normalizeComponent(
   components_VueMapboxvue_type_script_lang_js_,
-  VueMapboxvue_type_template_id_63fc083a_render,
+  VueMapboxvue_type_template_id_ae032d94_render,
   staticRenderFns,
   false,
   null,
@@ -14254,7 +14259,6 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
   watch: {
     source: function source(val) {
       if (_typeof(val) === 'object') {
-        debugger;
         var source = this.getMap().getLayer(this.layerId).source;
         this.MapboxVueInstance.updateSource(source, val.type, _objectSpread2({}, val));
       }
@@ -14825,12 +14829,12 @@ var VmLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var VmLayer = (VmLayer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"55d06db8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=template&id=142e663b&
-var VmSourcevue_type_template_id_142e663b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"display":"none"}},[_vm._t("default")],2)}
-var VmSourcevue_type_template_id_142e663b_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"55d06db8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=template&id=bd108ae0&
+var VmSourcevue_type_template_id_bd108ae0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"display":"none"}},[_vm._t("default")],2)}
+var VmSourcevue_type_template_id_bd108ae0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VmSource.vue?vue&type=template&id=142e663b&
+// CONCATENATED MODULE: ./src/components/VmSource.vue?vue&type=template&id=bd108ae0&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=script&lang=js&
 
@@ -14888,11 +14892,11 @@ var VmSourcevue_type_template_id_142e663b_staticRenderFns = []
     };
   },
   watch: {
-    '$props.options': function $propsOptions(val) {
+    '$props.options': function $propsOptions(val, oldval) {
       if (this.type === 'geojson' && val && val.data) {
         this.source.instance.setData(val.data);
-      } else {
-        this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, _objectSpread2({}, this.$props.options));
+      } else if (JSON.stringify(val) !== JSON.stringify(oldval)) {
+        this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, _objectSpread2({}, val));
       }
     }
   },
@@ -14925,8 +14929,8 @@ var VmSourcevue_type_template_id_142e663b_staticRenderFns = []
 
 var VmSource_component = normalizeComponent(
   components_VmSourcevue_type_script_lang_js_,
-  VmSourcevue_type_template_id_142e663b_render,
-  VmSourcevue_type_template_id_142e663b_staticRenderFns,
+  VmSourcevue_type_template_id_bd108ae0_render,
+  VmSourcevue_type_template_id_bd108ae0_staticRenderFns,
   false,
   null,
   null,

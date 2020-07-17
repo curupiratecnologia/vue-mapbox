@@ -45,6 +45,7 @@
                         }"
                         sourceLayer="painel_solucao_compartilhada_solucao_info"
                         type="fill"
+                        :multipleFeatureSelectionOn="'alt'"
                         :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
                         :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
                         :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
@@ -52,8 +53,9 @@
 
                         >
 
-                       <template v-slot:popupHover>
+                       <template v-slot:popupHover="slotprops">
                               <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
+                              <pre>{{slotprops}}</pre>
                         </template>
 
                         <template v-slot:popupClick="slotProps">

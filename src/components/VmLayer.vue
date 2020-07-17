@@ -466,7 +466,6 @@ export default {
 
     source: function (val) {
       if (typeof val === 'object') {
-        debugger
         const source = this.getMap().getLayer(this.layerId).source
         this.MapboxVueInstance.updateSource(source, val.type, { ...val })
       }

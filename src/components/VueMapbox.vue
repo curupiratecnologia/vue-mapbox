@@ -295,9 +295,9 @@ export default {
   updated () {
     console.log('Updated - updated dom vueMapbox')
 
-    // this.$nextTick(() => {
-    //   this.updateLayerOrder()
-    // })
+    this.$nextTick(() => {
+      this.updateLayerOrder()
+    })
   },
 
   beforeDestroy () {
@@ -489,10 +489,12 @@ export default {
         this.updateLayerOrder()
       )
 
-      //when idle because some time the layer get time to be added
+      // when idle because some time the layer get time to be added
       this.map.once('idle', () => {
         console.log('A styledata event occurred.')
-        this.updateLayerOrder()
+        this.$nextTick(() =>
+          this.updateLayerOrder()
+        )
       })
 
       return id

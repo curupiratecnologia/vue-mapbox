@@ -57,11 +57,11 @@ export default {
   },
 
   watch: {
-    '$props.options': function (val) {
+    '$props.options': function (val, oldval) {
       if (this.type === 'geojson' && val && val.data) {
         this.source.instance.setData(val.data)
-      } else {
-        this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, { ...this.$props.options })
+      } else if (JSON.stringify(val) !== JSON.stringify(oldval)) {
+        this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, { ...val })
       }
     }
   },
