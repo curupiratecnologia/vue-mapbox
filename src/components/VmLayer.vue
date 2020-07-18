@@ -18,6 +18,7 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 import filter from 'lodash/filter'
 import kebabCase from 'lodash/kebabCase'
+import camelCase from 'lodash/camelCase'
 
 const nativeEventsTypes = [
   'mousedown',
@@ -432,6 +433,7 @@ export default {
       hoverFeatures: [],
       hasChildPopup: null,
       lastClick: null,
+      lastHover: null,
       hasFeatureHover: false,
       hasFeatureClick: false
     }
@@ -629,14 +631,14 @@ export default {
         this.layerId = mylayer
         // get source add after add layer, because of case where the source especification is set in props as option, withou an id
         this.sourceId = this.getMap().getLayer(mylayer).source
-
-        // this.MapboxVueInstance.updateLayerOrder()
         // bind listners set in component to mapbox events
         this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId, this.created_at, this.zIndex)
       } catch (e) {
+        console.error('========================== Error adding Layer ' + this.name)
         console.error('Error adding Layer ' + this.name)
+        console.log(this.myPaint)
         console.error(e)
-        this.$destroy()
+        // this.$destroy()
       }
     },
 
@@ -679,6 +681,7 @@ export default {
         return false
       }
 
+      this.lastHover = e
       if (e.features.length > 0) {
         // if hovering the same feature, just return
         if (this.hoverFeatures.map(f => f.id).join('') === e.features.map(f => f.id).join('')) {
@@ -779,11 +782,9 @@ export default {
 
     //TODO - number betweww
            -  test fill-opacity
-    @params {string} kind - one of paint, // TODO paint-hover, paint-click, layout, layout-hover, layout-click
+    @params {string} kind - one of paint
     */
     mountPaintLayoutObject: function (kind) {
-      const finalPaintLayout = this.$props[kind] || {}
-
       const propertiesForKind = []
       // get all the props for the paint/layout
       // properties for this type of layer
@@ -791,40 +792,53 @@ export default {
         const key = prop[0]
         const value = prop[1]
         if (get(value, kind) && get(value, 'layerType') === this.type) {
-          propertiesForKind.push(key)
+          propertiesForKind.push(kebabCase(key))
+          propertiesForKind.push(kebabCase(key) + '-transition')
+        }
+      })
+
+      const finalPaintLayout = this.$props[kind] || {}
+      Object.keys(finalPaintLayout).forEach((key) => {
+        if (propertiesForKind.includes(key) === false) {
+          delete finalPaintLayout[key]
         }
       })
 
       propertiesForKind.forEach((prop) => {
         const paintKey = prop
-        const paintKeyKebab = kebabCase(paintKey)
+        const camelCaseKey = camelCase(paintKey)
         let paintValue
 
-        if (get(this, `$props[${paintKey}]`)) {
-          paintValue = this.$props[paintKey]
-        } else if (get(this, `$attrs[${paintKey}]`)) {
-          paintValue = this.$attrs[paintKey]
+        if (get(this, `$props[${camelCaseKey}]`)) {
+          paintValue = this.$props[camelCaseKey]
+        } else if (get(this, `$attrs[${camelCaseKey}]`)) {
+          paintValue = this.$attrs[camelCaseKey]
+        }else{
+          paintValue = finalPaintLayout[paintKey]
         }
 
         // check if we have this propertie set in classes props
-        const propertiesInClasses = filter(this.classes, elm => has(elm, paintKeyKebab))
+        const propertiesInClasses = filter(this.classes, elm => has(elm, paintKey))
+
+        // get only the por
         if (propertiesInClasses.length > 0) {
           const expression = []
-          /// check type. string we will use mach, number we will use betweem
+          /// TODO -  check type. string we will use mach, number we will use betweem??
           // if (typeof get(propertiesInClasses[0], 'value') === 'string') {
           const property = propertiesInClasses[0].property
           expression.push('match')
           expression.push(['get', property])
+
           propertiesInClasses.forEach(prop => {
             expression.push(prop.value)
-            expression.push(get(prop, paintKeyKebab))
+            expression.push(get(prop, paintKey))
           })
-          expression.push(paintValue)
+          expression.push(paintValue || expression[expression.length-1])
           paintValue = expression
         }
         // }
         if (paintValue) {
-          finalPaintLayout[paintKeyKebab] = paintValue
+          finalPaintLayout[paintKey] = paintValue
         }
       })
 
@@ -898,6 +912,7 @@ export default {
       popup = popupOver
       popupKey = 'layerPopupOver'
       props = {
+        center: [this.lastHover.lngLat.lng, this.lastHover.lngLat.lat],
         trackPointer: true,
         closeButton: false,
         closeOnClick: false,
