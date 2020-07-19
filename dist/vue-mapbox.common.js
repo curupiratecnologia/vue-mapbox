@@ -14776,11 +14776,13 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       return paint;
     },
     myLayout: function myLayout() {
+      var layout = this.mountPaintLayoutObject('layout');
+
       if (this.hasFeatureHover || this.hasFeatureClick) {
-        return this.getFinalFeatureStateForPaintOrLayout(this.layout, this.layoutHover, this.layoutClick);
+        return this.getFinalFeatureStateForPaintOrLayout(layout, this.layoutHover, this.layoutClick);
       }
 
-      return this.layout;
+      return layout;
     },
     layerInstance: function layerInstance() {
       return this.getMap().getLayer(this.id);
