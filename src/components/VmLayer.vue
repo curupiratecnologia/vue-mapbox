@@ -452,10 +452,11 @@ export default {
     },
 
     myLayout: function () {
+      const layout = this.mountPaintLayoutObject('layout')
       if (this.hasFeatureHover || this.hasFeatureClick) {
-        return this.getFinalFeatureStateForPaintOrLayout(this.layout, this.layoutHover, this.layoutClick)
+        return this.getFinalFeatureStateForPaintOrLayout(layout, this.layoutHover, this.layoutClick)
       }
-      return this.layout
+      return layout
     },
 
     layerInstance: function () {
@@ -813,7 +814,7 @@ export default {
           paintValue = this.$props[camelCaseKey]
         } else if (get(this, `$attrs[${camelCaseKey}]`)) {
           paintValue = this.$attrs[camelCaseKey]
-        }else{
+        } else {
           paintValue = finalPaintLayout[paintKey]
         }
 
@@ -833,7 +834,7 @@ export default {
             expression.push(prop.value)
             expression.push(get(prop, paintKey))
           })
-          expression.push(paintValue || expression[expression.length-1])
+          expression.push(paintValue || expression[expression.length - 1])
           paintValue = expression
         }
         // }

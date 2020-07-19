@@ -1,6 +1,6 @@
 {
   "name": "vue-mapbox",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/vue-mapbox.umd.js",
   "module": "dist/vue-mapbox.umd.js",
   "private": false,
