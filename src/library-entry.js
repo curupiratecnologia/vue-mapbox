@@ -7,6 +7,7 @@ import VmImage from './components/VmImage.vue'
 import VmLayerVector from './components/Layers/VmLayerVector.vue'
 import VmMarkerDonut from './components/Markers/VmMarkerDonut.vue'
 
+
 export default {
   VueMapbox,
   VmMarker,
@@ -15,6 +16,7 @@ export default {
   VmSource,
   VmLayerVector,
   VmMarkerDonut,
+  VmImage,
 
   install (Vue) {
     Vue.component('VueMapbox', VueMapbox)

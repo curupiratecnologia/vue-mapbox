@@ -15850,6 +15850,7 @@ if (typeof VmMarkerDonutvue_type_custom_index_0_blockType_docs_default.a === 'fu
   VmSource: VmSource,
   VmLayerVector: VmLayerVector,
   VmMarkerDonut: VmMarkerDonut,
+  VmImage: VmImage,
   install: function install(Vue) {
     Vue.component('VueMapbox', VueMapbox);
     Vue.component('VmMarker', VmMarker);
