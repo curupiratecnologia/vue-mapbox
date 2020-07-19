@@ -24,6 +24,7 @@ import findVNodeChildren from '../utils/findVNodeChildren'
 import get from 'lodash/get'
 import has from 'lodash/has'
 import orderBy from 'lodash/orderBy'
+import debounce from 'lodash/debounce'
 
 import uniqueId from 'lodash/uniqueId'
 
@@ -276,7 +277,8 @@ export default {
       this.map.fitBounds(val, { padding: this.padding })
     },
     maxBounds: function (val) {
-      this.map.setMaxBounds(val)
+      if(this.map)
+        this.map.setMaxBounds(val)
     }
   },
 
@@ -348,23 +350,6 @@ export default {
           this.camera = this.map.getZoom()
         })
       }
-
-      this.map.on('styledata', () => {
-        console.log('A styledata event occurred.')
-      //   this.updateLayerOrder()
-      })
-      this.map.on('sourcedata', () => {
-        console.log('A sourcedata event occurred.')
-      //   this.updateLayerOrder()
-      })
-      this.map.on('sourcedataloading', () => {
-        console.log('A sourcedataloading event occurred.')
-      //   this.updateLayerOrder()
-      })
-
-      this.map.on('styledata', function () {
-        console.log('A styledata event occurred.')
-      })
     },
 
     getMap: function () {
@@ -502,7 +487,7 @@ export default {
     /**
     * Update All Layers Order
     */
-    updateLayerOrder: function () {
+    updateLayerOrder: debounce(function () {
       console.log('UPDATE LAYER ORDER ==============================================================================')
       const findLayers = (VNode, bag) => {
         bag = bag || []
@@ -558,20 +543,20 @@ export default {
         }
         if (i === layersId.length) {
           // if (currentLayers[currentLayers.length - 1].id !== currentLayer) {
-            this.map.moveLayer(currentLayer)
+          this.map.moveLayer(currentLayer)
           // }
         } else {
           // get index of layer
           // const index = currentLayers.findIndex(l => l.id === currentLayer)
           // const beforeLayerId = currentLayers[index - 1].id
           const topLayer = layersId[i].id
-           if (!this.map.getLayer(topLayer)) {
-               continue
-           }
+          if (!this.map.getLayer(topLayer)) {
+            continue
+          }
           this.map.moveLayer(currentLayer, topLayer)
         }
       }
-    },
+    },400),
 
     /**
     * Update Layers Index

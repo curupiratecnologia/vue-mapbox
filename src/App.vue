@@ -13,8 +13,8 @@
                         source="painel_solucao_compartilhada_solucao_info"
                         sourceLayer="painel_solucao_compartilhada_solucao_info"
                         type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
+                        :paint="{ 'fill-color': fill, 'fill-opacity': 0.6, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
+                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
                         :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
                         multipleFeatureSelectionOn="alt"
 
@@ -72,6 +72,7 @@
     </center>
 
     ano <input type="text" v-model="ano">
+    fill <input type="text" v-model="fill">
 
   </div>
 </template>

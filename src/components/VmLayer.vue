@@ -841,8 +841,6 @@ export default {
           finalPaintLayout[paintKey] = paintValue
         }
       })
-
-      console.log(finalPaintLayout)
       return finalPaintLayout
     },
 

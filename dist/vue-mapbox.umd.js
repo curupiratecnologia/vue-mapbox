@@ -502,6 +502,31 @@ module.exports = set;
 
 /***/ }),
 
+/***/ "126d":
+/***/ (function(module, exports, __webpack_require__) {
+
+var asciiToArray = __webpack_require__("6da8"),
+    hasUnicode = __webpack_require__("aaec"),
+    unicodeToArray = __webpack_require__("d094");
+
+/**
+ * Converts `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function stringToArray(string) {
+  return hasUnicode(string)
+    ? unicodeToArray(string)
+    : asciiToArray(string);
+}
+
+module.exports = stringToArray;
+
+
+/***/ }),
+
 /***/ "1290":
 /***/ (function(module, exports) {
 
@@ -1713,6 +1738,44 @@ module.exports = baseFindIndex;
 
 /***/ }),
 
+/***/ "2b10":
+/***/ (function(module, exports) {
+
+/**
+ * The base implementation of `_.slice` without an iteratee call guard.
+ *
+ * @private
+ * @param {Array} array The array to slice.
+ * @param {number} [start=0] The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the slice of `array`.
+ */
+function baseSlice(array, start, end) {
+  var index = -1,
+      length = array.length;
+
+  if (start < 0) {
+    start = -start > length ? 0 : (length + start);
+  }
+  end = end > length ? length : end;
+  if (end < 0) {
+    end += length;
+  }
+  length = start > end ? 0 : ((end - start) >>> 0);
+  start >>>= 0;
+
+  var result = Array(length);
+  while (++index < length) {
+    result[index] = array[index + start];
+  }
+  return result;
+}
+
+module.exports = baseSlice;
+
+
+/***/ }),
+
 /***/ "2b3e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2394,6 +2457,36 @@ defineIterator(String, 'String', function (iterated) {
 /***/ (function(module, exports) {
 
 module.exports = {};
+
+
+/***/ }),
+
+/***/ "408c":
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__("2b3e");
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+module.exports = now;
 
 
 /***/ }),
@@ -4170,6 +4263,25 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
 
 /***/ }),
 
+/***/ "6da8":
+/***/ (function(module, exports) {
+
+/**
+ * Converts an ASCII `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function asciiToArray(string) {
+  return string.split('');
+}
+
+module.exports = asciiToArray;
+
+
+/***/ }),
+
 /***/ "6eeb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5119,6 +5231,35 @@ function stackGet(key) {
 }
 
 module.exports = stackGet;
+
+
+/***/ }),
+
+/***/ "8103":
+/***/ (function(module, exports, __webpack_require__) {
+
+var createCaseFirst = __webpack_require__("d194");
+
+/**
+ * Converts the first character of `string` to upper case.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category String
+ * @param {string} [string=''] The string to convert.
+ * @returns {string} Returns the converted string.
+ * @example
+ *
+ * _.upperFirst('fred');
+ * // => 'Fred'
+ *
+ * _.upperFirst('FRED');
+ * // => 'FRED'
+ */
+var upperFirst = createCaseFirst('toUpperCase');
+
+module.exports = upperFirst;
 
 
 /***/ }),
@@ -7825,6 +7966,39 @@ if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumb
 
 /***/ }),
 
+/***/ "aaec":
+/***/ (function(module, exports) {
+
+/** Used to compose unicode character classes. */
+var rsAstralRange = '\\ud800-\\udfff',
+    rsComboMarksRange = '\\u0300-\\u036f',
+    reComboHalfMarksRange = '\\ufe20-\\ufe2f',
+    rsComboSymbolsRange = '\\u20d0-\\u20ff',
+    rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange,
+    rsVarRange = '\\ufe0e\\ufe0f';
+
+/** Used to compose unicode capture groups. */
+var rsZWJ = '\\u200d';
+
+/** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */
+var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange  + rsComboRange + rsVarRange + ']');
+
+/**
+ * Checks if `string` contains Unicode symbols.
+ *
+ * @private
+ * @param {string} string The string to inspect.
+ * @returns {boolean} Returns `true` if a symbol is found, else `false`.
+ */
+function hasUnicode(string) {
+  return reHasUnicode.test(string);
+}
+
+module.exports = hasUnicode;
+
+
+/***/ }),
+
 /***/ "ab13":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8048,6 +8222,204 @@ function baseUnary(func) {
 }
 
 module.exports = baseUnary;
+
+
+/***/ }),
+
+/***/ "b047c":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("1a8c"),
+    now = __webpack_require__("408c"),
+    toNumber = __webpack_require__("b4b0");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        timeWaiting = wait - timeSinceLastCall;
+
+    return maxing
+      ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke)
+      : timeWaiting;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+module.exports = debounce;
 
 
 /***/ }),
@@ -8615,6 +8987,42 @@ module.exports = !fails(function () {
 
 /***/ }),
 
+/***/ "bba4":
+/***/ (function(module, exports, __webpack_require__) {
+
+var capitalize = __webpack_require__("e9a7"),
+    createCompounder = __webpack_require__("b20a");
+
+/**
+ * Converts `string` to [camel case](https://en.wikipedia.org/wiki/CamelCase).
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to convert.
+ * @returns {string} Returns the camel cased string.
+ * @example
+ *
+ * _.camelCase('Foo Bar');
+ * // => 'fooBar'
+ *
+ * _.camelCase('--foo-bar--');
+ * // => 'fooBar'
+ *
+ * _.camelCase('__FOO_BAR__');
+ * // => 'fooBar'
+ */
+var camelCase = createCompounder(function(result, word, index) {
+  word = word.toLowerCase();
+  return result + (index ? capitalize(word) : word);
+});
+
+module.exports = camelCase;
+
+
+/***/ }),
+
 /***/ "bbc0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8747,6 +9155,31 @@ function isIndex(value, length) {
 }
 
 module.exports = isIndex;
+
+
+/***/ }),
+
+/***/ "c32f":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseSlice = __webpack_require__("2b10");
+
+/**
+ * Casts `array` to a slice if it's needed.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {number} start The start position.
+ * @param {number} [end=array.length] The end position.
+ * @returns {Array} Returns the cast slice.
+ */
+function castSlice(array, start, end) {
+  var length = array.length;
+  end = end === undefined ? length : end;
+  return (!start && end >= length) ? array : baseSlice(array, start, end);
+}
+
+module.exports = castSlice;
 
 
 /***/ }),
@@ -9204,6 +9637,93 @@ module.exports = function (namespace, method) {
   return arguments.length < 2 ? aFunction(path[namespace]) || aFunction(global[namespace])
     : path[namespace] && path[namespace][method] || global[namespace] && global[namespace][method];
 };
+
+
+/***/ }),
+
+/***/ "d094":
+/***/ (function(module, exports) {
+
+/** Used to compose unicode character classes. */
+var rsAstralRange = '\\ud800-\\udfff',
+    rsComboMarksRange = '\\u0300-\\u036f',
+    reComboHalfMarksRange = '\\ufe20-\\ufe2f',
+    rsComboSymbolsRange = '\\u20d0-\\u20ff',
+    rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange,
+    rsVarRange = '\\ufe0e\\ufe0f';
+
+/** Used to compose unicode capture groups. */
+var rsAstral = '[' + rsAstralRange + ']',
+    rsCombo = '[' + rsComboRange + ']',
+    rsFitz = '\\ud83c[\\udffb-\\udfff]',
+    rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')',
+    rsNonAstral = '[^' + rsAstralRange + ']',
+    rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}',
+    rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]',
+    rsZWJ = '\\u200d';
+
+/** Used to compose unicode regexes. */
+var reOptMod = rsModifier + '?',
+    rsOptVar = '[' + rsVarRange + ']?',
+    rsOptJoin = '(?:' + rsZWJ + '(?:' + [rsNonAstral, rsRegional, rsSurrPair].join('|') + ')' + rsOptVar + reOptMod + ')*',
+    rsSeq = rsOptVar + reOptMod + rsOptJoin,
+    rsSymbol = '(?:' + [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral].join('|') + ')';
+
+/** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */
+var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+
+/**
+ * Converts a Unicode `string` to an array.
+ *
+ * @private
+ * @param {string} string The string to convert.
+ * @returns {Array} Returns the converted array.
+ */
+function unicodeToArray(string) {
+  return string.match(reUnicode) || [];
+}
+
+module.exports = unicodeToArray;
+
+
+/***/ }),
+
+/***/ "d194":
+/***/ (function(module, exports, __webpack_require__) {
+
+var castSlice = __webpack_require__("c32f"),
+    hasUnicode = __webpack_require__("aaec"),
+    stringToArray = __webpack_require__("126d"),
+    toString = __webpack_require__("76dd");
+
+/**
+ * Creates a function like `_.lowerFirst`.
+ *
+ * @private
+ * @param {string} methodName The name of the `String` case method to use.
+ * @returns {Function} Returns the new case function.
+ */
+function createCaseFirst(methodName) {
+  return function(string) {
+    string = toString(string);
+
+    var strSymbols = hasUnicode(string)
+      ? stringToArray(string)
+      : undefined;
+
+    var chr = strSymbols
+      ? strSymbols[0]
+      : string.charAt(0);
+
+    var trailing = strSymbols
+      ? castSlice(strSymbols, 1).join('')
+      : string.slice(1);
+
+    return chr[methodName]() + trailing;
+  };
+}
+
+module.exports = createCaseFirst;
 
 
 /***/ }),
@@ -10715,6 +11235,36 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "e9a7":
+/***/ (function(module, exports, __webpack_require__) {
+
+var toString = __webpack_require__("76dd"),
+    upperFirst = __webpack_require__("8103");
+
+/**
+ * Converts the first character of `string` to upper case and the remaining
+ * to lower case.
+ *
+ * @static
+ * @memberOf _
+ * @since 3.0.0
+ * @category String
+ * @param {string} [string=''] The string to capitalize.
+ * @returns {string} Returns the capitalized string.
+ * @example
+ *
+ * _.capitalize('FRED');
+ * // => 'Fred'
+ */
+function capitalize(string) {
+  return upperFirst(toString(string).toLowerCase());
+}
+
+module.exports = capitalize;
+
+
+/***/ }),
+
 /***/ "ea72":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11246,12 +11796,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"55d06db8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=ae032d94&
-var VueMapboxvue_type_template_id_ae032d94_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"55d06db8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=209bf9ca&
+var VueMapboxvue_type_template_id_209bf9ca_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=ae032d94&
+// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=209bf9ca&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -11528,6 +12078,10 @@ var has_default = /*#__PURE__*/__webpack_require__.n(has);
 var orderBy = __webpack_require__("93c6");
 var orderBy_default = /*#__PURE__*/__webpack_require__.n(orderBy);
 
+// EXTERNAL MODULE: ./node_modules/lodash/debounce.js
+var debounce = __webpack_require__("b047c");
+var debounce_default = /*#__PURE__*/__webpack_require__.n(debounce);
+
 // EXTERNAL MODULE: ./node_modules/lodash/uniqueId.js
 var uniqueId = __webpack_require__("98dc");
 var uniqueId_default = /*#__PURE__*/__webpack_require__.n(uniqueId);
@@ -11565,6 +12119,7 @@ var uniqueId_default = /*#__PURE__*/__webpack_require__.n(uniqueId);
 //
 //
 //
+
 
 
 
@@ -11798,7 +12353,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       });
     },
     maxBounds: function maxBounds(val) {
-      this.map.setMaxBounds(val);
+      if (this.map) this.map.setMaxBounds(val);
     }
   },
   beforeUpdated: function beforeUpdated() {
@@ -11866,19 +12421,6 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
           _this5.camera = _this5.map.getZoom();
         });
       }
-
-      this.map.on('styledata', function () {
-        console.log('A styledata event occurred.'); //   this.updateLayerOrder()
-      });
-      this.map.on('sourcedata', function () {
-        console.log('A sourcedata event occurred.'); //   this.updateLayerOrder()
-      });
-      this.map.on('sourcedataloading', function () {
-        console.log('A sourcedataloading event occurred.'); //   this.updateLayerOrder()
-      });
-      this.map.on('styledata', function () {
-        console.log('A styledata event occurred.');
-      });
     },
     getMap: function getMap() {
       return this.map;
@@ -12037,7 +12579,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     /**
     * Update All Layers Order
     */
-    updateLayerOrder: function updateLayerOrder() {
+    updateLayerOrder: debounce_default()(function () {
       console.log('UPDATE LAYER ORDER ==============================================================================');
 
       var findLayers = function findLayers(VNode, bag) {
@@ -12061,11 +12603,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
 
         if (get_default()(VNodeInstance, '$options.name', get_default()(VNodeInstance, 'componentOptions.Ctor.options.name')) === 'VmLayer') {
           bag.push(VNodeInstance);
-          console.log(get_default()(VNodeInstance, '$props.name'));
-        } // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
-        // if (!children) children = get(VNode, 'componentInstance.$children')
-        // if (!children)
-
+        }
 
         var children = get_default()(VNodeInstance, '$children');
 
@@ -12073,19 +12611,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
           children.forEach(function (node) {
             findLayers(node, bag);
           });
-        } // if (has(VNodeInstance, '$slots')) {
-        //   const mySlots = Object.keys(VNodeInstance.$slots)
-        //   mySlots.forEach(slotName => {
-        //     findLayers(VNodeInstance.$slots[slotName], bag)
-        //   })
-        // }
-        // if (has(VNodeInstance, '$scopedSlots')) {
-        //   const mySlots = Object.keys(VNodeInstance.$scopedSlots)
-        //   mySlots.forEach(slotName => {
-        //     findLayers(VNodeInstance.$scopedSlots[slotName](), bag)
-        //   })
-        // }
-
+        }
 
         return bag;
       };
@@ -12113,27 +12639,32 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         };
       });
       layersId = orderBy_default()(layersId, ['index'], ['asc']);
+      var currentLayers = this.map.getStyle().layers; // get index of first layer in
 
       for (var i = layersId.length; i > 1; i--) {
         var currentLayer = layersId[i - 1].id;
 
         if (!this.map.getLayer(currentLayer)) {
-          continue; // this.$nextTick(() =>
-          //   this.updateLayerOrder()
-          // )
-          //  return false
+          continue;
         }
 
         if (i === layersId.length) {
-          this.map.moveLayer(currentLayer);
-          console.log('move ' + currentLayer + ' to topmost');
+          // if (currentLayers[currentLayers.length - 1].id !== currentLayer) {
+          this.map.moveLayer(currentLayer); // }
         } else {
+          // get index of layer
+          // const index = currentLayers.findIndex(l => l.id === currentLayer)
+          // const beforeLayerId = currentLayers[index - 1].id
           var topLayer = layersId[i].id;
-          console.log('move ' + currentLayer + ' bo beneth ' + topLayer);
+
+          if (!this.map.getLayer(topLayer)) {
+            continue;
+          }
+
           this.map.moveLayer(currentLayer, topLayer);
         }
       }
-    },
+    }, 400),
 
     /**
     * Update Layers Index
@@ -12412,7 +12943,7 @@ function normalizeComponent (
 
 var VueMapbox_component = normalizeComponent(
   components_VueMapboxvue_type_script_lang_js_,
-  VueMapboxvue_type_template_id_ae032d94_render,
+  VueMapboxvue_type_template_id_209bf9ca_render,
   staticRenderFns,
   false,
   null,
@@ -13536,7 +14067,13 @@ var filter_default = /*#__PURE__*/__webpack_require__.n(filter);
 var kebabCase = __webpack_require__("375a");
 var kebabCase_default = /*#__PURE__*/__webpack_require__.n(kebabCase);
 
+// EXTERNAL MODULE: ./node_modules/lodash/camelCase.js
+var camelCase = __webpack_require__("bba4");
+var camelCase_default = /*#__PURE__*/__webpack_require__.n(camelCase);
+
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayer.vue?vue&type=script&lang=js&
+
+
 
 
 
@@ -13560,6 +14097,7 @@ var kebabCase_default = /*#__PURE__*/__webpack_require__.n(kebabCase);
  * @property {{}} property - property name do lookup
  * @property {string} fill-color - fill color of object with this propertie
  */
+
 
 
 
@@ -14230,6 +14768,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       hoverFeatures: [],
       hasChildPopup: null,
       lastClick: null,
+      lastHover: null,
       hasFeatureHover: false,
       hasFeatureClick: false
     };
@@ -14465,14 +15004,14 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         }));
         this.layerId = mylayer; // get source add after add layer, because of case where the source especification is set in props as option, withou an id
 
-        this.sourceId = this.getMap().getLayer(mylayer).source; // this.MapboxVueInstance.updateLayerOrder()
-        // bind listners set in component to mapbox events
+        this.sourceId = this.getMap().getLayer(mylayer).source; // bind listners set in component to mapbox events
 
         this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), VmLayervue_type_script_lang_js_nativeEventsTypes, this.layerId, this.created_at, this.zIndex);
       } catch (e) {
+        console.error('========================== Error adding Layer ' + this.name);
         console.error('Error adding Layer ' + this.name);
-        console.error(e);
-        this.$destroy();
+        console.log(this.myPaint);
+        console.error(e); // this.$destroy()
       }
     },
     setupLayerFeaturesEvents: function setupLayerFeaturesEvents() {
@@ -14516,6 +15055,8 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         this.featureMouseLeaveEvent(e);
         return false;
       }
+
+      this.lastHover = e;
 
       if (e.features.length > 0) {
         // if hovering the same feature, just return
@@ -14643,12 +15184,11 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     classes etc
      //TODO - number betweww
            -  test fill-opacity
-    @params {string} kind - one of paint, // TODO paint-hover, paint-click, layout, layout-hover, layout-click
+    @params {string} kind - one of paint
     */
     mountPaintLayoutObject: function mountPaintLayoutObject(kind) {
       var _this8 = this;
 
-      var finalPaintLayout = this.$props[kind] || {};
       var propertiesForKind = []; // get all the props for the paint/layout
       // properties for this type of layer
 
@@ -14657,27 +15197,36 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         var value = prop[1];
 
         if (get_default()(value, kind) && get_default()(value, 'layerType') === _this8.type) {
-          propertiesForKind.push(key);
+          propertiesForKind.push(kebabCase_default()(key));
+          propertiesForKind.push(kebabCase_default()(key) + '-transition');
+        }
+      });
+      var finalPaintLayout = this.$props[kind] || {};
+      Object.keys(finalPaintLayout).forEach(function (key) {
+        if (propertiesForKind.includes(key) === false) {
+          delete finalPaintLayout[key];
         }
       });
       propertiesForKind.forEach(function (prop) {
         var paintKey = prop;
-        var paintKeyKebab = kebabCase_default()(paintKey);
+        var camelCaseKey = camelCase_default()(paintKey);
         var paintValue;
 
-        if (get_default()(_this8, "$props[".concat(paintKey, "]"))) {
-          paintValue = _this8.$props[paintKey];
-        } else if (get_default()(_this8, "$attrs[".concat(paintKey, "]"))) {
-          paintValue = _this8.$attrs[paintKey];
+        if (get_default()(_this8, "$props[".concat(camelCaseKey, "]"))) {
+          paintValue = _this8.$props[camelCaseKey];
+        } else if (get_default()(_this8, "$attrs[".concat(camelCaseKey, "]"))) {
+          paintValue = _this8.$attrs[camelCaseKey];
+        } else {
+          paintValue = finalPaintLayout[paintKey];
         } // check if we have this propertie set in classes props
 
 
         var propertiesInClasses = filter_default()(_this8.classes, function (elm) {
-          return has_default()(elm, paintKeyKebab);
-        });
+          return has_default()(elm, paintKey);
+        }); // get only the por
 
         if (propertiesInClasses.length > 0) {
-          var expression = []; /// check type. string we will use mach, number we will use betweem
+          var expression = []; /// TODO -  check type. string we will use mach, number we will use betweem??
           // if (typeof get(propertiesInClasses[0], 'value') === 'string') {
 
           var property = propertiesInClasses[0].property;
@@ -14685,18 +15234,17 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
           expression.push(['get', property]);
           propertiesInClasses.forEach(function (prop) {
             expression.push(prop.value);
-            expression.push(get_default()(prop, paintKeyKebab));
+            expression.push(get_default()(prop, paintKey));
           });
-          expression.push(paintValue);
+          expression.push(paintValue || expression[expression.length - 1]);
           paintValue = expression;
         } // }
 
 
         if (paintValue) {
-          finalPaintLayout[paintKeyKebab] = paintValue;
+          finalPaintLayout[paintKey] = paintValue;
         }
       });
-      console.log(finalPaintLayout);
       return finalPaintLayout;
     },
     docEvents: function docEvents() {
@@ -14766,6 +15314,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       popup = popupOver;
       popupKey = 'layerPopupOver';
       props = {
+        center: [this.lastHover.lngLat.lng, this.lastHover.lngLat.lat],
         trackPointer: true,
         closeButton: false,
         closeOnClick: false,
@@ -14945,7 +15494,7 @@ var VmSource_component = normalizeComponent(
   name: 'vm-image',
   inject: ['getMap', 'mapboxgl', 'MapboxVueInstance'],
   props: {
-    /** 
+    /**
      * URL of the image
      */
     url: {
@@ -14953,7 +15502,7 @@ var VmSource_component = normalizeComponent(
       required: true
     },
 
-    /** 
+    /**
      * Name of image
      */
     name: {
@@ -14963,6 +15512,9 @@ var VmSource_component = normalizeComponent(
   },
   created: function created() {
     this.MapboxVueInstance.addImage(this.name, this.url);
+  },
+  render: function render(h) {
+    return null;
   }
 });
 // CONCATENATED MODULE: ./src/components/VmImage.vue?vue&type=script&lang=js&

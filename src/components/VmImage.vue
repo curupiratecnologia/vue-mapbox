@@ -3,14 +3,14 @@ export default {
   name: 'vm-image',
   inject: ['getMap', 'mapboxgl', 'MapboxVueInstance'],
   props: {
-    /** 
+    /**
      * URL of the image
      */
     url: {
       type: String,
       required: true
     },
-    /** 
+    /**
      * Name of image
      */
     name: {
@@ -21,6 +21,10 @@ export default {
 
   created: function () {
     this.MapboxVueInstance.addImage(this.name, this.url)
+  },
+
+  render: function (h) {
+    return null
   }
 }
 </script>
