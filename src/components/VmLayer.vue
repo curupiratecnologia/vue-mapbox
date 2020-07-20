@@ -40,7 +40,7 @@ export default {
 
   name: 'VmLayer',
 
-  inject: { getMap: 'getMap', mapboxgl: 'mapboxgl', MapboxVueInstance: 'MapboxVueInstance', getSource: { from: 'getSource', default: null } },
+  inject: { getMap: 'getMap', mapboxgl: 'mapboxgl', MapboxVueInstance: 'MapboxVueInstance', getSource: { from: 'getSource', default: undefined } },
 
   props: {
     /**
@@ -58,7 +58,7 @@ export default {
       type: String,
       required: true,
       validator: function (value) {
-        return ['fill', 'line', 'symbol', 'circle', 'heatmap', 'fill-extrusion', 'raster', 'hillshade', 'background'].indexOf(value) !== -1
+        return ['fill', 'line', 'symbol', 'circle', 'heatmap', 'fill-extrusion', 'raster', 'hillshade', 'background', 'custom'].indexOf(value) !== -1
       }
     },
     /**
@@ -67,6 +67,13 @@ export default {
     source: {
       type: [String, Object],
       mapbox: true
+    },
+    /**
+       The data source for the layer. If blank will find a parent Source component.  Reference a source that has already been defined using the source's unique id. Reference a new source using a source object (as defined in the Mapbox Style Specification ) directly.
+      */
+    customLayer: {
+      type: Object,
+      mapbox: false
     },
     /**
        The name of the source layer within the specified layer.source to use for this style layer. This is only applicable for vector tile sources and is required when layer.source is of the type vector .
@@ -570,34 +577,38 @@ export default {
 
   created: function () {
     this.popupOpen = false
+
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
-      const source = this.getSource()
+      const source = this.getSource && this.getSource()
       if (source && source.id) {
         options.source = source.id
       }
     }
     this.options = options
 
-    // check if source exist,
-    if (typeof this.options.source === 'string') {
-      if (this.getMap().getSource(this.options.source)) {
-        this.addLayer()
-      } else {
-        // add layer when a source with name is added
-        const func = (e) => {
-          console.log(e)
-          if (e.dataType == 'source' && e.sourceId === this.options.source) {
-            this.addLayer()
-            this.getMap().off('sourcedata', func)
-          }
-        }
-        this.getMap().on('sourcedata', func)
-      }
-    } else {
+    if (this.type === 'custom') {
       this.addLayer()
+    } else {
+      // check if source exist,
+      if (typeof this.options.source === 'string') {
+        if (this.getMap().getSource(this.options.source)) {
+          this.addLayer()
+        } else {
+          // add layer when a source with name is added
+          const func = (e) => {
+            console.log(e)
+            if (e.dataType == 'source' && e.sourceId === this.options.source) {
+              this.addLayer()
+              this.getMap().off('sourcedata', func)
+            }
+          }
+          this.getMap().on('sourcedata', func)
+        }
+      } else {
+        this.addLayer()
+      }
     }
-
     // if not, wait it to loaded an show it
   },
 
@@ -628,12 +639,18 @@ export default {
 
     addLayer: function () {
       try {
-        const mylayer = this.MapboxVueInstance.addLayer(this.name, this.type, { ...this.options, paint: this.myPaint, layout: this.myLayout })
-        this.layerId = mylayer
-        // get source add after add layer, because of case where the source especification is set in props as option, withou an id
-        this.sourceId = this.getMap().getLayer(mylayer).source
-        // bind listners set in component to mapbox events
-        this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId, this.created_at, this.zIndex)
+        if (this.customLayer) {
+          const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
+          this.layerId = mylayer
+        } else {
+          const id = this.MapboxVueInstance.getNewIdForLayer(this.name)
+          const mylayer = this.MapboxVueInstance.addLayer({ ...this.options, id: id, type: this.type, paint: this.myPaint, layout: this.myLayout })
+          this.layerId = mylayer
+          // get source add after add layer, because of case where the source especification is set in props as option, withou an id
+          this.sourceId = this.getMap().getLayer(mylayer).source
+          // bind listners set in component to mapbox events
+          this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId, this.created_at, this.zIndex)
+        }
       } catch (e) {
         console.error('========================== Error adding Layer ' + this.name)
         console.error('Error adding Layer ' + this.name)

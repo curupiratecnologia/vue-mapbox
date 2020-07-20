@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <center>
-      <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
+      <VueMapbox
+      hash="pos"
+       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
               <vm-source
                                     name="painel_solucao_compartilhada_solucao_info"
@@ -9,13 +11,11 @@
                                     :options="{ type:'vector', tiles:[`http://rspangea.mma.gov.br/tile/painel_solucao_compartilhada_solucao_info/{z}/{x}/{y}.mvt?ano_referencia=${ano}`], minzoom: 1, maxzoom: 24, }" >
 
                 </vm-source>
-<vmLayer name="myLayer"
+                  <vmLayer name="myLayer"
                         source="painel_solucao_compartilhada_solucao_info"
                         sourceLayer="painel_solucao_compartilhada_solucao_info"
                         type="fill"
                         :paint="{ 'fill-color': fill, 'fill-opacity': 0.6, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
-                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
                         multipleFeatureSelectionOn="alt"
 
                         >
@@ -33,9 +33,20 @@
 
                  </vmLayer>
 
+                  <vmLayerArc
+                      name="arcLayer"
+                      :data="fluxoFinal"
+                      :witdh="10"
+                      sourceColor="#ffffff"
+                      targetColor="corDestino"
+                      sourcePosition="geomOrigem"
+                      targetPosition="geomDestino"
+                    />
+
+
       </VueMapbox>
 
-            <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
+            <!-- <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
               <vmLayer name="myLayer"
                         :source="{
@@ -67,7 +78,7 @@
 
                  </vmLayer>
 
-      </VueMapbox>
+      </VueMapbox> -->
 
     </center>
 
@@ -480,7 +491,162 @@ export default {
 
       },
 
-      geojson: {}
+      geojson: {},
+
+      fluxo: [{
+        geocod_origem: 5219902,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.26031485, -15.93202096]
+        },
+        destinos: [{
+          geocod_destino: 5219902,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.26031485, -15.93202096]
+          },
+          adequado: 0,
+          inadequado: 4900,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5220108,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-50.37482105, -16.51410686]
+        },
+        destinos: [{
+          geocod_destino: 5220108,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-50.37482105, -16.51410686]
+          },
+          adequado: 0,
+          inadequado: 61800,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5220264,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-48.66342725, -17.05642588]
+        },
+        destinos: [{
+          geocod_destino: 5220264,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-48.66342725, -17.05642588]
+          },
+          adequado: 0,
+          inadequado: 2742.9,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5221007,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.60258016, -16.05500387]
+        },
+        destinos: [{
+          geocod_destino: 5221007,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.60258016, -16.05500387]
+          },
+          adequado: 0,
+          inadequado: 3720,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5221304,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-47.78063797, -18.35978943]
+        },
+        destinos: [{
+          geocod_destino: 5221304,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-47.78063797, -18.35978943]
+          },
+          adequado: 0,
+          inadequado: 21880,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5221700,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.67938453, -15.50501229]
+        },
+        destinos: [{
+          geocod_destino: 5221700,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.67938453, -15.50501229]
+          },
+          adequado: 0,
+          inadequado: 56000,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5222005,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-48.50667118, -16.74573646]
+        },
+        destinos: [{
+          geocod_destino: 5222005,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-48.50667118, -16.74573646]
+          },
+          adequado: 0,
+          inadequado: 39130,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5222054,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.80746824, -17.73092192]
+        },
+        destinos: [{
+          geocod_destino: 5222054,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.80746824, -17.73092192]
+          },
+          adequado: 0,
+          inadequado: 27533.1,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5300108,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-47.88061196, -15.78368965]
+        },
+        destinos: [{
+          geocod_destino: 5215603,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-48.28657588, -15.16421844]
+          },
+          adequado: 216960,
+          inadequado: 0,
+          adequacao: 100
+        }, {
+          geocod_destino: 5300108,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-47.88061196, -15.78368965]
+          },
+          adequado: 2960519.6,
+          inadequado: 140419.2,
+          adequacao: 95.47
+        }]
+      }]
 
     }
   },
@@ -496,6 +662,25 @@ export default {
   // },
 
   computed: {
+
+    fluxoFinal: function () {
+      const finalFluxo = [] // { from, to, corOrigem, corDestino}
+      this.fluxo.forEach(fluxo => {
+        fluxo.destinos.forEach(destino => {
+          const point = {
+            geomDestino: destino?.geom_destino?.coordinates,
+            geomOrigem: fluxo?.geom_origem?.coordinates,
+            corOrigem: '#ffffff',
+            corDestino: destino?.adequacao === 0 ? '#ff0000' : '#00FF00'
+
+          }
+          finalFluxo.push(point)
+        })
+      })
+
+      return finalFluxo
+    },
+
     images: function () {
       return {
         water: 'images/water-pattern.jpg',

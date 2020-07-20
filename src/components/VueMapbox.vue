@@ -277,8 +277,7 @@ export default {
       this.map.fitBounds(val, { padding: this.padding })
     },
     maxBounds: function (val) {
-      if(this.map)
-        this.map.setMaxBounds(val)
+      if (this.map) { this.map.setMaxBounds(val) }
     }
   },
 
@@ -455,19 +454,31 @@ export default {
       return source
     },
 
+    getNewIdForLayer: function (name) {
+      let id = name
+      if (!this.map.getLayer(name)) {
+        id = uniqueId('layer' + name)
+      }
+      return id
+    },
+
     /**
     * Create/Update Layer
     */
-    addLayer: function (id, type, options, createdAt, zIndex) {
+    addLayerTemp: function (options) {
+      this.map.addLayer(options)
+    },
+    /**
+    * Create/Update Layer
+    */
+    addLayer: function (options, zIndex) {
       // // if layer name exist, create a randow one
-      if (this.layers.get(id)) {
-        id = uniqueId(id + type)
-      }
+      const id = options.id
+      this.map.addLayer(options)
 
-      this.map.addLayer({ id: id, type: type, ...options })
-      const sourceObject = this.map.getLayer(id)
+      const sourceObject = this.map.getLayer(options.id)
 
-      this.layers.set(id, { id, type, options, instance: sourceObject, createdAt, zIndex })
+      this.layers.set(id, { id })
 
       this.$nextTick(() =>
         this.updateLayerOrder()
@@ -556,7 +567,7 @@ export default {
           this.map.moveLayer(currentLayer, topLayer)
         }
       }
-    },400),
+    }, 400),
 
     /**
     * Update Layers Index
