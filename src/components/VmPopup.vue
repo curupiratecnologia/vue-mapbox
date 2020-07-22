@@ -201,8 +201,8 @@ export default {
         trackPointer: this.trackPointer,
         maxWidth: this.maxWidth
       }
-
-      this.popup = new this.mapboxgl.Popup(options)
+      const mapboxgl = this.mapboxgl()
+      this.popup = new mapboxgl.Popup(options)
         .setLngLat(this.center)
         .setDOMContent(this.$el)
 

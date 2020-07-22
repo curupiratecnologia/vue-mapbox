@@ -6,7 +6,7 @@
       :customLayer="layer"
       :zIndex="zIndex"
       type="custom"
-    /> 
+    />
     </div>
 
 </template>
@@ -15,6 +15,7 @@
 
 import { ArcLayer } from '@deck.gl/layers'
 import { MapboxLayer } from '@deck.gl/mapbox'
+import { Deck } from '@deck.gl/core'
 import get from 'lodash/get'
 import has from 'lodash/has'
 
@@ -86,7 +87,8 @@ export default {
 
   data () {
     return {
-      layerCreated: false
+      layerCreated: false,
+      id: false
     }
   },
 
@@ -112,23 +114,31 @@ export default {
 
   watch: {
     '$props.data': function (val, oldval) {
-      if (this.layer) this.layer.setProps({ data: val })
+      if (this.layer) this.layer.setProps({ data: this.data })
+      // if (this.decklayer) this.decklayer.setProps({ layers: this.createLayer() })
     },
     '$props.width': function (val, oldval) {
       if (this.layer) this.layer.setProps({ getWidth: d => this.getWidth(d) })
+      // if (this.decklayer) this.decklayer.setProps({ layers: this.createLayer() })
     }
   },
 
   methods: {
 
     addLayer: function () {
-      const id = this.MapboxVueInstance.getNewIdForLayer(this.name)
+      this.id = this.MapboxVueInstance.getNewIdForLayer(this.name)
+
+      // this.decklayer = new Deck({
+      //   gl: this.MapboxVueInstance.getMap().painter.context.gl,
+      //   layers: this.createLayer()
+      // })
+
       this.layer = new MapboxLayer({
-        id: id,
+        id: this.id,
         type: ArcLayer,
         data: this.data,
         autoHighlight: true,
-        pickable: false, // TODO
+        pickable: true, // TODO
         getWidth: d => this.getWidth(d),
         getSourcePosition: d => this.getSourcePositionFunc(d),
         getTargetPosition: d => this.getTargetPositionFunc(d),
@@ -137,6 +147,7 @@ export default {
       })
 
       this.layerCreated = true
+
       // debugger
       // this.MapboxVueInstance.addLayer(this.layer)
       // this.getMap().addLayer(this.layer)
@@ -220,6 +231,22 @@ export default {
       ] : [0, 0, 0]
     }
 
+  },
+
+  createLayer: function () {
+    return [
+      new ArcLayer({
+        id: this.id,
+        data: this.data,
+        autoHighlight: true,
+        pickable: true, // TODO
+        getWidth: d => this.getWidth(d),
+        getSourcePosition: d => this.getSourcePositionFunc(d),
+        getTargetPosition: d => this.getTargetPositionFunc(d),
+        getSourceColor: d => this.getSourceColorFunc(d),
+        getTargetColor: d => this.getTargetColorFunc(d)
+      })
+    ]
   }
 
 }
