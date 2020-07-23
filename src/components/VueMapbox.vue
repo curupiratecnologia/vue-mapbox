@@ -17,19 +17,15 @@
 </template>
 
 <script>
-import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-
 import findVNodeChildren from '../utils/findVNodeChildren'
 import get from 'lodash/get'
-import has from 'lodash/has'
 import orderBy from 'lodash/orderBy'
 import debounce from 'lodash/debounce'
 
 import uniqueId from 'lodash/uniqueId'
 
 // inicia os webworks etc antes, para performance de mapax construidos e destruidos
-mapboxgl.prewarm()
 
 // import { ScatterplotLayer, ArcLayer, HexagonLayer } from '@deck.gl/layers'
 // import { MapboxLayer } from '@deck.gl/mapbox'
@@ -210,7 +206,7 @@ export default {
     return {
       getMap: () => this.map,
       mapLoaded: this.mapLoaded,
-      mapboxgl: mapboxgl,
+      mapboxgl: () => this.mapboxgl,
       MapboxVueInstance: this
     }
   },
@@ -228,17 +224,18 @@ export default {
     }
   },
 
-  static () {
-    return {
-
-    }
-  },
-
   beforeCreate () {
 
   },
 
-  created () {
+  async created () {
+
+    if (!window.mapboxgl) {
+      const mapboxgl = await import(/* webpackChunkName: "mapboxgl-core" */ 'mapbox-gl')
+      window.mapboxgl = mapboxgl.default || mapboxgl
+    }
+    this.mapboxgl =  window.mapboxgl 
+    window.mapboxgl.prewarm()
     this.sources = new Map() // {id:{type,data,instance}}
     this.layers = new Map() //
     // this.images = new Map() //
@@ -309,13 +306,13 @@ export default {
   methods: {
 
     createMap: function () {
-      mapboxgl.prewarm()
+      window.mapboxgl.prewarm()
       if (this.accessToken !== '') {
-        mapboxgl.accessToken = this.accessToken
+        window.mapboxgl.accessToken = this.accessToken
       } else if (process.env.VUE_APP_MAPBOX_ACCESS_TOKEN) {
-        mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
+        window.mapboxgl.accessToken = process.env.VUE_APP_MAPBOX_ACCESS_TOKEN
       }
-      this.map = new mapboxgl.Map({
+      this.map = new window.mapboxgl.Map({
         ...this.otherOptions,
         container: this.$refs.mapabaselayer,
         refreshExpiredTiles: false,
@@ -611,6 +608,8 @@ export default {
     * Remove Source
     */
     removeLayer: function (id) {
+      if(!this.map) return
+      
       if (this.layers.has(id)) {
         this.layers.delete(id)
       }
