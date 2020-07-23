@@ -1,4 +1,4 @@
-((typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] = (typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] || []).push([[2],{
+((typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] = (typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] || []).push([[0],{
 
 /***/ "e192":
 /***/ (function(module, exports, __webpack_require__) {
