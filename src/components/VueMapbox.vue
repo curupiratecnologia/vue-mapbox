@@ -1,7 +1,15 @@
 /* eslint-disable eqeqeq */``
 <template>
   <div class="vue-mapbox" :style="{ position:'relative', width: myWidth, height: myHeight }">
-    <div ref="mapabaselayer" id="mapaBaseLayer" class="map-layer mapbox-map-container">
+    <div ref="mapabaselayer" id="mapaBaseLayer" class="map-layer mapbox-map-container"
+    style="{ 
+        position: absolute !important;
+        left: 0px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width:100%;"
+    >
       <div v-if="mapLoaded">
         <slot></slot>
       </div>
@@ -755,7 +763,7 @@ export default {
 
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 
     .loader{
         position:fixed;
