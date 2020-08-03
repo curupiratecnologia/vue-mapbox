@@ -49,4 +49,3 @@ return mapboxgl;
 /***/ })
 
 }]);
-//# sourceMappingURL=vue-mapbox.umd.vendors~mapboxgl-core.js.map

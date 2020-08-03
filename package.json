@@ -3,6 +3,7 @@
   "version": "0.1.2",
   "main": "dist/vue-mapbox.umd.js",
   "module": "dist/vue-mapbox.umd.js",
+  "sideEffects": false,
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",

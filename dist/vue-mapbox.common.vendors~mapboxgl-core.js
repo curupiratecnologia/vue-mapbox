@@ -49,4 +49,3 @@ return mapboxgl;
 /***/ })
 
 }]);
-//# sourceMappingURL=vue-mapbox.common.vendors~mapboxgl-core.js.map

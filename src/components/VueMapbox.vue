@@ -198,6 +198,13 @@ export default {
     devMode: {
       type: Boolean,
       default: false
+    }, // {'name':url,'name2':url2}
+    /**
+       *  show cameras attributes
+    */
+    interactive: {
+      type: Boolean,
+      default: true
     } // {'name':url,'name2':url2}
 
   },
@@ -229,12 +236,12 @@ export default {
   },
 
   async created () {
-
+    console.log('created - vueMapbox')
     if (!window.mapboxgl) {
       const mapboxgl = await import(/* webpackChunkName: "mapboxgl-core" */ 'mapbox-gl')
       window.mapboxgl = mapboxgl.default || mapboxgl
     }
-    this.mapboxgl =  window.mapboxgl 
+    this.mapboxgl = window.mapboxgl
     window.mapboxgl.prewarm()
     this.sources = new Map() // {id:{type,data,instance}}
     this.layers = new Map() //
@@ -306,6 +313,7 @@ export default {
   methods: {
 
     createMap: function () {
+      console.log('createding map - vueMapbox')
       window.mapboxgl.prewarm()
       if (this.accessToken !== '') {
         window.mapboxgl.accessToken = this.accessToken
@@ -322,23 +330,25 @@ export default {
         zoom: this.zoom,
         hash: this.hash,
         bounds: this.bounds,
-        maxBounds: this.maxBounds
+        maxBounds: this.maxBounds,
+        interactive: this.interactive
         // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
       })
 
       this.addPropsImages()
 
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes)
-
+      console.log('setting mapa loaded')
       this.map.on('load', () => {
         const _this = this
+        console.log('mapa loaded fired')
+        this.mapLoaded = true
         /**
          * Load Event - When Maps Load
          *  @property {object} _this the component instance
           * @property {object} map the mapbox instance
          */
         this.$emit('load', _this, this.map)
-        this.mapLoaded = true
       })
 
       if (this.devMode) {
@@ -599,8 +609,10 @@ export default {
       this.map.loadImage(url, (error, image) => {
         if (error) {
           console.error(error)
+          console.error(url)
+        } else {
+          if (!this.map.hasImage(key)) this.map.addImage(key, image)
         }
-        if (!this.map.hasImage(key)) this.map.addImage(key, image)
       })
     },
 
@@ -608,12 +620,12 @@ export default {
     * Remove Source
     */
     removeLayer: function (id) {
-      if(!this.map) return
-      
+      if (!this.map) return
+
       if (this.layers.has(id)) {
         this.layers.delete(id)
       }
-      if (this.map.getLayer(id)) {
+      if (this.map?.getLayer(id)) {
         this.map.removeLayer(id)
       }
       this.$nextTick(() =>

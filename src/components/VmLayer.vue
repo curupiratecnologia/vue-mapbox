@@ -160,11 +160,23 @@ export default {
     },
 
     /**
-      * (Dynamic) Classes are short path to set paint and properties colors
-      * @values click, hover
+      * Classes are array that defines paint and layout properties on value.
+      * it is a short hand for expresion
+      * @values  [{'fill-color':'#fe0000', 'fill-opacity':0.3, value:1, property:"vlr_classe", 'label':"Área Artificial", },
+                 {'fill-color':'#ebe628', 'fill-opacity':'0.3',value:2, property:"vlr_classe", 'label':"Área Agrícola",}]
     */
     classes: {
       type: [Array]
+    },
+    /**
+      * How to interpolate the values in classes
+    */
+    classesValueInterpolation: {
+      type: String,
+      default: 'match',
+      validator: function (value) {
+        return ['match', 'step', 'interpolate'].indexOf(value) !== -1
+      }
     },
     /**
       * (Dynamic) Any child popup will be show on feature click or hover
@@ -840,18 +852,41 @@ export default {
 
         // get only the por
         if (propertiesInClasses.length > 0) {
-          const expression = []
+          let expression = []
           /// TODO -  check type. string we will use mach, number we will use betweem??
           // if (typeof get(propertiesInClasses[0], 'value') === 'string') {
           const property = propertiesInClasses[0].property
-          expression.push('match')
-          expression.push(['get', property])
 
-          propertiesInClasses.forEach(prop => {
-            expression.push(prop.value)
-            expression.push(get(prop, paintKey))
-          })
-          expression.push(paintValue || expression[expression.length - 1])
+          // MATCH VALUES
+          if (this.classesValueInterpolation === 'match') {
+            expression = ['match', ['get', property]]
+            propertiesInClasses.forEach((classe, i) => {
+              expression.push(classe.value)
+              expression.push(get(classe, paintKey))
+            })
+            expression.push(paintValue || expression[expression.length - 1])
+
+          // STEP VALUES
+          } else if (this.classesValueInterpolation === 'step') {
+            expression = ['step', ['to-number', ['get', property]]]
+            propertiesInClasses.forEach((classe, i) => {
+              expression.push(get(classe, paintKey))
+              if(classe.value) expression.push(classe.value)
+            })
+
+          // INTERPOLATE VALUES
+          } else if (this.classesValueInterpolation === 'interpolate') {
+            if (prop.match(/color/g)) { // check if is color
+              expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', property]]]
+            } else {
+              expression = ['interpolate', ['linear'], ['to-number', ['get', property]] ]
+            }
+            propertiesInClasses.forEach((classe, i) => {
+              expression.push(classe.value)
+              expression.push(get(classe, paintKey))
+            })
+          }
+
           paintValue = expression
         }
         // }

@@ -254,7 +254,8 @@ export default {
       if (this.$slots.marker) {
         options.element = this.$refs.marker
       }
-      this.marker = new this.mapboxgl().Marker(options).setLngLat(this.center)
+      const mapboxgl = this.mapboxgl()
+      this.marker = new mapboxgl.Marker(options).setLngLat(this.center)
 
       this.MapboxVueInstance.setupEvents(this.$listeners, this.marker, nativeEventsTypes)
       this.setupMarkerEvents()

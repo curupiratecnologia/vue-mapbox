@@ -757,17 +757,6 @@ if (NATIVE_WEAK_MAP && IS_IE11) {
 
 /***/ }),
 
-/***/ "11ec":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VmPopup_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("8217");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VmPopup_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VmPopup_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VmPopup_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
 /***/ "126d":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4888,6 +4877,58 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "466d":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var fixRegExpWellKnownSymbolLogic = __webpack_require__("d784");
+var anObject = __webpack_require__("825a");
+var toLength = __webpack_require__("50c4");
+var requireObjectCoercible = __webpack_require__("1d80");
+var advanceStringIndex = __webpack_require__("8aa5");
+var regExpExec = __webpack_require__("14c3");
+
+// @@match logic
+fixRegExpWellKnownSymbolLogic('match', 1, function (MATCH, nativeMatch, maybeCallNative) {
+  return [
+    // `String.prototype.match` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.match
+    function match(regexp) {
+      var O = requireObjectCoercible(this);
+      var matcher = regexp == undefined ? undefined : regexp[MATCH];
+      return matcher !== undefined ? matcher.call(regexp, O) : new RegExp(regexp)[MATCH](String(O));
+    },
+    // `RegExp.prototype[@@match]` method
+    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@match
+    function (regexp) {
+      var res = maybeCallNative(nativeMatch, regexp, this);
+      if (res.done) return res.value;
+
+      var rx = anObject(regexp);
+      var S = String(this);
+
+      if (!rx.global) return regExpExec(rx, S);
+
+      var fullUnicode = rx.unicode;
+      rx.lastIndex = 0;
+      var A = [];
+      var n = 0;
+      var result;
+      while ((result = regExpExec(rx, S)) !== null) {
+        var matchStr = String(result[0]);
+        A[n] = matchStr;
+        if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
+        n++;
+      }
+      return n === 0 ? null : A;
+    }
+  ];
+});
+
+
+/***/ }),
+
 /***/ "4840":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5063,13 +5104,6 @@ function toInteger(value) {
 
 module.exports = toInteger;
 
-
-/***/ }),
-
-/***/ "4b19":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -12167,13 +12201,6 @@ function withParameters(gl, parameters, func) {
 
 /***/ }),
 
-/***/ "8217":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "825a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17634,17 +17661,6 @@ function hashGet(key) {
 
 module.exports = hashGet;
 
-
-/***/ }),
-
-/***/ "bc10":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4b19");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_stylus_loader_index_js_ref_11_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_lang_stylus___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -24706,12 +24722,10 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"49875d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=727de603&
-var VueMapboxvue_type_template_id_727de603_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5c99bb3c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=7bf70fc6&
+var VueMapboxvue_type_template_id_7bf70fc6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
 var staticRenderFns = []
 
-
-// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=727de603&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -24865,154 +24879,6 @@ var mapbox_gl = __webpack_require__("ac6d");
 var lodash_get = __webpack_require__("9b02");
 var get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
 
-// EXTERNAL MODULE: ./node_modules/lodash/has.js
-var has = __webpack_require__("3852");
-var has_default = /*#__PURE__*/__webpack_require__.n(has);
-
-// CONCATENATED MODULE: ./src/utils/findVNodeChildren.js
-
-
-
-
-
-/**
- * Find If componente/Vnode has any children of type
-*/
-
-/* harmony default export */ var findVNodeChildren = (function (Node, componentNameToFind) {
-  var depthLevel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  var slots = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-  var scopedSlots = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
-  var foundInstances = []; // const findInstance = (theNodesChildren, currentDepth = 0) => {
-  //   if (!theNodesChildren) return
-  //   if (Array.isArray(theNodesChildren) === false) {
-  //     theNodesChildren = [theNodesChildren]
-  //   }
-  //   theNodesChildren.forEach(vnode => {
-  //     if ((get(vnode, '$options.name', get(vnode, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
-  //       foundInstances.push(vnode)
-  //     }
-  //     if ((vnode.$slots || vnode.$scopedSlots) && currentDepth <= depthLevel) {
-  //       // find in slots
-  //       const mySlots = (slots.length === 0) ? Object.keys(vnode.$slots) : slots
-  //       mySlots.forEach(slotName => {
-  //         if (has(vnode.$slots, slotName)) {
-  //           findInstance(vnode.$slots[slotName], currentDepth++)
-  //         }
-  //       })
-  //       // find in scoptSlots
-  //       const myScopedSlots = (scopedSlots.length === 0) ? Object.keys(vnode.$scopedSlots) : scopedSlots
-  //       myScopedSlots.forEach(slotName => {
-  //         if (has(vnode.$myScopedSlots, slotName)) {
-  //           const vnodeScopeSlots = vnode.$slots[slotName]()
-  //           findInstance(vnodeScopeSlots, currentDepth++)
-  //         }
-  //       })
-  //     }
-  //     const children = get(Node, 'children') || get(Node, 'componentOptions.children')
-  //     if (Array.isArray(children)) {
-  //       children.forEach(node => {
-  //         findInstance(node)
-  //       })
-  //     }
-  //   })
-  // }
-  // const findLayers = (VNode, bag) => {
-  //   bag = bag || []
-  //   if (Array.isArray(VNode)) {
-  //     VNode.forEach(node => {
-  //       findLayers(node, bag)
-  //     })
-  //     return bag
-  //   }
-  //   if ((get(VNode, '$options.name', get(VNode, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
-  //     bag.push(VNode)
-  //     console.log(VNode.componentOptions.propsData.name)
-  //   }
-  //   const children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
-  //   if (Array.isArray(children)) {
-  //     children.forEach(node => {
-  //       findLayers(node, bag)
-  //     })
-  //   }
-  //   if (has(VNode, '$slots')) {
-  //     const mySlots = Object.keys(VNode.$slots)
-  //     mySlots.forEach(slotName => {
-  //       findLayers(VNode.$slots[slotName], bag)
-  //     })
-  //   }
-  //   if (has(VNode, '$scopedSlots')) {
-  //     const mySlots = Object.keys(VNode.$scopedSlots)
-  //     mySlots.forEach(slotName => {
-  //       findLayers(VNode.$scopedSlots[slotName](), bag)
-  //     })
-  //   }
-  //   return bag
-  // }
-  // check for it
-  // findInstance(Node)
-
-  var findLayers = function findLayers(VNode, bag) {
-    bag = bag || [];
-
-    if (Array.isArray(VNode)) {
-      VNode.forEach(function (node) {
-        findLayers(node, bag);
-      });
-      return bag;
-    } //   // I will allways get the component instance
-
-
-    var VNodeInstance;
-
-    if (get_default()(VNode, 'componentInstance')) {
-      VNodeInstance = get_default()(VNode, 'componentInstance');
-    } else {
-      VNodeInstance = VNode;
-    }
-
-    if (get_default()(VNodeInstance, '$options.name', get_default()(VNodeInstance, 'componentOptions.Ctor.options.name')) === componentNameToFind) {
-      bag.push(VNodeInstance);
-      console.log(get_default()(VNodeInstance, '$props.name'));
-    } // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
-    // if (!children) children = get(VNode, 'componentInstance.$children')
-    // if (!children) 
-
-
-    var children = get_default()(VNodeInstance, '$children') || get_default()(VNodeInstance, 'children');
-
-    if (Array.isArray(children)) {
-      children.forEach(function (node) {
-        findLayers(node, bag);
-      });
-    }
-
-    if (has_default()(VNodeInstance, '$slots')) {
-      var mySlots = Object.keys(VNodeInstance.$slots);
-      mySlots.forEach(function (slotName) {
-        findLayers(VNodeInstance.$slots[slotName], bag);
-      });
-    }
-
-    if (has_default()(VNodeInstance, '$scopedSlots')) {
-      var _mySlots = Object.keys(VNodeInstance.$scopedSlots);
-
-      _mySlots.forEach(function (slotName) {
-        findLayers(VNodeInstance.$scopedSlots[slotName](), bag);
-      });
-    }
-
-    return bag;
-  };
-
-  foundInstances = findLayers(Node);
-
-  if (foundInstances.length === 0) {
-    return undefined;
-  }
-
-  return foundInstances;
-});
 // EXTERNAL MODULE: ./node_modules/lodash/orderBy.js
 var orderBy = __webpack_require__("93c6");
 var orderBy_default = /*#__PURE__*/__webpack_require__.n(orderBy);
@@ -25214,6 +25080,15 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     devMode: {
       type: Boolean,
       default: false
+    },
+    // {'name':url,'name2':url2}
+
+    /**
+       *  show cameras attributes
+    */
+    interactive: {
+      type: Boolean,
+      default: true
     } // {'name':url,'name2':url2}
 
   },
@@ -25253,19 +25128,21 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              console.log('created - vueMapbox');
+
               if (window.mapboxgl) {
-                _context.next = 5;
+                _context.next = 6;
                 break;
               }
 
-              _context.next = 3;
+              _context.next = 4;
               return __webpack_require__.e(/* import() | mapboxgl-core */ 0).then(__webpack_require__.t.bind(null, "e192", 7));
 
-            case 3:
+            case 4:
               mapboxgl = _context.sent;
               window.mapboxgl = mapboxgl.default || mapboxgl;
 
-            case 5:
+            case 6:
               _this3.mapboxgl = window.mapboxgl;
               window.mapboxgl.prewarm();
               _this3.sources = new Map(); // {id:{type,data,instance}}
@@ -25282,7 +25159,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
                 _this3.createMap();
               });
 
-            case 12:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -25350,6 +25227,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     createMap: function createMap() {
       var _this5 = this;
 
+      console.log('createding map - vueMapbox');
       window.mapboxgl.prewarm();
 
       if (this.accessToken !== '') {
@@ -25367,13 +25245,17 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         zoom: this.zoom,
         hash: this.hash,
         bounds: this.bounds,
-        maxBounds: this.maxBounds // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
+        maxBounds: this.maxBounds,
+        interactive: this.interactive // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
 
       }));
       this.addPropsImages();
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes);
+      console.log('setting mapa loaded');
       this.map.on('load', function () {
         var _this = _this5;
+        console.log('mapa loaded fired');
+        _this5.mapLoaded = true;
         /**
          * Load Event - When Maps Load
          *  @property {object} _this the component instance
@@ -25381,8 +25263,6 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
          */
 
         _this5.$emit('load', _this, _this5.map);
-
-        _this5.mapLoaded = true;
       });
 
       if (this.devMode) {
@@ -25675,9 +25555,10 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       this.map.loadImage(url, function (error, image) {
         if (error) {
           console.error(error);
+          console.error(url);
+        } else {
+          if (!_this10.map.hasImage(key)) _this10.map.addImage(key, image);
         }
-
-        if (!_this10.map.hasImage(key)) _this10.map.addImage(key, image);
       });
     },
 
@@ -25685,7 +25566,8 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * Remove Source
     */
     removeLayer: function removeLayer(id) {
-      var _this11 = this;
+      var _this$map,
+          _this11 = this;
 
       if (!this.map) return;
 
@@ -25693,7 +25575,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         this.layers.delete(id);
       }
 
-      if (this.map.getLayer(id)) {
+      if ((_this$map = this.map) === null || _this$map === void 0 ? void 0 : _this$map.getLayer(id)) {
         this.map.removeLayer(id);
       }
 
@@ -25810,9 +25692,6 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
 });
 // CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_VueMapboxvue_type_script_lang_js_ = (VueMapboxvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/VueMapbox.vue?vue&type=style&index=0&lang=stylus&
-var VueMapboxvue_type_style_index_0_lang_stylus_ = __webpack_require__("bc10");
-
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -25919,7 +25798,7 @@ function normalizeComponent (
 
 var VueMapbox_component = normalizeComponent(
   components_VueMapboxvue_type_script_lang_js_,
-  VueMapboxvue_type_template_id_727de603_render,
+  VueMapboxvue_type_template_id_7bf70fc6_render,
   staticRenderFns,
   false,
   null,
@@ -25970,12 +25849,158 @@ Get only props with props with mapbox set to true, and with a value
   });
   return mapboxProps;
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"49875d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=template&id=b8907464&
+// EXTERNAL MODULE: ./node_modules/lodash/has.js
+var has = __webpack_require__("3852");
+var has_default = /*#__PURE__*/__webpack_require__.n(has);
+
+// CONCATENATED MODULE: ./src/utils/findVNodeChildren.js
+
+
+
+
+
+/**
+ * Find If componente/Vnode has any children of type
+*/
+
+/* harmony default export */ var findVNodeChildren = (function (Node, componentNameToFind) {
+  var depthLevel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var slots = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+  var scopedSlots = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
+  var foundInstances = []; // const findInstance = (theNodesChildren, currentDepth = 0) => {
+  //   if (!theNodesChildren) return
+  //   if (Array.isArray(theNodesChildren) === false) {
+  //     theNodesChildren = [theNodesChildren]
+  //   }
+  //   theNodesChildren.forEach(vnode => {
+  //     if ((get(vnode, '$options.name', get(vnode, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
+  //       foundInstances.push(vnode)
+  //     }
+  //     if ((vnode.$slots || vnode.$scopedSlots) && currentDepth <= depthLevel) {
+  //       // find in slots
+  //       const mySlots = (slots.length === 0) ? Object.keys(vnode.$slots) : slots
+  //       mySlots.forEach(slotName => {
+  //         if (has(vnode.$slots, slotName)) {
+  //           findInstance(vnode.$slots[slotName], currentDepth++)
+  //         }
+  //       })
+  //       // find in scoptSlots
+  //       const myScopedSlots = (scopedSlots.length === 0) ? Object.keys(vnode.$scopedSlots) : scopedSlots
+  //       myScopedSlots.forEach(slotName => {
+  //         if (has(vnode.$myScopedSlots, slotName)) {
+  //           const vnodeScopeSlots = vnode.$slots[slotName]()
+  //           findInstance(vnodeScopeSlots, currentDepth++)
+  //         }
+  //       })
+  //     }
+  //     const children = get(Node, 'children') || get(Node, 'componentOptions.children')
+  //     if (Array.isArray(children)) {
+  //       children.forEach(node => {
+  //         findInstance(node)
+  //       })
+  //     }
+  //   })
+  // }
+  // const findLayers = (VNode, bag) => {
+  //   bag = bag || []
+  //   if (Array.isArray(VNode)) {
+  //     VNode.forEach(node => {
+  //       findLayers(node, bag)
+  //     })
+  //     return bag
+  //   }
+  //   if ((get(VNode, '$options.name', get(VNode, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
+  //     bag.push(VNode)
+  //     console.log(VNode.componentOptions.propsData.name)
+  //   }
+  //   const children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
+  //   if (Array.isArray(children)) {
+  //     children.forEach(node => {
+  //       findLayers(node, bag)
+  //     })
+  //   }
+  //   if (has(VNode, '$slots')) {
+  //     const mySlots = Object.keys(VNode.$slots)
+  //     mySlots.forEach(slotName => {
+  //       findLayers(VNode.$slots[slotName], bag)
+  //     })
+  //   }
+  //   if (has(VNode, '$scopedSlots')) {
+  //     const mySlots = Object.keys(VNode.$scopedSlots)
+  //     mySlots.forEach(slotName => {
+  //       findLayers(VNode.$scopedSlots[slotName](), bag)
+  //     })
+  //   }
+  //   return bag
+  // }
+  // check for it
+  // findInstance(Node)
+
+  var findLayers = function findLayers(VNode, bag) {
+    bag = bag || [];
+
+    if (Array.isArray(VNode)) {
+      VNode.forEach(function (node) {
+        findLayers(node, bag);
+      });
+      return bag;
+    } //   // I will allways get the component instance
+
+
+    var VNodeInstance;
+
+    if (get_default()(VNode, 'componentInstance')) {
+      VNodeInstance = get_default()(VNode, 'componentInstance');
+    } else {
+      VNodeInstance = VNode;
+    }
+
+    if (get_default()(VNodeInstance, '$options.name', get_default()(VNodeInstance, 'componentOptions.Ctor.options.name')) === componentNameToFind) {
+      bag.push(VNodeInstance);
+      console.log(get_default()(VNodeInstance, '$props.name'));
+    } // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
+    // if (!children) children = get(VNode, 'componentInstance.$children')
+    // if (!children) 
+
+
+    var children = get_default()(VNodeInstance, '$children') || get_default()(VNodeInstance, 'children');
+
+    if (Array.isArray(children)) {
+      children.forEach(function (node) {
+        findLayers(node, bag);
+      });
+    }
+
+    if (has_default()(VNodeInstance, '$slots')) {
+      var mySlots = Object.keys(VNodeInstance.$slots);
+      mySlots.forEach(function (slotName) {
+        findLayers(VNodeInstance.$slots[slotName], bag);
+      });
+    }
+
+    if (has_default()(VNodeInstance, '$scopedSlots')) {
+      var _mySlots = Object.keys(VNodeInstance.$scopedSlots);
+
+      _mySlots.forEach(function (slotName) {
+        findLayers(VNodeInstance.$scopedSlots[slotName](), bag);
+      });
+    }
+
+    return bag;
+  };
+
+  foundInstances = findLayers(Node);
+
+  if (foundInstances.length === 0) {
+    return undefined;
+  }
+
+  return foundInstances;
+});
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5c99bb3c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=template&id=b8907464&
 var VmPopupvue_type_template_id_b8907464_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({ maxHeight:_vm.myMaxHeight, overflow:'auto'})},[_vm._t("default")],2)}
 var VmPopupvue_type_template_id_b8907464_staticRenderFns = []
 
-
-// CONCATENATED MODULE: ./src/components/VmPopup.vue?vue&type=template&id=b8907464&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=script&lang=js&
 
@@ -26262,9 +26287,6 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
 });
 // CONCATENATED MODULE: ./src/components/VmPopup.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_VmPopupvue_type_script_lang_js_ = (VmPopupvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/VmPopup.vue?vue&type=style&index=0&lang=stylus&
-var VmPopupvue_type_style_index_0_lang_stylus_ = __webpack_require__("11ec");
-
 // CONCATENATED MODULE: ./src/components/VmPopup.vue
 
 
@@ -26576,7 +26598,8 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         options.element = this.$refs.marker;
       }
 
-      this.marker = new this.mapboxgl().Marker(options).setLngLat(this.center);
+      var mapboxgl = this.mapboxgl();
+      this.marker = new mapboxgl.Marker(options).setLngLat(this.center);
       this.MapboxVueInstance.setupEvents(this.$listeners, this.marker, VmMarkervue_type_script_lang_js_nativeEventsTypes);
       this.setupMarkerEvents();
       this.$nextTick(function () {
@@ -26894,6 +26917,9 @@ var es_array_join = __webpack_require__("a15b");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.splice.js
 var es_array_splice = __webpack_require__("a434");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.match.js
+var es_string_match = __webpack_require__("466d");
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 3 modules
 var toConsumableArray = __webpack_require__("2909");
 
@@ -26917,6 +26943,8 @@ var camelCase = __webpack_require__("bba4");
 var camelCase_default = /*#__PURE__*/__webpack_require__.n(camelCase);
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayer.vue?vue&type=script&lang=js&
+
+
 
 
 
@@ -27099,11 +27127,24 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     },
 
     /**
-      * (Dynamic) Classes are short path to set paint and properties colors
-      * @values click, hover
+      * Classes are array that defines paint and layout properties on value.
+      * it is a short hand for expresion
+      * @values  [{'fill-color':'#fe0000', 'fill-opacity':0.3, value:1, property:"vlr_classe", 'label':"Área Artificial", },
+                 {'fill-color':'#ebe628', 'fill-opacity':'0.3',value:2, property:"vlr_classe", 'label':"Área Agrícola",}]
     */
     classes: {
       type: [Array]
+    },
+
+    /**
+      * How to interpolate the values in classes
+    */
+    classesValueInterpolation: {
+      type: String,
+      default: 'match',
+      validator: function validator(value) {
+        return ['match', 'step', 'interpolate'].indexOf(value) !== -1;
+      }
     },
 
     /**
@@ -28099,14 +28140,35 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
           var expression = []; /// TODO -  check type. string we will use mach, number we will use betweem??
           // if (typeof get(propertiesInClasses[0], 'value') === 'string') {
 
-          var property = propertiesInClasses[0].property;
-          expression.push('match');
-          expression.push(['get', property]);
-          propertiesInClasses.forEach(function (prop) {
-            expression.push(prop.value);
-            expression.push(get_default()(prop, paintKey));
-          });
-          expression.push(paintValue || expression[expression.length - 1]);
+          var property = propertiesInClasses[0].property; // MATCH VALUES
+
+          if (_this8.classesValueInterpolation === 'match') {
+            expression = ['match', ['get', property]];
+            propertiesInClasses.forEach(function (classe, i) {
+              expression.push(classe.value);
+              expression.push(get_default()(classe, paintKey));
+            });
+            expression.push(paintValue || expression[expression.length - 1]); // STEP VALUES
+          } else if (_this8.classesValueInterpolation === 'step') {
+            expression = ['step', ['to-number', ['get', property]]];
+            propertiesInClasses.forEach(function (classe, i) {
+              expression.push(get_default()(classe, paintKey));
+              if (classe.value) expression.push(classe.value);
+            }); // INTERPOLATE VALUES
+          } else if (_this8.classesValueInterpolation === 'interpolate') {
+            if (prop.match(/color/g)) {
+              // check if is color
+              expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', property]]];
+            } else {
+              expression = ['interpolate', ['linear'], ['to-number', ['get', property]]];
+            }
+
+            propertiesInClasses.forEach(function (classe, i) {
+              expression.push(classe.value);
+              expression.push(get_default()(classe, paintKey));
+            });
+          }
+
           paintValue = expression;
         } // }
 
@@ -28248,12 +28310,10 @@ var VmLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var VmLayer = (VmLayer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"49875d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayerArc.vue?vue&type=template&id=21bff847&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5c99bb3c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayerArc.vue?vue&type=template&id=21bff847&
 var VmLayerArcvue_type_template_id_21bff847_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.layerCreated)?_c('vm-layer',{attrs:{"name":'arc'+this.name,"customLayer":_vm.layer,"zIndex":_vm.zIndex,"type":"custom"}}):_vm._e()],1)}
 var VmLayerArcvue_type_template_id_21bff847_staticRenderFns = []
 
-
-// CONCATENATED MODULE: ./src/components/VmLayerArc.vue?vue&type=template&id=21bff847&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 var classCallCheck = __webpack_require__("d4ec");
@@ -58666,12 +58726,10 @@ var VmLayerArc_component = normalizeComponent(
 )
 
 /* harmony default export */ var VmLayerArc = (VmLayerArc_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"49875d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=template&id=bd108ae0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5c99bb3c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=template&id=bd108ae0&
 var VmSourcevue_type_template_id_bd108ae0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"display":"none"}},[_vm._t("default")],2)}
 var VmSourcevue_type_template_id_bd108ae0_staticRenderFns = []
 
-
-// CONCATENATED MODULE: ./src/components/VmSource.vue?vue&type=template&id=bd108ae0&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=script&lang=js&
 
@@ -59130,58 +59188,6 @@ var VmMarkerDonut_component = normalizeComponent(
 if (typeof VmMarkerDonutvue_type_custom_index_0_blockType_docs_default.a === 'function') VmMarkerDonutvue_type_custom_index_0_blockType_docs_default()(VmMarkerDonut_component)
 
 /* harmony default export */ var VmMarkerDonut = (VmMarkerDonut_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"49875d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/LoadingComponent.vue?vue&type=template&id=1911e249&
-var LoadingComponentvue_type_template_id_1911e249_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('center',[_vm._v(" Carregando... ")])}
-var LoadingComponentvue_type_template_id_1911e249_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/LoadingComponent.vue?vue&type=template&id=1911e249&
-
-// CONCATENATED MODULE: ./src/components/LoadingComponent.vue
-
-var script = {}
-
-
-/* normalize component */
-
-var LoadingComponent_component = normalizeComponent(
-  script,
-  LoadingComponentvue_type_template_id_1911e249_render,
-  LoadingComponentvue_type_template_id_1911e249_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var LoadingComponent = (LoadingComponent_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"49875d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ErrorComponent.vue?vue&type=template&id=1cd642d2&
-var ErrorComponentvue_type_template_id_1cd642d2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('center',{staticClass:"alert alert-danger"},[_c('b',[_vm._v("ERROR")])])}
-var ErrorComponentvue_type_template_id_1cd642d2_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/ErrorComponent.vue?vue&type=template&id=1cd642d2&
-
-// CONCATENATED MODULE: ./src/components/ErrorComponent.vue
-
-var ErrorComponent_script = {}
-
-
-/* normalize component */
-
-var ErrorComponent_component = normalizeComponent(
-  ErrorComponent_script,
-  ErrorComponentvue_type_template_id_1cd642d2_render,
-  ErrorComponentvue_type_template_id_1cd642d2_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var ErrorComponent = (ErrorComponent_component.exports);
 // CONCATENATED MODULE: ./src/library-entry.js
 
 
@@ -59452,4 +59458,3 @@ module.exports = isSymbol;
 /***/ })
 
 /******/ });
-//# sourceMappingURL=vue-mapbox.common.js.map
