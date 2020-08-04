@@ -1,9 +1,9 @@
 import VueMapbox from './components/VueMapbox.vue'
+import VmSource from './components/VmSource.vue'
 import VmMarker from './components/VmMarker.vue'
 import VmPopup from './components/VmPopup.vue'
 import VmLayer from './components/VmLayer.vue'
 import VmLayerArc from './components/VmLayerArc.vue'
-// import VmSource from './components/VmSource.vue'
 import VmImage from './components/VmImage.vue'
 import VmLayerVector from './components/Layers/VmLayerVector.vue'
 import VmMarkerDonut from './components/Markers/VmMarkerDonut.vue'
@@ -46,7 +46,7 @@ export default {
   //   // fornecido e excedido. Padrão: Infinity
   //   timeout: 3000
   // }),
-  // VmSource,
+  VmSource,
   VmLayerVector,
   VmMarkerDonut,
   VmImage,
@@ -57,7 +57,7 @@ export default {
     Vue.component('VmMarker', VmMarker)
     Vue.component('VmPopup', VmPopup)
     Vue.component('VmLayer', VmLayer)
-    // Vue.component('VmSource', VmSource)
+    Vue.component('VmSource', VmSource)
     Vue.component('VmImage', VmImage)
     Vue.component('VmVectorLayersSource', VmLayerVector)
     Vue.component('VmMarkerDonut', VmMarkerDonut)
