@@ -8,9 +8,68 @@
               <vm-source
                                     name="painel_solucao_compartilhada_solucao_info"
                                     type='vector'
-                                    :options="{ type:'vector', tiles:[`http://rspangea.mma.gov.br/tile/painel_solucao_compartilhada_solucao_info/{z}/{x}/{y}.mvt?ano_referencia=${ano}`], minzoom: 1, maxzoom: 24, }" >
+                                    :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/painel_solucao_compartilhada_solucao_info/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24, }" >
 
                 </vm-source>
+
+           <vm-source
+                key="arranjos_potenciais"
+                name="arranjos_potenciais"
+                type='vector'
+                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/arranjos_potenciais/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 0, maxzoom: 24, }"
+                />
+           <vm-source
+                key="arranjos_potenciais-center"
+                name="arranjos_potenciais-center"
+                type='vector'
+                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/label/arranjos_potenciais/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 0, maxzoom: 24, }"
+                />
+
+                   <!-- ARRANJOS -->
+            <!-- <vm-layer
+                  key="arranjos_potenciais-fill"
+                  name="arranjos_potenciais-fill"
+                  type="fill"
+                  source="arranjos_potenciais"
+                  sourceLayer="arranjos_potenciais"
+                  fill-color="#5CEE89"
+                  :fill-opacity="0.6"
+                  :paint-hover="{'fill-opacity':1}"
+              >
+
+                <template #popupClick="{features}">
+                      <pre>{{features[0].properties}}</pre>
+                </template>
+              </vm-layer> -->
+
+                 <vm-layer
+                    name="circles"
+                    type="circle"
+                    source="arranjos_potenciais-center"
+                    sourceLayer="label_arranjos_potenciais"
+                    circle-color="#000000"
+                    :circle-radius="12"
+                    :circle-opacity="0.7"
+                    :z-index="23"
+       
+                  />
+                 <vm-layer
+                    name="circles"
+                    type="circle"
+                    source="arranjos_potenciais-center"
+                    sourceLayer="label_arranjos_potenciais"
+                    circle-color="#000000"
+                    :circle-radius="12"
+                    :circle-opacity="0.7"
+                    :z-index="23"
+       
+                  >
+                   
+                <template #popupClick="{features}">
+                      <pre>{{features[0].properties}}</pre>
+                </template>
+                 </vm-layer>
+
                   <vmLayer name="myLayer"
                         source="painel_solucao_compartilhada_solucao_info"
                         sourceLayer="painel_solucao_compartilhada_solucao_info"

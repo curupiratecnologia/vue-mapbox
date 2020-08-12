@@ -24731,8 +24731,8 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5c99bb3c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=df8293f4&scoped=true&
-var VueMapboxvue_type_template_id_df8293f4_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",staticStyle:{"position":"absolute","left":"0px","top":"0","bottom":"0","right":"0","width":"100%"},attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5c99bb3c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=25a578f8&scoped=true&
+var VueMapboxvue_type_template_id_25a578f8_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",staticStyle:{"position":"absolute","left":"0px","top":"0","bottom":"0","right":"0","width":"100%"},attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
 var staticRenderFns = []
 
 
@@ -24744,6 +24744,9 @@ var es_array_includes = __webpack_require__("caad");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
 var es_array_index_of = __webpack_require__("c975");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
+var es_array_iterator = __webpack_require__("e260");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
@@ -24759,6 +24762,9 @@ var es_object_entries = __webpack_require__("4fad");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
 var es_object_to_string = __webpack_require__("d3b7");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
+var es_promise = __webpack_require__("e6cf");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
 var es_string_includes = __webpack_require__("2532");
@@ -24836,9 +24842,6 @@ function _objectSpread2(target) {
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
 var runtime = __webpack_require__("96cf");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
-var es_promise = __webpack_require__("e6cf");
-
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
 
 
@@ -24898,6 +24901,8 @@ var uniqueId = __webpack_require__("98dc");
 var uniqueId_default = /*#__PURE__*/__webpack_require__.n(uniqueId);
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=script&lang=js&
+
+
 
 
 
@@ -25358,7 +25363,8 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * Update Source
     */
     updateSource: function updateSource(sourceid, type, options) {
-      var _this7 = this;
+      var _this$map$getStyle,
+          _this7 = this;
 
       debugger;
 
@@ -25367,7 +25373,8 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       } // apago todos os layers que tem esse source
 
 
-      var layers = this.map.getStyle().layers;
+      var layers = (_this$map$getStyle = this.map.getStyle()) === null || _this$map$getStyle === void 0 ? void 0 : _this$map$getStyle.layers;
+      if (!layers) return;
       layers.forEach(function (layer) {
         if (layer.source === sourceid) {
           _this7.map.removeLayer(layer.id);
@@ -25440,6 +25447,9 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     */
     updateLayerOrder: debounce_default()(function () {
       console.log('UPDATE LAYER ORDER ==============================================================================');
+      if (!this.map) return;
+      var layers = this.map.getStyle();
+      if (!(layers === null || layers === void 0 ? void 0 : layers.layers)) return;
 
       var findLayers = function findLayers(VNode, bag) {
         bag = bag || [];
@@ -25568,20 +25578,24 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     },
 
     /**
-    * Remove Source
+    * Remove Layer
     */
     removeLayer: function removeLayer(id) {
-      var _this$map,
-          _this11 = this;
+      var _this11 = this;
 
       if (!this.map) return;
+      var map = this.getMap();
 
       if (this.layers.has(id)) {
         this.layers.delete(id);
-      }
+      } // because when we try to remove a layer the mapbox itself has been destroied
 
-      if ((_this$map = this.map) === null || _this$map === void 0 ? void 0 : _this$map.getLayer(id)) {
-        this.map.removeLayer(id);
+
+      try {
+        if (map && map.getLayer(id)) {
+          map.removeLayer(id);
+        }
+      } catch (e) {// console.warn(e)
       }
 
       this.$nextTick(function () {
@@ -25803,11 +25817,11 @@ function normalizeComponent (
 
 var VueMapbox_component = normalizeComponent(
   components_VueMapboxvue_type_script_lang_js_,
-  VueMapboxvue_type_template_id_df8293f4_scoped_true_render,
+  VueMapboxvue_type_template_id_25a578f8_scoped_true_render,
   staticRenderFns,
   false,
   null,
-  "df8293f4",
+  "25a578f8",
   null
   
 )
@@ -44678,9 +44692,6 @@ var es_symbol_async_iterator = __webpack_require__("b636");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.iterator.js
 var es_symbol_iterator = __webpack_require__("d28b");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
-var es_array_iterator = __webpack_require__("e260");
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncIterator.js
 

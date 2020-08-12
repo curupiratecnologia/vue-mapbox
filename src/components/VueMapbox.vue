@@ -438,7 +438,9 @@ export default {
       }
 
       // apago todos os layers que tem esse source
-      const layers = this.map.getStyle().layers
+      const layers = this.map.getStyle()?.layers
+      if (!layers) return
+
       layers.forEach(layer => {
         if (layer.source === sourceid) {
           this.map.removeLayer(layer.id)
@@ -508,6 +510,10 @@ export default {
     */
     updateLayerOrder: debounce(function () {
       console.log('UPDATE LAYER ORDER ==============================================================================')
+      if (!this.map) return
+      const layers = this.map.getStyle()
+      if (!layers?.layers) return
+
       const findLayers = (VNode, bag) => {
         bag = bag || []
         if (Array.isArray(VNode)) {
@@ -618,16 +624,23 @@ export default {
     },
 
     /**
-    * Remove Source
+    * Remove Layer
     */
     removeLayer: function (id) {
       if (!this.map) return
+      const map = this.getMap()
 
       if (this.layers.has(id)) {
         this.layers.delete(id)
       }
-      if (this.map?.getLayer(id)) {
-        this.map.removeLayer(id)
+
+      // because when we try to remove a layer the mapbox itself has been destroied
+      try {
+        if (map && map.getLayer(id)) {
+          map.removeLayer(id)
+        }
+      } catch (e) {
+        // console.warn(e)
       }
       this.$nextTick(() =>
         this.updateLayerOrder()
