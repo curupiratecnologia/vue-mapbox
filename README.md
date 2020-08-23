@@ -1,6 +1,9 @@
-# vue-mapbox
+# @curupira/vue-mapbox
 
-[View Documentation](https://curupiratecnologia.gitlab.io/vue-mapbox/docs/)
+A wrapper for Mapbox using Vue, with advanced features and abstractions, like custom markers adn layers, automatic change aparrence on hover, automatic popups and so... like the batman belt for maps in vue 
+
+
+## [View Documentation](https://curupiratecnologia.gitlab.io/vue-mapbox/docs/)
 
 
 ## Project setup
