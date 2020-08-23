@@ -16,7 +16,8 @@ import forEach from 'lodash/forEach'
 // requireAllComponents(require.context('./components/Sources', false, /[A-Z]\w+\.(vue|js)$/))
 // requireAllComponents(require.context('./components/Layers', false, /[A-Z]\w+\.(vue|js)$/))
 
-import VueMapbox from './library-entry.js'
+import VueMapbox from './entry.js'
+Vue.use(VueMapbox)
 
 Vue.config.productionTip = false
 

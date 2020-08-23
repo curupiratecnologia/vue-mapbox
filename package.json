@@ -10,11 +10,12 @@
     "email": "leandroceles@gmail.com",
     "url": "https://curupiratecnologia.com.br"
   },
-  "homepage": "https://curupiratecnologia.github.io/vue-mapbox/",
+  "homepage": "https://curupiratecnologia.gitlab.io/vue-mapbox/docs/",
   "keywords": [
     "mapbox",
     "vue"
   ],
+  "files":["dist/*","src/**/*"],
   "license": "MIT",
   "repository": {
     "type": "git",
