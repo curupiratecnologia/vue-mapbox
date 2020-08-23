@@ -8,7 +8,7 @@ module.exports = {
   require: [path.join(__dirname, 'styleguide.global.js')],
   skipComponentsWithoutExample: false,
   pagePerSection: true,
-  usageMode: 'expand',
+  // usageMode: 'expand',
   updateDocs (docs) {
     // console.log(docs)
     // if (docs.doclets.version) {
@@ -67,14 +67,6 @@ module.exports = {
         'src/components/Markers/VmMarkerDonut.vue'
       ]
     },
-    {
-      name: 'Custom Sources',
-      sectionDepth: 1,
-      components: [
-        'src/components/Source/vmSourceGeoJson.vue'
-      ]
-    },
-    { name: 'Other components', sectionDepth: 1, components: 'src/components/VmPopup.vue' }
   ]
 
   // webpackConfig: {

@@ -7,6 +7,7 @@ Example Simple Popup
     <VueMapbox mapStyle="mapbox://styles/mapbox/outdoors-v11" :height="200" width="100%">
         <VmPopup  
           :center="[-45, -15]"
+          :open="true"
           :closeButton="false" 
           :closeOnClick="false" >
             <h6>Here goes the pop up content. you can use any vue components as child of this.</h6>

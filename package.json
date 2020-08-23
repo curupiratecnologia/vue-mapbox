@@ -1,10 +1,25 @@
 {
   "name": "@curupira/vue-mapbox",
-  "version": "0.1.4",
+  "version": "0.0.1-beta.1",
   "main": "dist/vue-mapbox.umd.js",
   "module": "dist/vue-mapbox.umd.js",
-  "sideEffects": false,
   "private": false,
+  "description": "A wrapper for Mapbox using Vue, with advanced features and abstractions",
+  "author": {
+    "name": "Leandro Celes",
+    "email": "leandroceles@gmail.com",
+    "url": "https://curupiratecnologia.com.br"
+  },
+  "homepage": "https://curupiratecnologia.github.io/vue-mapbox/",
+  "keywords": [
+    "mapbox",
+    "vue"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com:curupiratecnologia/vue-mapbox.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "serve:lib": "vue-cli-service build --target lib --name vue-mapbox src/library-entry.js --dest dist/ --watch",

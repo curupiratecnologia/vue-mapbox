@@ -1,27 +1,23 @@
 # vue-mapbox
 
-[Ver Documentção](https://curupiratecnologia.gitlab.io/vue-mapbox/docs/)
+[View Documentation](https://curupiratecnologia.gitlab.io/vue-mapbox/docs/)
 
 
 ## Project setup
+### Install
 ```
-npm install
+npm install --save @curupira/vue-mapbox
 ```
-
-### Compiles and hot-reloads for development
+### Use as plugin
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+import VueMapbox from 'vue-mapbox'
+Vue.use(VueMapbox)
 ```
 
-### Lints and fixes files
+### Use as Components in a Component
 ```
-npm run lint
+import { VueMapbox, VmLayer, VmSource } from 'vue-mapbox' //and others
+export defaults {
+    components: { VueMapbox, VmLayer, VmSource } 
+}
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
