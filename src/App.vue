@@ -2,28 +2,17 @@
   <div id="app">
     <center>
       <VueMapbox
+      ref="vuemapbox"
+      @load="loaded"
       hash="pos"
        mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-              <vm-source
-                                    name="painel_solucao_compartilhada_solucao_info"
-                                    type='vector'
-                                    :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/painel_solucao_compartilhada_solucao_info/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24, }" >
-
-                </vm-source>
-
-           <vm-source
-                key="arranjos_potenciais"
-                name="arranjos_potenciais"
-                type='vector'
-                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/arranjos_potenciais/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 0, maxzoom: 24, }"
-                />
-           <vm-source
+           <!-- <vm-source
                 key="arranjos_potenciais-center"
                 name="arranjos_potenciais-center"
                 type='vector'
                 :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/label/arranjos_potenciais/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 0, maxzoom: 24, }"
-                />
+                /> -->
 
                    <!-- ARRANJOS -->
             <!-- <vm-layer
@@ -42,41 +31,44 @@
                 </template>
               </vm-layer> -->
 
-                 <vm-layer
-                    name="circles"
-                    type="circle"
-                    source="arranjos_potenciais-center"
-                    sourceLayer="label_arranjos_potenciais"
-                    circle-color="#000000"
-                    :circle-radius="12"
-                    :circle-opacity="0.7"
-                    :z-index="23"
-       
-                  />
-                 <vm-layer
-                    name="circles"
-                    type="circle"
-                    source="arranjos_potenciais-center"
-                    sourceLayer="label_arranjos_potenciais"
-                    circle-color="#000000"
-                    :circle-radius="12"
-                    :circle-opacity="0.7"
-                    :z-index="23"
-       
-                  >
-                   
-                <template #popupClick="{features}">
-                      <pre>{{features[0].properties}}</pre>
-                </template>
-                 </vm-layer>
-
                   <vmLayer name="myLayer"
-                        source="painel_solucao_compartilhada_solucao_info"
-                        sourceLayer="painel_solucao_compartilhada_solucao_info"
+                        :source="{
+                              type:'vector',
+                              id:'arranjos_potenciais-center',
+                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_municipio_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
+                              minzoom: 0,
+                              maxzoom: 24
+                        }"
+                        sourceLayer="sinir_municipio_base"
                         type="fill"
-                        :paint="{ 'fill-color': fill, 'fill-opacity': 0.6, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
+                        :paint="{ 'fill-color': fill, 'fill-opacity': 0.1, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
                         multipleFeatureSelectionOn="alt"
+                        >
 
+                       <template v-slot:popupHover>
+                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
+                        </template>
+
+                        <template v-slot:popupClick="slotProps">
+                          <VmPopup max-width="400px">
+                               <pre>{{ slotProps.features && slotProps.features[0] && slotProps.features[0].properties }}</pre>
+                              <h6>Here goes the pop up content while in <b>CLICK</b> a Feature.</h6>
+                          </VmPopup>
+                        </template>
+
+                 </vmLayer>
+                  <vmLayer name="myLayer2"
+                        :source="{
+                              type:'vector',
+                              id:'arranjos_potenciais-center',
+                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_municipio_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
+                              minzoom: 0,
+                              maxzoom: 24
+                        }"
+                        sourceLayer="sinir_municipio_base"
+                        type="fill"
+                        :paint="{ 'fill-color': fill, 'fill-opacity': 0.1, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
+                        multipleFeatureSelectionOn="alt"
                         >
 
                        <template v-slot:popupHover>
@@ -101,7 +93,6 @@
                       sourcePosition="geomOrigem"
                       targetPosition="geomDestino"
                     />
-
 
       </VueMapbox>
 
@@ -770,6 +761,9 @@ export default {
     },
     featureenter: function (e) {
       console.log(e)
+    },
+    loaded: function (a, b) {
+      window.map = b
     }
   }
 }

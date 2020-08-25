@@ -50,6 +50,7 @@ export default {
       type: String,
       default: ''
     },
+
     /**
        Type of the Layer.
        @values "fill", "line", "symbol", "circle", "heatmap", "fill-extrusion", "raster", "hillshade", "background".
@@ -589,7 +590,6 @@ export default {
 
   created: function () {
     this.popupOpen = false
-
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
       const source = this.getSource && this.getSource()
@@ -597,6 +597,21 @@ export default {
         options.source = source.id
       }
     }
+
+
+    // if source is object, we create create the source apart,
+    // because if layers have the source id set for layer, we will use a unique one
+    // TODO - verify all source options are equal to make sure of it
+    if (options?.source?.constructor?.name === 'Object') {
+      const sourceid = options.source?.id || options.source?.name
+      if (sourceid) { 
+        if (this.MapboxVueInstance.getSource(sourceid) === false) {
+          this.MapboxVueInstance.addSource(sourceid, options.source.type, { ...options.source })
+        }
+        options.source = sourceid
+      }
+    }
+
     this.options = options
 
     if (this.type === 'custom') {
@@ -607,10 +622,10 @@ export default {
         if (this.getMap().getSource(this.options.source)) {
           this.addLayer()
         } else {
-          // add layer when a source with name is added
+          // add layer when a source with name is added in future
           const func = (e) => {
             console.log(e)
-            if (e.dataType == 'source' && e.sourceId === this.options.source) {
+            if (e.dataType === 'source' && e.sourceId === this.options.source) {
               this.addLayer()
               this.getMap().off('sourcedata', func)
             }
@@ -618,6 +633,7 @@ export default {
           this.getMap().on('sourcedata', func)
         }
       } else {
+        // TODO - pretty sure not used, remove in future
         this.addLayer()
       }
     }
@@ -655,6 +671,7 @@ export default {
           const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
           this.layerId = mylayer
         } else {
+          debugger
           const id = this.MapboxVueInstance.getNewIdForLayer(this.name)
           const mylayer = this.MapboxVueInstance.addLayer({ ...this.options, id: id, type: this.type, paint: this.myPaint, layout: this.myLayout })
           this.layerId = mylayer
@@ -871,7 +888,7 @@ export default {
             expression = ['step', ['to-number', ['get', property]]]
             propertiesInClasses.forEach((classe, i) => {
               expression.push(get(classe, paintKey))
-              if(classe.value) expression.push(classe.value)
+              if (classe.value) expression.push(classe.value)
             })
 
           // INTERPOLATE VALUES
@@ -879,7 +896,7 @@ export default {
             if (prop.match(/color/g)) { // check if is color
               expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', property]]]
             } else {
-              expression = ['interpolate', ['linear'], ['to-number', ['get', property]] ]
+              expression = ['interpolate', ['linear'], ['to-number', ['get', property]]]
             }
             propertiesInClasses.forEach((classe, i) => {
               expression.push(classe.value)

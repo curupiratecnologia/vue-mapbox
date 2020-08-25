@@ -27,6 +27,14 @@ export default {
       default: '',
       required: true
     },
+    /*
+    * If unique, check if a source with that name exist. If exist, we will use it, and not generate a new one
+    */
+    unique: {
+      type: Boolean,
+      default: false
+    },
+
     /**
        Type of the Source.
        @values vector, raster, raster-dem, geojson, image, video, canvas
@@ -68,7 +76,11 @@ export default {
 
   created: function () {
     const options = { ...this.$props.options }
-    this.source = this.MapboxVueInstance.addSource(this.name, this.type, options)
+    if (this.unique && this.MapboxVueInstance().getSource(this.name)) {
+      this.source = this.MapboxVueInstance().getSource(this.name)
+    } else {
+      this.source = this.MapboxVueInstance.addSource(this.name, this.type, options)
+    }
   },
 
   methods: {

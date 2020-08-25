@@ -404,6 +404,7 @@ export default {
     * Create/Update Source
     */
     addSource: function (id, type, options) {
+
       // if source name exist, create a randow one
       if (this.map.getSource(id)) {
         id = uniqueId(id + type)
@@ -414,6 +415,14 @@ export default {
 
       this.sources.set(id, { id, type, options, instance: sourceObject })
       return this.sources.get(id)
+    },
+
+    getSource: function (id) {
+      // if source name exist, create a randow one
+      if (this.sources.has(id)) {
+        return this.sources.get(id)
+      }
+      return false
     },
 
     /**
