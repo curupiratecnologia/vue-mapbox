@@ -93,6 +93,13 @@ export default {
       type: Number
     },
     /**
+     *  With hideOnOpacity, when opacity is 0, the visibilit of layer will be hidden, else, will be show
+     */
+    hideOnOpacity: {
+      type: Boolean,
+      default: true
+    },
+    /**
        (Dynamic) Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance.
       */
     filter: {
@@ -478,22 +485,42 @@ export default {
         paint = this.getFinalFeatureStateForPaintOrLayout(paint, this.paintHover, this.paintClick)
       }
 
-      if (!opacity) return paint
+      if (opacity === undefined || opacity === null) return paint
 
       // now check for scale opacity
-      Object.entries(paint).forEach((item) => {
-        const key = item[0]
-        const value = item[1]
+
+      // get all the opacity props for the paint/layout
+      // properties for this type of layer
+      const opacityForKind = []
+      Object.entries(this.$options.props).forEach((prop) => {
+        const key = kebabCase(prop[0])
+        const value = prop[1]
+        if (get(value, 'paint') && get(value, 'layerType') === this.type) {
+          if (key.indexOf('opacity') !== -1) {
+            opacityForKind.push(key)
+          // propertiesForKind.push(kebabCase(key) + '-transition')
+          }
+        }
+      })
+
+      opacityForKind.forEach((key) => {
+        if (!paint[key]) {
+          paint[key] = opacity
+          return
+        }
+        const value = paint[key]
         if (key.indexOf('opacity') !== -1) {
           if (value?.constructor?.name === 'Number') {
             paint[key] = value * opacity
           } else if (Array.isArray(value)) { // an expression
-            // treat interpolate and step diferent because they
-            // usually use zoom as input, and zoom input only work in toplevel
-            if (value?.[0] === 'interpolate') {
-              // TODO -
-            } else if (value?.[0] === 'step') {
-
+            // treat interpolate and step diferent because the usually use zoom as input, and zoom input only work in toplevel
+            const exprType = value?.[0]
+            if (exprType === 'interpolate' || exprType === 'step') {
+              const exprStart = (exprType === 'interpolate') ? value.splice(0, 4) : value.splice(0, 2)
+              for (let i = 0; i < value.length; i += 2) {
+                value[i] *= opacity
+              }
+              paint[key] = exprStart.concat(value)
             } else {
               paint[key] = ['*', [...value], opacity]
             }
@@ -505,9 +532,18 @@ export default {
     },
 
     myLayout: function () {
-      const layout = this.mountPaintLayoutObject('layout')
+      let layout = this.mountPaintLayoutObject('layout')
       if (this.hasFeatureHover || this.hasFeatureClick) {
-        return this.getFinalFeatureStateForPaintOrLayout(layout, this.layoutHover, this.layoutClick)
+        layout = this.getFinalFeatureStateForPaintOrLayout(layout, this.layoutHover, this.layoutClick)
+      }
+      const opacity = this.opacity
+
+      if (opacity === undefined || opacity === null) return layout
+      if (opacity === 0 && this.hideOnOpacity) {
+        layout.visibility = 'none'
+
+      } else if (!layout.visibility) {// just set visible if i dont have, so respect the input
+        layout.visibility = 'visible'
       }
       return layout
     },
@@ -535,7 +571,7 @@ export default {
       }
     },
 
-    maxzom: function (val) {
+    maxzoom: function (val) {
       if (this.layerExist()) {
         this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom)
       }

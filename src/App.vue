@@ -46,13 +46,15 @@
                         }"
                         sourceLayer="sinir_estado_base"
                         type="fill"
+                        :opacity="Number(opacity)"
+                        :hideOnOpacity="true"
                         :paint="{ 'fill-color': fill, 
-                        'fill-opacity': ['*', ['interpolate',['linear'],['zoom'],3.5,0.1,5,1], 1]
+                        'fill-opacity': ['interpolate',['linear'],['zoom'],3.5,0.1,5,1]
                          }"
 
                         multipleFeatureSelectionOn="alt"
                         >
-                        <!-- :opacity="Number(opacity)" -->
+                        <!--  -->
 
                        <template v-slot:popupHover>
                               <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>

@@ -57804,6 +57804,14 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     },
 
     /**
+     *  With hideOnOpacity, when opacity is 0, the visibilit of layer will be hidden, else, will be show
+     */
+    hideOnOpacity: {
+      type: Boolean,
+      default: true
+    },
+
+    /**
        (Dynamic) Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance.
       */
     filter: {
@@ -58434,6 +58442,8 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
   },
   computed: {
     myPaint: function myPaint() {
+      var _this = this;
+
       var paint = this.mountPaintLayoutObject('paint');
       var opacity = this.opacity; // const paintHover = this.mountPaintLayoutObject('paint-hover')
       // const paintClick = this.mountPaintLayoutObject('paint-click')
@@ -58442,11 +58452,28 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
         paint = this.getFinalFeatureStateForPaintOrLayout(paint, this.paintHover, this.paintClick);
       }
 
-      if (!opacity) return paint; // now check for scale opacity
+      if (opacity === undefined || opacity === null) return paint; // now check for scale opacity
+      // get all the opacity props for the paint/layout
+      // properties for this type of layer
 
-      Object.entries(paint).forEach(function (item) {
-        var key = item[0];
-        var value = item[1];
+      var opacityForKind = [];
+      Object.entries(this.$options.props).forEach(function (prop) {
+        var key = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_27___default()(prop[0]);
+        var value = prop[1];
+
+        if (lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(value, 'paint') && lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(value, 'layerType') === _this.type) {
+          if (key.indexOf('opacity') !== -1) {
+            opacityForKind.push(key); // propertiesForKind.push(kebabCase(key) + '-transition')
+          }
+        }
+      });
+      opacityForKind.forEach(function (key) {
+        if (!paint[key]) {
+          paint[key] = opacity;
+          return;
+        }
+
+        var value = paint[key];
 
         if (key.indexOf('opacity') !== -1) {
           var _value$constructor;
@@ -58455,10 +58482,18 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
             paint[key] = value * opacity;
           } else if (Array.isArray(value)) {
             // an expression
-            // treat interpolate and step diferent because they
-            // usually use zoom as input, and zoom input only work in toplevel
-            if ((value === null || value === void 0 ? void 0 : value[0]) === 'interpolate') {// TODO -
-            } else if ((value === null || value === void 0 ? void 0 : value[0]) === 'step') {} else {
+            // treat interpolate and step diferent because the usually use zoom as input, and zoom input only work in toplevel
+            var exprType = value === null || value === void 0 ? void 0 : value[0];
+
+            if (exprType === 'interpolate' || exprType === 'step') {
+              var exprStart = exprType === 'interpolate' ? value.splice(0, 4) : value.splice(0, 2);
+
+              for (var i = 0; i < value.length; i += 2) {
+                value[i] *= opacity;
+              }
+
+              paint[key] = exprStart.concat(value);
+            } else {
               paint[key] = ['*', Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_18__["default"])(value), opacity];
             }
           }
@@ -58470,7 +58505,17 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       var layout = this.mountPaintLayoutObject('layout');
 
       if (this.hasFeatureHover || this.hasFeatureClick) {
-        return this.getFinalFeatureStateForPaintOrLayout(layout, this.layoutHover, this.layoutClick);
+        layout = this.getFinalFeatureStateForPaintOrLayout(layout, this.layoutHover, this.layoutClick);
+      }
+
+      var opacity = this.opacity;
+      if (opacity === undefined || opacity === null) return layout;
+
+      if (opacity === 0 && this.hideOnOpacity) {
+        layout.visibility = 'none';
+      } else if (!layout.visibility) {
+        // just set visible if i dont have, so respect the input
+        layout.visibility = 'visible';
       }
 
       return layout;
@@ -58493,58 +58538,58 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
         this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom);
       }
     },
-    maxzom: function maxzom(val) {
+    maxzoom: function maxzoom(val) {
       if (this.layerExist()) {
         this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom);
       }
     },
     zIndex: function zIndex(val) {
-      var _this = this;
+      var _this2 = this;
 
       console.log(val);
       this.$nextTick(function () {
-        return _this.MapboxVueInstance.updateLayerOrder();
+        return _this2.MapboxVueInstance.updateLayerOrder();
       });
     },
     filter: function filter(val) {
       this.getMap().setFilter(this.layerId, val);
     },
     myPaint: function myPaint(newPaint, oldPaint) {
-      var _this2 = this;
+      var _this3 = this;
 
       Object.entries(newPaint).forEach(function (item) {
         var key = item[0];
         var value = item[1];
 
         if (JSON.stringify(value) !== JSON.stringify(oldPaint[key])) {
-          if (_this2.layerExist()) {
-            _this2.getMap().setPaintProperty(_this2.layerId, key, value);
+          if (_this3.layerExist()) {
+            _this3.getMap().setPaintProperty(_this3.layerId, key, value);
           }
         }
       });
     },
     myLayout: function myLayout(newLayout, oldLayout) {
-      var _this3 = this;
+      var _this4 = this;
 
       Object.entries(newLayout).forEach(function (item) {
         var key = item[0];
         var value = item[1];
 
         if (JSON.stringify(value) !== JSON.stringify(oldLayout[key])) {
-          if (_this3.layerExist()) {
-            _this3.getMap().setLayoutProperty(_this3.layerId, key, value);
+          if (_this4.layerExist()) {
+            _this4.getMap().setLayoutProperty(_this4.layerId, key, value);
           }
         }
       });
     },
     selectedFeatures: function selectedFeatures(val, oldVal) {
-      var _this4 = this;
+      var _this5 = this;
 
       var map = this.getMap();
       oldVal.forEach(function (feature) {
         map.setFeatureState({
-          source: _this4.sourceId,
-          sourceLayer: _this4.sourceLayer,
+          source: _this5.sourceId,
+          sourceLayer: _this5.sourceLayer,
           id: feature.id
         }, {
           click: false
@@ -58552,8 +58597,8 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       });
       val.forEach(function (feature) {
         map.setFeatureState({
-          source: _this4.sourceId,
-          sourceLayer: _this4.sourceLayer,
+          source: _this5.sourceId,
+          sourceLayer: _this5.sourceLayer,
           id: feature.id
         }, {
           click: true
@@ -58568,15 +58613,15 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       this.$emit('featureselect', val);
     },
     hoverFeatures: function hoverFeatures(val, oldVal) {
-      var _this5 = this;
+      var _this6 = this;
 
       var map = this.getMap();
 
       if (oldVal.length > 0) {
         oldVal.forEach(function (feature) {
           map.setFeatureState({
-            source: _this5.sourceId,
-            sourceLayer: _this5.sourceLayer,
+            source: _this6.sourceId,
+            sourceLayer: _this6.sourceLayer,
             id: feature.id
           }, {
             hover: false
@@ -58586,8 +58631,8 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
       val.forEach(function (feature) {
         map.setFeatureState({
-          source: _this5.sourceId,
-          sourceLayer: _this5.sourceLayer,
+          source: _this6.sourceId,
+          sourceLayer: _this6.sourceLayer,
           id: feature.id
         }, {
           hover: true
@@ -58605,7 +58650,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
   created: function created() {
     var _options$source,
         _options$source$const,
-        _this6 = this;
+        _this7 = this;
 
     this.popupOpen = false;
     var options = Object(_utils_getOnlyMapboxProps__WEBPACK_IMPORTED_MODULE_19__["default"])(this);
@@ -58649,10 +58694,10 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
           var func = function func(e) {
             console.log(e);
 
-            if (e.dataType === 'source' && e.sourceId === _this6.options.source) {
-              _this6.addLayer();
+            if (e.dataType === 'source' && e.sourceId === _this7.options.source) {
+              _this7.addLayer();
 
-              _this6.getMap().off('sourcedata', func);
+              _this7.getMap().off('sourcedata', func);
             }
           };
 
@@ -58809,7 +58854,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       this.hoverFeatures = [];
     },
     featureMouseClickEvent: function featureMouseClickEvent(e) {
-      var _this7 = this;
+      var _this8 = this;
 
       var features = this.getMap().queryRenderedFeatures(e.point); // if clicked in another top most layer, is like clicking outside this
 
@@ -58826,7 +58871,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
       if (e.features.length > 0) {
         e.features.forEach(function (feature) {
-          var selectedFeatureIndex = lodash_findIndex__WEBPACK_IMPORTED_MODULE_21___default()(_this7.selectedFeatures, {
+          var selectedFeatureIndex = lodash_findIndex__WEBPACK_IMPORTED_MODULE_21___default()(_this8.selectedFeatures, {
             id: feature.id
           });
 
@@ -58908,7 +58953,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     @params {string} kind - one of paint
     */
     mountPaintLayoutObject: function mountPaintLayoutObject(kind) {
-      var _this8 = this;
+      var _this9 = this;
 
       var propertiesForKind = []; // get all the props for the paint/layout
       // properties for this type of layer
@@ -58917,7 +58962,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
         var key = prop[0];
         var value = prop[1];
 
-        if (lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(value, kind) && lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(value, 'layerType') === _this8.type) {
+        if (lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(value, kind) && lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(value, 'layerType') === _this9.type) {
           propertiesForKind.push(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_27___default()(key));
           propertiesForKind.push(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_27___default()(key) + '-transition');
         }
@@ -58933,17 +58978,17 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
         var camelCaseKey = lodash_camelCase__WEBPACK_IMPORTED_MODULE_28___default()(paintKey);
         var paintValue;
 
-        if (lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(_this8, "$props[".concat(camelCaseKey, "]"))) {
-          paintValue = _this8.$props[camelCaseKey];
-        } else if (lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(_this8, "$attrs[".concat(camelCaseKey, "]"))) {
-          paintValue = _this8.$attrs[camelCaseKey];
+        if (lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(_this9, "$props[".concat(camelCaseKey, "]"))) {
+          paintValue = _this9.$props[camelCaseKey];
+        } else if (lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(_this9, "$attrs[".concat(camelCaseKey, "]"))) {
+          paintValue = _this9.$attrs[camelCaseKey];
         } else {
           paintValue = finalPaintLayout[paintKey];
         }
 
-        paintValue = _this8.innerExpressionConverter(paintValue); // check if we have this propertie set in classes props
+        paintValue = _this9.innerExpressionConverter(paintValue); // check if we have this propertie set in classes props
 
-        var propertiesInClasses = lodash_filter__WEBPACK_IMPORTED_MODULE_26___default()(_this8.classes, function (elm) {
+        var propertiesInClasses = lodash_filter__WEBPACK_IMPORTED_MODULE_26___default()(_this9.classes, function (elm) {
           return lodash_has__WEBPACK_IMPORTED_MODULE_23___default()(elm, paintKey);
         }); // get only the properties for  this type of layer
 
@@ -58953,20 +58998,20 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
           var property = propertiesInClasses[0].property; // MATCH VALUES
 
-          if (_this8.classesValueInterpolation === 'match') {
+          if (_this9.classesValueInterpolation === 'match') {
             expression = ['match', ['get', property]];
             propertiesInClasses.forEach(function (classe, i) {
-              expression.push(_this8.innerExpressionConverter(classe.value));
+              expression.push(_this9.innerExpressionConverter(classe.value));
               expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(classe, paintKey));
             });
             expression.push(paintValue || expression[expression.length - 1]); // STEP VALUES
-          } else if (_this8.classesValueInterpolation === 'step') {
+          } else if (_this9.classesValueInterpolation === 'step') {
             expression = ['step', ['to-number', ['get', property]]];
             propertiesInClasses.forEach(function (classe, i) {
               expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(classe, paintKey));
-              if (classe.value) expression.push(_this8.innerExpressionConverter(classe.value));
+              if (classe.value) expression.push(_this9.innerExpressionConverter(classe.value));
             }); // INTERPOLATE VALUES
-          } else if (_this8.classesValueInterpolation === 'interpolate') {
+          } else if (_this9.classesValueInterpolation === 'interpolate') {
             if (prop.match(/color/g)) {
               // check if is color
               expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', property]]];
@@ -58975,7 +59020,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
             }
 
             propertiesInClasses.forEach(function (classe, i) {
-              expression.push(_this8.innerExpressionConverter(classe.value));
+              expression.push(_this9.innerExpressionConverter(classe.value));
               expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(classe, paintKey));
             });
           }
@@ -59025,7 +59070,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     }
   },
   render: function render(h) {
-    var _this9 = this;
+    var _this10 = this;
 
     var emptyElm = null; // h('div')
 
@@ -59103,9 +59148,9 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
       var closeFunc = lodash_get__WEBPACK_IMPORTED_MODULE_24___default()(popupInstance, 'componentOptions.listeners.close');
       lodash_set__WEBPACK_IMPORTED_MODULE_25___default()(popupInstance.componentOptions, 'listeners.close', function (e) {
-        _this9.popupOpen = false;
-        _this9.selectedFeatures = [];
-        _this9.hoverFeatures = [];
+        _this10.popupOpen = false;
+        _this10.selectedFeatures = [];
+        _this10.hoverFeatures = [];
 
         if (closeFunc) {
           closeFunc(e);
