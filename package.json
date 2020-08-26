@@ -1,6 +1,6 @@
 {
   "name": "@curupira/vue-mapbox",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "main": "dist/vue-mapbox.umd.js",
   "module": "dist/vue-mapbox.umd.js",
   "private": false,
@@ -23,13 +23,13 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "serve:lib": "vue-cli-service build --target lib --name vue-mapbox src/library-entry.js --dest dist/ --watch",
+    "serve-lib": "vue-cli-service build --target lib --name vue-mapbox src/entry.js --dest dist/ --watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "styleguide": "vue-cli-service styleguidist",
     "styleguide:build": "vue-cli-service  styleguidist:build --verbose",
     "build-lib": "npm run build-lib:library",
-    "build-lib:library": "rm -rf dist/* && vue-cli-service build --target lib --name vue-mapbox src/entry.js --dest dist/"
+    "build-lib:library": "vue-cli-service build --target lib --name vue-mapbox src/entry.js --dest dist/"
   },
   "dependencies": {
     "@deck.gl/core": "^8.2.3",

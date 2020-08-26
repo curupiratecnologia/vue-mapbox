@@ -357,6 +357,18 @@ export default {
           this.camera = this.map.getZoom()
         })
       }
+
+      var idleOrder = () => {
+        this.map.once('idle', () => {
+          this.updateLayerOrder()
+          setTimeout(idleOrder, 500)
+        })
+      }
+      idleOrder()
+
+      this.map.on('moveend', () => {
+        this.updateLayerOrder()
+      })
     },
 
     getMap: function () {
@@ -404,7 +416,6 @@ export default {
     * Create/Update Source
     */
     addSource: function (id, type, options) {
-
       // if source name exist, create a randow one
       if (this.map.getSource(id)) {
         id = uniqueId(id + type)
@@ -441,7 +452,6 @@ export default {
     * Update Source
     */
     updateSource: function (sourceid, type, options) {
-      debugger
       if (this.sources.has(sourceid)) {
         this.sources.delete(sourceid)
       }

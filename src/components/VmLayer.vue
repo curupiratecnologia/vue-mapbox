@@ -85,6 +85,14 @@ export default {
       name: 'source-layer'
     },
     /**
+     *  A abstract scale to opacity.
+     *  if opacity is 1, it will use the layer opacity definition, if 0.5, it will reduce the current opacity in 50%.
+     * it is greate to control all opacity in one time
+     */
+    opacity: {
+      type: Number
+    },
+    /**
        (Dynamic) Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance.
       */
     filter: {
@@ -462,12 +470,37 @@ export default {
   computed: {
 
     myPaint: function () {
-      const paint = this.mountPaintLayoutObject('paint')
+      let paint = this.mountPaintLayoutObject('paint')
+      const opacity = this.opacity
       // const paintHover = this.mountPaintLayoutObject('paint-hover')
       // const paintClick = this.mountPaintLayoutObject('paint-click')
       if (this.hasFeatureHover || this.hasFeatureClick) {
-        return this.getFinalFeatureStateForPaintOrLayout(paint, this.paintHover, this.paintClick)
+        paint = this.getFinalFeatureStateForPaintOrLayout(paint, this.paintHover, this.paintClick)
       }
+
+      if (!opacity) return paint
+
+      // now check for scale opacity
+      Object.entries(paint).forEach((item) => {
+        const key = item[0]
+        const value = item[1]
+        if (key.indexOf('opacity') !== -1) {
+          if (value?.constructor?.name === 'Number') {
+            paint[key] = value * opacity
+          } else if (Array.isArray(value)) { // an expression
+            // treat interpolate and step diferent because they
+            // usually use zoom as input, and zoom input only work in toplevel
+            if (value?.[0] === 'interpolate') {
+              // TODO -
+            } else if (value?.[0] === 'step') {
+
+            } else {
+              paint[key] = ['*', [...value], opacity]
+            }
+          }
+        }
+      })
+
       return paint
     },
 
@@ -487,10 +520,12 @@ export default {
 
   watch: {
 
-    source: function (val) {
+    source: function (val, oldval) {
       if (typeof val === 'object') {
-        const source = this.getMap().getLayer(this.layerId).source
-        this.MapboxVueInstance.updateSource(source, val.type, { ...val })
+        if (JSON.stringify(val) !== JSON.stringify(oldval)) {
+          const source = this.getMap().getLayer(this.layerId).source
+          this.MapboxVueInstance.updateSource(source, val.type, { ...val })
+        }
       }
     },
 
@@ -598,13 +633,12 @@ export default {
       }
     }
 
-
     // if source is object, we create create the source apart,
     // because if layers have the source id set for layer, we will use a unique one
     // TODO - verify all source options are equal to make sure of it
     if (options?.source?.constructor?.name === 'Object') {
       const sourceid = options.source?.id || options.source?.name
-      if (sourceid) { 
+      if (sourceid) {
         if (this.MapboxVueInstance.getSource(sourceid) === false) {
           this.MapboxVueInstance.addSource(sourceid, options.source.type, { ...options.source })
         }
@@ -652,7 +686,8 @@ export default {
       this.MapboxVueInstance.removeLayer(this.layerId)
       // check if the source of layer is a Object/ownSource,and remove it too
       if (typeof this.source === 'object') {
-        this.getMap().removeSource(this.sourceId)
+        // TODO - not removing sourve because others can be using it, but make this logic better
+        // this.getMap().removeSource(this.sourceId)
       }
     }
   },
@@ -671,7 +706,6 @@ export default {
           const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
           this.layerId = mylayer
         } else {
-          debugger
           const id = this.MapboxVueInstance.getNewIdForLayer(this.name)
           const mylayer = this.MapboxVueInstance.addLayer({ ...this.options, id: id, type: this.type, paint: this.myPaint, layout: this.myLayout })
           this.layerId = mylayer
@@ -864,10 +898,12 @@ export default {
           paintValue = finalPaintLayout[paintKey]
         }
 
+        paintValue = this.innerExpressionConverter(paintValue)
+
         // check if we have this propertie set in classes props
         const propertiesInClasses = filter(this.classes, elm => has(elm, paintKey))
 
-        // get only the por
+        // get only the properties for  this type of layer
         if (propertiesInClasses.length > 0) {
           let expression = []
           /// TODO -  check type. string we will use mach, number we will use betweem??
@@ -878,7 +914,7 @@ export default {
           if (this.classesValueInterpolation === 'match') {
             expression = ['match', ['get', property]]
             propertiesInClasses.forEach((classe, i) => {
-              expression.push(classe.value)
+              expression.push(this.innerExpressionConverter(classe.value))
               expression.push(get(classe, paintKey))
             })
             expression.push(paintValue || expression[expression.length - 1])
@@ -888,7 +924,7 @@ export default {
             expression = ['step', ['to-number', ['get', property]]]
             propertiesInClasses.forEach((classe, i) => {
               expression.push(get(classe, paintKey))
-              if (classe.value) expression.push(classe.value)
+              if (classe.value) expression.push(this.innerExpressionConverter(classe.value))
             })
 
           // INTERPOLATE VALUES
@@ -899,7 +935,7 @@ export default {
               expression = ['interpolate', ['linear'], ['to-number', ['get', property]]]
             }
             propertiesInClasses.forEach((classe, i) => {
-              expression.push(classe.value)
+              expression.push(this.innerExpressionConverter(classe.value))
               expression.push(get(classe, paintKey))
             })
           }
@@ -912,6 +948,22 @@ export default {
         }
       })
       return finalPaintLayout
+    },
+
+    /*
+    * comver raw properties values with custom express,
+    like using ['z',4,6,2,5] -> ['interpolate', ['linear'], ['zoom'], 4,6,2,5]
+    */
+    innerExpressionConverter: function (value) {
+      if (Array.isArray(value)) {
+        if (value?.[0] === 'z') {
+          let valueFinal = [...value]
+          valueFinal.shift()
+          valueFinal = ['interpolate', ['linear'], ['zoom'], ...valueFinal]
+          return valueFinal
+        }
+      }
+      return value
     },
 
     docEvents: function () {

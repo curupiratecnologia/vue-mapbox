@@ -2,46 +2,25 @@
   <div id="app">
     <center>
       <VueMapbox
+      key="mapbox"
       ref="vuemapbox"
       @load="loaded"
       hash="pos"
-       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
+      mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-           <!-- <vm-source
-                key="arranjos_potenciais-center"
-                name="arranjos_potenciais-center"
-                type='vector'
-                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/label/arranjos_potenciais/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 0, maxzoom: 24, }"
-                /> -->
-
-                   <!-- ARRANJOS -->
-            <!-- <vm-layer
-                  key="arranjos_potenciais-fill"
-                  name="arranjos_potenciais-fill"
-                  type="fill"
-                  source="arranjos_potenciais"
-                  sourceLayer="arranjos_potenciais"
-                  fill-color="#5CEE89"
-                  :fill-opacity="0.6"
-                  :paint-hover="{'fill-opacity':1}"
-              >
-
-                <template #popupClick="{features}">
-                      <pre>{{features[0].properties}}</pre>
-                </template>
-              </vm-layer> -->
-
-                  <vmLayer name="myLayer"
+<!--                 
+                  <vmLayer name="myLayer2"
                         :source="{
                               type:'vector',
                               id:'arranjos_potenciais-center',
-                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_municipio_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
+                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_estado_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
                               minzoom: 0,
                               maxzoom: 24
                         }"
-                        sourceLayer="sinir_municipio_base"
+                        sourceLayer="sinir_estado_base"
                         type="fill"
-                        :paint="{ 'fill-color': fill, 'fill-opacity': 0.1, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
+                        :opacity="Number(opacity)"
+                        :paint="{ 'fill-color': fill, 'fill-opacity': ['z', 3.5,0.1,5,1], 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
                         multipleFeatureSelectionOn="alt"
                         >
 
@@ -56,20 +35,24 @@
                           </VmPopup>
                         </template>
 
-                 </vmLayer>
+                 </vmLayer> -->
                   <vmLayer name="myLayer2"
                         :source="{
                               type:'vector',
                               id:'arranjos_potenciais-center',
-                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_municipio_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
+                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_estado_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
                               minzoom: 0,
                               maxzoom: 24
                         }"
-                        sourceLayer="sinir_municipio_base"
+                        sourceLayer="sinir_estado_base"
                         type="fill"
-                        :paint="{ 'fill-color': fill, 'fill-opacity': 0.1, 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
+                        :paint="{ 'fill-color': fill, 
+                        'fill-opacity': ['*', ['interpolate',['linear'],['zoom'],3.5,0.1,5,1], 1]
+                         }"
+
                         multipleFeatureSelectionOn="alt"
                         >
+                        <!-- :opacity="Number(opacity)" -->
 
                        <template v-slot:popupHover>
                               <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
@@ -131,8 +114,8 @@
       </VueMapbox> -->
 
     </center>
-
-    ano <input type="text" v-model="ano">
+      <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
+  
     fill <input type="text" v-model="fill">
 
   </div>
@@ -146,6 +129,7 @@ export default {
   name: 'App',
   data () {
     return {
+      opacity: 1,
       show: true,
       center: [-45, -15],
       drag: false,
