@@ -15,7 +15,10 @@
     "mapbox",
     "vue"
   ],
-  "files":["dist/*","src/**/*"],
+  "files": [
+    "dist/*",
+    "src/**/*"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -38,7 +41,7 @@
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.2",
     "core-js": "^3.6.4",
-    "mapbox-gl": "^1.10.0",
+    "mapbox-gl": "^1.12.0",
     "vue": "^2.6.11",
     "vue-static": "0.0.5"
   },

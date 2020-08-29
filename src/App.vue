@@ -36,7 +36,7 @@
                         </template>
 
                  </vmLayer> -->
-                  <vmLayer name="myLayer2"
+                  <!-- <vmLayer name="myLayer2"
                         :source="{
                               type:'vector',
                               id:'arranjos_potenciais-center',
@@ -46,15 +46,13 @@
                         }"
                         sourceLayer="sinir_estado_base"
                         type="fill"
-                        :opacity="Number(opacity)"
-                        :hideOnOpacity="true"
-                        :paint="{ 'fill-color': fill, 
-                        'fill-opacity': ['interpolate',['linear'],['zoom'],3.5,0.1,5,1]
-                         }"
+                        :paint="{ 'fill-color': fill, 'fill-opacity': ['z', 3.5,0.1,5,1]  }"
 
+                        :paint-hover="{  'fill-opacity': 1  }"
+                        color-hover="#FF0044"                       
                         multipleFeatureSelectionOn="alt"
+                        :opacity="Number(opacity)"
                         >
-                        <!--  -->
 
                        <template v-slot:popupHover>
                               <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
@@ -67,7 +65,15 @@
                           </VmPopup>
                         </template>
 
-                 </vmLayer>
+                 </vmLayer> -->
+
+
+                        <vm-source
+                key="painel_solucao_compartilhada_municipio"
+                name="painel_solucao_compartilhada_municipio"
+                type='vector'
+                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/painel_solucao_compartilhada_municipio/{z}/{x}/{y}.mvt?ano_referencia=2018`], minzoom: 0, maxzoom: 24, }"
+        />
 
                   <vmLayerArc
                       name="arcLayer"
@@ -78,6 +84,67 @@
                       sourcePosition="geomOrigem"
                       targetPosition="geomDestino"
                     />
+
+
+
+
+        <vm-layer
+              key="municipio-disposicao-final2"
+              name="municipio-disposicao-final2"
+              type="fill"
+              source="painel_solucao_compartilhada_municipio"
+              sourceLayer="painel_solucao_compartilhada_municipio"
+              :fill-opacity="['z', 3, 0.1, 4, 0.8]"
+              :fill-opacity-hover="['z', 3, 0.5, 4, 0.9]"
+              :paint-hover="{'fill-opacity':1}"
+              :paint="{
+                'color':'#0f329f'
+              }"
+              color-hover='#0f3290'
+              :opacity="Number(opacity)"
+             
+   
+            >
+              <!-- :fill-color='["case",[">=",["to-number", ["get","adequacao"]], 100],"#75fa4c","#ea3223"]' -->
+            <template #popupHover="slot">
+              <div>
+                  <pre>{{slot}}</pre>
+              </div>
+            </template>
+            <template #popupClick="slot">
+              <div>
+                  <pre>{{slot}}</pre>
+              </div>
+            </template>
+        </vm-layer>
+
+        <!-- <vm-layer
+              key="municipio-disposicao-final"
+              name="municipio-disposicao-final"
+              type="fill"
+              source="painel_solucao_compartilhada_municipio"
+              sourceLayer="painel_solucao_compartilhada_municipio"
+              :fill-opacity="0.8"
+              :paint-hover="{'fill-opacity':1}"
+              :paint="{
+                'color':'#ffff00'
+              }"
+              color-hover='#0f329f'
+              :opacity="Number(opacity)"
+             
+   
+            >
+            <template #popupHover="slot">
+              <div>
+                  <pre>{{slot}}</pre>
+              </div>
+            </template>
+            <template #popupClick="slot">
+              <div>
+                  <pre>{{slot}}</pre>
+              </div>
+            </template>
+        </vm-layer> -->
 
       </VueMapbox>
 

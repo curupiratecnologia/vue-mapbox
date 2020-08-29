@@ -10,15 +10,19 @@
 
 import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
 import findVNodeChildren from '../utils/findVNodeChildren'
-import findIndex from 'lodash/findIndex'
+import pickBy from 'lodash/pickBy'
 import VmPopup from './VmPopup'
 
 import has from 'lodash/has'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import filter from 'lodash/filter'
+import findIndex from 'lodash/findIndex'
 import kebabCase from 'lodash/kebabCase'
 import camelCase from 'lodash/camelCase'
+import startCase from 'lodash/startCase'
+
+import LAYER_PROPS from './LayerMapboxProps.js'
 
 const nativeEventsTypes = [
   'mousedown',
@@ -91,6 +95,27 @@ export default {
      */
     opacity: {
       type: Number
+    },
+    /**
+     *  A shorthand to set color, in any type.
+     * example, for layer type fill, will set fill-color, in circle, will set
+     */
+    color: {
+      type: String
+    },
+    /**
+     *  A shorthand to set color, in any type.
+     * example, for layer type fill, will set fill-color, in circle, will set
+     */
+    colorHover: {
+      type: String
+    },
+    /**
+     *  A shorthand to set color, in any type.
+     * example, for layer type fill, will set fill-color, in circle, will set
+     */
+    colorClick: {
+      type: String
     },
     /**
      *  With hideOnOpacity, when opacity is 0, the visibilit of layer will be hidden, else, will be show
@@ -213,255 +238,25 @@ export default {
         return ['shift', 'control', 'alt', true, false].indexOf(value) !== -1
       }
     },
-
-    'background-color': { paint: true, layerType: 'background' },
-
-    'background-opacity': { paint: true, layerType: 'background' },
-
-    'background-pattern': { paint: true, layerType: 'background' },
-
-    'fill-antialias': { paint: true, layerType: 'fill' },
-
-    'fill-color': { paint: true, layerType: 'fill' },
-
-    'fill-opacity': { paint: true, layerType: 'fill' },
-
-    'fill-outline-color': { paint: true, layerType: 'fill' },
-
-    'fill-pattern': { paint: true, layerType: 'fill' },
-
-    'fill-sort-key': { layout: true, layerType: 'fill' },
-
-    'fill-translate': { paint: true, layerType: 'fill' },
-
-    'fill-translate-anchor': { paint: true, layerType: 'fill' },
-
-    'line-blur': { paint: true, layerType: 'line' },
-
-    'line-cap': { layout: true, layerType: 'line' },
-
-    'line-color': { paint: true, layerType: 'line' },
-
-    'line-dasharray': { paint: true, layerType: 'line' },
-
-    'line-gap-width': { paint: true, layerType: 'line' },
-
-    'line-gradient': { paint: true, layerType: 'line' },
-
-    'line-join': { layout: true, layerType: 'line' },
-
-    'line-miter-limit': { layout: true, layerType: 'line' },
-
-    'line-offset': { paint: true, layerType: 'line' },
-
-    'line-opacity': { paint: true, layerType: 'line' },
-
-    'line-pattern': { paint: true, layerType: 'line' },
-
-    'line-round-limit': { layout: true, layerType: 'line' },
-
-    'line-sort-key': { layout: true, layerType: 'line' },
-
-    'line-translate': { paint: true, layerType: 'line' },
-
-    'line-translate-anchor': { paint: true, layerType: 'line' },
-
-    'line-width': { paint: true, layerType: 'line' },
-
-    'icon-allow-overlap': { layout: true, layerType: 'symbol' },
-
-    'icon-anchor': { layout: true, layerType: 'symbol' },
-
-    'icon-color': { paint: true, layerType: 'symbol' },
-
-    'icon-halo-blur': { paint: true, layerType: 'symbol' },
-
-    'icon-halo-color': { paint: true, layerType: 'symbol' },
-
-    'icon-halo-width': { paint: true, layerType: 'symbol' },
-
-    'icon-ignore-placement': { layout: true, layerType: 'symbol' },
-
-    'icon-image': { layout: true, layerType: 'symbol' },
-
-    'icon-keep-upright': { layout: true, layerType: 'symbol' },
-
-    'icon-offset': { layout: true, layerType: 'symbol' },
-
-    'icon-opacity': { paint: true, layerType: 'symbol' },
-
-    'icon-optional': { layout: true, layerType: 'symbol' },
-
-    'icon-padding': { layout: true, layerType: 'symbol' },
-
-    'icon-pitch-alignment': { layout: true, layerType: 'symbol' },
-
-    'icon-rotate': { layout: true, layerType: 'symbol' },
-
-    'icon-rotation-alignment': { layout: true, layerType: 'symbol' },
-
-    'icon-size': { layout: true, layerType: 'symbol' },
-
-    'icon-text-fit': { layout: true, layerType: 'symbol' },
-
-    'icon-text-fit-padding': { layout: true, layerType: 'symbol' },
-
-    'icon-translate': { paint: true, layerType: 'symbol' },
-
-    'icon-translate-anchor': { paint: true, layerType: 'symbol' },
-
-    'symbol-avoid-edges': { layout: true, layerType: 'symbol' },
-
-    'symbol-placement': { layout: true, layerType: 'symbol' },
-
-    'symbol-sort-key': { layout: true, layerType: 'symbol' },
-
-    'symbol-spacing': { layout: true, layerType: 'symbol' },
-
-    'symbol-z-order': { layout: true, layerType: 'symbol' },
-
-    'text-allow-overlap': { layout: true, layerType: 'symbol' },
-
-    'text-anchor': { layout: true, layerType: 'symbol' },
-
-    'text-color': { paint: true, layerType: 'symbol' },
-
-    'text-field': { layout: true, layerType: 'symbol' },
-
-    'text-font': { layout: true, layerType: 'symbol' },
-
-    'text-halo-blur': { paint: true, layerType: 'symbol' },
-
-    'text-halo-color': { paint: true, layerType: 'symbol' },
-
-    'text-halo-width': { paint: true, layerType: 'symbol' },
-
-    'text-ignore-placement': { layout: true, layerType: 'symbol' },
-
-    'text-justify': { layout: true, layerType: 'symbol' },
-
-    'text-keep-upright': { layout: true, layerType: 'symbol' },
-
-    'text-letter-spacing': { layout: true, layerType: 'symbol' },
-
-    'text-line-height': { layout: true, layerType: 'symbol' },
-
-    'text-max-angle': { layout: true, layerType: 'symbol' },
-
-    'text-max-width': { layout: true, layerType: 'symbol' },
-
-    'text-offset': { layout: true, layerType: 'symbol' },
-
-    'text-opacity': { paint: true, layerType: 'symbol' },
-
-    'text-optional': { layout: true, layerType: 'symbol' },
-
-    'text-padding': { layout: true, layerType: 'symbol' },
-
-    'text-pitch-alignment': { layout: true, layerType: 'symbol' },
-
-    'text-radial-offset': { layout: true, layerType: 'symbol' },
-
-    'text-rotate': { layout: true, layerType: 'symbol' },
-
-    'text-rotation-alignment': { layout: true, layerType: 'symbol' },
-
-    'text-size': { layout: true, layerType: 'symbol' },
-
-    'text-transform': { layout: true, layerType: 'symbol' },
-
-    'text-translate': { paint: true, layerType: 'symbol' },
-
-    'text-translate-anchor': { paint: true, layerType: 'symbol' },
-
-    'text-variable-anchor': { layout: true, layerType: 'symbol' },
-
-    'text-writing-mode': { layout: true, layerType: 'symbol' },
-
-    'raster-brightness-max': { paint: true, layerType: 'raster' },
-
-    'raster-brightness-min': { paint: true, layerType: 'raster' },
-
-    'raster-contrast': { paint: true, layerType: 'raster' },
-
-    'raster-fade-duration': { paint: true, layerType: 'raster' },
-
-    'raster-hue-rotate': { paint: true, layerType: 'raster' },
-
-    'raster-opacity': { paint: true, layerType: 'raster' },
-
-    'raster-resampling': { paint: true, layerType: 'raster' },
-
-    'raster-saturation': { paint: true, layerType: 'raster' },
-
-    'circle-blur': { paint: true, layerType: 'circle' },
-
-    'circle-color': { paint: true, layerType: 'circle' },
-
-    'circle-opacity': { paint: true, layerType: 'circle' },
-
-    'circle-pitch-alignment': { paint: true, layerType: 'circle' },
-
-    'circle-pitch-scale': { paint: true, layerType: 'circle' },
-
-    'circle-radius': { paint: true, layerType: 'circle' },
-
-    'circle-sort-key': { layout: true, layerType: 'circle' },
-
-    'circle-stroke-color': { paint: true, layerType: 'circle' },
-
-    'circle-stroke-opacity': { paint: true, layerType: 'circle' },
-
-    'circle-stroke-width': { paint: true, layerType: 'circle' },
-
-    'circle-translate': { paint: true, layerType: 'circle' },
-
-    'circle-translate-anchor': { paint: true, layerType: 'circle' },
-
-    'fill-extrusion-base': { paint: true, layerType: 'fill-extrusion' },
-
-    'fill-extrusion-color': { paint: true, layerType: 'fill-extrusion' },
-
-    'fill-extrusion-height': { paint: true, layerType: 'fill-extrusion' },
-
-    'fill-extrusion-opacity': { paint: true, layerType: 'fill-extrusion' },
-
-    'fill-extrusion-pattern': { paint: true, layerType: 'fill-extrusion' },
-
-    'fill-extrusion-translate': { paint: true, layerType: 'fill-extrusion' },
-
-    'fill-extrusion-translate-anchor': { paint: true, layerType: 'fill-extrusion' },
-
-    'fill-extrusion-vertical-gradient': { paint: true, layerType: 'fill-extrusion' },
-
-    'heatmap-color': { paint: true, layerType: 'heatmap' },
-
-    'heatmap-intensity': { paint: true, layerType: 'heatmap' },
-
-    'heatmap-opacity': { paint: true, layerType: 'heatmap' },
-
-    'heatmap-radius': { paint: true, layerType: 'heatmap' },
-
-    'heatmap-weight': { paint: true, layerType: 'heatmap' },
-
-    'hillshade-accent-color': { paint: true, layerType: 'hillshade' },
-
-    'hillshade-exaggeration': { paint: true, layerType: 'hillshade' },
-
-    'hillshade-highlight-color': { paint: true, layerType: 'hillshade' },
-
-    'hillshade-illumination-anchor': { paint: true, layerType: 'hillshade' },
-
-    'hillshade-illumination-direction': { paint: true, layerType: 'hillshade' },
-
-    'hillshade-shadow-color': { paint: true, layerType: 'hillshade' },
-
-    visibility: { layout: true, layerType: 'all' }
+    /**
+    * array of values to join the features using setState
+    * so we can easy use it on expression or show in popup
+    */
+    dataJoin: {
+      type: [Array, String]
+    },
+    dataJoinKey: {
+      type: String,
+      default: 'id'
+    },
+
+    ...LAYER_PROPS
 
   },
 
   data () {
     return {
+      featureState:{},
       layerId: null,
       sourceId: null,
       selectedFeatures: [],
@@ -476,73 +271,48 @@ export default {
 
   computed: {
 
+    myPaintNormal: function () {
+      return this.getPaintLayoutForState('paint', '')
+    },
+    myPaintHover: function () {
+      return this.getPaintLayoutForState('paint', 'hover')
+    },
+    myPaintClick: function () {
+      return this.getPaintLayoutForState('paint', 'click')
+    },
+    myLayoutNormal: function () {
+      return this.getPaintLayoutForState('layout', '')
+    },
+    myLayoutHover: function () {
+      return this.getPaintLayoutForState('layout', 'hover')
+    },
+    myLayoutClick: function () {
+      return this.getPaintLayoutForState('layout', 'click')
+    },
+
     myPaint: function () {
-      let paint = this.mountPaintLayoutObject('paint')
-      const opacity = this.opacity
-      // const paintHover = this.mountPaintLayoutObject('paint-hover')
-      // const paintClick = this.mountPaintLayoutObject('paint-click')
+      let paint = this.myPaintNormal
+      const paintHover = this.myPaintHover
+      const paintClick = this.myPaintClick
       if (this.hasFeatureHover || this.hasFeatureClick) {
-        paint = this.getFinalFeatureStateForPaintOrLayout(paint, this.paintHover, this.paintClick)
+        paint = this.getFinalFeatureStateForPaintOrLayout(paint, paintHover, paintClick)
       }
-
-      if (opacity === undefined || opacity === null) return paint
-
-      // now check for scale opacity
-
-      // get all the opacity props for the paint/layout
-      // properties for this type of layer
-      const opacityForKind = []
-      Object.entries(this.$options.props).forEach((prop) => {
-        const key = kebabCase(prop[0])
-        const value = prop[1]
-        if (get(value, 'paint') && get(value, 'layerType') === this.type) {
-          if (key.indexOf('opacity') !== -1) {
-            opacityForKind.push(key)
-          // propertiesForKind.push(kebabCase(key) + '-transition')
-          }
-        }
-      })
-
-      opacityForKind.forEach((key) => {
-        if (!paint[key]) {
-          paint[key] = opacity
-          return
-        }
-        const value = paint[key]
-        if (key.indexOf('opacity') !== -1) {
-          if (value?.constructor?.name === 'Number') {
-            paint[key] = value * opacity
-          } else if (Array.isArray(value)) { // an expression
-            // treat interpolate and step diferent because the usually use zoom as input, and zoom input only work in toplevel
-            const exprType = value?.[0]
-            if (exprType === 'interpolate' || exprType === 'step') {
-              const exprStart = (exprType === 'interpolate') ? value.splice(0, 4) : value.splice(0, 2)
-              for (let i = 0; i < value.length; i += 2) {
-                value[i] *= opacity
-              }
-              paint[key] = exprStart.concat(value)
-            } else {
-              paint[key] = ['*', [...value], opacity]
-            }
-          }
-        }
-      })
-
       return paint
     },
 
     myLayout: function () {
-      let layout = this.mountPaintLayoutObject('layout')
+      let layout = this.myLayoutNormal
+      const layoutHover = this.myPaintHover
+      const layoutClick = this.myPaintClick
       if (this.hasFeatureHover || this.hasFeatureClick) {
-        layout = this.getFinalFeatureStateForPaintOrLayout(layout, this.layoutHover, this.layoutClick)
+        layout = this.getFinalFeatureStateForPaintOrLayout(layout, layoutHover, layoutClick)
       }
+      // check hideOnOpacitu
       const opacity = this.opacity
-
-      if (opacity === undefined || opacity === null) return layout
+      if (this.hideOnOpacity === false || opacity === undefined || opacity === null) return layout
       if (opacity === 0 && this.hideOnOpacity) {
         layout.visibility = 'none'
-
-      } else if (!layout.visibility) {// just set visible if i dont have, so respect the input
+      } else if (!layout.visibility) { // just set visible if i dont have, so respect the input
         layout.visibility = 'visible'
       }
       return layout
@@ -759,6 +529,8 @@ export default {
       }
     },
 
+    //* * EVENTS SETUP */
+
     setupLayerFeaturesEvents: function () {
       if (this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
         this.hasFeatureHover = true
@@ -824,7 +596,6 @@ export default {
 
     featureMouseClickEvent: function (e) {
       const features = this.getMap().queryRenderedFeatures(e.point)
-
       // if clicked in another top most layer, is like clicking outside this
       if (get(features, '[0].layer.id') !== this.layerId) {
         this.selectedFeatures = []
@@ -871,22 +642,42 @@ export default {
       }
     },
 
-    /**
-    * calculate the final paint o layout properties utiliing creating feature state 'hover' and 'click'
-    */
+    //* * PAINT AND LAYOUT SETUPS */
+
     getFinalFeatureStateForPaintOrLayout: function (normal, hover, click) {
       const result = { ...normal }
+
       if (this.hasFeatureHover || this.hasFeatureClick || this.hasChildPopup) {
         Object.entries(result).forEach((item) => {
           const key = item[0]
           const value = item[1]
           let pp = value
-          if (hover && hover[key]) {
-            pp = ['case', ['boolean', ['feature-state', 'hover'], false], hover[key], value]
+          // Check if we use zoom level, because it can be used only as tope level
+          // treat interpolate and step diferent because the usually use zoom as input, and zoom input only work in toplevel
+          if ((value?.[0] === 'interpolate' && value?.[2]?.[0] === 'zoom') || (value?.[0] === 'step' && value?.[1]?.[0] === 'zoom')) {
+            const exprType = value?.[0]
+            const exprStart = (exprType === 'interpolate') ? value.splice(0, 4) : value.splice(0, 2)
+
+            const opacity = this.opacity ?? 1
+            for (let i = 0; i < value.length; i += 2) {
+              value[i] *= opacity
+              if (hover && hover[key]) {
+                value[i] = ['case', ['boolean', ['feature-state', 'hover'], false], hover[key] * opacity, value[i]]
+              }
+              if (click && click[key]) {
+                value[i] = ['case', ['boolean', ['feature-state', 'click'], false], click[key] * opacity, value[i]]
+              }
+            }
+            pp = exprStart.concat(value)
+          } else {
+            if (hover && hover[key]) {
+              pp = ['case', ['boolean', ['feature-state', 'hover'], false], hover[key], value]
+            }
+            if (click && click[key]) {
+              pp = ['case', ['boolean', ['feature-state', 'click'], false], click[key], pp]
+            }
           }
-          if (click && click[key]) {
-            pp = ['case', ['boolean', ['feature-state', 'click'], false], click[key], pp]
-          }
+
           result[key] = pp
         })
       }
@@ -894,100 +685,162 @@ export default {
     },
 
     /**
-    Mount the fina paint/layout object utilizing the paint/layout properties,
-    classes etc
-
-    //TODO - number betweww
-           -  test fill-opacity
-    @params {string} kind - one of paint
+    Return all layout or paint set for this layer type, in a determinate state
+    /* @params kind | layout or paint
+    /* @params state | '', click or hover
     */
-    mountPaintLayoutObject: function (kind) {
-      const propertiesForKind = []
-      // get all the props for the paint/layout
-      // properties for this type of layer
-      Object.entries(this.$options.props).forEach((prop) => {
-        const key = prop[0]
-        const value = prop[1]
-        if (get(value, kind) && get(value, 'layerType') === this.type) {
-          propertiesForKind.push(kebabCase(key))
-          propertiesForKind.push(kebabCase(key) + '-transition')
+    getPaintLayoutForState: function (kind = 'paint', state = '') {
+      const allPaintLayout = this.getAllPaintLayoutForKind(kind)
+      const removeStateRegex = new RegExp('-' + state + '$', 'g')
+
+      // GET WHAT IS DEFINED VIA NORMAL PROP (paint, layout, paintHove...)
+      const paintLayoutObject = get(this.$props, kind + startCase(state), {})
+      let paintLayoutFinal = {}
+      Object.keys(paintLayoutObject).forEach((k) => {
+        const kConvert = this.innerPaintPropConvert(k)
+        paintLayoutFinal[kConvert] = this.innerExpressionConverter(paintLayoutObject[k])
+      })
+
+      // GET WHAT IS DEFINE LOOSELY IN PROPS (fill-color, fill-color-click .....)
+      Object.entries(this.$options.propsData).forEach(item => {
+        const key = this.innerPaintPropConvert(kebabCase(item[0]))
+        const value = item[1]
+        var keyNormalName = key.replace(removeStateRegex, '')
+        if ((state !== '' && key.indexOf('-' + state) > -1) && allPaintLayout.includes(keyNormalName)) {
+          paintLayoutFinal[keyNormalName] = this.innerExpressionConverter(value)
+        } else if (state === '' && allPaintLayout.includes(keyNormalName)) {
+          paintLayoutFinal[keyNormalName] = this.innerExpressionConverter(value)
         }
       })
 
-      const finalPaintLayout = this.$props[kind] || {}
-      Object.keys(finalPaintLayout).forEach((key) => {
-        if (propertiesForKind.includes(key) === false) {
-          delete finalPaintLayout[key]
-        }
-      })
+      // GET WHAT IS DEFINE VIA CLASSES ([fill-color: red, property:vl_name, value:'df',...])
+      // for each paint/layout props,
+      // check if we find it in the classe and mount a expression for it
+      allPaintLayout.forEach((plKey) => {
+        const plKeyState = plKey !== '' ? plKey + '-' + state : plKey
+        const classesElementsWithPL = filter(this.classes, elm => has(elm, plKeyState))
 
-      propertiesForKind.forEach((prop) => {
-        const paintKey = prop
-        const camelCaseKey = camelCase(paintKey)
-        let paintValue
-
-        if (get(this, `$props[${camelCaseKey}]`)) {
-          paintValue = this.$props[camelCaseKey]
-        } else if (get(this, `$attrs[${camelCaseKey}]`)) {
-          paintValue = this.$attrs[camelCaseKey]
-        } else {
-          paintValue = finalPaintLayout[paintKey]
-        }
-
-        paintValue = this.innerExpressionConverter(paintValue)
-
-        // check if we have this propertie set in classes props
-        const propertiesInClasses = filter(this.classes, elm => has(elm, paintKey))
-
-        // get only the properties for  this type of layer
-        if (propertiesInClasses.length > 0) {
+        if (classesElementsWithPL.length > 0) {
           let expression = []
-          /// TODO -  check type. string we will use mach, number we will use betweem??
-          // if (typeof get(propertiesInClasses[0], 'value') === 'string') {
-          const property = propertiesInClasses[0].property
+          const featureProperty = classesElementsWithPL[0].property // TODO maybe put state here too
 
           // MATCH VALUES
           if (this.classesValueInterpolation === 'match') {
-            expression = ['match', ['get', property]]
-            propertiesInClasses.forEach((classe, i) => {
-              expression.push(this.innerExpressionConverter(classe.value))
-              expression.push(get(classe, paintKey))
+            expression = ['match', ['get', featureProperty]]
+            classesElementsWithPL.forEach((classeElm, i) => {
+              expression.push(this.innerExpressionConverter(classeElm.value))
+              expression.push(get(classeElm, plKeyState))
             })
-            expression.push(paintValue || expression[expression.length - 1])
+            expression.push(paintLayoutFinal[plKey] || expression[expression.length - 1])
 
           // STEP VALUES
           } else if (this.classesValueInterpolation === 'step') {
-            expression = ['step', ['to-number', ['get', property]]]
-            propertiesInClasses.forEach((classe, i) => {
-              expression.push(get(classe, paintKey))
-              if (classe.value) expression.push(this.innerExpressionConverter(classe.value))
+            expression = ['step', ['to-number', ['get', featureProperty]]]
+            classesElementsWithPL.forEach((classeElm, i) => {
+              // TODO - i think need to test default value when is steped
+              expression.push(get(classeElm, plKeyState))
+              if (classeElm.value) expression.push(this.innerExpressionConverter(classeElm.value))
             })
 
           // INTERPOLATE VALUES
           } else if (this.classesValueInterpolation === 'interpolate') {
-            if (prop.match(/color/g)) { // check if is color
-              expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', property]]]
+            if (featureProperty.match(/color/g)) { // check if is color
+              expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', featureProperty]]]
             } else {
-              expression = ['interpolate', ['linear'], ['to-number', ['get', property]]]
+              expression = ['interpolate', ['linear'], ['to-number', ['get', featureProperty]]]
             }
-            propertiesInClasses.forEach((classe, i) => {
-              expression.push(this.innerExpressionConverter(classe.value))
-              expression.push(get(classe, paintKey))
+            classesElementsWithPL.forEach((classeElm, i) => {
+              expression.push(this.innerExpressionConverter(classeElm.value))
+              expression.push(get(classeElm, plKeyState))
             })
           }
-
-          paintValue = expression
-        }
-        // }
-        if (paintValue) {
-          finalPaintLayout[paintKey] = paintValue
+          paintLayoutFinal[this.innerPaintPropConvert(plKey)] = expression
         }
       })
-      return finalPaintLayout
+
+      // Zoom expression not work in hover or click states
+      // it is a limitation of mapbox zoom only work as top level exp,
+      // and if we set ir in phover or click, it will be uset in secundary moments
+      if (state !== '') {
+        Object.entries(paintLayoutFinal).forEach((item) => {
+          const key = item[0]
+          const value = item[1]
+          if (this.checkForZoomExp(value)) {
+            console.error('ZOOM expression can not be user in hover or click state due mapbox limitations. Default will be the last value')
+            paintLayoutFinal[key] = value[value.length - 1] // (value?.[0] === 'interpolate') ? value[value.length-1] : value?.[2] // default value if interpolate, or step
+          }
+        })
+      }
+
+      // OPACITY CHECK STEP
+      if (kind === 'paint') {
+        paintLayoutFinal = this.processPaintOpacity(paintLayoutFinal)
+      }
+
+      return { ...paintLayoutFinal }
     },
 
-    /*
-    * comver raw properties values with custom express,
+    /** Treat opacity scale
+    * opacity is a especial case, wher we scale all opacity set witth this value
+    * opacity not set will be set to so we can fase a layout
+    */
+    processPaintOpacity: function (paint) {
+      const opacity = this.opacity
+      if (opacity === undefined || opacity === null) {
+        return paint
+      }
+
+      // get all the opacity props for the paint/layout
+      // properties for this type of layer
+      const allPaintProperties = this.getAllPaintLayoutForKind('paint')
+      const opacityProps = allPaintProperties.filter(key => key.indexOf('opacity') !== -1)
+
+      opacityProps.forEach((key) => {
+        if (!paint[key]) {
+          paint[key] = opacity
+          return
+        }
+        const value = paint[key]
+        if (value?.constructor?.name === 'Number') {
+          paint[key] = value * opacity
+        } else if (Array.isArray(value)) { // an expression
+          //
+          if (this.checkForZoomExp(value)) {
+            const exprStart = (value[0] === 'interpolate') ? value.splice(0, 4) : value.splice(0, 2)
+            for (let i = 0; i < value.length; i += 2) {
+              value[i] *= opacity
+            }
+            paint[key] = exprStart.concat(value)
+          } else {
+            paint[key] = ['*', [...value], opacity]
+          }
+        }
+      })
+
+      return paint
+    },
+
+    /**
+    * Return all layout or paint that exist for this layer type
+    /* @params kind | layout or paint
+    */
+    getAllPaintLayoutForKind: function (kind) {
+      const propertiesForKind = ['color'] // user shorhand for color for all layer types
+      Object.entries(this.$options.props).forEach((prop) => {
+        const key = kebabCase(prop[0])
+        const value = prop[1]
+        if (get(value, kind) && get(value, 'layerType') === this.type) {
+          if (key.indexOf('-hover') === -1 && key.indexOf('-click') === -1) {
+            propertiesForKind.push(key)
+            // propertiesForKind.push(key + '-transition') //disable transition for now
+          }
+        }
+      })
+      return propertiesForKind
+    },
+
+    /**
+    * convert raw properties values with custom express,
     like using ['z',4,6,2,5] -> ['interpolate', ['linear'], ['zoom'], 4,6,2,5]
     */
     innerExpressionConverter: function (value) {
@@ -1000,6 +853,23 @@ export default {
         }
       }
       return value
+    },
+    /**
+    * convert generic key layouts props to the layer type,
+    like using color:#fffff -> fill-color: #fffff  if type fill
+    */
+    innerPaintPropConvert: function (prop) {
+      if (['color', 'color-hover', 'color-click'].includes(prop)) {
+        return this.type + '-' + prop
+      }
+      return prop
+    },
+
+    checkForZoomExp: function (exp) {
+      if ((exp?.[2]?.[0] === 'zoom') || (exp?.[1]?.[0] === 'zoom')) {
+        return true
+      }
+      return false
     },
 
     docEvents: function () {
