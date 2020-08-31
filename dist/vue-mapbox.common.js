@@ -1,14 +1,5 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["vue-mapbox"] = factory();
-	else
-		root["vue-mapbox"] = factory();
-})((typeof self !== 'undefined' ? self : this), function() {
-return /******/ (function(modules) { // webpackBootstrap
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
 /******/ 	function webpackJsonpCallback(data) {
 /******/ 		var chunkIds = data[0];
@@ -46,14 +37,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"vue-mapbox.umd": 0
+/******/ 		"vue-mapbox.common": 0
 /******/ 	};
 /******/
 /******/
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "vue-mapbox.umd." + ({"vendors~mapboxgl-core":"vendors~mapboxgl-core"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "vue-mapbox.common." + ({"vendors~mapboxgl-core":"vendors~mapboxgl-core"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -93516,5 +93507,4 @@ Function that calculate the current value from a zoom,value array
 /***/ })
 
 /******/ });
-});
-//# sourceMappingURL=vue-mapbox.umd.js.map
+//# sourceMappingURL=vue-mapbox.common.js.map

@@ -224,6 +224,7 @@ export default {
     },
 
     setupPopup: function () {
+      if(! this.popup) return
       if (this.open) {
         if (this.popup.isOpen() === false) { this.popup.addTo(this.getMap()) }
       } else {

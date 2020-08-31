@@ -8,7 +8,7 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-<!--                 
+<!--
                   <vmLayer name="myLayer2"
                         :source="{
                               type:'vector',
@@ -49,7 +49,7 @@
                         :paint="{ 'fill-color': fill, 'fill-opacity': ['z', 3.5,0.1,5,1]  }"
 
                         :paint-hover="{  'fill-opacity': 1  }"
-                        color-hover="#FF0044"                       
+                        color-hover="#FF0044"
                         multipleFeatureSelectionOn="alt"
                         :opacity="Number(opacity)"
                         >
@@ -67,7 +67,6 @@
 
                  </vmLayer> -->
 
-
                         <vm-source
                 key="painel_solucao_compartilhada_municipio"
                 name="painel_solucao_compartilhada_municipio"
@@ -75,7 +74,7 @@
                 :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/painel_solucao_compartilhada_municipio/{z}/{x}/{y}.mvt?ano_referencia=2018`], minzoom: 0, maxzoom: 24, }"
         />
 
-                  <vmLayerArc
+                  <!-- <vmLayerArc
                       name="arcLayer"
                       :data="fluxoFinal"
                       :witdh="10"
@@ -83,10 +82,7 @@
                       targetColor="corDestino"
                       sourcePosition="geomOrigem"
                       targetPosition="geomDestino"
-                    />
-
-
-
+                    /> -->
 
         <vm-layer
               key="municipio-disposicao-final2"
@@ -94,16 +90,12 @@
               type="fill"
               source="painel_solucao_compartilhada_municipio"
               sourceLayer="painel_solucao_compartilhada_municipio"
-              :fill-opacity="['z', 3, 0.1, 4, 0.8]"
-              :fill-opacity-hover="['z', 3, 0.5, 4, 0.9]"
-              :paint-hover="{'fill-opacity':1}"
               :paint="{
-                'color':'#0f329f'
+                'fill-color':['coalesce',  ['feature-state','color'], '#ff4400'  ]
               }"
               color-hover='#0f3290'
               :opacity="Number(opacity)"
-             
-   
+              :dataJoin="dataJoin"
             >
               <!-- :fill-color='["case",[">=",["to-number", ["get","adequacao"]], 100],"#75fa4c","#ea3223"]' -->
             <template #popupHover="slot">
@@ -118,6 +110,19 @@
             </template>
         </vm-layer>
 
+          <vmLayer name="myLayer"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        type="fill"
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
+                      
+                        :opacity="Number(opacity)"
+                        :hideOnOpacity="true"
+
+                />
+
         <!-- <vm-layer
               key="municipio-disposicao-final"
               name="municipio-disposicao-final"
@@ -131,8 +136,7 @@
               }"
               color-hover='#0f329f'
               :opacity="Number(opacity)"
-             
-   
+
             >
             <template #popupHover="slot">
               <div>
@@ -184,7 +188,7 @@
 
     </center>
       <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
-  
+
     fill <input type="text" v-model="fill">
 
   </div>
@@ -208,6 +212,10 @@ export default {
       fill: '#ff7700',
       dataSet: [100, 4, 7],
       ano: 2018,
+      dataJoin: [{ id: 4200101, color: '#ffffff' },
+        { id: 4109401, color: '#ffffff' },
+        { id: 5107305, color: '#ffffff' }
+      ],
 
       geojson1: {
         type: 'FeatureCollection',

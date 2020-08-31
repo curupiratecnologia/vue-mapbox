@@ -138,6 +138,7 @@ export default {
 
 
 
+
 ### Showing Popups when Features are Hover or Click
 
 
@@ -191,6 +192,67 @@ export default {
 }
 </script>
 ```
+
+
+
+
+
+
+### Opacity, fading/scaling all layer opacity/layer visibility
+
+We can set a **opacity** prop, that will scale all opacity properties of the current layer.
+It is a great way to fade a layer, without having to ajust every single property, like text-opacity, icon--opacity, etc. it will automatic scale all
+
+You can even set a **hideOnOpacity**, that when the opacity is 0, the layer visilibity is turn off (great way to not fire events or show popups when opacity is 0)
+
+
+```vue
+<template>
+      <div>
+      <VueMapbox v-once key="mymap3" mapStyle="mapbox://styles/mapbox/dark-v10" height="400px" width="100%" :center="[-47, -15]" :zoom="5">
+                <vmLayer name="myLayer3"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        type="fill"
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
+                        @featureselect="featureselect"
+                        :opacity="Number(opacity)"
+                        :hideOnOpacity="true"
+
+                />
+    </VueMapbox>
+    <br />
+       <input  type="range" min="0" max="1" step="0.05" v-model="opacity" >
+       {{ opacity }}
+  
+    </div>
+</template>
+<script>
+export default {
+  data() {
+    return { 
+      opacity:1,
+      features: false,
+      center: [-45, -15],
+    }
+  },
+  methods: {
+    featureselect:function( features ) {
+ 
+      if( Array.isArray(features) && features[0] && features[0].properties){
+        this.features = features[0].properties
+      }else{
+        this.features = false
+      }
+ 
+    }
+  }
+}
+</script>
+```
+
 
 
 

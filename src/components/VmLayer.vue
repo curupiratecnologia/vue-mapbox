@@ -22,6 +22,8 @@ import kebabCase from 'lodash/kebabCase'
 import camelCase from 'lodash/camelCase'
 import startCase from 'lodash/startCase'
 
+import axios from 'axios'
+
 import LAYER_PROPS from './LayerMapboxProps.js'
 
 const nativeEventsTypes = [
@@ -238,12 +240,21 @@ export default {
         return ['shift', 'control', 'alt', true, false].indexOf(value) !== -1
       }
     },
+
     /**
     * array of values to join the features using setState
-    * so we can easy use it on expression or show in popup
+    * so we can easy use it on expression or show in popup id
     */
     dataJoin: {
       type: [Array, String]
+    },
+
+    /**
+    If dataJoin is a url, and the items is not in root, here we define the path of the itens, like this "items" os "items.result"
+    (lodash get like)
+    */
+    dataJoinDataPath: {
+      type: String
     },
     dataJoinKey: {
       type: String,
@@ -256,7 +267,7 @@ export default {
 
   data () {
     return {
-      featureState:{},
+      featureState: {},
       layerId: null,
       sourceId: null,
       selectedFeatures: [],
@@ -265,7 +276,13 @@ export default {
       lastClick: null,
       lastHover: null,
       hasFeatureHover: false,
-      hasFeatureClick: false
+      hasFeatureClick: false,
+      myData: false,
+      /**
+      KeysExistInData allow to transform some the expressions from ['get','properties'] to ['feature-state','featurestate']
+      */
+      keysExistInData: []
+
     }
   },
 
@@ -425,6 +442,29 @@ export default {
        * @property {array} features array with all features selected
        */
       this.$emit('featurehover', val)
+    },
+
+    // DATA JOIN WATCHERS
+    myData: function (val, oldval) {
+      if (Array.isArray(val) && Array.isArray(oldval)) {
+        if (JSON.stringify(val) === JSON.stringify(oldval)) {
+          return
+        }
+      }
+      this.keysExistInData = Object.keys(val?.[0])
+      this.addDataJoin()
+    },
+
+    dataJoin: function () {
+      this.loadData()
+    },
+
+    dataJoinKey: function () {
+      this.addDataJoin()
+    },
+
+    dataJoinDataPath: function () {
+      this.addDataJoin()
     }
 
   },
@@ -519,6 +559,7 @@ export default {
           this.sourceId = this.getMap().getLayer(mylayer).source
           // bind listners set in component to mapbox events
           this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), nativeEventsTypes, this.layerId, this.created_at, this.zIndex)
+          this.loadData()
         }
       } catch (e) {
         console.error('========================== Error adding Layer ' + this.name)
@@ -527,6 +568,45 @@ export default {
         console.error(e)
         // this.$destroy()
       }
+    },
+
+    addDataJoin: function () {
+      if (Array.isArray(this.myData)) {
+        const map = this.getMap()
+        this.myData.forEach(feature => {
+          // check object and if we have an id
+          if (feature?.constructor?.name !== 'Object') return
+          const id = feature?.[this.dataJoinKey]
+          if (id === undefined) return
+          map.setFeatureState(
+            { source: this.sourceId, sourceLayer: this.sourceLayer, id },
+            { ...feature }
+          )
+        })
+      }
+    },
+
+    loadData: async function () {
+      let res = false
+      if (Array.isArray(this.dataJoin)) {
+        res = [...this.dataJoin]
+      } else if (this.dataJoin?.constructor?.name === 'String') {
+        try {
+          const url = new URL(this.dataJoin)
+          const res = await axios.get(url)
+          const path = this.dataJoinDataPath ? 'data' + this.dataJoinDataPath : 'data'
+          const data = get(res, path)
+          if (Array.isArray(data)) {
+            return [...data]
+          } else {
+            console.error('dataJoin url dont return an Array in path:'+path)
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      }
+      this.myData = res
+      return res
     },
 
     //* * EVENTS SETUP */
@@ -852,6 +932,11 @@ export default {
           return valueFinal
         }
       }
+      /**
+       Implementes joinData expression converter so we can use allow to transform some the expressions from ['get','properties'] to ['feature-state','featurestate']
+      // TODO IMPLEMENT - use the  ['coalesce', [get,property], ['feature-state','color'], '#ff4400'  ]
+      // but maybe it is too much of outside word mapbox, maybe not implement it
+      */
       return value
     },
     /**
@@ -958,6 +1043,7 @@ export default {
     }
 
     // setup popupinstance data
+    debugger;
     popupInstance.componentOptions.propsData = {
       ...popupInstance.componentOptions.propsData,
       ...props
