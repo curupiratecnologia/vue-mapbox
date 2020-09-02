@@ -636,6 +636,12 @@ export default {
         map.off('click', this.layerMouseClickOutEvent)
         map.on('click', this.layerMouseClickOutEvent)
       }
+
+
+      //CUSTON EVENTS
+      // featureHover
+      // featureClick
+      // featureLeave
     },
 
     featureMouseMoveEvent: function (e) {
@@ -721,6 +727,7 @@ export default {
         this.selectedFeatures = []
       }
     },
+    
 
     //* * PAINT AND LAYOUT SETUPS */
 
@@ -797,7 +804,8 @@ export default {
       // for each paint/layout props,
       // check if we find it in the classe and mount a expression for it
       allPaintLayout.forEach((plKey) => {
-        const plKeyState = plKey !== '' ? plKey + '-' + state : plKey
+        const plKeyState = state !== '' ? plKey + '-' + state : plKey
+        debugger;
         const classesElementsWithPL = filter(this.classes, elm => has(elm, plKeyState))
 
         if (classesElementsWithPL.length > 0) {
@@ -1043,7 +1051,6 @@ export default {
     }
 
     // setup popupinstance data
-    debugger;
     popupInstance.componentOptions.propsData = {
       ...popupInstance.componentOptions.propsData,
       ...props

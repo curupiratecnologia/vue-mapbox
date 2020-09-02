@@ -1,6 +1,6 @@
 {
   "name": "@curupira/vue-mapbox",
-  "version": "0.0.1-beta.5",
+  "version": "0.0.1-beta.6",
   "main": "dist/vue-mapbox.umd.js",
   "module": "dist/vue-mapbox.umd.js",
   "private": false,
@@ -35,9 +35,9 @@
     "build-lib:library": "vue-cli-service build --target lib --name vue-mapbox src/entry.js --dest dist/"
   },
   "dependencies": {
-    "@deck.gl/core": "^8.2.3",
-    "@deck.gl/layers": "^8.2.3",
-    "@deck.gl/mapbox": "^8.2.3",
+    "@deck.gl/core": "^8.2.7",
+    "@deck.gl/layers": "^8.2.7",
+    "@deck.gl/mapbox": "^8.2.7",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.1.2",
     "core-js": "^3.6.4",

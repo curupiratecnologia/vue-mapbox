@@ -237,7 +237,7 @@ export default {
   },
 
   async created () {
-    console.log('created - vueMapbox')
+    // console.log('created - vueMapbox')
     if (!window.mapboxgl) {
       const mapboxgl = await import(/* webpackChunkName: "mapboxgl-core" */ 'mapbox-gl')
       window.mapboxgl = mapboxgl.default || mapboxgl
@@ -287,11 +287,11 @@ export default {
   },
 
   beforeUpdated () {
-    console.log('beforeUpdated dom vueMapbox')
+    // console.log('beforeUpdated dom vueMapbox')
   },
 
   mounted () {
-    console.log('Mounted - Mounted dom vueMapbox')
+    // console.log('Mounted - Mounted dom vueMapbox')
 
     // this.$nextTick(() => {
     //   this.updateLayerOrder()
@@ -299,7 +299,7 @@ export default {
   },
 
   updated () {
-    console.log('Updated - updated dom vueMapbox')
+    // console.log('Updated - updated dom vueMapbox')
     this.$nextTick(() => {
       this.updateLayerOrder()
     })
@@ -314,7 +314,7 @@ export default {
   methods: {
 
     createMap: function () {
-      console.log('createding map - vueMapbox')
+      // console.log('createding map - vueMapbox')
       window.mapboxgl.prewarm()
       if (this.accessToken !== '') {
         window.mapboxgl.accessToken = this.accessToken
@@ -339,10 +339,10 @@ export default {
       this.addPropsImages()
 
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes)
-      console.log('setting mapa loaded')
+      // console.log('setting mapa loaded')
       this.map.on('load', () => {
         const _this = this
-        console.log('mapa loaded fired')
+        // console.log('mapa loaded fired')
         this.mapLoaded = true
         /**
          * Load Event - When Maps Load
@@ -503,6 +503,9 @@ export default {
     addLayer: function (options, zIndex) {
       // // if layer name exist, create a randow one
       const id = options.id
+
+      //TODO - get the before layer
+
       this.map.addLayer(options)
 
       const sourceObject = this.map.getLayer(options.id)
@@ -515,7 +518,7 @@ export default {
 
       // when idle because some time the layer get time to be added
       this.map.once('idle', () => {
-        console.log('A styledata event occurred.')
+        // console.log('A styledata event occurred.')
         this.$nextTick(() =>
           this.updateLayerOrder()
         )
@@ -528,7 +531,7 @@ export default {
     * Update All Layers Order
     */
     updateLayerOrder: debounce(function () {
-      console.log('UPDATE LAYER ORDER ==============================================================================')
+      // console.log('UPDATE LAYER ORDER ==============================================================================')
       if (!this.map) return
       const layers = this.map.getStyle()
       if (!layers?.layers) return
@@ -602,6 +605,9 @@ export default {
       }
     }, 400),
 
+
+
+
     /**
     * Update Layers Index
     */
@@ -666,77 +672,6 @@ export default {
       )
     },
 
-    //   setMapEvents: function () {
-    //     var _map = this.$options.map
-    //     // var { MapboxLayer, HexagonLayer } = window.deck;
-    //     var _t = this
-
-    //     this.$options.map.on('style.load', function () {
-    //       setTimeout(() => {
-    //         _t.$store.commit('mapLoaded', true)
-    //       }, 100)
-
-    //       window.mapboxmap.flyTo({ pitch: 0, zoom: _t.zoom + 0.5, duration: 2000 })
-    //     })
-
-    //     this.$options.map.on('click', (e) => {
-    //       // allox coords copy when click on shift.
-    //       // need to disable on env
-    //       // if(event.shiftKey){
-    //       var coordnates = `[${e.lngLat.lng},${e.lngLat.lat}]`
-    //       $('body').append('<input id="clipboard" style="position:absolute;z-index:0;opacity:0"/>')
-    //       var copyText = document.getElementById('clipboard')
-    //       copyText.value = coordnates
-    //       /* Select the text field */
-    //       copyText.select()
-    //       /* Copy the text inside the text field */
-    //       document.execCommand('Copy')
-    //       /* Alert the copied text */
-    //       // alert("Copied the text: " + copyText.value);
-    //       $(copyText).remove()
-    //       // }
-    //     })
-
-    //     this.$options.map.on('zoomend', (e) => {
-    //       var map = e.target
-    //       var zoomStore = this.$store.getters.zoom
-    //       var zoomMap = map.getZoom()
-    //       if (zoomStore != zoomMap) { this.$store.commit('zoom', zoomMap) }
-    //     })
-    //   },
-
-    //   flyToPage: function (to, duration = 2000, force = false) {
-    //     to = to || this.$route
-    //     var camera = _.get(to, 'meta.camera', false)
-    //     var id = _.get(to, 'params.id', false)
-
-    //     var cameraSet = _.get(camera, id, camera)
-
-    //     if (this.$store.state.initialAnimationFinish === false) { cameraSet = { center: [-47.85927131478161, -15.799714225713075], pitch: 55.00000000000001, zoom: 6.30769269135277, bearing: 0 } }
-
-    //     if (!cameraSet) {
-    //       return
-    //     }
-
-    //     setTimeout(() => { // make sure we have a delay to finish any initial setup
-    //       if (this.map) {
-    //         this.map.resize() // resize because the first time container may be change and the map note
-    //         // just change if it is not moving
-    //         if (this.map.isMoving() && force == false) {
-    //           //   console.log("Map Moving, will not go to ");
-    //           return
-    //         } else {
-    //           // console.log("Map will fly");
-    //           this.map.flyTo({ ...cameraSet, duration: duration })
-    //         }
-
-    //         // tell the map has finish it first animation
-    //         setTimeout(() => {
-    //           if (this.$store.state.initialAnimationFinish == false) { this.$store.commit('initialAnimationFinish', true) }
-    //         }, duration)
-    //       }
-    //     }, 100)
-    //   }
 
     docEvents: function () {
       this.$emit('click')

@@ -8,73 +8,39 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-<!--
-                  <vmLayer name="myLayer2"
-                        :source="{
-                              type:'vector',
-                              id:'arranjos_potenciais-center',
-                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_estado_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
-                              minzoom: 0,
-                              maxzoom: 24
-                        }"
-                        sourceLayer="sinir_estado_base"
-                        type="fill"
-                        :opacity="Number(opacity)"
-                        :paint="{ 'fill-color': fill, 'fill-opacity': ['z', 3.5,0.1,5,1], 'fill-color-transition':{ 'duration': 20000, 'delay': 2000 }  }"
-                        multipleFeatureSelectionOn="alt"
-                        >
 
-                       <template v-slot:popupHover>
-                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
-                        </template>
-
-                        <template v-slot:popupClick="slotProps">
-                          <VmPopup max-width="400px">
-                               <pre>{{ slotProps.features && slotProps.features[0] && slotProps.features[0].properties }}</pre>
-                              <h6>Here goes the pop up content while in <b>CLICK</b> a Feature.</h6>
-                          </VmPopup>
-                        </template>
-
-                 </vmLayer> -->
-                  <!-- <vmLayer name="myLayer2"
-                        :source="{
-                              type:'vector',
-                              id:'arranjos_potenciais-center',
-                              type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_estado_base/{z}/{x}/{y}.mvt?ano_referencia=2019`], minzoom: 1, maxzoom: 24,
-                              minzoom: 0,
-                              maxzoom: 24
-                        }"
-                        sourceLayer="sinir_estado_base"
-                        type="fill"
-                        :paint="{ 'fill-color': fill, 'fill-opacity': ['z', 3.5,0.1,5,1]  }"
-
-                        :paint-hover="{  'fill-opacity': 1  }"
-                        color-hover="#FF0044"
-                        multipleFeatureSelectionOn="alt"
-                        :opacity="Number(opacity)"
-                        >
-
-                       <template v-slot:popupHover>
-                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
-                        </template>
-
-                        <template v-slot:popupClick="slotProps">
-                          <VmPopup max-width="400px">
-                               <pre>{{ slotProps.features && slotProps.features[0] && slotProps.features[0].properties }}</pre>
-                              <h6>Here goes the pop up content while in <b>CLICK</b> a Feature.</h6>
-                          </VmPopup>
-                        </template>
-
-                 </vmLayer> -->
-
-                        <vm-source
-                key="painel_solucao_compartilhada_municipio"
-                name="painel_solucao_compartilhada_municipio"
-                type='vector'
-                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/painel_solucao_compartilhada_municipio/{z}/{x}/{y}.mvt?ano_referencia=2018`], minzoom: 0, maxzoom: 24, }"
+        <vm-source
+          key="bioma"
+          name="bioma"
+          type='vector'
+          :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/bioma/{z}/{x}/{y}.mvt`], minzoom: 0, maxzoom: 24, }"
         />
 
-                  <!-- <vmLayerArc
+
+          <vmLayer name="myLayer"
+              source="bioma"
+              sourceLayer="bioma"
+              type="fill"
+              :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+              :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
+              :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+             :classes = "[
+            { 'fill-color': '#6A9369', 'value': 'Amazônia', 'property': 'nome_bioma' },
+            { 'fill-color': '#C1C690', 'value': 'Caatinga', 'property': 'nome_bioma' },
+            { 'fill-color': '#99A278', 'value': 'Cerrado', 'property': 'nome_bioma' },
+            { 'fill-color': '#C1E2BE', 'value': 'Mata Atlântica', 'property': 'nome_bioma' },
+            { 'fill-color': '#92BA94', 'value': 'Pampa', 'property': 'nome_bioma' }
+          ]"
+          classesValueInterpolation='match'
+              multipleFeatureSelectionOn="alt"
+              :opacity="Number(opacity)"
+              :hideOnOpacity="true"
+          />
+
+
+<!-- 
+
+                  <vmLayerArc
                       name="arcLayer"
                       :data="fluxoFinal"
                       :witdh="10"
@@ -84,108 +50,10 @@
                       targetPosition="geomDestino"
                     /> -->
 
-        <vm-layer
-              key="municipio-disposicao-final2"
-              name="municipio-disposicao-final2"
-              type="fill"
-              source="painel_solucao_compartilhada_municipio"
-              sourceLayer="painel_solucao_compartilhada_municipio"
-              :paint="{
-                'fill-color':['coalesce',  ['feature-state','color'], '#ff4400'  ]
-              }"
-              color-hover='#0f3290'
-              :opacity="Number(opacity)"
-              :dataJoin="dataJoin"
-            >
-              <!-- :fill-color='["case",[">=",["to-number", ["get","adequacao"]], 100],"#75fa4c","#ea3223"]' -->
-            <template #popupHover="slot">
-              <div>
-                  <pre>{{slot}}</pre>
-              </div>
-            </template>
-            <template #popupClick="slot">
-              <div>
-                  <pre>{{slot}}</pre>
-              </div>
-            </template>
-        </vm-layer>
-
-          <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-                        multipleFeatureSelectionOn="alt"
-                      
-                        :opacity="Number(opacity)"
-                        :hideOnOpacity="true"
-
-                />
-
-        <!-- <vm-layer
-              key="municipio-disposicao-final"
-              name="municipio-disposicao-final"
-              type="fill"
-              source="painel_solucao_compartilhada_municipio"
-              sourceLayer="painel_solucao_compartilhada_municipio"
-              :fill-opacity="0.8"
-              :paint-hover="{'fill-opacity':1}"
-              :paint="{
-                'color':'#ffff00'
-              }"
-              color-hover='#0f329f'
-              :opacity="Number(opacity)"
-
-            >
-            <template #popupHover="slot">
-              <div>
-                  <pre>{{slot}}</pre>
-              </div>
-            </template>
-            <template #popupClick="slot">
-              <div>
-                  <pre>{{slot}}</pre>
-              </div>
-            </template>
-        </vm-layer> -->
 
       </VueMapbox>
 
-            <!-- <VueMapbox mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
-
-              <vmLayer name="myLayer"
-                        :source="{
-                          id:'outrosource',
-                          type:'vector',
-                          tiles:[`http://rspangea.mma.gov.br/tile/painel_solucao_compartilhada_solucao_info/{z}/{x}/{y}.mvt?ano_referencia=${ano}`]
-                        }"
-                        sourceLayer="painel_solucao_compartilhada_solucao_info"
-                        type="fill"
-                        :multipleFeatureSelectionOn="'alt'"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-                        multipleFeatureSelectionOn="alt"
-
-                        >
-
-                       <template v-slot:popupHover="slotprops">
-                              <h6> Here goes the pop up content while in <b>HOVER</b> a Feature.</h6>
-                              <pre>{{slotprops}}</pre>
-                        </template>
-
-                        <template v-slot:popupClick="slotProps">
-                          <VmPopup max-width="400px">
-                               <pre>{{ slotProps.features && slotProps.features[0] && slotProps.features[0].properties }}</pre>
-                              <h6>Here goes the pop up content while in <b>CLICK</b> a Feature.</h6>
-                          </VmPopup>
-                        </template>
-
-                 </vmLayer>
-
-      </VueMapbox> -->
-
+       
     </center>
       <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
 

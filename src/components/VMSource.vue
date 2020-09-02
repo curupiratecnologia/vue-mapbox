@@ -67,7 +67,7 @@ export default {
   watch: {
     '$props.options': function (val, oldval) {
       if (this.type === 'geojson' && val && val.data) {
-        this.source.instance.setData(val.data)
+        this.getMap().getSource(this.source.id).setData(val.data)
       } else if (JSON.stringify(val) !== JSON.stringify(oldval)) {
         this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, { ...val })
       }
@@ -76,8 +76,8 @@ export default {
 
   created: function () {
     const options = { ...this.$props.options }
-    if (this.unique && this.MapboxVueInstance().getSource(this.name)) {
-      this.source = this.MapboxVueInstance().getSource(this.name)
+    if (this.unique && this.MapboxVueInstance.getSource(this.name)) {
+      this.source = this.MapboxVueInstance.getSource(this.name)
     } else {
       this.source = this.MapboxVueInstance.addSource(this.name, this.type, options)
     }
