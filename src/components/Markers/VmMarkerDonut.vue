@@ -54,6 +54,10 @@ export default {
     zoomScale: {
       type: Array
       // default: () => [0, 10, 4, 10, 24, 1]
+    },
+
+    anchor: {
+      default: 'center'
     }
 
   },
@@ -216,7 +220,7 @@ export default {
 
     return h(VmMarker,
       {
-        props: { ...this.$attrs, ...this.$props, anchor: 'center' },
+        props: { ...this.$attrs, ...this.$props, anchor: this.anchor },
         on: { ...this.$listeners }
 
       }, [

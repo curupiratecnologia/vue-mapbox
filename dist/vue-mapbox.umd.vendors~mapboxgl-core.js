@@ -1,10 +1,6 @@
-((typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] = (typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] || []).push([["vendors~mapboxgl-core"],{
+((typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] = (typeof self !== 'undefined' ? self : this)["webpackJsonpvue_mapbox"] || []).push([[0],{
 
-/***/ "./node_modules/mapbox-gl/dist/mapbox-gl.js":
-/*!**************************************************!*\
-  !*** ./node_modules/mapbox-gl/dist/mapbox-gl.js ***!
-  \**************************************************/
-/*! no static exports found */
+/***/ "e192":
 /***/ (function(module, exports, __webpack_require__) {
 
 /* Mapbox GL JS is licensed under the 3-Clause BSD License. Full text of license: https://github.com/mapbox/mapbox-gl-js/blob/v1.12.0/LICENSE.txt */
@@ -53,4 +49,3 @@ return mapboxgl;
 /***/ })
 
 }]);
-//# sourceMappingURL=vue-mapbox.umd.vendors~mapboxgl-core.js.map

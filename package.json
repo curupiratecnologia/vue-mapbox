@@ -1,6 +1,6 @@
 {
   "name": "@curupira/vue-mapbox",
-  "version": "0.0.1-beta.6",
+  "version": "0.0.1-beta.7",
   "main": "dist/vue-mapbox.umd.js",
   "module": "dist/vue-mapbox.umd.js",
   "private": false,

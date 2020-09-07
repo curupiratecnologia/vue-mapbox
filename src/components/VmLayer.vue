@@ -90,6 +90,14 @@ export default {
       mapbox: true,
       name: 'source-layer'
     },
+
+    /**
+       *  Object with images to load in format {'imagename':url,'image2name':url2}
+    */
+    images: {
+      type: Object,
+      default: () => ({})
+    }, // {'name':url,'name2':url2}
     /**
      *  A abstract scale to opacity.
      *  if opacity is 1, it will use the layer opacity definition, if 0.5, it will reduce the current opacity in 50%.
@@ -470,6 +478,7 @@ export default {
   },
 
   created: function () {
+
     this.popupOpen = false
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
@@ -487,6 +496,8 @@ export default {
       if (sourceid) {
         if (this.MapboxVueInstance.getSource(sourceid) === false) {
           this.MapboxVueInstance.addSource(sourceid, options.source.type, { ...options.source })
+        }else{ //update source
+          this.MapboxVueInstance.updateSource(sourceid, options.source.type, { ...options.source })
         }
         options.source = sourceid
       }
@@ -518,6 +529,10 @@ export default {
       }
     }
     // if not, wait it to loaded an show it
+
+    if (this.images) {
+      this.MapboxVueInstance.addPropsImages(this.images)
+    }
   },
 
   mounted: async function () {
@@ -599,7 +614,7 @@ export default {
           if (Array.isArray(data)) {
             return [...data]
           } else {
-            console.error('dataJoin url dont return an Array in path:'+path)
+            console.error('dataJoin url dont return an Array in path:' + path)
           }
         } catch (e) {
           console.error(e)
@@ -637,8 +652,7 @@ export default {
         map.on('click', this.layerMouseClickOutEvent)
       }
 
-
-      //CUSTON EVENTS
+      // CUSTON EVENTS
       // featureHover
       // featureClick
       // featureLeave
@@ -727,7 +741,6 @@ export default {
         this.selectedFeatures = []
       }
     },
-    
 
     //* * PAINT AND LAYOUT SETUPS */
 
@@ -805,7 +818,7 @@ export default {
       // check if we find it in the classe and mount a expression for it
       allPaintLayout.forEach((plKey) => {
         const plKeyState = state !== '' ? plKey + '-' + state : plKey
-        debugger;
+        
         const classesElementsWithPL = filter(this.classes, elm => has(elm, plKeyState))
 
         if (classesElementsWithPL.length > 0) {
