@@ -504,7 +504,7 @@ export default {
       // // if layer name exist, create a randow one
       const id = options.id
 
-      //TODO - get the before layer
+      // TODO - get the before layer
 
       this.map.addLayer(options)
 
@@ -605,9 +605,6 @@ export default {
       }
     }, 400),
 
-
-
-
     /**
     * Update Layers Index
     */
@@ -637,13 +634,23 @@ export default {
 
     addImage: function (key, url) {
       if (!this.map) return
-      // TODO - chek when is a htmlimage or other type
+   
+      // create empety image to be avaliable to styles before loading the actual image
+      var width = 24 // The image will be 64 pixels square
+      var bytesPerPixel = 4 // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
+      var data = new Uint8Array(width * width * bytesPerPixel)
+
+      if (!this.map.hasImage(key)) this.map.addImage(key, { width: width, height: width, data: data })
+
+      // than load and replace
       this.map.loadImage(url, (error, image) => {
         if (error) {
           console.error(error)
           console.error(url)
         } else {
-          if (!this.map.hasImage(key)) this.map.addImage(key, image)
+          // if (!this.map.hasImage(key))
+          if (this.map.hasImage(key)) this.map.removeImage(key)
+          this.map.addImage(key, image)
         }
       })
     },
@@ -671,7 +678,6 @@ export default {
         this.updateLayerOrder()
       )
     },
-
 
     docEvents: function () {
       this.$emit('click')

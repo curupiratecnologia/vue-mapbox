@@ -8,7 +8,6 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-
         <vm-source
           key="bioma"
           name="bioma"
@@ -16,8 +15,32 @@
           :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/bioma/{z}/{x}/{y}.mvt`], minzoom: 0, maxzoom: 24, }"
         />
 
+                  <vm-source
+                key="estadoBase"
+                name="estado_base"
+                type='vector'
+                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_estado_base/{z}/{x}/{y}.mvt`], minzoom: 2, maxzoom: 24, }"
+                />
 
-          <vmLayer name="myLayer"
+    <vm-layer
+                        key="EstadoCapagColors"
+                        name="EstadoCapagColors"
+                        type="fill"
+                        source="estado_base"
+                        sourceLayer="sinir_estado_base"
+                        :paint="{'fill-color':capagClassesEstadual}"
+                        :z-index="20"
+                      >
+
+                        <template #popupHover="slotProps">
+                          <div>
+                            <b>  {{ slotProps.features[0].properties.nome_estado }} </b>
+                          </div>
+                        </template>
+
+                      </vm-layer>
+
+          <!-- <vmLayer name="myLayer"
               source="bioma"
               sourceLayer="bioma"
               type="fill"
@@ -35,10 +58,9 @@
               multipleFeatureSelectionOn="alt"
               :opacity="Number(opacity)"
               :hideOnOpacity="true"
-          />
+          /> -->
 
-
-<!-- 
+<!--
 
                   <vmLayerArc
                       name="arcLayer"
@@ -50,13 +72,12 @@
                       targetPosition="geomDestino"
                     /> -->
 
-
       </VueMapbox>
 
-       
     </center>
       <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
-
+      color: <input  type="checkbox" v-model="color" /> {{color}}
+      {{capagClassesEstadual}}
     fill <input type="text" v-model="fill">
 
   </div>
@@ -70,6 +91,7 @@ export default {
   name: 'App',
   data () {
     return {
+      color: false,
       opacity: 1,
       show: true,
       center: [-45, -15],
@@ -641,6 +663,15 @@ export default {
   // },
 
   computed: {
+
+    capagClassesEstadual: function () {
+      const exp = ['match', ['id'], 11, '#3db3c1', 12, '#3db3c1', 13, '#3db3c1', 14, '#fdb863', 15, '#3db3c1', 16, '#fdb863', 17, '#fdb863', 21, '#fdb863', 22, '#3db3c1', 23, '#3db3c1', 24, '#fdb863', 25, '#3db3c1', 26, '#fdb863', 27, '#3db3c1', 28, '#fdb863', 29, '#fdb863', 31, '#6b486b', 32, '#b3ffd4', 33, '#6b486b', 35, '#3db3c1', 41, '#3db3c1', 42, '#fdb863', 43, '#6b486b', 50, '#fdb863', 51, '#fdb863', 52, '#fdb863', 53, '#fdb863', '#666666']
+      if (this.color) {
+        return '#6666FF'
+        return exp
+      }
+      return '#666666'
+    },
 
     fluxoFinal: function () {
       const finalFluxo = [] // { from, to, corOrigem, corDestino}

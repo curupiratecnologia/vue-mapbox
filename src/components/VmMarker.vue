@@ -151,6 +151,13 @@ export default {
     */
     metadata: {
       type: Object
+    },
+    /**
+    * opacidade
+    */
+    opacity: {
+      type: Number,
+      default: 0.2
     }
   },
 
@@ -229,14 +236,13 @@ export default {
   },
 
   beforeDestroy () {
-    console.count("remove marker")
+    console.count('remove marker')
     this.getMap().off('zoom', this.markerVisibility)
     if (this.marker) {
-          console.count("really remove marker")
+      console.count('really remove marker')
       this.marker.remove()
-    }else{
-          console.count("no marker to remove")
-    
+    } else {
+      console.count('no marker to remove')
     }
   },
 
@@ -505,7 +511,7 @@ export default {
     // return null
 
     return h('div',
-      {},
+      { style: { opacity: Number(this.opacity) } },
       [...childrens]
     )
 

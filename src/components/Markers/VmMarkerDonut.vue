@@ -58,6 +58,9 @@ export default {
 
     anchor: {
       default: 'center'
+    },
+    opacity: {
+      default: 1
     }
 
   },
@@ -220,7 +223,7 @@ export default {
 
     return h(VmMarker,
       {
-        props: { ...this.$attrs, ...this.$props, anchor: this.anchor },
+        props: { ...this.$attrs, ...this.$props, opacity: this.opacity, anchor: this.anchor },
         on: { ...this.$listeners }
 
       }, [
