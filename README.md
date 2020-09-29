@@ -13,7 +13,7 @@ npm install --save @curupira/vue-mapbox
 ```
 ### Use as plugin
 ```
-import VueMapbox from 'vue-mapbox'
+import VueMapbox from '@curupira/vue-mapbox'
 Vue.use(VueMapbox)
 ```
 
