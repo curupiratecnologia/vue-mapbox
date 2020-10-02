@@ -26,18 +26,12 @@
                         key="EstadoCapagColors"
                         name="EstadoCapagColors"
                         type="fill"
+                        @featurehover="featureenter"
                         source="estado_base"
                         sourceLayer="sinir_estado_base"
-                        :paint="{'fill-color':capagClassesEstadual}"
+                       
                         :z-index="20"
                       >
-
-                        <template #popupHover="slotProps">
-                          <div>
-                            <b>  {{ slotProps.features[0].properties.nome_estado }} </b>
-                          </div>
-                        </template>
-
                       </vm-layer>
 
           <!-- <vmLayer name="myLayer"
@@ -59,18 +53,6 @@
               :opacity="Number(opacity)"
               :hideOnOpacity="true"
           /> -->
-
-<!--
-
-                  <vmLayerArc
-                      name="arcLayer"
-                      :data="fluxoFinal"
-                      :witdh="10"
-                      sourceColor="#ffffff"
-                      targetColor="corDestino"
-                      sourcePosition="geomOrigem"
-                      targetPosition="geomDestino"
-                    /> -->
 
       </VueMapbox>
 
@@ -720,6 +702,7 @@ export default {
       console.log('aaa')
     },
     featureenter: function (e) {
+      debugger;
       console.log(e)
     },
     loaded: function (a, b) {

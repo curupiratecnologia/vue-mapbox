@@ -428,6 +428,7 @@ export default {
     },
 
     hoverFeatures: function (val, oldVal) {
+    
       const map = this.getMap()
       if (oldVal.length > 0) {
         oldVal.forEach(feature => {
@@ -478,7 +479,6 @@ export default {
   },
 
   created: function () {
-
     this.popupOpen = false
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
@@ -496,7 +496,7 @@ export default {
       if (sourceid) {
         if (this.MapboxVueInstance.getSource(sourceid) === false) {
           this.MapboxVueInstance.addSource(sourceid, options.source.type, { ...options.source })
-        }else{ //update source
+        } else { // update source
           this.MapboxVueInstance.updateSource(sourceid, options.source.type, { ...options.source })
         }
         options.source = sourceid
@@ -627,7 +627,8 @@ export default {
     //* * EVENTS SETUP */
 
     setupLayerFeaturesEvents: function () {
-      if (this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
+    
+      if ( this.$listeners.featurehover || this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
         this.hasFeatureHover = true
       } else {
         this.hasFeatureHover = false
@@ -637,6 +638,7 @@ export default {
       } else {
         this.hasFeatureClick = false
       }
+
       const map = this.getMap()
       if (this.hasFeatureHover || this.hasFeatureClick) {
         map.off('mousemove', this.layerId, this.featureMouseMoveEvent)
@@ -818,16 +820,19 @@ export default {
       // check if we find it in the classe and mount a expression for it
       allPaintLayout.forEach((plKey) => {
         const plKeyState = state !== '' ? plKey + '-' + state : plKey
-        
+
         const classesElementsWithPL = filter(this.classes, elm => has(elm, plKeyState))
 
         if (classesElementsWithPL.length > 0) {
           let expression = []
-          const featureProperty = classesElementsWithPL[0].property // TODO maybe put state here too
+          const featureProperty = classesElementsWithPL[0]?.property // TODO maybe put state here too
 
           // MATCH VALUES
           if (this.classesValueInterpolation === 'match') {
-            expression = ['match', ['get', featureProperty]]
+            debugger
+            const featureId = featureProperty === '_id'
+            expression = featureId ? ['match', ['id']] : ['match', ['get', featureProperty]]
+
             classesElementsWithPL.forEach((classeElm, i) => {
               expression.push(this.innerExpressionConverter(classeElm.value))
               expression.push(get(classeElm, plKeyState))

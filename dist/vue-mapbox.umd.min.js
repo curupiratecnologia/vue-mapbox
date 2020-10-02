@@ -61171,75 +61171,72 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_includes__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ "./node_modules/core-js/modules/es.array.index-of.js");
 /* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
-/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
-/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
-/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.entries */ "./node_modules/core-js/modules/es.object.entries.js");
-/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
-/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.regexp.constructor */ "./node_modules/core-js/modules/es.regexp.constructor.js");
-/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
-/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
-/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.string.match */ "./node_modules/core-js/modules/es.string.match.js");
-/* harmony import */ var core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var core_js_modules_web_url__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! core-js/modules/web.url */ "./node_modules/core-js/modules/web.url.js");
-/* harmony import */ var core_js_modules_web_url__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_url__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/typeof */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/typeof.js");
-/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var _utils_getOnlyMapboxProps__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../utils/getOnlyMapboxProps */ "./src/utils/getOnlyMapboxProps.js");
-/* harmony import */ var _utils_findVNodeChildren__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../utils/findVNodeChildren */ "./src/utils/findVNodeChildren.js");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
-/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_31___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_31__);
-/* harmony import */ var _VmPopup__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./VmPopup */ "./src/components/VmPopup.vue");
-/* harmony import */ var lodash_has__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! lodash/has */ "./node_modules/lodash/has.js");
-/* harmony import */ var lodash_has__WEBPACK_IMPORTED_MODULE_33___default = /*#__PURE__*/__webpack_require__.n(lodash_has__WEBPACK_IMPORTED_MODULE_33__);
-/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
-/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_34___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_34__);
-/* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! lodash/set */ "./node_modules/lodash/set.js");
-/* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_35___default = /*#__PURE__*/__webpack_require__.n(lodash_set__WEBPACK_IMPORTED_MODULE_35__);
-/* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! lodash/filter */ "./node_modules/lodash/filter.js");
-/* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_36___default = /*#__PURE__*/__webpack_require__.n(lodash_filter__WEBPACK_IMPORTED_MODULE_36__);
-/* harmony import */ var lodash_findIndex__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! lodash/findIndex */ "./node_modules/lodash/findIndex.js");
-/* harmony import */ var lodash_findIndex__WEBPACK_IMPORTED_MODULE_37___default = /*#__PURE__*/__webpack_require__.n(lodash_findIndex__WEBPACK_IMPORTED_MODULE_37__);
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! lodash/kebabCase */ "./node_modules/lodash/kebabCase.js");
-/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_38___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_38__);
-/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! lodash/camelCase */ "./node_modules/lodash/camelCase.js");
-/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_39___default = /*#__PURE__*/__webpack_require__.n(lodash_camelCase__WEBPACK_IMPORTED_MODULE_39__);
-/* harmony import */ var lodash_startCase__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! lodash/startCase */ "./node_modules/lodash/startCase.js");
-/* harmony import */ var lodash_startCase__WEBPACK_IMPORTED_MODULE_40___default = /*#__PURE__*/__webpack_require__.n(lodash_startCase__WEBPACK_IMPORTED_MODULE_40__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_41___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_41__);
-/* harmony import */ var _LayerMapboxProps_js__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./LayerMapboxProps.js */ "./src/components/LayerMapboxProps.js");
-
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.number.constructor */ "./node_modules/core-js/modules/es.number.constructor.js");
+/* harmony import */ var core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_number_constructor__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.entries */ "./node_modules/core-js/modules/es.object.entries.js");
+/* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.regexp.constructor */ "./node_modules/core-js/modules/es.regexp.constructor.js");
+/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.regexp.to-string */ "./node_modules/core-js/modules/es.regexp.to-string.js");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! core-js/modules/es.string.includes */ "./node_modules/core-js/modules/es.string.includes.js");
+/* harmony import */ var core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_includes__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! core-js/modules/es.string.match */ "./node_modules/core-js/modules/es.string.match.js");
+/* harmony import */ var core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_21__);
+/* harmony import */ var core_js_modules_web_url__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! core-js/modules/web.url */ "./node_modules/core-js/modules/web.url.js");
+/* harmony import */ var core_js_modules_web_url__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_url__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_24__);
+/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/typeof */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/typeof.js");
+/* harmony import */ var _Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _utils_getOnlyMapboxProps__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../utils/getOnlyMapboxProps */ "./src/utils/getOnlyMapboxProps.js");
+/* harmony import */ var _utils_findVNodeChildren__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../utils/findVNodeChildren */ "./src/utils/findVNodeChildren.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! lodash/pickBy */ "./node_modules/lodash/pickBy.js");
+/* harmony import */ var lodash_pickBy__WEBPACK_IMPORTED_MODULE_30___default = /*#__PURE__*/__webpack_require__.n(lodash_pickBy__WEBPACK_IMPORTED_MODULE_30__);
+/* harmony import */ var _VmPopup__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./VmPopup */ "./src/components/VmPopup.vue");
+/* harmony import */ var lodash_has__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! lodash/has */ "./node_modules/lodash/has.js");
+/* harmony import */ var lodash_has__WEBPACK_IMPORTED_MODULE_32___default = /*#__PURE__*/__webpack_require__.n(lodash_has__WEBPACK_IMPORTED_MODULE_32__);
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! lodash/get */ "./node_modules/lodash/get.js");
+/* harmony import */ var lodash_get__WEBPACK_IMPORTED_MODULE_33___default = /*#__PURE__*/__webpack_require__.n(lodash_get__WEBPACK_IMPORTED_MODULE_33__);
+/* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! lodash/set */ "./node_modules/lodash/set.js");
+/* harmony import */ var lodash_set__WEBPACK_IMPORTED_MODULE_34___default = /*#__PURE__*/__webpack_require__.n(lodash_set__WEBPACK_IMPORTED_MODULE_34__);
+/* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! lodash/filter */ "./node_modules/lodash/filter.js");
+/* harmony import */ var lodash_filter__WEBPACK_IMPORTED_MODULE_35___default = /*#__PURE__*/__webpack_require__.n(lodash_filter__WEBPACK_IMPORTED_MODULE_35__);
+/* harmony import */ var lodash_findIndex__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! lodash/findIndex */ "./node_modules/lodash/findIndex.js");
+/* harmony import */ var lodash_findIndex__WEBPACK_IMPORTED_MODULE_36___default = /*#__PURE__*/__webpack_require__.n(lodash_findIndex__WEBPACK_IMPORTED_MODULE_36__);
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! lodash/kebabCase */ "./node_modules/lodash/kebabCase.js");
+/* harmony import */ var lodash_kebabCase__WEBPACK_IMPORTED_MODULE_37___default = /*#__PURE__*/__webpack_require__.n(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_37__);
+/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! lodash/camelCase */ "./node_modules/lodash/camelCase.js");
+/* harmony import */ var lodash_camelCase__WEBPACK_IMPORTED_MODULE_38___default = /*#__PURE__*/__webpack_require__.n(lodash_camelCase__WEBPACK_IMPORTED_MODULE_38__);
+/* harmony import */ var lodash_startCase__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! lodash/startCase */ "./node_modules/lodash/startCase.js");
+/* harmony import */ var lodash_startCase__WEBPACK_IMPORTED_MODULE_39___default = /*#__PURE__*/__webpack_require__.n(lodash_startCase__WEBPACK_IMPORTED_MODULE_39__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_40___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_40__);
+/* harmony import */ var _LayerMapboxProps_js__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./LayerMapboxProps.js */ "./src/components/LayerMapboxProps.js");
 
 
 
@@ -61302,7 +61299,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       default: undefined
     }
   },
-  props: Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({
+  props: Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({
     /**
        **ID/Name of the Layer.** If blank or not unique, will auto generate one for you
       */
@@ -61547,7 +61544,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       type: String,
       default: 'id'
     }
-  }, _LayerMapboxProps_js__WEBPACK_IMPORTED_MODULE_42__["default"]),
+  }, _LayerMapboxProps_js__WEBPACK_IMPORTED_MODULE_41__["default"]),
   data: function data() {
     return {
       featureState: {},
@@ -61626,10 +61623,10 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
   },
   watch: {
     source: function source(val, oldval) {
-      if (Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_27__["default"])(val) === 'object') {
+      if (Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_26__["default"])(val) === 'object') {
         if (JSON.stringify(val) !== JSON.stringify(oldval)) {
           var source = this.getMap().getLayer(this.layerId).source;
-          this.MapboxVueInstance.updateSource(source, val.type, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, val));
+          this.MapboxVueInstance.updateSource(source, val.type, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, val));
         }
       }
     },
@@ -61773,7 +61770,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
         _this6 = this;
 
     this.popupOpen = false;
-    var options = Object(_utils_getOnlyMapboxProps__WEBPACK_IMPORTED_MODULE_29__["default"])(this);
+    var options = Object(_utils_getOnlyMapboxProps__WEBPACK_IMPORTED_MODULE_28__["default"])(this);
 
     if (!options.source) {
       var source = this.getSource && this.getSource();
@@ -61793,10 +61790,10 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
       if (sourceid) {
         if (this.MapboxVueInstance.getSource(sourceid) === false) {
-          this.MapboxVueInstance.addSource(sourceid, options.source.type, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, options.source));
+          this.MapboxVueInstance.addSource(sourceid, options.source.type, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, options.source));
         } else {
-          //update source
-          this.MapboxVueInstance.updateSource(sourceid, options.source.type, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, options.source));
+          // update source
+          this.MapboxVueInstance.updateSource(sourceid, options.source.type, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, options.source));
         }
 
         options.source = sourceid;
@@ -61838,7 +61835,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     }
   },
   mounted: function () {
-    var _mounted = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_26__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var _mounted = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_25__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -61868,7 +61865,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       console.log('destroying ' + this.layerId);
       this.MapboxVueInstance.removeLayer(this.layerId); // check if the source of layer is a Object/ownSource,and remove it too
 
-      if (Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_27__["default"])(this.source) === 'object') {// TODO - not removing sourve because others can be using it, but make this logic better
+      if (Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_typeof__WEBPACK_IMPORTED_MODULE_26__["default"])(this.source) === 'object') {// TODO - not removing sourve because others can be using it, but make this logic better
         // this.getMap().removeSource(this.sourceId)
       }
     }
@@ -61887,7 +61884,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
         } else {
           var id = this.MapboxVueInstance.getNewIdForLayer(this.name);
 
-          var _mylayer = this.MapboxVueInstance.addLayer(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, this.options), {}, {
+          var _mylayer = this.MapboxVueInstance.addLayer(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, this.options), {}, {
             id: id,
             type: this.type,
             paint: this.myPaint,
@@ -61924,12 +61921,12 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
             source: _this7.sourceId,
             sourceLayer: _this7.sourceLayer,
             id: id
-          }, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, feature));
+          }, Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, feature));
         });
       }
     },
     loadData: function () {
-      var _loadData = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_26__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var _loadData = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_25__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         var _this$dataJoin, _this$dataJoin$constr;
 
         var res, url, _res, path, data;
@@ -61945,7 +61942,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
                   break;
                 }
 
-                res = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_24__["default"])(this.dataJoin);
+                res = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_23__["default"])(this.dataJoin);
                 _context2.next = 23;
                 break;
 
@@ -61958,19 +61955,19 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
                 _context2.prev = 6;
                 url = new URL(this.dataJoin);
                 _context2.next = 10;
-                return axios__WEBPACK_IMPORTED_MODULE_41___default.a.get(url);
+                return axios__WEBPACK_IMPORTED_MODULE_40___default.a.get(url);
 
               case 10:
                 _res = _context2.sent;
                 path = this.dataJoinDataPath ? 'data' + this.dataJoinDataPath : 'data';
-                data = lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(_res, path);
+                data = lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(_res, path);
 
                 if (!Array.isArray(data)) {
                   _context2.next = 17;
                   break;
                 }
 
-                return _context2.abrupt("return", Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_24__["default"])(data));
+                return _context2.abrupt("return", Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_23__["default"])(data));
 
               case 17:
                 console.error('dataJoin url dont return an Array in path:' + path);
@@ -62004,13 +62001,13 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     }(),
     //* * EVENTS SETUP */
     setupLayerFeaturesEvents: function setupLayerFeaturesEvents() {
-      if (this.paintHover || this.layoutHover || lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$scopedSlots, 'popupHover') || lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$slots, 'popupHover')) {
+      if (this.$listeners.featurehover || this.paintHover || this.layoutHover || lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$scopedSlots, 'popupHover') || lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$slots, 'popupHover')) {
         this.hasFeatureHover = true;
       } else {
         this.hasFeatureHover = false;
       }
 
-      if (this.paintClick || this.layoutClick || lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$scopedSlots, 'popupClick') || lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$slots, 'popupClick')) {
+      if (this.paintClick || this.layoutClick || lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$scopedSlots, 'popupClick') || lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$slots, 'popupClick')) {
         this.hasFeatureClick = true;
       } else {
         this.hasFeatureClick = false;
@@ -62044,7 +62041,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
       var features = this.getMap().queryRenderedFeatures(e.point);
 
-      if (lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(features, '[0].layer.id') !== this.layerId) {
+      if (lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(features, '[0].layer.id') !== this.layerId) {
         this.featureMouseLeaveEvent(e);
         return false;
       }
@@ -62085,20 +62082,20 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
       var features = this.getMap().queryRenderedFeatures(e.point); // if clicked in another top most layer, is like clicking outside this
 
-      if (lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(features, '[0].layer.id') !== this.layerId) {
+      if (lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(features, '[0].layer.id') !== this.layerId) {
         this.selectedFeatures = [];
         return;
       }
 
       this.lastClick = e;
 
-      var featuresSelected = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_24__["default"])(this.selectedFeatures);
+      var featuresSelected = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_23__["default"])(this.selectedFeatures);
 
       var featuresToAdd = []; // [...this.selectedFeatures]
 
       if (e.features.length > 0) {
         e.features.forEach(function (feature) {
-          var selectedFeatureIndex = lodash_findIndex__WEBPACK_IMPORTED_MODULE_37___default()(_this8.selectedFeatures, {
+          var selectedFeatureIndex = lodash_findIndex__WEBPACK_IMPORTED_MODULE_36___default()(_this8.selectedFeatures, {
             id: feature.id
           });
 
@@ -62148,7 +62145,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     getFinalFeatureStateForPaintOrLayout: function getFinalFeatureStateForPaintOrLayout(normal, hover, click) {
       var _this9 = this;
 
-      var result = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, normal);
+      var result = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, normal);
 
       if (this.hasFeatureHover || this.hasFeatureClick || this.hasChildPopup) {
         Object.entries(result).forEach(function (item) {
@@ -62209,7 +62206,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       var allPaintLayout = this.getAllPaintLayoutForKind(kind);
       var removeStateRegex = new RegExp('-' + state + '$', 'g'); // GET WHAT IS DEFINED VIA NORMAL PROP (paint, layout, paintHove...)
 
-      var paintLayoutObject = lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(this.$props, kind + lodash_startCase__WEBPACK_IMPORTED_MODULE_40___default()(state), {});
+      var paintLayoutObject = lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(this.$props, kind + lodash_startCase__WEBPACK_IMPORTED_MODULE_39___default()(state), {});
       var paintLayoutFinal = {};
       Object.keys(paintLayoutObject).forEach(function (k) {
         var kConvert = _this10.innerPaintPropConvert(k);
@@ -62218,7 +62215,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       }); // GET WHAT IS DEFINE LOOSELY IN PROPS (fill-color, fill-color-click .....)
 
       Object.entries(this.$options.propsData).forEach(function (item) {
-        var key = _this10.innerPaintPropConvert(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_38___default()(item[0]));
+        var key = _this10.innerPaintPropConvert(lodash_kebabCase__WEBPACK_IMPORTED_MODULE_37___default()(item[0]));
 
         var value = item[1];
         var keyNormalName = key.replace(removeStateRegex, '');
@@ -62234,27 +62231,31 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
       allPaintLayout.forEach(function (plKey) {
         var plKeyState = state !== '' ? plKey + '-' + state : plKey;
-        var classesElementsWithPL = lodash_filter__WEBPACK_IMPORTED_MODULE_36___default()(_this10.classes, function (elm) {
-          return lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(elm, plKeyState);
+        var classesElementsWithPL = lodash_filter__WEBPACK_IMPORTED_MODULE_35___default()(_this10.classes, function (elm) {
+          return lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(elm, plKeyState);
         });
 
         if (classesElementsWithPL.length > 0) {
+          var _classesElementsWithP;
+
           var expression = [];
-          var featureProperty = classesElementsWithPL[0].property; // TODO maybe put state here too
+          var featureProperty = (_classesElementsWithP = classesElementsWithPL[0]) === null || _classesElementsWithP === void 0 ? void 0 : _classesElementsWithP.property; // TODO maybe put state here too
           // MATCH VALUES
 
           if (_this10.classesValueInterpolation === 'match') {
-            expression = ['match', ['get', featureProperty]];
+            debugger;
+            var featureId = featureProperty === '_id';
+            expression = featureId ? ['match', ['id']] : ['match', ['get', featureProperty]];
             classesElementsWithPL.forEach(function (classeElm, i) {
               expression.push(_this10.innerExpressionConverter(classeElm.value));
-              expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(classeElm, plKeyState));
+              expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(classeElm, plKeyState));
             });
             expression.push(paintLayoutFinal[plKey] || expression[expression.length - 1]); // STEP VALUES
           } else if (_this10.classesValueInterpolation === 'step') {
             expression = ['step', ['to-number', ['get', featureProperty]]];
             classesElementsWithPL.forEach(function (classeElm, i) {
               // TODO - i think need to test default value when is steped
-              expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(classeElm, plKeyState));
+              expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(classeElm, plKeyState));
               if (classeElm.value) expression.push(_this10.innerExpressionConverter(classeElm.value));
             }); // INTERPOLATE VALUES
           } else if (_this10.classesValueInterpolation === 'interpolate') {
@@ -62267,7 +62268,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
             classesElementsWithPL.forEach(function (classeElm, i) {
               expression.push(_this10.innerExpressionConverter(classeElm.value));
-              expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(classeElm, plKeyState));
+              expression.push(lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(classeElm, plKeyState));
             });
           }
 
@@ -62294,7 +62295,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
         paintLayoutFinal = this.processPaintOpacity(paintLayoutFinal);
       }
 
-      return Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, paintLayoutFinal);
+      return Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, paintLayoutFinal);
     },
 
     /** Treat opacity scale
@@ -62340,7 +62341,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
             paint[key] = exprStart.concat(value);
           } else {
-            paint[key] = ['*', Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_24__["default"])(value), opacity];
+            paint[key] = ['*', Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_23__["default"])(value), opacity];
           }
         }
       });
@@ -62357,10 +62358,10 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
       var propertiesForKind = ['color']; // user shorhand for color for all layer types
 
       Object.entries(this.$options.props).forEach(function (prop) {
-        var key = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_38___default()(prop[0]);
+        var key = lodash_kebabCase__WEBPACK_IMPORTED_MODULE_37___default()(prop[0]);
         var value = prop[1];
 
-        if (lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(value, kind) && lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(value, 'layerType') === _this12.type) {
+        if (lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(value, kind) && lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(value, 'layerType') === _this12.type) {
           if (key.indexOf('-hover') === -1 && key.indexOf('-click') === -1) {
             propertiesForKind.push(key); // propertiesForKind.push(key + '-transition') //disable transition for now
           }
@@ -62376,10 +62377,10 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     innerExpressionConverter: function innerExpressionConverter(value) {
       if (Array.isArray(value)) {
         if ((value === null || value === void 0 ? void 0 : value[0]) === 'z') {
-          var valueFinal = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_24__["default"])(value);
+          var valueFinal = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_23__["default"])(value);
 
           valueFinal.shift();
-          valueFinal = ['interpolate', ['linear'], ['zoom']].concat(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_24__["default"])(valueFinal));
+          valueFinal = ['interpolate', ['linear'], ['zoom']].concat(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_23__["default"])(valueFinal));
           return valueFinal;
         }
       }
@@ -62434,7 +62435,7 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
     var emptyElm = null; // h('div')
 
-    if (this.hoverFeatures.length === 0 && this.selectedFeatures.length === 0 || !lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$scopedSlots, 'popupHover') && !lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$scopedSlots, 'popupClick') && !lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$slots, 'popupHover') && !lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$slots, 'popupClick')) {
+    if (this.hoverFeatures.length === 0 && this.selectedFeatures.length === 0 || !lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$scopedSlots, 'popupHover') && !lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$scopedSlots, 'popupClick') && !lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$slots, 'popupHover') && !lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$slots, 'popupClick')) {
       return emptyElm;
     } // create the popupElement
 
@@ -62445,20 +62446,20 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
     var props = {};
     var popupKey; // check for popupHover Slot
 
-    if (lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$scopedSlots, 'popupHover')) {
+    if (lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$scopedSlots, 'popupHover')) {
       popupOver = this.$scopedSlots.popupHover({
         features: this.hoverFeatures
       }); // [0]
-    } else if (lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$slots, 'popupHover')) {
+    } else if (lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$slots, 'popupHover')) {
       popupOver = this.$slots.popupHover;
     } // check for popupClick Slot
 
 
-    if (lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$scopedSlots, 'popupClick')) {
+    if (lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$scopedSlots, 'popupClick')) {
       popupClick = this.$scopedSlots.popupClick({
         features: this.selectedFeatures
       }); // [0]
-    } else if (lodash_has__WEBPACK_IMPORTED_MODULE_33___default()(this.$slots, 'popupClick')) {
+    } else if (lodash_has__WEBPACK_IMPORTED_MODULE_32___default()(this.$slots, 'popupClick')) {
       popupClick = this.$slots.popupClick;
     }
 
@@ -62492,22 +62493,22 @@ var nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mouse
 
     var popupInstance; // check if popup is the content type of popup, if not create one
 
-    var popupFind = Object(_utils_findVNodeChildren__WEBPACK_IMPORTED_MODULE_30__["default"])(popup, 'VmPopup');
+    var popupFind = Object(_utils_findVNodeChildren__WEBPACK_IMPORTED_MODULE_29__["default"])(popup, 'VmPopup');
 
     if (popupFind) {
       popupInstance = popupFind[0];
     } else {
-      popupInstance = h(_VmPopup__WEBPACK_IMPORTED_MODULE_32__["default"], [popup]);
+      popupInstance = h(_VmPopup__WEBPACK_IMPORTED_MODULE_31__["default"], [popup]);
     } // setup popupinstance data
 
 
-    popupInstance.componentOptions.propsData = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_28__["default"])({}, popupInstance.componentOptions.propsData), props);
+    popupInstance.componentOptions.propsData = Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])(Object(_Users_le_PROJETOS_CURUPIRA_vue_mapbox_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_27__["default"])({}, popupInstance.componentOptions.propsData), props);
 
     if (popupKey === 'layerPopupClick') {
       this.popupOpen = true; // when click in close of popup, deselect any selected layers
 
-      var closeFunc = lodash_get__WEBPACK_IMPORTED_MODULE_34___default()(popupInstance, 'componentOptions.listeners.close');
-      lodash_set__WEBPACK_IMPORTED_MODULE_35___default()(popupInstance.componentOptions, 'listeners.close', function (e) {
+      var closeFunc = lodash_get__WEBPACK_IMPORTED_MODULE_33___default()(popupInstance, 'componentOptions.listeners.close');
+      lodash_set__WEBPACK_IMPORTED_MODULE_34___default()(popupInstance.componentOptions, 'listeners.close', function (e) {
         _this13.popupOpen = false;
         _this13.selectedFeatures = [];
         _this13.hoverFeatures = [];
