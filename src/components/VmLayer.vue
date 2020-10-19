@@ -455,26 +455,38 @@ export default {
 
     // DATA JOIN WATCHERS
     myData: function (val, oldval) {
-      if (Array.isArray(val) && Array.isArray(oldval)) {
-        if (JSON.stringify(val) === JSON.stringify(oldval)) {
-          return
-        }
-      }
+      // debugger;
+      // if (Array.isArray(val) && Array.isArray(oldval)) {
+      //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
+      //     return
+      //   }
+      // }
+      debugger
+
       this.keysExistInData = Object.keys(val?.[0])
+      if(oldval){
+        this.removeDataJoin(oldval)
+      }
       this.addDataJoin()
     },
 
-    dataJoin: function () {
+    dataJoin: function (val, oldval) {
+      // debugger
+      // if (Array.isArray(val) && Array.isArray(oldval)) {
+      //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
+      //     return
+      //   }
+      // }
       this.loadData()
     },
 
-    dataJoinKey: function () {
-      this.addDataJoin()
-    },
+    // dataJoinKey: function () {
+    //   this.addDataJoin()
+    // },
 
-    dataJoinDataPath: function () {
-      this.addDataJoin()
-    }
+    // dataJoinDataPath: function () {
+    //   this.addDataJoin()
+    // }
 
   },
 
@@ -582,6 +594,21 @@ export default {
         console.log(this.myPaint)
         console.error(e)
         // this.$destroy()
+      }
+    },
+
+     removeDataJoin: function (vals) {
+      if (Array.isArray(vals)) {
+        const map = this.getMap()
+        vals.forEach(feature => {
+          // check object and if we have an id
+          if (feature?.constructor?.name !== 'Object') return
+          const id = feature?.[this.dataJoinKey]
+          if (id === undefined) return
+          map.removeFeatureState(
+            { source: this.sourceId, sourceLayer: this.sourceLayer, id }
+          )
+        })
       }
     },
 
