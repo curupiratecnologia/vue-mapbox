@@ -420,7 +420,18 @@ export default {
   },
 
   render (h) {
-    console.log('marker render')
+
+    const minZoom = this.minZoom ? this.minZoom : 0
+    const maxZoom = this.maxZoom ? this.maxZoom : 24
+    const zoom = this.getMap().getZoom()
+
+    // if (zoom < minZoom || zoom > maxZoom) {
+    //     return null
+    // }
+
+    //   this.rendered = true
+
+
     const childrens = []
     let popup
     let popupKey
@@ -511,9 +522,11 @@ export default {
     // return null
 
     return h('div',
-      { style: { opacity: Number(this.opacity) } },
+      { style: { display:'none', opacity: Number(this.opacity) } },
       [...childrens]
     )
+
+    this.markerVisibility();
 
     // just for documentatio
     /**

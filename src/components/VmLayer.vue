@@ -297,21 +297,28 @@ export default {
   computed: {
 
     myPaintNormal: function () {
+      //hack to check props change to force computed
+      const allPaintLayout = JSON.stringify(this.$props) 
       return this.getPaintLayoutForState('paint', '')
     },
     myPaintHover: function () {
+      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('paint', 'hover')
     },
     myPaintClick: function () {
+      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('paint', 'click')
     },
     myLayoutNormal: function () {
+      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('layout', '')
     },
     myLayoutHover: function () {
+      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('layout', 'hover')
     },
     myLayoutClick: function () {
+      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('layout', 'click')
     },
 
@@ -428,7 +435,6 @@ export default {
     },
 
     hoverFeatures: function (val, oldVal) {
-    
       const map = this.getMap()
       if (oldVal.length > 0) {
         oldVal.forEach(feature => {
@@ -461,8 +467,6 @@ export default {
       //     return
       //   }
       // }
-      debugger
-
       this.keysExistInData = Object.keys(val?.[0])
       if(oldval){
         this.removeDataJoin(oldval)
@@ -831,6 +835,7 @@ export default {
       })
 
       // GET WHAT IS DEFINE LOOSELY IN PROPS (fill-color, fill-color-click .....)
+      debugger;
       Object.entries(this.$options.propsData).forEach(item => {
         const key = this.innerPaintPropConvert(kebabCase(item[0]))
         const value = item[1]
@@ -856,7 +861,6 @@ export default {
 
           // MATCH VALUES
           if (this.classesValueInterpolation === 'match') {
-            debugger
             const featureId = featureProperty === '_id'
             expression = featureId ? ['match', ['id']] : ['match', ['get', featureProperty]]
 

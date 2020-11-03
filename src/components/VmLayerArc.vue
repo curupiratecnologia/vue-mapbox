@@ -170,7 +170,7 @@ export default {
       } else {
         pos = get(item, this.sourcePosition, [-45, -15])
       }
-      console.log(pos)
+      // console.log(pos)
       return pos
     },
 
@@ -181,7 +181,7 @@ export default {
       } else {
         pos = get(item, this.targetPosition, [-45, -15])
       }
-      console.log(pos)
+      // console.log(pos)
       return pos
     },
 

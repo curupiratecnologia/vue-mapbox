@@ -59,9 +59,22 @@ export default {
     anchor: {
       default: 'center'
     },
+
     opacity: {
       default: 1
-    }
+    },
+      /**
+      (Dynamic) min zoom of map tha will show the marker
+    */
+    minZoom: {
+      type: [String, Number]
+    },
+    /**
+      (Dynamic) min zoom of map tha will show the marker
+    */
+    maxZoom: {
+      type: [String, Number]
+    },
 
   },
 
@@ -182,6 +195,7 @@ export default {
   },
 
   render (h) {
+    
     const svg = this.createDonutChart(this.dataSet, this.dataColor, this.myradius, this.chartWidth, parseInt(this.fontSize))
 
     const children = []
@@ -209,7 +223,7 @@ export default {
     Object.entries(this.$slots).forEach((item) => {
       const key = item[0]
       const value = item[1]
-      if (key == 'marker') return
+      if (key === 'marker') return
       // set(value,'data.slot',key)
       children.push(
         h('div', {
@@ -220,9 +234,10 @@ export default {
     })
 
     // get all slots all slots and scoped slots
-
+    
     return h(VmMarker,
       {
+        key:this.key+"marker",
         props: { ...this.$attrs, ...this.$props, opacity: this.opacity, anchor: this.anchor },
         on: { ...this.$listeners }
 

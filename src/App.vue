@@ -17,42 +17,32 @@
 
                   <vm-source
                 key="estadoBase"
-                name="estado_base"
+                name="sinir_municipio_base"
+                type='vector'
+                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_municipio_base/{z}/{x}/{y}.mvt?ano_referencia=2018`], minzoom: 2, maxzoom: 24, }"
+                />
+                  <vm-source
+                key="estadoBase"
+                name="sinir_estado_base"
                 type='vector'
                 :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_estado_base/{z}/{x}/{y}.mvt`], minzoom: 2, maxzoom: 24, }"
                 />
 
-    <vm-layer
+                  <vm-layer
                         key="EstadoCapagColors"
                         name="EstadoCapagColors"
                         type="fill"
+                        :fill-color="fill"
+                        :fill-opacity="0.5"
                         @featurehover="featureenter"
-                        source="estado_base"
-                        sourceLayer="sinir_estado_base"
-                       
+                        source="sinir_municipio_base"
+                        sourceLayer="sinir_municipio_base"
                         :z-index="20"
                       >
                       </vm-layer>
 
-          <!-- <vmLayer name="myLayer"
-              source="bioma"
-              sourceLayer="bioma"
-              type="fill"
-              :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-              :paint-hover="{ 'fill-color': 'red', 'fill-opacity': 1  }"
-              :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-             :classes = "[
-            { 'fill-color': '#6A9369', 'value': 'Amazônia', 'property': 'nome_bioma' },
-            { 'fill-color': '#C1C690', 'value': 'Caatinga', 'property': 'nome_bioma' },
-            { 'fill-color': '#99A278', 'value': 'Cerrado', 'property': 'nome_bioma' },
-            { 'fill-color': '#C1E2BE', 'value': 'Mata Atlântica', 'property': 'nome_bioma' },
-            { 'fill-color': '#92BA94', 'value': 'Pampa', 'property': 'nome_bioma' }
-          ]"
-          classesValueInterpolation='match'
-              multipleFeatureSelectionOn="alt"
-              :opacity="Number(opacity)"
-              :hideOnOpacity="true"
-          /> -->
+         
+
 
       </VueMapbox>
 
