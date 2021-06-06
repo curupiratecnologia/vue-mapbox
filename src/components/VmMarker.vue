@@ -174,7 +174,7 @@ export default {
   },
 
   created: function () {
-    console.count('marker created')
+    //console.count('marker created')
     this.popup = null
     this.markerElement = null
     this.eventsFunction = {}
@@ -188,12 +188,12 @@ export default {
   },
 
   mounted () {
-    console.count('marker mounted')
+    // console.count('marker mounted')
     this.$nextTick(() => this.createMarker())
   },
 
   async updated () {
-    // console.log('marker updated')
+    // //console.log('marker updated')
     // await this.$nextTick()
     // this.setupMarker()
     // this.$nextTick(() => this.setupMarker())
@@ -236,13 +236,13 @@ export default {
   },
 
   beforeDestroy () {
-    console.count('remove marker')
+    // console.count('remove marker')
     this.getMap().off('zoom', this.markerVisibility)
     if (this.marker) {
-      console.count('really remove marker')
+      // console.count('really remove marker')
       this.marker.remove()
     } else {
-      console.count('no marker to remove')
+      // console.count('no marker to remove')
     }
   },
 
@@ -253,7 +253,7 @@ export default {
   methods: {
 
     createMarker: function () {
-      console.log('setupMarker')
+      //console.log('setupMarker')
       const options = getOnlyMapboxProps(this)
       if (this.marker) this.marker.remove()
 

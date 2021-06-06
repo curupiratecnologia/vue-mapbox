@@ -190,7 +190,7 @@ export default {
   methods: {
 
     createPopup: function () {
-      console.log('popup created!')
+      //console.log('popup created!')
       const options = {
         closeButton: this.closeButton,
         closeOnMove: this.closeOnMove,
@@ -217,7 +217,7 @@ export default {
         this.$emit('update:open', false)
       })
       this.popup.on('close', () => {
-        console.log('chamou fechou do popup')
+        //console.log('chamou fechou do popup')
       })
       this.setupPopup()
       this.MapboxVueInstance.setupEvents(this.$listeners, this.popup, nativeEventsTypes)

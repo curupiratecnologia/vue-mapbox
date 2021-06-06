@@ -114,8 +114,8 @@ export default {
 
         this.layerAdded = true
 
-        console.log('Adding _geoJSON threebox')
-        console.log(this._geoJSON)
+        //console.log('Adding _geoJSON threebox')
+        //console.log(this._geoJSON)
 
         this.layer = this.threebox.addSymbolLayer({
           source: this._geoJSON,

@@ -8,38 +8,92 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-        <vm-source
-          key="bioma"
-          name="bioma"
-          type='vector'
-          :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/bioma/{z}/{x}/{y}.mvt`], minzoom: 0, maxzoom: 24, }"
-        />
+         <vmLayerArc 
+          name="arcLayer"
+          :data="fluxo"
+         sourcePosition="geom_origem.coordinates"
+         targetPosition="destinos[0].geom_destino.coordinates"
 
-                  <vm-source
-                key="estadoBase"
-                name="sinir_municipio_base"
-                type='vector'
-                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_municipio_base/{z}/{x}/{y}.mvt?ano_referencia=2018`], minzoom: 2, maxzoom: 24, }"
-                />
-                  <vm-source
-                key="estadoBase"
-                name="sinir_estado_base"
-                type='vector'
-                :options="{ type:'vector', tiles:[`http://pangea-dev.apps.mma.gov.br/tile/sinir_estado_base/{z}/{x}/{y}.mvt`], minzoom: 2, maxzoom: 24, }"
-                />
-
-                  <vm-layer
-                        key="EstadoCapagColors"
-                        name="EstadoCapagColors"
+         />
+         <vmLayer name="myLayer"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
                         type="fill"
-                        :fill-color="fill"
-                        :fill-opacity="0.5"
-                        @featurehover="featureenter"
-                        source="sinir_municipio_base"
-                        sourceLayer="sinir_municipio_base"
-                        :z-index="20"
-                      >
-                      </vm-layer>
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
+                        >
+
+                     <template #popupHover="slotProps">
+                <vm-popup v-if="slotProps.features"
+                    max-width="200px"
+                    max-height="290px"
+                    color="#2E2D2D"
+                    text-color="white"
+                    >
+                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
+                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
+
+                </vm-popup>
+             </template>
+              <template #popupClick="slotProps">
+                <vm-popup v-if="slotProps.features"
+                    max-width="200px"
+                    max-height="290px"
+                    color="#2E2D2D"
+                    text-color="white"
+                    >
+                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
+                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
+                </vm-popup>
+             </template>
+      </vmLayer>
+
+         
+
+
+      </VueMapbox>
+
+       <VueMapbox
+      key="mapbox2"
+      ref="vuemapbox2"
+      mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
+
+        
+         <vmLayer name="myLayer"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        type="fill"
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
+                        key="layer2"
+                        >
+
+                     <template #popupHover="slotProps">
+                <vm-popup v-if="slotProps.features"
+                    max-width="200px"
+                    max-height="290px"
+                    color="#2E2D2D"
+                    text-color="white"
+                    >
+                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
+                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
+
+                </vm-popup>
+             </template>
+              <template #popupClick="slotProps">
+                <vm-popup v-if="slotProps.features"
+                    max-width="200px"
+                    max-height="290px"
+                    color="#2E2D2D"
+                    text-color="white"
+                    >
+                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
+                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
+                </vm-popup>
+             </template>
+      </vmLayer>
 
          
 
@@ -689,16 +743,21 @@ export default {
 
   methods: {
     alert: function () {
-      console.log('aaa')
+      //console.log('aaa')
     },
     featureenter: function (e) {
-      debugger;
-      console.log(e)
+
+      //console.log(e)
     },
     loaded: function (a, b) {
       window.map = b
+      b.on('render', function(data) {
+                 console.count('render event occurred.');
+                 console.log('render event occurred.', data);
+            });
     }
   }
+
 }
 </script>
 

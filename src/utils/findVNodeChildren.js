@@ -58,7 +58,7 @@ export default function (Node, componentNameToFind, depthLevel = 1, slots = [], 
   //   }
   //   if ((get(VNode, '$options.name', get(VNode, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
   //     bag.push(VNode)
-  //     console.log(VNode.componentOptions.propsData.name)
+  //     //console.log(VNode.componentOptions.propsData.name)
   //   }
   //   const children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
   //   if (Array.isArray(children)) {
@@ -106,7 +106,7 @@ export default function (Node, componentNameToFind, depthLevel = 1, slots = [], 
 
     if ((get(VNodeInstance, '$options.name', get(VNodeInstance, 'componentOptions.Ctor.options.name')) === componentNameToFind)) {
       bag.push(VNodeInstance)
-      console.log( get(VNodeInstance, '$props.name') )
+      //console.log( get(VNodeInstance, '$props.name') )
     }
     // let children = get(VNode, 'children') || get(VNode, 'componentOptions.children')
     // if (!children) children = get(VNode, 'componentInstance.$children')

@@ -835,7 +835,7 @@ export default {
       })
 
       // GET WHAT IS DEFINE LOOSELY IN PROPS (fill-color, fill-color-click .....)
-      debugger;
+      
       Object.entries(this.$options.propsData).forEach(item => {
         const key = this.innerPaintPropConvert(kebabCase(item[0]))
         const value = item[1]

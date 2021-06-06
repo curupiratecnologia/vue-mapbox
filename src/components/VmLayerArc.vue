@@ -13,11 +13,18 @@
 
 <script>
 
-import { ArcLayer } from '@deck.gl/layers'
-import { MapboxLayer } from '@deck.gl/mapbox'
-import { Deck } from '@deck.gl/core'
+// import { ArcLayer } from '@deck.gl/layers'
+// import { MapboxLayer } from '@deck.gl/mapbox'
+// import { Deck } from '@deck.gl/core'
 import get from 'lodash/get'
 import has from 'lodash/has'
+import loadScriptsCss from '../utils/loadScriptsCss'
+
+const SOURCES = [
+  'https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js',
+  'https://unpkg.com/@deck.gl/layers@8.4.16/dist.min.js',
+  'https://unpkg.com/@deck.gl/mapbox@8.4.16/dist.min.js'
+]
 
 export default {
 
@@ -95,21 +102,37 @@ export default {
   destroyed () {
     // if (this.getMap()) {
     //   if (this.getMap().getLayer(this.name)) {
-    //     console.log('destroying Arc Layer')
+    //     //console.log('destroying Arc Layer')
     //     this.MapboxVueInstance.removeLayer(this.name)
     //   }
     // }
     this.layer = null
   },
 
-  created: function () {
+  async created () {
     this.layer = null
-  },
+    if (!window.deck) {
+      try {
+        await loadScriptsCss(SOURCES)
+      } catch (e) {
+        console.error(e)
+        throw new Error('Erro loading for arc layer ')
+      }
+    }
 
-  mounted: function () {
+    if (!window.deck) {
+      throw new Error('Erro loading for arc layer ')
+    }
+
+    this.deck = window.deck
+
     this.$nextTick(() => {
       this.addLayer()
     })
+  },
+
+  mounted: function () {
+    
   },
 
   watch: {
@@ -132,10 +155,11 @@ export default {
       //   gl: this.MapboxVueInstance.getMap().painter.context.gl,
       //   layers: this.createLayer()
       // })
+      const { MapboxLayer } = window.deck
 
       this.layer = new MapboxLayer({
         id: this.id,
-        type: ArcLayer,
+        type: window.deck.ArcLayer,
         data: this.data,
         autoHighlight: true,
         pickable: true, // TODO
@@ -170,7 +194,7 @@ export default {
       } else {
         pos = get(item, this.sourcePosition, [-45, -15])
       }
-      // console.log(pos)
+      // //console.log(pos)
       return pos
     },
 
@@ -181,7 +205,7 @@ export default {
       } else {
         pos = get(item, this.targetPosition, [-45, -15])
       }
-      // console.log(pos)
+      // //console.log(pos)
       return pos
     },
 
@@ -190,13 +214,14 @@ export default {
 
       if (!this.sourceColor) {
         color = this.color
-      }
-      if (typeof this.sourceColor === 'function') {
-        color = this.sourceColor(item)
-      } else if (has(item, this.sourceColor)) {
-        color = get(item, this.sourceColor)
-      } else {
-        color = this.sourceColor
+      }else{
+        if (typeof this.sourceColor === 'function') {
+          color = this.sourceColor(item)
+        } else if (has(item, this.sourceColor)) {
+          color = get(item, this.sourceColor)
+        } else {
+          color = this.sourceColor
+        }
       }
       return this.convertToArray(color)
     },
@@ -205,13 +230,14 @@ export default {
       let color
       if (!this.targetColor) {
         color = this.color
-      }
-      if (typeof this.targetColor === 'function') {
-        color = this.targetColor(item)
-      } else if (has(item, this.targetColor)) {
-        color = get(item, this.targetColor)
-      } else {
-        color = this.targetColor
+      }else{
+        if (typeof this.targetColor === 'function') {
+          color = this.targetColor(item)
+        } else if (has(item, this.targetColor)) {
+          color = get(item, this.targetColor)
+        } else {
+          color = this.targetColor
+        }
       }
       return this.convertToArray(color)
     },
@@ -235,7 +261,8 @@ export default {
 
   createLayer: function () {
     return [
-      new ArcLayer({
+      // new ArcLayer({
+      new deck.ArcLayer({
         id: this.id,
         data: this.data,
         autoHighlight: true,

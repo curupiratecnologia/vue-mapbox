@@ -18,13 +18,12 @@
 </template>
 
 <script>
-import 'mapbox-gl/dist/mapbox-gl.css'
 import findVNodeChildren from '../utils/findVNodeChildren'
 import get from 'lodash/get'
 import orderBy from 'lodash/orderBy'
 import debounce from 'lodash/debounce'
-
 import uniqueId from 'lodash/uniqueId'
+import loadScriptsCss from '../utils/loadScriptsCss'
 
 // inicia os webworks etc antes, para performance de mapax construidos e destruidos
 
@@ -114,6 +113,14 @@ export default {
     accessToken: {
       type: String,
       default: ''
+    },
+    /**
+       * Allow layer nome to be rewrite, so layer with same name don't show error, and you can get than with ref in vm-layer
+       * Bur if your application need the exatc name of layer, so yo can get the exatc name, set it to false
+    */
+    layersCanRaname: {
+      type: Boolean,
+      default: true
     },
     /**
        * The map's Mapbox style. Can be a URL or the STYLE OBJECT itself . example mapbox://styles/mapbox/streets-v11.  more info at https://mapbox.com/mapbox-gl-style-spec/
@@ -237,11 +244,24 @@ export default {
   },
 
   async created () {
-    // console.log('created - vueMapbox')
+    // //console.log('created - vueMapbox')
     if (!window.mapboxgl) {
-      const mapboxgl = await import(/* webpackChunkName: "mapboxgl-core" */ 'mapbox-gl')
-      window.mapboxgl = mapboxgl.default || mapboxgl
+      const sources = [
+        'https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js',
+        'https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css'
+      ]
+      try {
+        await loadScriptsCss(sources)
+      } catch (e) {
+        console.error(e);
+        throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ')
+      }
     }
+
+    if (!window.mapboxgl) {
+      throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ')
+    }
+
     this.mapboxgl = window.mapboxgl
     window.mapboxgl.prewarm()
     this.sources = new Map() // {id:{type,data,instance}}
@@ -287,11 +307,11 @@ export default {
   },
 
   beforeUpdated () {
-    // console.log('beforeUpdated dom vueMapbox')
+    // //console.log('beforeUpdated dom vueMapbox')
   },
 
   mounted () {
-    // console.log('Mounted - Mounted dom vueMapbox')
+    // //console.log('Mounted - Mounted dom vueMapbox')
 
     // this.$nextTick(() => {
     //   this.updateLayerOrder()
@@ -299,7 +319,7 @@ export default {
   },
 
   updated () {
-    // console.log('Updated - updated dom vueMapbox')
+    // //console.log('Updated - updated dom vueMapbox')
     this.$nextTick(() => {
       this.updateLayerOrder()
     })
@@ -314,7 +334,7 @@ export default {
   methods: {
 
     createMap: function () {
-      // console.log('createding map - vueMapbox')
+      // //console.log('createding map - vueMapbox')
       window.mapboxgl.prewarm()
       if (this.accessToken !== '') {
         window.mapboxgl.accessToken = this.accessToken
@@ -332,6 +352,8 @@ export default {
         hash: this.hash,
         bounds: this.bounds,
         maxBounds: this.maxBounds,
+        minZoom: this.minZoom,
+        maxZoom: this.maxZoom,
         interactive: this.interactive
         // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
       })
@@ -339,10 +361,10 @@ export default {
       this.addPropsImages()
 
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes)
-      // console.log('setting mapa loaded')
+      // //console.log('setting mapa loaded')
       this.map.on('load', () => {
         const _this = this
-        // console.log('mapa loaded fired')
+        // //console.log('mapa loaded fired')
         this.mapLoaded = true
         /**
          * Load Event - When Maps Load
@@ -417,7 +439,7 @@ export default {
     */
     addSource: function (id, type, options) {
       // if source name exist, create a randow one
-      if (this.map.getSource(id)) {
+      if (this.map.getSource(id) && this.layersCanRaname) {
         id = uniqueId(id + type)
       }
 
@@ -485,7 +507,7 @@ export default {
 
     getNewIdForLayer: function (name) {
       let id = name
-      if (!this.map.getLayer(name)) {
+      if (!this.map.getLayer(name) && this.layersCanRaname) {
         id = uniqueId('layer' + name)
       }
       return id
@@ -518,7 +540,7 @@ export default {
 
       // when idle because some time the layer get time to be added
       this.map.once('idle', () => {
-        // console.log('A styledata event occurred.')
+        // //console.log('A styledata event occurred.')
         this.$nextTick(() =>
           this.updateLayerOrder()
         )
@@ -530,8 +552,8 @@ export default {
     /**
     * Update All Layers Order
     */
+    // TODO IPORTANTE - complete refactory layer order
     updateLayerOrder: debounce(function () {
-      // console.log('UPDATE LAYER ORDER ==============================================================================')
       if (!this.map) return
       const layers = this.map.getStyle()
       if (!layers?.layers) return
@@ -582,6 +604,7 @@ export default {
       layersId = orderBy(layersId, ['index'], ['asc'])
 
       const currentLayers = this.map.getStyle().layers
+
       // get index of first layer in
       for (let i = layersId.length; i > 1; i--) {
         const currentLayer = layersId[i - 1].id
@@ -634,7 +657,7 @@ export default {
 
     addImage: function (key, url) {
       if (!this.map) return
-   
+
       // create empety image to be avaliable to styles before loading the actual image
       var width = 24 // The image will be 64 pixels square
       var bytesPerPixel = 4 // Each pixel is represented by 4 bytes: red, green, blue, and alpha.

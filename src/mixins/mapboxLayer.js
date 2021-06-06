@@ -134,7 +134,7 @@ export default {
     this.map.removeLayer(this.layerName)
     this.map.removeSource(this.sourceName)
     // this.map.up
-    console.log('REMOVENDO:' + this.layerName)
+    //console.log('REMOVENDO:' + this.layerName)
   },
 
   methods: {
@@ -184,7 +184,7 @@ export default {
         })
 
         this.map.on('mousemove', this.layerName, (e) => {
-          // console.log(this.layerName+new Date())
+          // //console.log(this.layerName+new Date())
           // if (e.originalEvent.cancelBubble) {
           //     return;
           // }

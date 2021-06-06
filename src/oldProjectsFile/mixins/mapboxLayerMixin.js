@@ -211,7 +211,7 @@ export default {
       this.map.removeLayer(this.layerName)
       this.map.removeSource(this.sourceName)
       // this.map.up
-      console.log('REMOVENDO:' + this.layerName)
+      //console.log('REMOVENDO:' + this.layerName)
     }
   },
 
@@ -238,7 +238,7 @@ export default {
       })
 
       this.map.on('mousemove', this.layerName, function (e) {
-        // console.log('mousemove: '+this.layerName)
+        // //console.log('mousemove: '+this.layerName)
         if (e.features.length > 0) {
           e = { ...e, ...e.features[0].properties }
           _t.$emit('mousemove', e)
@@ -357,7 +357,7 @@ export default {
 
     setLayerStyle: function () {
       if (!this.map && this.layerAdded) return
-      console.log('update style for: ' + this.layerName)
+      //console.log('update style for: ' + this.layerName)
       const styleRoot = this.map.getStyle()
       const layerIndex = _.findIndex(styleRoot.layers, { id: this.layerName })
       const layerStyle = this.getLayerStyle()

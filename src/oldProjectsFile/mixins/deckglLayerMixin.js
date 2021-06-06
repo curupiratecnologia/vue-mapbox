@@ -184,7 +184,7 @@ export default {
     this.map.removeLayer(this.layerName)
     // this.map.removeSource(this.sourceName);
     // this.map.up
-    console.log('REMOVENDO:' + this.layerName)
+    //console.log('REMOVENDO:' + this.layerName)
   },
 
   methods: {
