@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <center>
+
+     <recuperacao-energetica-icon />
       <VueMapbox
       key="mapbox"
       ref="vuemapbox"
@@ -8,97 +10,125 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-         <vmLayerArc 
+      
+      
+     
+
+      
+      <!-- <vmLayer name="myLayer"
+                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
+                        type="fill"
+                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
+                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
+                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
+                        multipleFeatureSelectionOn="alt"
+                        >
+
+               <template #popupHover="slotProps">
+                <vm-popup v-if="slotProps.features"
+                    max-width="200px"
+                    max-height="290px"
+                    color="#2E2D2D"
+                    text-color="white"
+                    >
+                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
+             
+
+                </vm-popup>
+             </template>
+              <template #popupClick="slotProps">
+                <vm-popup v-if="slotProps.features"
+                    max-width="200px"
+                    max-height="290px"
+                    color="#2E2D2D"
+                    text-color="white"
+                    >
+                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
+            
+                </vm-popup>
+             </template>
+      </vmLayer> -->
+
+      <vmLayerArc
+          key="arclayer"
           name="arcLayer"
           :data="fluxo"
-         sourcePosition="geom_origem.coordinates"
-         targetPosition="destinos[0].geom_destino.coordinates"
-
-         />
-         <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-                        multipleFeatureSelectionOn="alt"
-                        >
-
-                     <template #popupHover="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
-
-                </vm-popup>
-             </template>
-              <template #popupClick="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
-                </vm-popup>
-             </template>
-      </vmLayer>
-
-         
+          sourcePosition="geom_origem.coordinates"
+          targetPosition="destinos[0].geom_destino.coordinates"
+      />
 
 
-      </VueMapbox>
 
-       <VueMapbox
-      key="mapbox2"
-      ref="vuemapbox2"
-      mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
+        <!-- <vm-image name="testeurl" url="/images/ambiente_construido_2.png" /> -->
+
+        <vm-image name="testesvg"
+                  width="55px">
+
+                  <recuperacao-energetica-icon :energiaPercent="0" :processamentoPercent="20"/>
+
+        </vm-image>
 
         
-         <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-                        multipleFeatureSelectionOn="alt"
-                        key="layer2"
-                        >
 
-                     <template #popupHover="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
+        <!-- <vm-image name="testesvgcontent" 
+                  width="25px"
+        url='<svg width="135" height="135" viewBox="0 0 135 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="67.5" cy="67.5" r="57" stroke="black" stroke-width="21" stroke-dasharray="300 300"/>
+                <g filter="url(#filter0_d)">
+                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" fill="#F21414"/>
+                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" stroke="#F40000"/>
+                </g>
+                <defs>
+                <filter id="filter0_d" x="28.0141" y="39.31" width="71.0719" height="59.19" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                </filter>
+                </defs>
+      </svg>' /> -->
 
-                </vm-popup>
-             </template>
-              <template #popupClick="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-                    <!-- <indicador-bar :name="layer.name" :value="slotProps.features[0].properties[layer.variavel]" /> -->
-                </vm-popup>
-             </template>
-      </vmLayer>
+        <vm-source 
+        name="ponto estados"
+        type="geojson" :options="{data:geojson2}">
+              <vm-layer
+                name="layer-sumbol-teste"
+                type="symbol"
+                :icon-image='["coalesce", ["image", "testeurl"], ["image", "testesvg"], ["image", "testesvgcontent"] ,["image", "tema-1-marke"]]'
+             >
 
-         
-
-
+            </vm-layer>
+    </vm-source>
       </VueMapbox>
+
+<!-- 
+    <svg width="135" height="135" viewBox="0 0 135 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="67.5" cy="67.5" r="57" stroke="black" stroke-width="21" stroke-dasharray="300 300"/>
+                <g filter="url(#filter0_d)">
+                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" fill="#F21414"/>
+                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" stroke="#F40000"/>
+                </g>
+                <defs>
+                <filter id="filter0_d" x="28.0141" y="39.31" width="71.0719" height="59.19" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                </filter>
+                </defs>
+      </svg> -->
+
+
+
+
+
+
 
     </center>
       <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
@@ -113,8 +143,11 @@
 
 //  import VueMapbox from './components/VueMapbox.vue'
 
+import RecIcon from '@/components/recuperacao-energetica-icon'
+
 export default {
   name: 'App',
+  components:{'recuperacao-energetica-icon':RecIcon},
   data () {
     return {
       color: false,
@@ -743,18 +776,18 @@ export default {
 
   methods: {
     alert: function () {
-      //console.log('aaa')
+      // console.log('aaa')
     },
     featureenter: function (e) {
 
-      //console.log(e)
+      // console.log(e)
     },
     loaded: function (a, b) {
       window.map = b
-      b.on('render', function(data) {
-                 console.count('render event occurred.');
-                 console.log('render event occurred.', data);
-            });
+      b.on('render', function (data) {
+        //  console.count('render event occurred.');
+        //  console.log('render event occurred.', data);
+      })
     }
   }
 

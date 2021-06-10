@@ -253,7 +253,7 @@ export default {
       try {
         await loadScriptsCss(sources)
       } catch (e) {
-        console.error(e);
+        console.error(e)
         throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ')
       }
     }
@@ -266,6 +266,7 @@ export default {
     window.mapboxgl.prewarm()
     this.sources = new Map() // {id:{type,data,instance}}
     this.layers = new Map() //
+    this.imagesMap = new Map() //
     // this.images = new Map() //
     this.layersGroups = new Map() //
     this.eventsOnMap = new Map() //
@@ -655,25 +656,75 @@ export default {
     * @params {object} images.
     */
 
-    addImage: function (key, url) {
+    addImage: async function (key, url, forceUpdate = false) {
       if (!this.map) return
+      // if already have the image on map, and not force update, return
+      if (forceUpdate === false && this.imagesMap.has(key)) {
+        return
+      }
 
       // create empety image to be avaliable to styles before loading the actual image
       var width = 24 // The image will be 64 pixels square
       var bytesPerPixel = 4 // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
       var data = new Uint8Array(width * width * bytesPerPixel)
-
       if (!this.map.hasImage(key)) this.map.addImage(key, { width: width, height: width, data: data })
 
-      // than load and replace
-      this.map.loadImage(url, (error, image) => {
-        if (error) {
-          console.error(error)
-          console.error(url)
+      // set image before it is loading, because if a have another node after
+      this.imagesMap.set(key, true)
+      // now load the real image
+      let imgElement
+      try {
+        imgElement = await this.processImage(url)
+      } catch (e) {
+        console.error(`image ${key}:${url} loading error`)
+        console.error(e)
+      }
+
+      if (this.map.hasImage(key) && imgElement) {
+        this.map.removeImage(key)
+        this.map.addImage(key, imgElement)
+      }
+    },
+
+    /**
+    Remove an image of map
+    * @params {object} images.
+    */
+
+    removeImage: async function (key) {
+      if (!this.map) return
+
+      if (this.map.hasImage(key)) {
+        this.map.removeImage(key)
+        this.imagesMap.delete(key)
+      }
+    },
+
+    /**
+    Creat a html image element from a url or a svg
+    * @params {object} images.
+    */
+    processImage: async function (imgSource) {
+      return new Promise((resolve, reject) => {
+        if (!imgSource) {
+          reject(new Error('img empty'))
+        } else if (imgSource?.constructor?.name === 'HTMLImageElement') {
+          resolve(imgSource)
+        } else if (imgSource?.constructor?.name === 'String' || imgSource?.constructor?.name === 'SVGSVGElement') {
+          const newimg = new Image()
+          newimg.onload = () => {
+            resolve(newimg)
+          }
+          newimg.onerror = (e) => {
+            reject(e)
+          }
+          // check if is a svg as string o html element
+          if ((imgSource?.constructor?.name === 'String' && imgSource.match(/<\s*svg/g)) || (imgSource?.constructor?.name === 'SVGSVGElement')) {
+            imgSource = 'data:image/svg+xml;base64,' + window.btoa(imgSource?.outerHTML ?? imgSource)
+          }
+          newimg.src = imgSource
         } else {
-          // if (!this.map.hasImage(key))
-          if (this.map.hasImage(key)) this.map.removeImage(key)
-          this.map.addImage(key, image)
+          reject(new Error('Not compatibility image. Please set source as an url, a svg string, a svg element or img element'))
         }
       })
     },
