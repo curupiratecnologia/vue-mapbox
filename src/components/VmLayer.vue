@@ -297,8 +297,8 @@ export default {
   computed: {
 
     myPaintNormal: function () {
-      //hack to check props change to force computed
-      const allPaintLayout = JSON.stringify(this.$props) 
+      // hack to check props change to force computed
+      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('paint', '')
     },
     myPaintHover: function () {
@@ -379,7 +379,7 @@ export default {
       }
     },
     zIndex: function (val) {
-      console.log(val)
+      // console.log(val)
       this.$nextTick(() => this.MapboxVueInstance.updateLayerOrder())
     },
 
@@ -461,28 +461,28 @@ export default {
 
     // DATA JOIN WATCHERS
     myData: function (val, oldval) {
-      // debugger;
+      /// /debugger;
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
       //   }
       // }
       this.keysExistInData = Object.keys(val?.[0])
-      if(oldval){
+      if (oldval) {
         this.removeDataJoin(oldval)
       }
       this.addDataJoin()
     },
 
     dataJoin: function (val, oldval) {
-      // debugger
+      /// /debugger
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
       //   }
       // }
       this.loadData()
-    },
+    }
 
     // dataJoinKey: function () {
     //   this.addDataJoin()
@@ -494,7 +494,30 @@ export default {
 
   },
 
+  mounted () {
+    // debugger;
+    // //console.log('Mounted - Mounted dom vueMapbox')
+
+    // this.$nextTick(() => {
+    //   this.updateLayerOrder()
+    // })
+  },
+
+  beforeUpdated: function () {
+    // debugger;
+    // //console.log('beforeUpdated dom vueMapbox')
+  },
+
+  updated: function () {
+    // debugger
+    // update layer
+    this.$nextTick(() => {
+      this.updateLayerOrder()
+    })
+  },
+
   created: function () {
+    // debugger
     this.popupOpen = false
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
@@ -531,7 +554,7 @@ export default {
         } else {
           // add layer when a source with name is added in future
           const func = (e) => {
-            console.log(e)
+            // console.log(e)
             if (e.dataType === 'source' && e.sourceId === this.options.source) {
               this.addLayer()
               this.getMap().off('sourcedata', func)
@@ -559,7 +582,7 @@ export default {
 
   destroyed () {
     if (this.layerId) {
-      console.log('destroying ' + this.layerId)
+      // console.log('destroying ' + this.layerId)
       this.MapboxVueInstance.removeLayer(this.layerId)
       // check if the source of layer is a Object/ownSource,and remove it too
       if (typeof this.source === 'object') {
@@ -578,6 +601,7 @@ export default {
     },
 
     addLayer: function () {
+      // debugger;
       try {
         if (this.customLayer) {
           const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
@@ -593,15 +617,15 @@ export default {
           this.loadData()
         }
       } catch (e) {
-        console.error('========================== Error adding Layer ' + this.name)
-        console.error('Error adding Layer ' + this.name)
-        console.log(this.myPaint)
-        console.error(e)
+        // console.error('========================== Error adding Layer ' + this.name)
+        // console.error('Error adding Layer ' + this.name)
+        // console.log(this.myPaint)
+        // console.error(e)
         // this.$destroy()
       }
     },
 
-     removeDataJoin: function (vals) {
+    removeDataJoin: function (vals) {
       if (Array.isArray(vals)) {
         const map = this.getMap()
         vals.forEach(feature => {
@@ -645,10 +669,10 @@ export default {
           if (Array.isArray(data)) {
             return [...data]
           } else {
-            console.error('dataJoin url dont return an Array in path:' + path)
+            // console.error('dataJoin url dont return an Array in path:' + path)
           }
         } catch (e) {
-          console.error(e)
+          // console.error(e)
         }
       }
       this.myData = res
@@ -658,8 +682,7 @@ export default {
     //* * EVENTS SETUP */
 
     setupLayerFeaturesEvents: function () {
-    
-      if ( this.$listeners.featurehover || this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
+      if (this.$listeners.featurehover || this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
         this.hasFeatureHover = true
       } else {
         this.hasFeatureHover = false
@@ -835,7 +858,7 @@ export default {
       })
 
       // GET WHAT IS DEFINE LOOSELY IN PROPS (fill-color, fill-color-click .....)
-      
+
       Object.entries(this.$options.propsData).forEach(item => {
         const key = this.innerPaintPropConvert(kebabCase(item[0]))
         const value = item[1]
@@ -903,7 +926,7 @@ export default {
           const key = item[0]
           const value = item[1]
           if (this.checkForZoomExp(value)) {
-            console.error('ZOOM expression can not be user in hover or click state due mapbox limitations. Default will be the last value')
+            // console.error('ZOOM expression can not be user in hover or click state due mapbox limitations. Default will be the last value')
             paintLayoutFinal[key] = value[value.length - 1] // (value?.[0] === 'interpolate') ? value[value.length-1] : value?.[2] // default value if interpolate, or step
           }
         })

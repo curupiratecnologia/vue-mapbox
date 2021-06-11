@@ -51,7 +51,6 @@ export default {
   },
 
   render: function (h) {
-    debugger
     if (this.$slots?.default?.[0]) {
       return this.$slots?.default[0]
     }
@@ -64,14 +63,12 @@ export default {
 
   methods: {
     addImage: function () {
-      debugger
       this.$nextTick(() => {
         let tagElm = this?.$el
         // if not root, find children
         if (tagElm?.constructor?.name === 'HTMLDivElement') {
           tagElm = (this.$el.querySelector('svg') || this.$el.querySelector('img'))
         }
-
         if (tagElm?.constructor?.name === 'SVGSVGElement' || tagElm?.constructor?.name === 'HTMLImageElement') {
           this.MapboxVueInstance.addImage(this.name, tagElm, this.forceUpdate)
         } else {
