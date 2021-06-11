@@ -26,7 +26,7 @@
                     max-height="290px"
                     color="#2E2D2D"
                     text-color="white"
-                    >
+                    >`
                     <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
 
                 </vm-popup>
