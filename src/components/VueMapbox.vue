@@ -1,4 +1,4 @@
-/* eslint-disable eqeqeq */``
+
 <template>
   <div class="vue-mapbox" :style="{ position:'relative', width: myWidth, height: myHeight }">
     <div ref="mapabaselayer" id="mapaBaseLayer" class="map-layer mapbox-map-container"
@@ -18,10 +18,9 @@
 </template>
 
 <script>
-import findVNodeChildren from '../utils/findVNodeChildren'
+import findVNodeChildren from '../utils/findVNodeChildren' // TODO - check why not work, and using this.findLayers works
 import get from 'lodash/get'
 import orderBy from 'lodash/orderBy'
-import debounce from 'lodash/debounce'
 import uniqueId from 'lodash/uniqueId'
 import loadScriptsCss from '../utils/loadScriptsCss'
 
@@ -78,7 +77,8 @@ const nativeEventsTypes = [
 ]
 
 export default {
-
+/* eslint-disable camelcase */
+/* eslint-disable eqeqeq */
   name: 'VueMapbox',
   /**
        * Access current mapbox instance using componentInstance.map
@@ -321,7 +321,7 @@ export default {
 
   updated () {
     // update mapbox
-    // //console.log('Updated - updated dom vueMapbox')
+    console.log('🚀 ~ file: VueMapbox.vue ~ line 329 ~ updated ~ update mapbox')
     // this.$nextTick(() => {
     if (this.updateLayerTimeout) clearTimeout(this.updateLayerTimeout)
     this.updateLayerTimeout = setTimeout(this.updateLayerOrder, 400)
@@ -429,6 +429,7 @@ export default {
     * Create/Update Source
     */
     addSource: function (id, type, options) {
+      debugger
       // if source name exist, create a randow one
       if (this.map.getSource(id) && this.layersCanRaname) {
         id = uniqueId(id + type)
@@ -501,6 +502,8 @@ export default {
       if (this.map.getLayer(name) && this.layersCanRaname) {
         id = uniqueId('autoNamelayer_' + name)
       }
+      // TODO IMPORTANTISSIMO - refazer logica de nome de layer e source, pq layers com source objetos da meio que ruim
+      id = uniqueId('autoNamelayer_' + name)
       return id
     },
 
@@ -515,22 +518,38 @@ export default {
     */
     addLayer: function (options, zIndex) {
       // // if layer name exist, create a randow one
-      const id = options.id
+      let id = options.id
 
       if (this.map.getLayer(id)) {
         this.removeLayer(id)
       }
       // TODO - get the before layer
-      const beforeId = this.updateLayerOrder(id)
+      let beforeId = this.updateLayerOrder(id)
+
+      if (options?.source?.constructor?.name === 'Object') {
+        // check if we have a id
+        const sourceId = options?.source?.id ?? id
+        if (this.map.getSource(sourceId)) {
+          options.id = uniqueId('new' + sourceId)
+          id = options.id
+          // options.source.name = options.source.id
+        }
+      }
+
+      if (this.map.getLayer(id)) {
+        this.removeLayer(id)
+      }
+
+      if (!this.map.getLayer(beforeId)) { beforeId = undefined }
       this.map.addLayer(options, beforeId)
 
       // const sourceObject = this.map.getLayer(options.id)
 
       this.layers.set(id, { id })
 
-      // this.updateLayerOrder()
+      this.updateLayerOrder()
 
-      return id
+      return options.id
     },
 
     findLayers: function (VNode, bag) {
@@ -566,29 +585,33 @@ export default {
     */
     // TODO IPORTANTE - complete refactory layer order
     updateLayerOrder: function (setLayerNameToReturnItBeforeLayerID) {
-      // console.count('===============================updateLayerOrder')
-      // console.time('updateLayerOrder')
+      console.count('===============================updateLayerOrder')
+      console.count(setLayerNameToReturnItBeforeLayerID)
+      console.time('updateLayerOrder')
 
       const currentLayers = this.map?.getStyle()?.layers ?? undefined
 
       const layerInstances = this.findLayers(this.$slots.default)
-      // console.log('find layer vNode tree')
-      // console.timeLog('updateLayerOrder')
+      console.log('find layer vNode tree')
+      console.timeLog('updateLayerOrder')
 
       // check if i have layers in map or in vNodTree
       if (!currentLayers || !layerInstances) {
-        // console.warn('Map or layer in vNode not exist')
-        // console.timeEnd('updateLayerOrder')
+        console.warn('Map or layer in vNode not exist')
+        console.timeEnd('updateLayerOrder')
         return
       }
 
-      /// /console.log('======= All LAYERS IN MAPBOX')
-      /// /console.table(currentLayers)
+      console.log('======= All LAYERS IN MAPBOX')
+      console.table(currentLayers)
 
       // make layers with order
       let layersId = layerInstances.map((layer, i) => {
         const component = layer.componentInstance || layer
         const id = get(component, '$data.layerId')
+        if (!id) {
+          debugger
+        }
         let zIndex = get(component, '$props.zIndex')
         const index = i
         if (zIndex) {
@@ -597,26 +620,19 @@ export default {
         return { id, index, zIndex }
       })
       layersId = orderBy(layersId, ['index'], ['asc'])
-      /// /console.log('======= ORDER  INDEX')
-      /// /console.table(layersId)
-
-      // create a function
-      layersId.move = function (from, to) {
-        if (to < 0) to = 0
-        this.splice(to, 0, this.splice(from, 1)[0])
-        return this
-      }
+      console.log('======= ORDER  INDEX')
+      console.table(layersId)
 
       for (let to = 0; to < layersId.length; to++) {
-        if (layersId[to].zIndex?.constructor?.name === 'Number') {
-          // layersId.splice(to, 0, layersId.splice(layersId[to].zIndex, 1)[0])
-          layersId.move(to, layersId[to].zIndex)
+        if (!layersId[to].zIndex) {
+          layersId[to].zIndex = to
         }
       }
-      /// /console.log('======= ORDER Z INDEX')
-      /// /console.table(layersId)
-      // console.log('order vnode layers')
-      // console.timeLog('updateLayerOrder')
+      layersId = orderBy(layersId, ['zIndex'], ['asc'])
+      console.log('======= ORDER Z INDEX')
+      console.table(layersId)
+      console.log('order vnode layers')
+      console.timeLog('updateLayerOrder')
 
       // create a object with layer id and topLayer id
       const currentLayersByID = {}
@@ -626,15 +642,15 @@ export default {
         currentLayersByID[layer.id] = obj
       })
 
-      /// /console.log('======= ORDER IN MAPBOX')
-      /// /console.table(Object.values(currentLayersByID).filter(item => item.id.indexOf('layer-') > -1))
-      // console.log('generate all layers topLayerId')
-      // console.timeLog('updateLayerOrder')
+      console.log('======= ORDER IN MAPBOX')
+      console.table(Object.values(currentLayersByID).filter(item => item.id.indexOf('layer-') > -1))
+      console.log('generate all layers topLayerId')
+      console.timeLog('updateLayerOrder')
 
       // return before layer name
       if (setLayerNameToReturnItBeforeLayerID) {
-        // console.timeEnd('updateLayerOrder')
-        // console.warn('return before layer name')
+        console.timeEnd('updateLayerOrder')
+        console.warn('return before layer name')
         return currentLayersByID?.[setLayerNameToReturnItBeforeLayerID]
       }
 
@@ -644,15 +660,15 @@ export default {
         const currentLayer = layersId?.[i - 1]?.id
         // if we dont have layer im map, go to next one
         if (!currentLayersByID?.[currentLayer]) continue
-        /// /console.log(`check currentLayer:${currentLayer} topLayer:${topLayer}`)
+        console.log(`check currentLayer:${currentLayer} topLayer:${topLayer}`)
         if (currentLayersByID?.[currentLayer]?.topLayerId !== topLayer) {
-          // console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
+          console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
           this.map.moveLayer(currentLayer, topLayer)
         }
       }
-      // console.log('loop and move layers')
-      // console.timeLog('updateLayerOrder')
-      // console.timeEnd('updateLayerOrder')
+      console.log('loop and move layers')
+      console.timeLog('updateLayerOrder')
+      console.timeEnd('updateLayerOrder')
     },
 
     /**

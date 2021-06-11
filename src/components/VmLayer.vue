@@ -361,8 +361,8 @@ export default {
     source: function (val, oldval) {
       if (typeof val === 'object') {
         if (JSON.stringify(val) !== JSON.stringify(oldval)) {
-          const source = this.getMap().getLayer(this.layerId).source
-          this.MapboxVueInstance.updateSource(source, val.type, { ...val })
+          const source = this?.getMap()?.getLayer(this.layerId)?.source
+          if (source) { this.MapboxVueInstance.updateSource(source, val.type, { ...val }) }
         }
       }
     },
@@ -494,15 +494,6 @@ export default {
 
   },
 
-  mounted () {
-    // debugger;
-    // //console.log('Mounted - Mounted dom vueMapbox')
-
-    // this.$nextTick(() => {
-    //   this.updateLayerOrder()
-    // })
-  },
-
   beforeUpdated: function () {
     // debugger;
     // //console.log('beforeUpdated dom vueMapbox')
@@ -511,9 +502,11 @@ export default {
   updated: function () {
     // debugger
     // update layer
-    this.$nextTick(() => {
-      this.updateLayerOrder()
-    })
+    // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
+    // this.$nextTick(() => {
+    //   console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer nextTick')
+    //   this.updateLayerOrder()
+    // })
   },
 
   created: function () {
@@ -601,15 +594,18 @@ export default {
     },
 
     addLayer: function () {
-      // debugger;
+      debugger;
       try {
         if (this.customLayer) {
           const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
           this.layerId = mylayer
         } else {
           const id = this.MapboxVueInstance.getNewIdForLayer(this.name)
+          // set the layerId before create layer, because can be time consumming the addLayer
+          // and if we set after the findLayer will get null the $data.layerId
+          this.layerId = id
           const mylayer = this.MapboxVueInstance.addLayer({ ...this.options, id: id, type: this.type, paint: this.myPaint, layout: this.myLayout })
-          this.layerId = mylayer
+          console.log(`layerName:${this.name}, id:${id}, mylayer:${mylayer}, this.layerId:${this.layerId} `)
           // get source add after add layer, because of case where the source especification is set in props as option, withou an id
           this.sourceId = this.getMap().getLayer(mylayer).source
           // bind listners set in component to mapbox events
@@ -618,9 +614,9 @@ export default {
         }
       } catch (e) {
         // console.error('========================== Error adding Layer ' + this.name)
-        // console.error('Error adding Layer ' + this.name)
+        console.error('Error adding Layer:' + this.name)
         // console.log(this.myPaint)
-        // console.error(e)
+        console.error(e)
         // this.$destroy()
       }
     },

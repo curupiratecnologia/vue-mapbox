@@ -52,7 +52,7 @@ export default {
 
   render: function (h) {
     if (this.$slots?.default?.[0]) {
-      return this.$slots?.default[0]
+      return h('div', { style: 'display:none' },[this.$slots?.default[0]])
     }
     return null
   },
