@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <center>
-
-     <recuperacao-energetica-icon />
+    <center>  
+      
+        <recuperacao-energetica-icon :energiaPercent="50" :processamentoPercent="70" tecnologia="Coprocessamento"/>
+      
+     <!-- <recuperacao-energetica-icon /> -->
       <VueMapbox
+    
       key="mapbox"
       ref="vuemapbox"
       @load="loaded"
@@ -55,17 +58,19 @@
         <!-- <vm-image name="testeurl" url="/images/ambiente_construido_2.png" /> -->
 
         <vm-image name="testesvg"
-                  width="55px">
+                  width="55px"
+                  :updateOnChange="true"
+                  >
 
                   <recuperacao-energetica-icon :energiaPercent="0" :processamentoPercent="20"/>
 
         </vm-image>
-        <vm-image name="testesvg2"
+        <!-- <vm-image name="testesvg2"
                   width="55px">
 
                   <recuperacao-energetica-icon :energiaPercent="50" :processamentoPercent="70"/>
 
-        </vm-image>
+        </vm-image> -->
 
         <!-- <vm-image name="testesvgcontent"
                   width="25px"
@@ -103,17 +108,39 @@
             </vm-layer>
       </vm-source>
 
+
+
+
+
       <vm-source
         key="source-energetico"
         name="ponto estados"
         type="geojson" :options="{data:geojson2}">
+  
+  
               <vm-layer
                 key="layer-icon"
                 name="layer-icons"
                 type="symbol"
                 :icon-image='["coalesce", ["image", "testeurl"], ["image", "testesvg"], ["image", "testesvgcontent"] ,["image", "tema-1-marke"]]'
+                icon-anchor="top-left"
+                :icon-ignore-placement="true"
+                :icon-offset="[-33,-33]"
              >
             </vm-layer>
+
+
+            <vm-layer
+                key="layer-icon-center"
+                name="layer-icons-center"
+                type="circle"
+                :circle-radius="33"
+                :circle-color="'rgba(0,255,0,0.4)'"
+                @featurehover="emcimaIcone"
+            >
+            </vm-layer>
+
+
       </vm-source>
 
       <vm-source
@@ -153,11 +180,12 @@
 
 
     </center>
-      <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
+    <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
+      <!-- 
       toogle order: <input  type="checkbox" v-model="show" /> {{color}}
       {{capagClassesEstadual}}
     fill <input type="text" v-model="fill">
-    z-index-triangulo <input type="number" v-model="zindex">
+    z-index-triangulo <input type="number" v-model="zindex"> -->
 
   </div>
 </template>
@@ -167,10 +195,18 @@
 //  import VueMapbox from './components/VueMapbox.vue'
 
 import RecIcon from '@/components/recuperacao-energetica-icon'
+import PaiTeste from '@/components/pai-teste'
+import Filho from '@/components/filho'
 
 export default {
   name: 'App',
-  components: { 'recuperacao-energetica-icon': RecIcon },
+  components: { 
+    'recuperacao-energetica-icon': RecIcon,
+    'pai-teste': PaiTeste,
+    'filho': Filho
+    
+    
+    },
   data () {
     return {
       zindex: 0,
@@ -190,117 +226,7 @@ export default {
         { id: 5107305, color: '#ffffff' }
       ],
 
-      geojson1: {
-        type: 'FeatureCollection',
-        features: [
-          {
-            type: 'Feature',
-            properties: {
-              tipoRegiao: 'estado',
-              nome: 'Rio de Janeiro',
-              temas: {
-                1: {
-                  nome: 'Mobilidade',
-                  total: 1,
-                  cor: '#984593'
-                }
-              },
-              geocod: '33',
-              colorSet: [
-                '#984593'
-              ],
-              dataSet: [
-                1
-              ],
-              cluster: true
-            },
-            geometry: {
-              type: 'Point',
-              crs: {
-                type: 'name',
-                properties: {
-                  name: 'urn:ogc:def:crs:EPSG::4674'
-                }
-              },
-              coordinates: [
-                -42.0711523406202,
-                -22.0720646645004
-              ]
-            }
-          },
-          {
-            type: 'Feature',
-            properties: {
-              tipoRegiao: 'estado',
-              nome: 'São Paulo',
-              temas: {
-                1: {
-                  nome: 'Mobilidade',
-                  total: 1,
-                  cor: '#984593'
-                }
-              },
-              geocod: '35',
-              colorSet: [
-                '#984593'
-              ],
-              dataSet: [
-                1
-              ],
-              cluster: true
-            },
-            geometry: {
-              type: 'Point',
-              crs: {
-                type: 'name',
-                properties: {
-                  name: 'urn:ogc:def:crs:EPSG::4674'
-                }
-              },
-              coordinates: [
-                -49.1831841692549,
-                -22.5736727410571
-              ]
-            }
-          },
-          {
-            type: 'Feature',
-            properties: {
-              tipoRegiao: 'estado',
-              nome: 'Paraná',
-              temas: {
-                1: {
-                  nome: 'Mobilidade',
-                  total: 1,
-                  cor: '#984593'
-                }
-              },
-              geocod: '41',
-              colorSet: [
-                '#984593'
-              ],
-              dataSet: [
-                1
-              ],
-              cluster: true
-            },
-            geometry: {
-              type: 'Point',
-              crs: {
-                type: 'name',
-                properties: {
-                  name: 'urn:ogc:def:crs:EPSG::4674'
-                }
-              },
-              coordinates: [
-                -51.8183643619047,
-                -24.6344451045557
-              ]
-            }
-          }
-        ]
-      },
-
+  
       geojson2: {
 
         type: 'FeatureCollection',
@@ -308,6 +234,11 @@ export default {
           {
             type: 'Feature',
             properties: {
+              tecnologia:'Aterro Sanitário',
+              processamentoPercent:80,
+              energiaPercent:20,
+
+
               tipoRegiao: 'estado',
               nome: 'Pará',
               temas: {
@@ -343,6 +274,9 @@ export default {
           {
             type: 'Feature',
             properties: {
+              tecnologia:'Aterro Sanitário/CTR',
+              processamentoPercent:20,
+              energiaPercent:0,
               tipoRegiao: 'estado',
               nome: 'Minas Gerais',
               temas: {
@@ -378,6 +312,9 @@ export default {
           {
             type: 'Feature',
             properties: {
+              tecnologia:'Incineração de Resíduos Classe I',
+              processamentoPercent:20,
+              energiaPercent:10,
               tipoRegiao: 'estado',
               nome: 'Esprito Santo',
               temas: {
@@ -413,6 +350,9 @@ export default {
           {
             type: 'Feature',
             properties: {
+              tecnologia:'Lixão com Recuperação de Biogás',
+              processamentoPercent:60,
+              energiaPercent:50,
               tipoRegiao: 'estado',
               nome: 'Rio de Janeiro',
               temas: {
@@ -455,6 +395,9 @@ export default {
           {
             type: 'Feature',
             properties: {
+                       tecnologia:'Lixão com Recuperação de Biogás',
+              processamentoPercent:60,
+              energiaPercent:50,
               tipoRegiao: 'estado',
               nome: 'São Paulo',
               temas: {
@@ -497,6 +440,9 @@ export default {
           {
             type: 'Feature',
             properties: {
+                       tecnologia:'Lixão com Recuperação de Biogás',
+              processamentoPercent:60,
+              energiaPercent:50,
               tipoRegiao: 'estado',
               nome: 'Paraná',
               temas: {
@@ -532,6 +478,9 @@ export default {
           {
             type: 'Feature',
             properties: {
+              tecnologia:'Transbordo de Resíduos',
+              processamentoPercent:20,
+              energiaPercent:80,
               tipoRegiao: 'estado',
               nome: 'Distrito Federal',
               temas: {
@@ -568,169 +517,8 @@ export default {
 
       },
 
-      geojson3: {
 
-        type: 'FeatureCollection',
-        features: []
-
-      },
-
-      geojson: {},
-
-      fluxo: [{
-        geocod_origem: 5219902,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-49.26031485, -15.93202096]
-        },
-        destinos: [{
-          geocod_destino: 5219902,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-49.26031485, -15.93202096]
-          },
-          adequado: 0,
-          inadequado: 4900,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5220108,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-50.37482105, -16.51410686]
-        },
-        destinos: [{
-          geocod_destino: 5220108,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-50.37482105, -16.51410686]
-          },
-          adequado: 0,
-          inadequado: 61800,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5220264,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-48.66342725, -17.05642588]
-        },
-        destinos: [{
-          geocod_destino: 5220264,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-48.66342725, -17.05642588]
-          },
-          adequado: 0,
-          inadequado: 2742.9,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5221007,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-49.60258016, -16.05500387]
-        },
-        destinos: [{
-          geocod_destino: 5221007,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-49.60258016, -16.05500387]
-          },
-          adequado: 0,
-          inadequado: 3720,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5221304,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-47.78063797, -18.35978943]
-        },
-        destinos: [{
-          geocod_destino: 5221304,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-47.78063797, -18.35978943]
-          },
-          adequado: 0,
-          inadequado: 21880,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5221700,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-49.67938453, -15.50501229]
-        },
-        destinos: [{
-          geocod_destino: 5221700,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-49.67938453, -15.50501229]
-          },
-          adequado: 0,
-          inadequado: 56000,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5222005,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-48.50667118, -16.74573646]
-        },
-        destinos: [{
-          geocod_destino: 5222005,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-48.50667118, -16.74573646]
-          },
-          adequado: 0,
-          inadequado: 39130,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5222054,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-49.80746824, -17.73092192]
-        },
-        destinos: [{
-          geocod_destino: 5222054,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-49.80746824, -17.73092192]
-          },
-          adequado: 0,
-          inadequado: 27533.1,
-          adequacao: 0
-        }]
-      }, {
-        geocod_origem: 5300108,
-        geom_origem: {
-          type: 'Point',
-          coordinates: [-47.88061196, -15.78368965]
-        },
-        destinos: [{
-          geocod_destino: 5215603,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-48.28657588, -15.16421844]
-          },
-          adequado: 216960,
-          inadequado: 0,
-          adequacao: 100
-        }, {
-          geocod_destino: 5300108,
-          geom_destino: {
-            type: 'Point',
-            coordinates: [-47.88061196, -15.78368965]
-          },
-          adequado: 2960519.6,
-          inadequado: 140419.2,
-          adequacao: 95.47
-        }]
-      }]
+    
 
     }
   },
@@ -756,23 +544,7 @@ export default {
       return '#666666'
     },
 
-    fluxoFinal: function () {
-      const finalFluxo = [] // { from, to, corOrigem, corDestino}
-      this.fluxo.forEach(fluxo => {
-        fluxo.destinos.forEach(destino => {
-          const point = {
-            geomDestino: destino?.geom_destino?.coordinates,
-            geomOrigem: fluxo?.geom_origem?.coordinates,
-            corOrigem: '#ffffff',
-            corDestino: destino?.adequacao === 0 ? '#ff0000' : '#00FF00'
-
-          }
-          finalFluxo.push(point)
-        })
-      })
-
-      return finalFluxo
-    },
+ 
 
     images: function () {
       return {
@@ -806,6 +578,11 @@ export default {
 
       // console.log(e)
     },
+    
+    emcimaIcone : function (e){
+
+    },
+
     loaded: function (a, b) {
       window.map = b
       // b.on('render', function (data) {

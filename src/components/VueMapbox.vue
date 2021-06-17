@@ -244,7 +244,7 @@ export default {
   },
 
   async created () {
-    // //console.log('created - vueMapbox')
+    // ////console.log('created - vueMapbox')
     if (!window.mapboxgl) {
       const sources = [
         'https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js',
@@ -253,7 +253,7 @@ export default {
       try {
         await loadScriptsCss(sources)
       } catch (e) {
-        // console.error(e)
+        // //console.error(e)
         throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ')
       }
     }
@@ -297,9 +297,6 @@ export default {
 
   watch: {
     bounds: function (val) {
-      // var newCameraTransform = this.map.cameraForBounds(val, {
-      //   padding: { top: 10, bottom: 25, left: 15, right: 5 }
-      // })
       this.map.fitBounds(val, { padding: this.padding })
     },
     maxBounds: function (val) {
@@ -308,11 +305,11 @@ export default {
   },
 
   beforeUpdated () {
-    // //console.log('beforeUpdated dom vueMapbox')
+    // ////console.log('beforeUpdated dom vueMapbox')
   },
 
   mounted () {
-    // //console.log('Mounted - Mounted dom vueMapbox')
+    // ////console.log('Mounted - Mounted dom vueMapbox')
 
     // this.$nextTick(() => {
     //   this.updateLayerOrder()
@@ -321,7 +318,7 @@ export default {
 
   updated () {
     // update mapbox
-    console.log('🚀 ~ file: VueMapbox.vue ~ line 329 ~ updated ~ update mapbox')
+    // console.log('🚀 ~ file: VueMapbox.vue ~ line 329 ~ updated ~ update mapbox')
     // this.$nextTick(() => {
     if (this.updateLayerTimeout) clearTimeout(this.updateLayerTimeout)
     this.updateLayerTimeout = setTimeout(this.updateLayerOrder, 400)
@@ -337,7 +334,7 @@ export default {
   methods: {
 
     createMap: function () {
-      // //console.log('createding map - vueMapbox')
+      // ////console.log('createding map - vueMapbox')
       window.mapboxgl.prewarm()
       if (this.accessToken !== '') {
         window.mapboxgl.accessToken = this.accessToken
@@ -364,10 +361,10 @@ export default {
       this.addPropsImages()
 
       this.setupEvents(this.$listeners, this.map, nativeEventsTypes)
-      // //console.log('setting mapa loaded')
+      // ////console.log('setting mapa loaded')
       this.map.on('load', () => {
         const _this = this
-        // //console.log('mapa loaded fired')
+        // ////console.log('mapa loaded fired')
         this.mapLoaded = true
         /**
          * Load Event - When Maps Load
@@ -429,7 +426,7 @@ export default {
     * Create/Update Source
     */
     addSource: function (id, type, options) {
-      debugger
+      // debugger
       // if source name exist, create a randow one
       if (this.map.getSource(id) && this.layersCanRaname) {
         id = uniqueId(id + type)
@@ -585,32 +582,32 @@ export default {
     */
     // TODO IPORTANTE - complete refactory layer order
     updateLayerOrder: function (setLayerNameToReturnItBeforeLayerID) {
-      console.count('===============================updateLayerOrder')
-      console.count(setLayerNameToReturnItBeforeLayerID)
-      console.time('updateLayerOrder')
+      // console.count('===============================updateLayerOrder')
+      // console.count(setLayerNameToReturnItBeforeLayerID)
+      // console.time('updateLayerOrder')
 
       const currentLayers = this.map?.getStyle()?.layers ?? undefined
 
       const layerInstances = this.findLayers(this.$slots.default)
-      console.log('find layer vNode tree')
-      console.timeLog('updateLayerOrder')
+      // console.log('find layer vNode tree')
+      // console.timeLog('updateLayerOrder')
 
       // check if i have layers in map or in vNodTree
       if (!currentLayers || !layerInstances) {
-        console.warn('Map or layer in vNode not exist')
-        console.timeEnd('updateLayerOrder')
+        // console.warn('Map or layer in vNode not exist')
+        // console.timeEnd('updateLayerOrder')
         return
       }
 
-      console.log('======= All LAYERS IN MAPBOX')
-      console.table(currentLayers)
+      // console.log('======= All LAYERS IN MAPBOX')
+      // console.table(currentLayers)
 
       // make layers with order
       let layersId = layerInstances.map((layer, i) => {
         const component = layer.componentInstance || layer
         const id = get(component, '$data.layerId')
         if (!id) {
-          debugger
+          // debugger
         }
         let zIndex = get(component, '$props.zIndex')
         const index = i
@@ -620,8 +617,8 @@ export default {
         return { id, index, zIndex }
       })
       layersId = orderBy(layersId, ['index'], ['asc'])
-      console.log('======= ORDER  INDEX')
-      console.table(layersId)
+      // console.log('======= ORDER  INDEX')
+      // console.table(layersId)
 
       for (let to = 0; to < layersId.length; to++) {
         if (!layersId[to].zIndex) {
@@ -629,10 +626,10 @@ export default {
         }
       }
       layersId = orderBy(layersId, ['zIndex'], ['asc'])
-      console.log('======= ORDER Z INDEX')
-      console.table(layersId)
-      console.log('order vnode layers')
-      console.timeLog('updateLayerOrder')
+      // console.log('======= ORDER Z INDEX')
+      // console.table(layersId)
+      // console.log('order vnode layers')
+      // console.timeLog('updateLayerOrder')
 
       // create a object with layer id and topLayer id
       const currentLayersByID = {}
@@ -642,15 +639,15 @@ export default {
         currentLayersByID[layer.id] = obj
       })
 
-      console.log('======= ORDER IN MAPBOX')
-      console.table(Object.values(currentLayersByID).filter(item => item.id.indexOf('layer-') > -1))
-      console.log('generate all layers topLayerId')
-      console.timeLog('updateLayerOrder')
+      // console.log('======= ORDER IN MAPBOX')
+      // console.table(Object.values(currentLayersByID).filter(item => item.id.indexOf('layer-') > -1))
+      // console.log('generate all layers topLayerId')
+      // console.timeLog('updateLayerOrder')
 
       // return before layer name
       if (setLayerNameToReturnItBeforeLayerID) {
-        console.timeEnd('updateLayerOrder')
-        console.warn('return before layer name')
+        // console.timeEnd('updateLayerOrder')
+        // console.warn('return before layer name')
         return currentLayersByID?.[setLayerNameToReturnItBeforeLayerID]
       }
 
@@ -660,15 +657,15 @@ export default {
         const currentLayer = layersId?.[i - 1]?.id
         // if we dont have layer im map, go to next one
         if (!currentLayersByID?.[currentLayer]) continue
-        console.log(`check currentLayer:${currentLayer} topLayer:${topLayer}`)
+        // console.log(`check currentLayer:${currentLayer} topLayer:${topLayer}`)
         if (currentLayersByID?.[currentLayer]?.topLayerId !== topLayer) {
-          console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
+          // console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
           this.map.moveLayer(currentLayer, topLayer)
         }
       }
-      console.log('loop and move layers')
-      console.timeLog('updateLayerOrder')
-      console.timeEnd('updateLayerOrder')
+      // console.log('loop and move layers')
+      // console.timeLog('updateLayerOrder')
+      // console.timeEnd('updateLayerOrder')
     },
 
     /**
@@ -718,8 +715,8 @@ export default {
       try {
         imgElement = await this.processImage(url)
       } catch (e) {
-        // console.error(`image ${key}:${url} loading error`)
-        // console.error(e)
+        // //console.error(`image ${key}:${url} loading error`)
+        // //console.error(e)
       }
 
       if (this.map.hasImage(key) && imgElement) {
@@ -758,17 +755,31 @@ export default {
             resolve(newimg)
           }
           newimg.onerror = (e) => {
+            console.warn('convert/load image error:')
+            console.warn(e)
             reject(e)
           }
           // check if is a svg as string o html element
           if ((imgSource?.constructor?.name === 'String' && imgSource.match(/<\s*svg/g)) || (imgSource?.constructor?.name === 'SVGSVGElement')) {
-            imgSource = 'data:image/svg+xml;base64,' + window.btoa(imgSource?.outerHTML ?? imgSource)
+            imgSource = this.convertSvgToBase64(imgSource?.outerHTML ?? imgSource)
           }
           newimg.src = imgSource
         } else {
           reject(new Error('Not compatibility image. Please set source as an url, a svg string, a svg element or img element'))
         }
       })
+    },
+
+    convertSvgToBase64: function (content) {
+      // const converted = this.toBinary(content)
+      let encoded
+      try {
+        encoded = window.btoa(unescape(encodeURIComponent(content)))
+      } catch (e) {
+        console.error(e)
+      }
+      // console.log(encoded)
+      return 'data:image/svg+xml;base64,' + encoded
     },
 
     /**
@@ -788,7 +799,7 @@ export default {
           map.removeLayer(id)
         }
       } catch (e) {
-        /// /console.warn(e)
+        /// ///console.warn(e)
       }
       this.$nextTick(() =>
         this.updateLayerOrder()

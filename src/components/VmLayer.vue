@@ -461,7 +461,7 @@ export default {
 
     // DATA JOIN WATCHERS
     myData: function (val, oldval) {
-      /// /debugger;
+      /// /////debugger;
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
@@ -475,7 +475,7 @@ export default {
     },
 
     dataJoin: function (val, oldval) {
-      /// /debugger
+      /// /////debugger
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
@@ -495,12 +495,12 @@ export default {
   },
 
   beforeUpdated: function () {
-    // debugger;
+    // ////debugger;
     // //console.log('beforeUpdated dom vueMapbox')
   },
 
   updated: function () {
-    // debugger
+    // ////debugger
     // update layer
     // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
     // this.$nextTick(() => {
@@ -510,7 +510,7 @@ export default {
   },
 
   created: function () {
-    // debugger
+    // ////debugger
     this.popupOpen = false
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
@@ -594,7 +594,7 @@ export default {
     },
 
     addLayer: function () {
-      debugger;
+      ////debugger;
       try {
         if (this.customLayer) {
           const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
