@@ -559,8 +559,8 @@ export default {
     mouseleave: function (features, map) {
       console.count('🚀 ~ mouseleave')
     },
-    loading: function (e, feature) {
-      console.count('🚀 ~ loading app', e)
+    loading: function (e) {
+      console.log('🚀 ~ APP loading layer', e)
     },
 
     emcimaIcone: function (e) {

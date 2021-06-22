@@ -722,8 +722,20 @@ export default {
 
       // if (this.$listeners.loading) {
       map.on('render', this.layerId, (e) => {
+        if (this.loading === undefined) {
+          this.loading = true
+          console.log('🚀 ~ file: VmLayer.vue ~ line 727 ~ map.on ~ this.loading', this.loading)
+          this.$emit('loading', true)
+          console.log('emit init', true);
+        }
         if (e?.target) {
-          this.$emit('loading', !e.target.loaded())
+          const loading = !e.target.loaded()
+          console.log('🚀 ~ file: VmLayer.vue ~ line 732 ~ map.on ~ loading', loading)
+          if (this.loading !== loading) {
+            this.$emit('loading', loading)
+            console.log('emit loading change', loading);
+            this.loading = loading
+          }
         }
       })
       // }
@@ -840,6 +852,7 @@ export default {
             for (let i = 0; i < value.length; i += 2) {
               value[i] *= opacity
               if (hover && hover[key]) {
+                console.log('🚀 ~ file: VmLayer.vue ~ line 853 ~ map.on ~ this.$emit', this.$emit)
                 value[i] = ['case', ['boolean', ['feature-state', 'hover'], false], hover[key] * opacity, value[i]]
               }
               if (click && click[key]) {
