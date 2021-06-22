@@ -1,12 +1,26 @@
 <template>
-  <div id="app">
-    <center>  
-      
-        <recuperacao-energetica-icon :energiaPercent="50" :processamentoPercent="70" tecnologia="Coprocessamento"/>
-      
+  <div id="app"
+  style="background:rgba(25, 26, 26, 0.000)"
+  >
+    <center>
+
+        <recuperacao-energetica-icon
+            :energiaPercent="50"
+            :processamentoPercent="90"
+            tecnologia="Coprocessamento"
+            :showInfo="false"
+            />
+
+        <recuperacao-energetica-icon
+            :energiaPercent="50"
+            :processamentoPercent="70"
+            tecnologia="Coprocessamento"
+            :showInfo="true"
+            />
+
      <!-- <recuperacao-energetica-icon /> -->
       <VueMapbox
-    
+
       key="mapbox"
       ref="vuemapbox"
       @load="loaded"
@@ -14,84 +28,15 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-      <!-- <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-                        multipleFeatureSelectionOn="alt"
-                        >
-
-               <template #popupHover="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >`
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-
-                </vm-popup>
-             </template>
-              <template #popupClick="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-
-                </vm-popup>
-             </template>
-      </vmLayer> -->
-
-      <!-- <vmLayerArc
-          key="arclayer"
-          name="arcLayer"
-          :data="fluxo"
-          sourcePosition="geom_origem.coordinates"
-          targetPosition="destinos[0].geom_destino.coordinates"
-      /> -->
-
-        <!-- <vm-image name="testeurl" url="/images/ambiente_construido_2.png" /> -->
-
+<!--
         <vm-image name="testesvg"
                   width="55px"
                   :updateOnChange="true"
                   >
 
-                  <recuperacao-energetica-icon :energiaPercent="0" :processamentoPercent="20"/>
+                  <recuperacao-energetica-icon :energiaPercent="20" :processamentoPercent="60"/>
 
         </vm-image>
-        <!-- <vm-image name="testesvg2"
-                  width="55px">
-
-                  <recuperacao-energetica-icon :energiaPercent="50" :processamentoPercent="70"/>
-
-        </vm-image> -->
-
-        <!-- <vm-image name="testesvgcontent"
-                  width="25px"
-        url='<svg width="135" height="135" viewBox="0 0 135 135" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="67.5" cy="67.5" r="57" stroke="black" stroke-width="21" stroke-dasharray="300 300"/>
-                <g filter="url(#filter0_d)">
-                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" fill="#F21414"/>
-                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" stroke="#F40000"/>
-                </g>
-                <defs>
-                <filter id="filter0_d" x="28.0141" y="39.31" width="71.0719" height="59.19" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-                <feOffset dy="4"/>
-                <feGaussianBlur stdDeviation="2"/>
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                </filter>
-                </defs>
-      </svg>' /> -->
 
         <vm-source v-if="show"
         key="poligno-triangula"
@@ -101,23 +46,19 @@
                 key="layer-vermelho"
                 name="layer-vermelho"
                 type="fill"
-                color="#ff0000"
+                fill-color="#ff0000"
+                fill-color-hover="#00ff00"
                 :opacity="0.6"
              >
 
             </vm-layer>
       </vm-source>
 
-
-
-
-
       <vm-source
-        key="source-energetico"
-        name="ponto estados"
+        key="unidade-recuperacao-energetica"
+        name="unidade-recuperacao-energetica"
         type="geojson" :options="{data:geojson2}">
-  
-  
+
               <vm-layer
                 key="layer-icon"
                 name="layer-icons"
@@ -126,20 +67,22 @@
                 icon-anchor="top-left"
                 :icon-ignore-placement="true"
                 :icon-offset="[-33,-33]"
+                :ignoreOthersLayer="true"
+                @featurehover="unidadeFeatureHover"
+                @mousemove="mousemove"
+                @mouseleave="mouseleave"
              >
             </vm-layer>
-
 
             <vm-layer
                 key="layer-icon-center"
                 name="layer-icons-center"
                 type="circle"
                 :circle-radius="33"
-                :circle-color="'rgba(0,255,0,0.4)'"
+                :circle-color="'rgba(0,255,0,255)'"
                 @featurehover="emcimaIcone"
             >
             </vm-layer>
-
 
       </vm-source>
 
@@ -162,6 +105,7 @@
         <vm-source
         key="poligno-triangula-z-index"
         name="poligno-triangula-z-index"
+
         type="geojson" :options='{data:{ "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": { "stroke": "#555555", "stroke-width": 2, "stroke-opacity": 1, "fill": "#555555", "fill-opacity": 0.5 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -33.92578125, -6.970049417296218 ], [ -40.341796875, -7.667441482726056 ], [ -55.283203125, -10.876464994816283 ], [ -63.28125, -11.781325296112277 ], [ -67.2802734375, -12.554563528593656 ], [ -67.6318359375, -13.838079936422462 ], [ -67.8076171875, -14.944784875088372 ], [ -52.82226562499999, -13.325484885597936 ], [ -44.033203125, -12.254127737657369 ], [ -38.84765625, -10.876464994816283 ], [ -33.92578125, -9.232248799418674 ], [ -33.92578125, -6.970049417296218 ] ] ] } } ] }}'>
               <vm-layer
                 key="layer-verde"
@@ -173,15 +117,45 @@
              >
 
             </vm-layer>
-      </vm-source>
+      </vm-source> -->
+
+                 <!-- :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" > -->
+                      <!-- :options="{ data: 'https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&qualidade=maxima&intrarregiao=municipio'}" -->
+
+            <vm-layer
+            :source="{
+                   type:'vector',
+                   tiles:[`https://hapi-sigweb.cgee.org.br/tile/uso_cobertura_terra/{z}/{x}/{y}.mvt`],
+                   minzoom: 0,
+                   maxzoom: 24
+                }"
+                    sourceLayer="uso_cobertura_terra"
+                    name="myLayer"
+                    type="fill"
+                    @mousemove="mousemove"
+                    @loading="loading"
+                    :paint="{ 'fill-color': '#ff0000' }"
+                    :classes="[ {'fill-color':'#fe0000', value:1,'label':'Área Artificial', property:'vlr_classe'},
+                      {'fill-color':'#ebe628', value:2,'label':'Área Agrícola', property:'vlr_classe'},
+                          {'fill-color':'#cd8900', value:3,'label':'Pastagem com Manejo', property:'vlr_classe'},
+                          {'fill-color':'#d4e885', value:4,'label':'Mosaico de Ocupações em Área Florestal', property:'vlr_classe'},
+                          {'fill-color':'#00915a', value:5,'label':'Silvicultura', property:'vlr_classe'},
+                          {'fill-color':'#73a800', value:6,'label':'Vegetação Florestal', property:'vlr_classe'},
+                          {'fill-color':'#beb8f4', value:7,'label':'Área Úmida', property:'vlr_classe'},
+                          {'fill-color':'#c890a9', value:8,'label':'Vegetação Campestre', property:'vlr_classe'},
+                          {'fill-color':'#d69963', value:9,'label':'Mosaico de Ocupações em Área Campestre', property:'vlr_classe'},
+                          {'fill-color':'#8cffff', value:10,'label':'Corpo d\'Água Continental', property:'vlr_classe'},
+                          {'fill-color':'#2d99da', value:11,'label':'Corpo d\'Água Costeiro', property:'vlr_classe'},
+                          {'fill-color':'#888888', value:12,'label':'Área Descoberta', property:'vlr_classe'}
+                  ]"
+        classesValueInterpolation='match'
+            />
 
       </VueMapbox>
 
-
-
     </center>
     <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
-      <!-- 
+      <!--
       toogle order: <input  type="checkbox" v-model="show" /> {{color}}
       {{capagClassesEstadual}}
     fill <input type="text" v-model="fill">
@@ -200,13 +174,12 @@ import Filho from '@/components/filho'
 
 export default {
   name: 'App',
-  components: { 
+  components: {
     'recuperacao-energetica-icon': RecIcon,
     'pai-teste': PaiTeste,
-    'filho': Filho
-    
-    
-    },
+    filho: Filho
+
+  },
   data () {
     return {
       zindex: 0,
@@ -226,7 +199,6 @@ export default {
         { id: 5107305, color: '#ffffff' }
       ],
 
-  
       geojson2: {
 
         type: 'FeatureCollection',
@@ -234,10 +206,10 @@ export default {
           {
             type: 'Feature',
             properties: {
-              tecnologia:'Aterro Sanitário',
-              processamentoPercent:80,
-              energiaPercent:20,
-
+              id: 1,
+              tecnologia: 'Aterro Sanitário',
+              processamentoPercent: 80,
+              energiaPercent: 20,
 
               tipoRegiao: 'estado',
               nome: 'Pará',
@@ -274,9 +246,10 @@ export default {
           {
             type: 'Feature',
             properties: {
-              tecnologia:'Aterro Sanitário/CTR',
-              processamentoPercent:20,
-              energiaPercent:0,
+              id: 2,
+              tecnologia: 'Aterro Sanitário/CTR',
+              processamentoPercent: 20,
+              energiaPercent: 0,
               tipoRegiao: 'estado',
               nome: 'Minas Gerais',
               temas: {
@@ -312,9 +285,10 @@ export default {
           {
             type: 'Feature',
             properties: {
-              tecnologia:'Incineração de Resíduos Classe I',
-              processamentoPercent:20,
-              energiaPercent:10,
+              id: 3,
+              tecnologia: 'Incineração de Resíduos Classe I',
+              processamentoPercent: 20,
+              energiaPercent: 10,
               tipoRegiao: 'estado',
               nome: 'Esprito Santo',
               temas: {
@@ -350,9 +324,10 @@ export default {
           {
             type: 'Feature',
             properties: {
-              tecnologia:'Lixão com Recuperação de Biogás',
-              processamentoPercent:60,
-              energiaPercent:50,
+              id: 4,
+              tecnologia: 'Lixão com Recuperação de Biogás',
+              processamentoPercent: 60,
+              energiaPercent: 50,
               tipoRegiao: 'estado',
               nome: 'Rio de Janeiro',
               temas: {
@@ -395,9 +370,10 @@ export default {
           {
             type: 'Feature',
             properties: {
-                       tecnologia:'Lixão com Recuperação de Biogás',
-              processamentoPercent:60,
-              energiaPercent:50,
+              id: 5,
+              tecnologia: 'Lixão com Recuperação de Biogás',
+              processamentoPercent: 60,
+              energiaPercent: 50,
               tipoRegiao: 'estado',
               nome: 'São Paulo',
               temas: {
@@ -440,9 +416,10 @@ export default {
           {
             type: 'Feature',
             properties: {
-                       tecnologia:'Lixão com Recuperação de Biogás',
-              processamentoPercent:60,
-              energiaPercent:50,
+              id: 6,
+              tecnologia: 'Incineração de RSS e Resíduos Classe I',
+              processamentoPercent: 60,
+              energiaPercent: 50,
               tipoRegiao: 'estado',
               nome: 'Paraná',
               temas: {
@@ -478,9 +455,9 @@ export default {
           {
             type: 'Feature',
             properties: {
-              tecnologia:'Transbordo de Resíduos',
-              processamentoPercent:20,
-              energiaPercent:80,
+              tecnologia: 'Transbordo de Resíduos',
+              processamentoPercent: 20,
+              energiaPercent: 80,
               tipoRegiao: 'estado',
               nome: 'Distrito Federal',
               temas: {
@@ -515,10 +492,7 @@ export default {
           }
         ]
 
-      },
-
-
-    
+      }
 
     }
   },
@@ -543,8 +517,6 @@ export default {
       }
       return '#666666'
     },
-
- 
 
     images: function () {
       return {
@@ -578,8 +550,20 @@ export default {
 
       // console.log(e)
     },
-    
-    emcimaIcone : function (e){
+    unidadeFeatureHover: function (features, map) {
+      console.log('🚀 ~ file: App.vue ~ line 591 ~ features', features)
+    },
+    mousemove: function (features, map) {
+      // console.count('🚀 ~ mousemove')
+    },
+    mouseleave: function (features, map) {
+      console.count('🚀 ~ mouseleave')
+    },
+    loading: function (e, feature) {
+      console.count('🚀 ~ loading app', e)
+    },
+
+    emcimaIcone: function (e) {
 
     },
 

@@ -164,7 +164,7 @@ export default {
           return
         }
 
-        // debugger;
+//debugger;
         // alert('clicou em:' + _t.layerName )
         e.preventDefault()
 

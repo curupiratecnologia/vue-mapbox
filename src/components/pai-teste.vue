@@ -4,13 +4,13 @@
 export default {
   mounted: function () {
     // Create an observer instance linked to the callback function
-    var observer = new MutationObserver(() => console.log('🚀 ~ file: pai-teste.vue ~ line 1 ~ filho mudouuuu :)'))
+    this.observer = new MutationObserver(() => console.log('🚀 ~ file: pai-teste.vue ~ line 1 ~ filho mudouuuu :)'))
 
     // Options for the observer (which mutations to observe)
     var config = { attributes: true, childList: true, characterData: true, subtree: true }
     this.$nextTick(() => {
     // Start observing the target node for configured mutations
-      observer.observe(this.$el, config)
+      this.observer .observe(this.$el, config)
     })
 
     // Later, you can stop observing
@@ -18,11 +18,11 @@ export default {
   },
   beforeUpdate () {
     console.log('🚀 ~ file: pai-teste.vue ~ line 9 ~ beforeUpdate ~ beforeUpdate')
-    debugger
+//debugger
   },
   updated () {
     console.log('🚀 ~ file: pai-teste.vue ~ line 12 ~ updated ~ updated')
-    debugger
+//debugger
   },
   render (h) {
     console.log('🚀 ~ file: pai-teste.vue ~ line 13 ~ render ~ render')

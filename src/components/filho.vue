@@ -27,12 +27,12 @@ export default {
   beforeUpdate () {
     console.log('🚀 ~ file: filho.vue ~ line 18 ~ beforeUpdate ~ beforeUpdate')
 
-    debugger
+//debugger
   },
   updated () {
     console.log('🚀 ~ file: filho.vue ~ line 23 ~ updated ~ updated')
 
-    debugger
+//debugger
   }
 }
 

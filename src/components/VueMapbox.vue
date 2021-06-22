@@ -426,10 +426,14 @@ export default {
     * Create/Update Source
     */
     addSource: function (id, type, options) {
-      // debugger
+//debugger
       // if source name exist, create a randow one
       if (this.map.getSource(id) && this.layersCanRaname) {
         id = uniqueId(id + type)
+      }
+
+      if(type==='geojson' && ! options?.generateId ){
+        options.generateId = true
       }
 
       this.map.addSource(id, { type, ...options })
@@ -607,7 +611,7 @@ export default {
         const component = layer.componentInstance || layer
         const id = get(component, '$data.layerId')
         if (!id) {
-          // debugger
+//debugger
         }
         let zIndex = get(component, '$props.zIndex')
         const index = i
@@ -696,17 +700,17 @@ export default {
     */
 
     addImage: async function (key, url, forceUpdate = false) {
-      if (!this.map) return
+      if (!this?.map?.hasImage) return
       // if already have the image on map, and not force update, return
       if (forceUpdate === false && this.imagesMap.has(key)) {
         return
       }
 
       // create empety image to be avaliable to styles before loading the actual image
-      var width = 24 // The image will be 64 pixels square
-      var bytesPerPixel = 4 // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
-      var data = new Uint8Array(width * width * bytesPerPixel)
-      if (!this.map.hasImage(key)) this.map.addImage(key, { width: width, height: width, data: data })
+      // var width = 24 // The image will be 64 pixels square
+      // var bytesPerPixel = 4 // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
+      // var data = new Uint8Array(width * width * bytesPerPixel)
+      // if (!this.map.hasImage(key)) this.map.addImage(key, { width: width, height: width, data: data })
 
       // set image before it is loading, because if a have another node after
       this.imagesMap.set(key, true)
@@ -720,8 +724,12 @@ export default {
       }
 
       if (this.map.hasImage(key) && imgElement) {
-        this.map.removeImage(key)
-        this.map.addImage(key, imgElement)
+          // this.map.updateImage(key, imgElement)
+          this.map.removeImage(key)
+          this.map.addImage(key, imgElement)
+          this.map.triggerRepaint()
+      }else if(imgElement){
+          this.map.addImage(key, imgElement)
       }
     },
 

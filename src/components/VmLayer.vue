@@ -10,7 +10,6 @@
 
 import getOnlyMapboxProps from '../utils/getOnlyMapboxProps'
 import findVNodeChildren from '../utils/findVNodeChildren'
-import pickBy from 'lodash/pickBy'
 import VmPopup from './VmPopup'
 
 import has from 'lodash/has'
@@ -19,7 +18,6 @@ import set from 'lodash/set'
 import filter from 'lodash/filter'
 import findIndex from 'lodash/findIndex'
 import kebabCase from 'lodash/kebabCase'
-import camelCase from 'lodash/camelCase'
 import startCase from 'lodash/startCase'
 
 import axios from 'axios'
@@ -269,6 +267,23 @@ export default {
       default: 'id'
     },
 
+    /**
+    * Set if this layer is ignore when calculating the top most layer to see what we are hover
+    */
+    ignoreEvents: {
+      type: Boolean,
+      default: false
+
+    },
+    /**
+    * Set if this layer is ignore when calculating the top most layer to see what we are hover
+    */
+    ignoreOthersLayer: {
+      type: Boolean,
+      default: false
+
+    },
+
     ...LAYER_PROPS
 
   },
@@ -298,27 +313,21 @@ export default {
 
     myPaintNormal: function () {
       // hack to check props change to force computed
-      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('paint', '')
     },
     myPaintHover: function () {
-      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('paint', 'hover')
     },
     myPaintClick: function () {
-      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('paint', 'click')
     },
     myLayoutNormal: function () {
-      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('layout', '')
     },
     myLayoutHover: function () {
-      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('layout', 'hover')
     },
     myLayoutClick: function () {
-      const allPaintLayout = JSON.stringify(this.$props)
       return this.getPaintLayoutForState('layout', 'click')
     },
 
@@ -461,7 +470,6 @@ export default {
 
     // DATA JOIN WATCHERS
     myData: function (val, oldval) {
-      /// /////debugger;
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
@@ -475,14 +483,13 @@ export default {
     },
 
     dataJoin: function (val, oldval) {
-      /// /////debugger
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
       //   }
       // }
       this.loadData()
-    }
+    },
 
     // dataJoinKey: function () {
     //   this.addDataJoin()
@@ -492,15 +499,28 @@ export default {
     //   this.addDataJoin()
     // }
 
+    myPaintClick: function (val) {
+      if (val) { this.setupLayerFeaturesEvents() }
+    },
+    myPaintHover: function (val) {
+      if (val) { this.setupLayerFeaturesEvents() }
+    },
+    myLayoutHover: function (val) {
+      if (val) { this.setupLayerFeaturesEvents() }
+    },
+    myLayoutClick: function (val) {
+      if (val) { this.setupLayerFeaturesEvents() }
+    }
+
   },
 
   beforeUpdated: function () {
-    // ////debugger;
+    // debugger;
     // //console.log('beforeUpdated dom vueMapbox')
   },
 
   updated: function () {
-    // ////debugger
+    // debugger
     // update layer
     // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
     // this.$nextTick(() => {
@@ -510,8 +530,8 @@ export default {
   },
 
   created: function () {
-    // ////debugger
     this.popupOpen = false
+
     const options = getOnlyMapboxProps(this)
     if (!options.source) {
       const source = this.getSource && this.getSource()
@@ -594,7 +614,6 @@ export default {
     },
 
     addLayer: function () {
-      ////debugger;
       try {
         if (this.customLayer) {
           const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
@@ -605,7 +624,6 @@ export default {
           // and if we set after the findLayer will get null the $data.layerId
           this.layerId = id
           const mylayer = this.MapboxVueInstance.addLayer({ ...this.options, id: id, type: this.type, paint: this.myPaint, layout: this.myLayout })
-          console.log(`layerName:${this.name}, id:${id}, mylayer:${mylayer}, this.layerId:${this.layerId} `)
           // get source add after add layer, because of case where the source especification is set in props as option, withou an id
           this.sourceId = this.getMap().getLayer(mylayer).source
           // bind listners set in component to mapbox events
@@ -613,11 +631,8 @@ export default {
           this.loadData()
         }
       } catch (e) {
-        // console.error('========================== Error adding Layer ' + this.name)
         console.error('Error adding Layer:' + this.name)
-        // console.log(this.myPaint)
         console.error(e)
-        // this.$destroy()
       }
     },
 
@@ -629,6 +644,7 @@ export default {
           if (feature?.constructor?.name !== 'Object') return
           const id = feature?.[this.dataJoinKey]
           if (id === undefined) return
+          // TODO - important - include feature_state in same source for varius layer
           map.removeFeatureState(
             { source: this.sourceId, sourceLayer: this.sourceLayer, id }
           )
@@ -678,12 +694,12 @@ export default {
     //* * EVENTS SETUP */
 
     setupLayerFeaturesEvents: function () {
-      if (this.$listeners.featurehover || this.paintHover || this.layoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
+      if (this.$listeners.featurehover || this.myPaintHover || this.myLayoutHover || has(this.$scopedSlots, 'popupHover') || has(this.$slots, 'popupHover')) {
         this.hasFeatureHover = true
       } else {
         this.hasFeatureHover = false
       }
-      if (this.paintClick || this.layoutClick || has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick')) {
+      if (this.$listeners.featureclick || this.myPaintClick || this.myLayoutClick || has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick')) {
         this.hasFeatureClick = true
       } else {
         this.hasFeatureClick = false
@@ -704,6 +720,14 @@ export default {
         map.on('click', this.layerMouseClickOutEvent)
       }
 
+      // if (this.$listeners.loading) {
+      map.on('render', this.layerId, (e) => {
+        if (e?.target) {
+          this.$emit('loading', !e.target.loaded())
+        }
+      })
+      // }
+
       // CUSTON EVENTS
       // featureHover
       // featureClick
@@ -717,7 +741,9 @@ export default {
       // check if im the top most layer
       // TODO - create event in mapbox instance to detect .capture.stop propagations etc, and implement this logic in the events
       const features = this.getMap().queryRenderedFeatures(e.point)
-      if (get(features, '[0].layer.id') !== this.layerId) {
+      // console.log("🚀 ~ file: VmLayer.vue ~ line 732 ~ features", features)
+
+      if (this.ignoreOthersLayer === false && get(features, '[0].layer.id') !== this.layerId) {
         this.featureMouseLeaveEvent(e)
         return false
       }
@@ -725,7 +751,7 @@ export default {
       this.lastHover = e
       if (e.features.length > 0) {
         // if hovering the same feature, just return
-        if (this.hoverFeatures.map(f => f.id).join('') === e.features.map(f => f.id).join('')) {
+        if (this?.hoverFeatures?.length > 0 && this.hoverFeatures.map(f => f.id).join('') === e.features.map(f => f.id).join('')) {
           return false
         }
         if (this.hasFeatureClick) { // if have click events, change cursor

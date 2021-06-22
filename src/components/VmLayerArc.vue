@@ -172,7 +172,7 @@ export default {
 
       this.layerCreated = true
 
-      // debugger
+//debugger
       // this.MapboxVueInstance.addLayer(this.layer)
       // this.getMap().addLayer(this.layer)
     },
