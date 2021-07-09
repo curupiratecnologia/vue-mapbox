@@ -213,6 +213,10 @@ export default {
     interactive: {
       type: Boolean,
       default: true
+    },
+    attributionControl: {
+      type: Boolean,
+      default: true
     } // {'name':url,'name2':url2}
 
   },
@@ -354,7 +358,8 @@ export default {
         maxBounds: this.maxBounds,
         minZoom: this.minZoom,
         maxZoom: this.maxZoom,
-        interactive: this.interactive
+        interactive: this.interactive,
+        attributionControl: this.attributionControl
         // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
       })
 

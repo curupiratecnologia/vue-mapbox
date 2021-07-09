@@ -21,7 +21,7 @@ export default {
       */
     anchor: {
       type: String,
-      default: 'bottom',
+      default: undefined,
       validator: function (value) {
         return [
           'center',

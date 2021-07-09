@@ -388,7 +388,7 @@ export default {
       }
     },
     zIndex: function (val) {
-      // console.log(val)
+      // // console.log(val)
       this.$nextTick(() => this.MapboxVueInstance.updateLayerOrder())
     },
 
@@ -516,15 +516,15 @@ export default {
 
   beforeUpdated: function () {
     // debugger;
-    // //console.log('beforeUpdated dom vueMapbox')
+    // //// console.log('beforeUpdated dom vueMapbox')
   },
 
   updated: function () {
     // debugger
     // update layer
-    // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
+    // // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
     // this.$nextTick(() => {
-    //   console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer nextTick')
+    //   // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer nextTick')
     //   this.updateLayerOrder()
     // })
   },
@@ -567,7 +567,7 @@ export default {
         } else {
           // add layer when a source with name is added in future
           const func = (e) => {
-            // console.log(e)
+            // // console.log(e)
             if (e.dataType === 'source' && e.sourceId === this.options.source) {
               this.addLayer()
               this.getMap().off('sourcedata', func)
@@ -595,7 +595,7 @@ export default {
 
   destroyed () {
     if (this.layerId) {
-      // console.log('destroying ' + this.layerId)
+      // // console.log('destroying ' + this.layerId)
       this.MapboxVueInstance.removeLayer(this.layerId)
       // check if the source of layer is a Object/ownSource,and remove it too
       if (typeof this.source === 'object') {
@@ -720,30 +720,32 @@ export default {
         map.on('click', this.layerMouseClickOutEvent)
       }
 
-      // if (this.$listeners.loading) {
-      map.on('render', this.layerId, (e) => {
-        if (this.loading === undefined) {
-          this.loading = true
-          console.log('🚀 ~ file: VmLayer.vue ~ line 727 ~ map.on ~ this.loading', this.loading)
-          this.$emit('loading', true)
-          console.log('emit init', true);
-        }
-        if (e?.target) {
-          const loading = !e.target.loaded()
-          console.log('🚀 ~ file: VmLayer.vue ~ line 732 ~ map.on ~ loading', loading)
-          if (this.loading !== loading) {
-            this.$emit('loading', loading)
-            console.log('emit loading change', loading);
-            this.loading = loading
-          }
-        }
-      })
-      // }
+      if (this.$listeners.loading) {
+        map.off('render', this.layerId, this.layerLoading)
+        map.on('render', this.layerId, this.layerLoading)
+      }
 
       // CUSTON EVENTS
       // featureHover
       // featureClick
       // featureLeave
+    },
+    layerLoading: function (e) {
+      if (this.loading === undefined) {
+        this.loading = true
+        // console.log('🚀 ~ file: VmLayer.vue ~ line 727 ~ map.on ~ this.loading', this.loading)
+        this.$emit('loading', true)
+        console.log('emit init', true);
+      }
+      if (e?.target) {
+        const loading = !e.target.loaded()
+        // console.log('🚀 ~ file: VmLayer.vue ~ line 732 ~ map.on ~ loading', loading)
+        if (this.loading !== loading) {
+          this.$emit('loading', loading)
+          console.log('emit loading change', loading);
+          this.loading = loading
+        }
+      }
     },
 
     featureMouseMoveEvent: function (e) {
@@ -753,7 +755,7 @@ export default {
       // check if im the top most layer
       // TODO - create event in mapbox instance to detect .capture.stop propagations etc, and implement this logic in the events
       const features = this.getMap().queryRenderedFeatures(e.point)
-      // console.log("🚀 ~ file: VmLayer.vue ~ line 732 ~ features", features)
+      // // console.log("🚀 ~ file: VmLayer.vue ~ line 732 ~ features", features)
 
       if (this.ignoreOthersLayer === false && get(features, '[0].layer.id') !== this.layerId) {
         this.featureMouseLeaveEvent(e)
@@ -852,7 +854,7 @@ export default {
             for (let i = 0; i < value.length; i += 2) {
               value[i] *= opacity
               if (hover && hover[key]) {
-                console.log('🚀 ~ file: VmLayer.vue ~ line 853 ~ map.on ~ this.$emit', this.$emit)
+                // console.log('🚀 ~ file: VmLayer.vue ~ line 853 ~ map.on ~ this.$emit', this.$emit)
                 value[i] = ['case', ['boolean', ['feature-state', 'hover'], false], hover[key] * opacity, value[i]]
               }
               if (click && click[key]) {

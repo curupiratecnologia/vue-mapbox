@@ -1065,6 +1065,21 @@ var update = add("04f858a6", content, true, {"sourceMap":false,"shadowMode":fals
 
 /***/ }),
 
+/***/ "1bda":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("4627");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("07da13d0", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
 /***/ "1be4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3572,6 +3587,17 @@ module.exports = isArrayLike;
 
 /***/ }),
 
+/***/ "31b0":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_7e484895_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("1bda");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_7e484895_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_7e484895_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_7e484895_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "32b3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4394,6 +4420,20 @@ module.exports = function (it) {
   var isRegExp;
   return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : classof(it) == 'RegExp');
 };
+
+
+/***/ }),
+
+/***/ "4627":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".loader[data-v-7e484895]{position:fixed;top:50%;left:50%;text-align:center}.map-layer[data-v-7e484895]{position:absolute!important;left:0;top:0;bottom:0;right:0;width:100%;z-index:3}.map-layer .mapboxgl-canvas[data-v-7e484895]{left:0}", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
@@ -7237,17 +7277,6 @@ var Map = getNative(root, 'Map');
 
 module.exports = Map;
 
-
-/***/ }),
-
-/***/ "7a09":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_634af6ae_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("cd98");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_634af6ae_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_634af6ae_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_634af6ae_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -10233,20 +10262,6 @@ module.exports = get;
 
 /***/ }),
 
-/***/ "9b0a":
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".loader[data-v-634af6ae]{position:fixed;top:50%;left:50%;text-align:center}.map-layer[data-v-634af6ae]{position:absolute!important;left:0;top:0;bottom:0;right:0;width:100%;z-index:3}.map-layer .mapboxgl-canvas[data-v-634af6ae]{left:0}", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
 /***/ "9bdd":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12053,12 +12068,12 @@ __webpack_require__.d(__webpack_exports__, "VmMarkerDonut", function() { return 
 __webpack_require__.d(__webpack_exports__, "LoadingComponent", function() { return /* reexport */ LoadingComponent; });
 __webpack_require__.d(__webpack_exports__, "ErrorComponent", function() { return /* reexport */ ErrorComponent; });
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=634af6ae&scoped=true&
-var VueMapboxvue_type_template_id_634af6ae_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",staticStyle:{"position":"absolute","left":"0px","top":"0","bottom":"0","right":"0","width":"100%"},attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=7e484895&scoped=true&
+var VueMapboxvue_type_template_id_7e484895_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",staticStyle:{"position":"absolute","left":"0px","top":"0","bottom":"0","right":"0","width":"100%"},attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=634af6ae&scoped=true&
+// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=7e484895&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -12690,6 +12705,10 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     interactive: {
       type: Boolean,
       default: true
+    },
+    attributionControl: {
+      type: Boolean,
+      default: true
     } // {'name':url,'name2':url2}
 
   },
@@ -12859,7 +12878,8 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         maxBounds: this.maxBounds,
         minZoom: this.minZoom,
         maxZoom: this.maxZoom,
-        interactive: this.interactive // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
+        interactive: this.interactive,
+        attributionControl: this.attributionControl // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
 
       }));
       this.addPropsImages();
@@ -13498,8 +13518,8 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
 });
 // CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_VueMapboxvue_type_script_lang_js_ = (VueMapboxvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/VueMapbox.vue?vue&type=style&index=0&id=634af6ae&lang=stylus&scoped=true&
-var VueMapboxvue_type_style_index_0_id_634af6ae_lang_stylus_scoped_true_ = __webpack_require__("7a09");
+// EXTERNAL MODULE: ./src/components/VueMapbox.vue?vue&type=style&index=0&id=7e484895&lang=stylus&scoped=true&
+var VueMapboxvue_type_style_index_0_id_7e484895_lang_stylus_scoped_true_ = __webpack_require__("31b0");
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -13607,11 +13627,11 @@ function normalizeComponent (
 
 var VueMapbox_component = normalizeComponent(
   components_VueMapboxvue_type_script_lang_js_,
-  VueMapboxvue_type_template_id_634af6ae_scoped_true_render,
+  VueMapboxvue_type_template_id_7e484895_scoped_true_render,
   staticRenderFns,
   false,
   null,
-  "634af6ae",
+  "7e484895",
   null
   
 )
@@ -13774,12 +13794,12 @@ Get only props with props with mapbox set to true, and with a value
   });
   return mapboxProps;
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=template&id=10750f1e&
-var VmPopupvue_type_template_id_10750f1e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({ maxHeight:_vm.myMaxHeight, overflow:'auto'})},[_vm._t("default")],2)}
-var VmPopupvue_type_template_id_10750f1e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=template&id=881869f8&
+var VmPopupvue_type_template_id_881869f8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({ maxHeight:_vm.myMaxHeight, overflow:'auto'})},[_vm._t("default")],2)}
+var VmPopupvue_type_template_id_881869f8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VmPopup.vue?vue&type=template&id=10750f1e&
+// CONCATENATED MODULE: ./src/components/VmPopup.vue?vue&type=template&id=881869f8&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=script&lang=js&
 
@@ -13804,7 +13824,7 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
       */
     anchor: {
       type: String,
-      default: 'bottom',
+      default: undefined,
       validator: function validator(value) {
         return ['center', 'top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'].indexOf(value) !== -1;
       }
@@ -14081,8 +14101,8 @@ var VmPopupvue_type_style_index_0_lang_stylus_ = __webpack_require__("11ec");
 
 var VmPopup_component = normalizeComponent(
   components_VmPopupvue_type_script_lang_js_,
-  VmPopupvue_type_template_id_10750f1e_render,
-  VmPopupvue_type_template_id_10750f1e_staticRenderFns,
+  VmPopupvue_type_template_id_881869f8_render,
+  VmPopupvue_type_template_id_881869f8_staticRenderFns,
   false,
   null,
   null,
@@ -15754,7 +15774,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     zIndex: function zIndex(val) {
       var _this = this;
 
-      // console.log(val)
+      // // console.log(val)
       this.$nextTick(function () {
         return _this.MapboxVueInstance.updateLayerOrder();
       });
@@ -15905,13 +15925,13 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     }
   },
   beforeUpdated: function beforeUpdated() {// debugger;
-    // //console.log('beforeUpdated dom vueMapbox')
+    // //// console.log('beforeUpdated dom vueMapbox')
   },
   updated: function updated() {// debugger
     // update layer
-    // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
+    // // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
     // this.$nextTick(() => {
-    //   console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer nextTick')
+    //   // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer nextTick')
     //   this.updateLayerOrder()
     // })
   },
@@ -15963,7 +15983,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         } else {
           // add layer when a source with name is added in future
           var func = function func(e) {
-            // console.log(e)
+            // // console.log(e)
             if (e.dataType === 'source' && e.sourceId === _this6.options.source) {
               _this6.addLayer();
 
@@ -16012,7 +16032,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
   }(),
   destroyed: function destroyed() {
     if (this.layerId) {
-      // console.log('destroying ' + this.layerId)
+      // // console.log('destroying ' + this.layerId)
       this.MapboxVueInstance.removeLayer(this.layerId); // check if the source of layer is a Object/ownSource,and remove it too
 
       if (_typeof(this.source) === 'object') {// TODO - not removing sourve because others can be using it, but make this logic better
@@ -16168,8 +16188,6 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     }(),
     //* * EVENTS SETUP */
     setupLayerFeaturesEvents: function setupLayerFeaturesEvents() {
-      var _this9 = this;
-
       if (this.$listeners.featurehover || this.myPaintHover || this.myLayoutHover || has_default()(this.$scopedSlots, 'popupHover') || has_default()(this.$slots, 'popupHover')) {
         this.hasFeatureHover = true;
       } else {
@@ -16197,25 +16215,41 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
         map.off('click', this.layerMouseClickOutEvent);
         map.on('click', this.layerMouseClickOutEvent);
-      } // if (this.$listeners.loading) {
+      }
 
-
-      map.on('render', this.layerId, function (e) {
-        if (e === null || e === void 0 ? void 0 : e.target) {
-          _this9.$emit('loading', !e.target.loaded());
-        }
-      }); // }
-      // CUSTON EVENTS
+      if (this.$listeners.loading) {
+        map.off('render', this.layerId, this.layerLoading);
+        map.on('render', this.layerId, this.layerLoading);
+      } // CUSTON EVENTS
       // featureHover
       // featureClick
       // featureLeave
+
+    },
+    layerLoading: function layerLoading(e) {
+      if (this.loading === undefined) {
+        this.loading = true; // console.log('🚀 ~ file: VmLayer.vue ~ line 727 ~ map.on ~ this.loading', this.loading)
+
+        this.$emit('loading', true);
+        console.log('emit init', true);
+      }
+
+      if (e === null || e === void 0 ? void 0 : e.target) {
+        var loading = !e.target.loaded(); // console.log('🚀 ~ file: VmLayer.vue ~ line 732 ~ map.on ~ loading', loading)
+
+        if (this.loading !== loading) {
+          this.$emit('loading', loading);
+          console.log('emit loading change', loading);
+          this.loading = loading;
+        }
+      }
     },
     featureMouseMoveEvent: function featureMouseMoveEvent(e) {
       // if click popup is open, i stop hover events
       if (this.popupOpen) return false; // check if im the top most layer
       // TODO - create event in mapbox instance to detect .capture.stop propagations etc, and implement this logic in the events
 
-      var features = this.getMap().queryRenderedFeatures(e.point); // console.log("🚀 ~ file: VmLayer.vue ~ line 732 ~ features", features)
+      var features = this.getMap().queryRenderedFeatures(e.point); // // console.log("🚀 ~ file: VmLayer.vue ~ line 732 ~ features", features)
 
       if (this.ignoreOthersLayer === false && get_default()(features, '[0].layer.id') !== this.layerId) {
         this.featureMouseLeaveEvent(e);
@@ -16256,7 +16290,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       this.hoverFeatures = [];
     },
     featureMouseClickEvent: function featureMouseClickEvent(e) {
-      var _this10 = this;
+      var _this9 = this;
 
       var features = this.getMap().queryRenderedFeatures(e.point); // if clicked in another top most layer, is like clicking outside this
 
@@ -16273,7 +16307,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       if (e.features.length > 0) {
         e.features.forEach(function (feature) {
-          var selectedFeatureIndex = findIndex_default()(_this10.selectedFeatures, {
+          var selectedFeatureIndex = findIndex_default()(_this9.selectedFeatures, {
             id: feature.id
           });
 
@@ -16321,7 +16355,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     },
     //* * PAINT AND LAYOUT SETUPS */
     getFinalFeatureStateForPaintOrLayout: function getFinalFeatureStateForPaintOrLayout(normal, hover, click) {
-      var _this11 = this;
+      var _this10 = this;
 
       var result = _objectSpread2({}, normal);
 
@@ -16335,16 +16369,17 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
           // treat interpolate and step diferent because the usually use zoom as input, and zoom input only work in toplevel
 
           if ((value === null || value === void 0 ? void 0 : value[0]) === 'interpolate' && (value === null || value === void 0 ? void 0 : (_value$ = value[2]) === null || _value$ === void 0 ? void 0 : _value$[0]) === 'zoom' || (value === null || value === void 0 ? void 0 : value[0]) === 'step' && (value === null || value === void 0 ? void 0 : (_value$2 = value[1]) === null || _value$2 === void 0 ? void 0 : _value$2[0]) === 'zoom') {
-            var _this11$opacity;
+            var _this10$opacity;
 
             var exprType = value === null || value === void 0 ? void 0 : value[0];
             var exprStart = exprType === 'interpolate' ? value.splice(0, 4) : value.splice(0, 2);
-            var opacity = (_this11$opacity = _this11.opacity) !== null && _this11$opacity !== void 0 ? _this11$opacity : 1;
+            var opacity = (_this10$opacity = _this10.opacity) !== null && _this10$opacity !== void 0 ? _this10$opacity : 1;
 
             for (var i = 0; i < value.length; i += 2) {
               value[i] *= opacity;
 
               if (hover && hover[key]) {
+                // console.log('🚀 ~ file: VmLayer.vue ~ line 853 ~ map.on ~ this.$emit', this.$emit)
                 value[i] = ['case', ['boolean', ['feature-state', 'hover'], false], hover[key] * opacity, value[i]];
               }
 
@@ -16377,7 +16412,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     /* @params state | '', click or hover
     */
     getPaintLayoutForState: function getPaintLayoutForState() {
-      var _this12 = this;
+      var _this11 = this;
 
       var kind = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'paint';
       var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
@@ -16387,21 +16422,21 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       var paintLayoutObject = get_default()(this.$props, kind + startCase_default()(state), {});
       var paintLayoutFinal = {};
       Object.keys(paintLayoutObject).forEach(function (k) {
-        var kConvert = _this12.innerPaintPropConvert(k);
+        var kConvert = _this11.innerPaintPropConvert(k);
 
-        paintLayoutFinal[kConvert] = _this12.innerExpressionConverter(paintLayoutObject[k]);
+        paintLayoutFinal[kConvert] = _this11.innerExpressionConverter(paintLayoutObject[k]);
       }); // GET WHAT IS DEFINE LOOSELY IN PROPS (fill-color, fill-color-click .....)
 
       Object.entries(this.$options.propsData).forEach(function (item) {
-        var key = _this12.innerPaintPropConvert(kebabCase_default()(item[0]));
+        var key = _this11.innerPaintPropConvert(kebabCase_default()(item[0]));
 
         var value = item[1];
         var keyNormalName = key.replace(removeStateRegex, '');
 
         if (state !== '' && key.indexOf('-' + state) > -1 && allPaintLayout.includes(keyNormalName)) {
-          paintLayoutFinal[keyNormalName] = _this12.innerExpressionConverter(value);
+          paintLayoutFinal[keyNormalName] = _this11.innerExpressionConverter(value);
         } else if (state === '' && allPaintLayout.includes(keyNormalName)) {
-          paintLayoutFinal[keyNormalName] = _this12.innerExpressionConverter(value);
+          paintLayoutFinal[keyNormalName] = _this11.innerExpressionConverter(value);
         }
       }); // GET WHAT IS DEFINE VIA CLASSES ([fill-color: red, property:vl_name, value:'df',...])
       // for each paint/layout props,
@@ -16409,7 +16444,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       allPaintLayout.forEach(function (plKey) {
         var plKeyState = state !== '' ? plKey + '-' + state : plKey;
-        var classesElementsWithPL = filter_default()(_this12.classes, function (elm) {
+        var classesElementsWithPL = filter_default()(_this11.classes, function (elm) {
           return has_default()(elm, plKeyState);
         });
 
@@ -16420,22 +16455,22 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
           var featureProperty = (_classesElementsWithP = classesElementsWithPL[0]) === null || _classesElementsWithP === void 0 ? void 0 : _classesElementsWithP.property; // TODO maybe put state here too
           // MATCH VALUES
 
-          if (_this12.classesValueInterpolation === 'match') {
+          if (_this11.classesValueInterpolation === 'match') {
             var featureId = featureProperty === '_id';
             expression = featureId ? ['match', ['id']] : ['match', ['get', featureProperty]];
             classesElementsWithPL.forEach(function (classeElm, i) {
-              expression.push(_this12.innerExpressionConverter(classeElm.value));
+              expression.push(_this11.innerExpressionConverter(classeElm.value));
               expression.push(get_default()(classeElm, plKeyState));
             });
             expression.push(paintLayoutFinal[plKey] || expression[expression.length - 1]); // STEP VALUES
-          } else if (_this12.classesValueInterpolation === 'step') {
+          } else if (_this11.classesValueInterpolation === 'step') {
             expression = ['step', ['to-number', ['get', featureProperty]]];
             classesElementsWithPL.forEach(function (classeElm, i) {
               // TODO - i think need to test default value when is steped
               expression.push(get_default()(classeElm, plKeyState));
-              if (classeElm.value) expression.push(_this12.innerExpressionConverter(classeElm.value));
+              if (classeElm.value) expression.push(_this11.innerExpressionConverter(classeElm.value));
             }); // INTERPOLATE VALUES
-          } else if (_this12.classesValueInterpolation === 'interpolate') {
+          } else if (_this11.classesValueInterpolation === 'interpolate') {
             if (featureProperty.match(/color/g)) {
               // check if is color
               expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', featureProperty]]];
@@ -16444,12 +16479,12 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
             }
 
             classesElementsWithPL.forEach(function (classeElm, i) {
-              expression.push(_this12.innerExpressionConverter(classeElm.value));
+              expression.push(_this11.innerExpressionConverter(classeElm.value));
               expression.push(get_default()(classeElm, plKeyState));
             });
           }
 
-          paintLayoutFinal[_this12.innerPaintPropConvert(plKey)] = expression;
+          paintLayoutFinal[_this11.innerPaintPropConvert(plKey)] = expression;
         }
       }); // Zoom expression not work in hover or click states
       // it is a limitation of mapbox zoom only work as top level exp,
@@ -16460,7 +16495,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
           var key = item[0];
           var value = item[1];
 
-          if (_this12.checkForZoomExp(value)) {
+          if (_this11.checkForZoomExp(value)) {
             // console.error('ZOOM expression can not be user in hover or click state due mapbox limitations. Default will be the last value')
             paintLayoutFinal[key] = value[value.length - 1]; // (value?.[0] === 'interpolate') ? value[value.length-1] : value?.[2] // default value if interpolate, or step
           }
@@ -16480,7 +16515,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     * opacity not set will be set to so we can fase a layout
     */
     processPaintOpacity: function processPaintOpacity(paint) {
-      var _this13 = this;
+      var _this12 = this;
 
       var opacity = this.opacity;
 
@@ -16509,7 +16544,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         } else if (Array.isArray(value)) {
           // an expression
           //
-          if (_this13.checkForZoomExp(value)) {
+          if (_this12.checkForZoomExp(value)) {
             var exprStart = value[0] === 'interpolate' ? value.splice(0, 4) : value.splice(0, 2);
 
             for (var i = 0; i < value.length; i += 2) {
@@ -16530,7 +16565,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     /* @params kind | layout or paint
     */
     getAllPaintLayoutForKind: function getAllPaintLayoutForKind(kind) {
-      var _this14 = this;
+      var _this13 = this;
 
       var propertiesForKind = ['color']; // user shorhand for color for all layer types
 
@@ -16538,7 +16573,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         var key = kebabCase_default()(prop[0]);
         var value = prop[1];
 
-        if (get_default()(value, kind) && get_default()(value, 'layerType') === _this14.type) {
+        if (get_default()(value, kind) && get_default()(value, 'layerType') === _this13.type) {
           if (key.indexOf('-hover') === -1 && key.indexOf('-click') === -1) {
             propertiesForKind.push(key); // propertiesForKind.push(key + '-transition') //disable transition for now
           }
@@ -16608,7 +16643,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     }
   },
   render: function render(h) {
-    var _this15 = this;
+    var _this14 = this;
 
     var emptyElm = null; // h('div')
 
@@ -16686,9 +16721,9 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       var closeFunc = get_default()(popupInstance, 'componentOptions.listeners.close');
       set_default()(popupInstance.componentOptions, 'listeners.close', function (e) {
-        _this15.popupOpen = false;
-        _this15.selectedFeatures = [];
-        _this15.hoverFeatures = [];
+        _this14.popupOpen = false;
+        _this14.selectedFeatures = [];
+        _this14.hoverFeatures = [];
 
         if (closeFunc) {
           closeFunc(e);
@@ -18715,21 +18750,6 @@ module.exports = function (it) {
   return EXISTS ? document.createElement(it) : {};
 };
 
-
-/***/ }),
-
-/***/ "cd98":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("9b0a");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("4a213408", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
