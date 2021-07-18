@@ -432,6 +432,8 @@ export default {
        * @property {array} features array with all features selected
        */
       this.$emit('featureselect', val)
+      this.$emit('featureselect', val)
+      this.$emit('featureclick', val)
     },
 
     hoverFeatures: function (val, oldVal) {
@@ -594,7 +596,6 @@ export default {
     },
 
     addLayer: function () {
-      debugger;
       try {
         if (this.customLayer) {
           const mylayer = this.MapboxVueInstance.addLayer(this.customLayer)
@@ -683,7 +684,7 @@ export default {
       } else {
         this.hasFeatureHover = false
       }
-      if (this.paintClick || this.layoutClick || has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick')) {
+      if (this.$listeners.featurehover || this.$listeners.featureclick || this.paintClick || this.layoutClick || has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick')) {
         this.hasFeatureClick = true
       } else {
         this.hasFeatureClick = false

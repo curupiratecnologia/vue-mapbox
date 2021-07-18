@@ -862,7 +862,7 @@ export default {
         right: 0;
         width:100%;
         // background:red;
-        z-index:3
+        // z-index:3
 
         .mapboxgl-canvas{
             left:0;

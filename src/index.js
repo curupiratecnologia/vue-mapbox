@@ -1,3 +1,4 @@
+// export { default as VueMapbox } from './components/VmMapboxSmall.vue'
 export { default as VueMapbox } from './components/VueMapbox.vue'
 export { default as VmSource } from './components/VmSource.vue'
 export { default as VmMarker } from './components/VmMarker.vue'
