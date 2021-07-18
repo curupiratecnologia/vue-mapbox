@@ -872,7 +872,7 @@ export default {
 <style lang="stylus" scoped>
 
     .loader{
-        position:fixed;
+        position:absolute;
         top:50%;
         left:50%;
         text-align:center;
@@ -886,7 +886,7 @@ export default {
         right: 0;
         width:100%;
         // background:red;
-        z-index:3
+        // z-index:3
 
         .mapboxgl-canvas{
             left:0;

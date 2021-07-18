@@ -441,6 +441,7 @@ export default {
        * @property {array} features array with all features selected
        */
       this.$emit('featureselect', val)
+      this.$emit('featureclick', val)
     },
 
     hoverFeatures: function (val, oldVal) {
@@ -699,14 +700,14 @@ export default {
       } else {
         this.hasFeatureHover = false
       }
-      if (this.$listeners.featureclick || this.myPaintClick || this.myLayoutClick || has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick')) {
+      if (this.$listeners.featureclick || this.$listeners.featureselect || this.myPaintClick || this.myLayoutClick || has(this.$scopedSlots, 'popupClick') || has(this.$slots, 'popupClick')) {
         this.hasFeatureClick = true
       } else {
         this.hasFeatureClick = false
       }
 
       const map = this.getMap()
-      if (this.hasFeatureHover || this.hasFeatureClick) {
+      if (this.hasFeatureHover) {
         map.off('mousemove', this.layerId, this.featureMouseMoveEvent)
         map.off('mouseleave', this.layerId, this.featureMouseLeaveEvent)
         map.on('mousemove', this.layerId, this.featureMouseMoveEvent)

@@ -1,26 +1,9 @@
 <template>
-  <div id="app"
-  style="background:rgba(25, 26, 26, 0.000)"
-  >
+  <div id="app">
     <center>
 
-        <recuperacao-energetica-icon
-            :energiaPercent="50"
-            :processamentoPercent="90"
-            tecnologia="Coprocessamento"
-            :showInfo="false"
-            />
-
-        <recuperacao-energetica-icon
-            :energiaPercent="50"
-            :processamentoPercent="70"
-            tecnologia="Coprocessamento"
-            :showInfo="true"
-            />
-
-     <!-- <recuperacao-energetica-icon /> -->
+     <recuperacao-energetica-icon />
       <VueMapbox
-
       key="mapbox"
       ref="vuemapbox"
       @load="loaded"
@@ -28,138 +11,31 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-<!--
-        <vm-image name="testesvg"
-                  width="55px"
-                  :updateOnChange="true"
-                  >
 
-                  <recuperacao-energetica-icon :energiaPercent="20" :processamentoPercent="60"/>
-
-        </vm-image>
-
-        <vm-source v-if="show"
-        key="poligno-triangula"
-        name="poligno-triangula"
-        type="geojson" :options='{data:{ "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": {}, "geometry": { "type": "Polygon", "coordinates": [ [ [ -40.1220703125, -8.450638800331001 ], [ -48.9111328125, -3.601142320158722 ], [ -55.107421875, -6.053161295714067 ], [ -59.765625, -10.055402736564224 ], [ -59.150390625, -20.179723502765153 ], [ -52.5146484375, -24.806681353851978 ], [ -46.669921875, -25.60190226111573 ], [ -41.220703125, -16.762467717941593 ], [ -40.1220703125, -8.450638800331001 ] ] ] } } ] }}'>
-              <vm-layer
-                key="layer-vermelho"
-                name="layer-vermelho"
-                type="fill"
-                fill-color="#ff0000"
-                fill-color-hover="#00ff00"
-                :opacity="0.6"
-             >
-
-            </vm-layer>
-      </vm-source>
-
-      <vm-source
-        key="unidade-recuperacao-energetica"
-        name="unidade-recuperacao-energetica"
-        type="geojson" :options="{data:geojson2}">
-
-              <vm-layer
-                key="layer-icon"
-                name="layer-icons"
-                type="symbol"
-                :icon-image='["coalesce", ["image", "testeurl"], ["image", "testesvg"], ["image", "testesvgcontent"] ,["image", "tema-1-marke"]]'
-                icon-anchor="top-left"
-                :icon-ignore-placement="true"
-                :icon-offset="[-33,-33]"
-                :ignoreOthersLayer="true"
-                @featurehover="unidadeFeatureHover"
-                @mousemove="mousemove"
-                @mouseleave="mouseleave"
-             >
-            </vm-layer>
-
-            <vm-layer
-                key="layer-icon-center"
-                name="layer-icons-center"
-                type="circle"
-                :circle-radius="33"
-                :circle-color="'rgba(0,255,0,255)'"
-                @featurehover="emcimaIcone"
+       <vm-source name="exampleSource" 
+                 type="geojson" 
+                 :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" >
+            
+            <vm-layer name="myLayer"
+                    type="fill"
+                    @featureclick="featureenter"
+                    :paint="{ 'fill-color': '#ff0000', 'fill-opacity': 0.6  }"
+                    :paintHover="{ 'fill-opacity': 1  }"
             >
             </vm-layer>
 
-      </vm-source>
-
-      <vm-source
-        v-if="!show"
-        key="poligno-triangula"
-        name="poligno-triangula"
-        type="geojson" :options='{data:{ "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": {}, "geometry": { "type": "Polygon", "coordinates": [ [ [ -40.1220703125, -8.450638800331001 ], [ -48.9111328125, -3.601142320158722 ], [ -55.107421875, -6.053161295714067 ], [ -59.765625, -10.055402736564224 ], [ -59.150390625, -20.179723502765153 ], [ -52.5146484375, -24.806681353851978 ], [ -46.669921875, -25.60190226111573 ], [ -41.220703125, -16.762467717941593 ], [ -40.1220703125, -8.450638800331001 ] ] ] } } ] }}'>
-              <vm-layer
-                key="layer-vermelho"
-                name="layer-vermelho"
-                type="fill"
-                color="#ff0000"
-                :opacity="0.6"
-             >
-
-            </vm-layer>
-      </vm-source>
-
-        <vm-source
-        key="poligno-triangula-z-index"
-        name="poligno-triangula-z-index"
-
-        type="geojson" :options='{data:{ "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": { "stroke": "#555555", "stroke-width": 2, "stroke-opacity": 1, "fill": "#555555", "fill-opacity": 0.5 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -33.92578125, -6.970049417296218 ], [ -40.341796875, -7.667441482726056 ], [ -55.283203125, -10.876464994816283 ], [ -63.28125, -11.781325296112277 ], [ -67.2802734375, -12.554563528593656 ], [ -67.6318359375, -13.838079936422462 ], [ -67.8076171875, -14.944784875088372 ], [ -52.82226562499999, -13.325484885597936 ], [ -44.033203125, -12.254127737657369 ], [ -38.84765625, -10.876464994816283 ], [ -33.92578125, -9.232248799418674 ], [ -33.92578125, -6.970049417296218 ] ] ] } } ] }}'>
-              <vm-layer
-                key="layer-verde"
-                name="layer-verde"
-                type="fill"
-                color="#00FF00"
-                :opacity="1"
-                :z-index="zindex"
-             >
-
-            </vm-layer>
-      </vm-source> -->
-
-                 <!-- :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" > -->
-                      <!-- :options="{ data: 'https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&qualidade=maxima&intrarregiao=municipio'}" -->
-
-            <vm-layer
-            :source="{
-                   type:'vector',
-                   tiles:[`https://hapi-sigweb.cgee.org.br/tile/uso_cobertura_terra/{z}/{x}/{y}.mvt`],
-                   minzoom: 0,
-                   maxzoom: 24
-                }"
-                    sourceLayer="uso_cobertura_terra"
-                    name="myLayer"
-                    type="fill"
-                    @mousemove="mousemove"
-                    @loading="loading"
-                    :paint="{ 'fill-color': '#ff0000' }"
-                    :classes="[ {'fill-color':'#fe0000', value:1,'label':'Área Artificial', property:'vlr_classe'},
-                      {'fill-color':'#ebe628', value:2,'label':'Área Agrícola', property:'vlr_classe'},
-                          {'fill-color':'#cd8900', value:3,'label':'Pastagem com Manejo', property:'vlr_classe'},
-                          {'fill-color':'#d4e885', value:4,'label':'Mosaico de Ocupações em Área Florestal', property:'vlr_classe'},
-                          {'fill-color':'#00915a', value:5,'label':'Silvicultura', property:'vlr_classe'},
-                          {'fill-color':'#73a800', value:6,'label':'Vegetação Florestal', property:'vlr_classe'},
-                          {'fill-color':'#beb8f4', value:7,'label':'Área Úmida', property:'vlr_classe'},
-                          {'fill-color':'#c890a9', value:8,'label':'Vegetação Campestre', property:'vlr_classe'},
-                          {'fill-color':'#d69963', value:9,'label':'Mosaico de Ocupações em Área Campestre', property:'vlr_classe'},
-                          {'fill-color':'#8cffff', value:10,'label':'Corpo d\'Água Continental', property:'vlr_classe'},
-                          {'fill-color':'#2d99da', value:11,'label':'Corpo d\'Água Costeiro', property:'vlr_classe'},
-                          {'fill-color':'#888888', value:12,'label':'Área Descoberta', property:'vlr_classe'}
-                  ]"
-        classesValueInterpolation='match'
-            />
+       </vm-source>
 
       </VueMapbox>
 
+
+
     </center>
-    <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
-      <!--
+      <input  type="range" min="0" max="1" step="0.1" v-model="opacity" >
       toogle order: <input  type="checkbox" v-model="show" /> {{color}}
       {{capagClassesEstadual}}
     fill <input type="text" v-model="fill">
-    z-index-triangulo <input type="number" v-model="zindex"> -->
+    z-index-triangulo <input type="number" v-model="zindex">
 
   </div>
 </template>
@@ -169,17 +45,10 @@
 //  import VueMapbox from './components/VueMapbox.vue'
 
 import RecIcon from '@/components/recuperacao-energetica-icon'
-import PaiTeste from '@/components/pai-teste'
-import Filho from '@/components/filho'
 
 export default {
   name: 'App',
-  components: {
-    'recuperacao-energetica-icon': RecIcon,
-    'pai-teste': PaiTeste,
-    filho: Filho
-
-  },
+  components: { 'recuperacao-energetica-icon': RecIcon },
   data () {
     return {
       zindex: 0,
@@ -199,6 +68,117 @@ export default {
         { id: 5107305, color: '#ffffff' }
       ],
 
+      geojson1: {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Rio de Janeiro',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                }
+              },
+              geocod: '33',
+              colorSet: [
+                '#984593'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -42.0711523406202,
+                -22.0720646645004
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'São Paulo',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                }
+              },
+              geocod: '35',
+              colorSet: [
+                '#984593'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -49.1831841692549,
+                -22.5736727410571
+              ]
+            }
+          },
+          {
+            type: 'Feature',
+            properties: {
+              tipoRegiao: 'estado',
+              nome: 'Paraná',
+              temas: {
+                1: {
+                  nome: 'Mobilidade',
+                  total: 1,
+                  cor: '#984593'
+                }
+              },
+              geocod: '41',
+              colorSet: [
+                '#984593'
+              ],
+              dataSet: [
+                1
+              ],
+              cluster: true
+            },
+            geometry: {
+              type: 'Point',
+              crs: {
+                type: 'name',
+                properties: {
+                  name: 'urn:ogc:def:crs:EPSG::4674'
+                }
+              },
+              coordinates: [
+                -51.8183643619047,
+                -24.6344451045557
+              ]
+            }
+          }
+        ]
+      },
+
       geojson2: {
 
         type: 'FeatureCollection',
@@ -206,11 +186,6 @@ export default {
           {
             type: 'Feature',
             properties: {
-              id: 1,
-              tecnologia: 'Aterro Sanitário',
-              processamentoPercent: 80,
-              energiaPercent: 20,
-
               tipoRegiao: 'estado',
               nome: 'Pará',
               temas: {
@@ -246,10 +221,6 @@ export default {
           {
             type: 'Feature',
             properties: {
-              id: 2,
-              tecnologia: 'Aterro Sanitário/CTR',
-              processamentoPercent: 20,
-              energiaPercent: 0,
               tipoRegiao: 'estado',
               nome: 'Minas Gerais',
               temas: {
@@ -285,10 +256,6 @@ export default {
           {
             type: 'Feature',
             properties: {
-              id: 3,
-              tecnologia: 'Incineração de Resíduos Classe I',
-              processamentoPercent: 20,
-              energiaPercent: 10,
               tipoRegiao: 'estado',
               nome: 'Esprito Santo',
               temas: {
@@ -324,10 +291,6 @@ export default {
           {
             type: 'Feature',
             properties: {
-              id: 4,
-              tecnologia: 'Lixão com Recuperação de Biogás',
-              processamentoPercent: 60,
-              energiaPercent: 50,
               tipoRegiao: 'estado',
               nome: 'Rio de Janeiro',
               temas: {
@@ -370,10 +333,6 @@ export default {
           {
             type: 'Feature',
             properties: {
-              id: 5,
-              tecnologia: 'Lixão com Recuperação de Biogás',
-              processamentoPercent: 60,
-              energiaPercent: 50,
               tipoRegiao: 'estado',
               nome: 'São Paulo',
               temas: {
@@ -416,10 +375,6 @@ export default {
           {
             type: 'Feature',
             properties: {
-              id: 6,
-              tecnologia: 'Incineração de RSS e Resíduos Classe I',
-              processamentoPercent: 60,
-              energiaPercent: 50,
               tipoRegiao: 'estado',
               nome: 'Paraná',
               temas: {
@@ -455,9 +410,6 @@ export default {
           {
             type: 'Feature',
             properties: {
-              tecnologia: 'Transbordo de Resíduos',
-              processamentoPercent: 20,
-              energiaPercent: 80,
               tipoRegiao: 'estado',
               nome: 'Distrito Federal',
               temas: {
@@ -492,7 +444,171 @@ export default {
           }
         ]
 
-      }
+      },
+
+      geojson3: {
+
+        type: 'FeatureCollection',
+        features: []
+
+      },
+
+      geojson: {},
+
+      fluxo: [{
+        geocod_origem: 5219902,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.26031485, -15.93202096]
+        },
+        destinos: [{
+          geocod_destino: 5219902,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.26031485, -15.93202096]
+          },
+          adequado: 0,
+          inadequado: 4900,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5220108,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-50.37482105, -16.51410686]
+        },
+        destinos: [{
+          geocod_destino: 5220108,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-50.37482105, -16.51410686]
+          },
+          adequado: 0,
+          inadequado: 61800,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5220264,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-48.66342725, -17.05642588]
+        },
+        destinos: [{
+          geocod_destino: 5220264,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-48.66342725, -17.05642588]
+          },
+          adequado: 0,
+          inadequado: 2742.9,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5221007,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.60258016, -16.05500387]
+        },
+        destinos: [{
+          geocod_destino: 5221007,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.60258016, -16.05500387]
+          },
+          adequado: 0,
+          inadequado: 3720,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5221304,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-47.78063797, -18.35978943]
+        },
+        destinos: [{
+          geocod_destino: 5221304,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-47.78063797, -18.35978943]
+          },
+          adequado: 0,
+          inadequado: 21880,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5221700,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.67938453, -15.50501229]
+        },
+        destinos: [{
+          geocod_destino: 5221700,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.67938453, -15.50501229]
+          },
+          adequado: 0,
+          inadequado: 56000,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5222005,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-48.50667118, -16.74573646]
+        },
+        destinos: [{
+          geocod_destino: 5222005,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-48.50667118, -16.74573646]
+          },
+          adequado: 0,
+          inadequado: 39130,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5222054,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-49.80746824, -17.73092192]
+        },
+        destinos: [{
+          geocod_destino: 5222054,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-49.80746824, -17.73092192]
+          },
+          adequado: 0,
+          inadequado: 27533.1,
+          adequacao: 0
+        }]
+      }, {
+        geocod_origem: 5300108,
+        geom_origem: {
+          type: 'Point',
+          coordinates: [-47.88061196, -15.78368965]
+        },
+        destinos: [{
+          geocod_destino: 5215603,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-48.28657588, -15.16421844]
+          },
+          adequado: 216960,
+          inadequado: 0,
+          adequacao: 100
+        }, {
+          geocod_destino: 5300108,
+          geom_destino: {
+            type: 'Point',
+            coordinates: [-47.88061196, -15.78368965]
+          },
+          adequado: 2960519.6,
+          inadequado: 140419.2,
+          adequacao: 95.47
+        }]
+      }]
 
     }
   },
@@ -516,6 +632,24 @@ export default {
         return exp
       }
       return '#666666'
+    },
+
+    fluxoFinal: function () {
+      const finalFluxo = [] // { from, to, corOrigem, corDestino}
+      this.fluxo.forEach(fluxo => {
+        fluxo.destinos.forEach(destino => {
+          const point = {
+            geomDestino: destino?.geom_destino?.coordinates,
+            geomOrigem: fluxo?.geom_origem?.coordinates,
+            corOrigem: '#ffffff',
+            corDestino: destino?.adequacao === 0 ? '#ff0000' : '#00FF00'
+
+          }
+          finalFluxo.push(point)
+        })
+      })
+
+      return finalFluxo
     },
 
     images: function () {
@@ -548,25 +682,8 @@ export default {
     },
     featureenter: function (e) {
 
-      // console.log(e)
+      console.log(e)
     },
-    unidadeFeatureHover: function (features, map) {
-      console.log('🚀 ~ file: App.vue ~ line 591 ~ features', features)
-    },
-    mousemove: function (features, map) {
-      // console.count('🚀 ~ mousemove')
-    },
-    mouseleave: function (features, map) {
-      console.count('🚀 ~ mouseleave')
-    },
-    loading: function (e) {
-      console.log('🚀 ~ APP loading layer', e)
-    },
-
-    emcimaIcone: function (e) {
-
-    },
-
     loaded: function (a, b) {
       window.map = b
       // b.on('render', function (data) {
