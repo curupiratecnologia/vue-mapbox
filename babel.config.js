@@ -1,11 +1,11 @@
 const devPresets = ['@vue/babel-preset-app']
 const buildPresets = [
   [
-    '@vue/cli-plugin-babel/preset',
+    "@vue/cli-plugin-babel/preset",
     {
-      useBuiltIns: false
-    }
-  ]
+      useBuiltIns: false,
+    },
+  ],
 ]
 
 module.exports = {

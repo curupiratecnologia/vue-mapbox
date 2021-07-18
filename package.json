@@ -1,6 +1,6 @@
 {
   "name": "@curupira/vue-mapbox",
-  "version": "0.1.1-beta.33",
+  "version": "0.1.1-beta.41",
   "main": "dist/vue-mapbox.umd.js",
   "module": "dist/vue-mapbox.umd.js",
   "private": false,
@@ -26,13 +26,13 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "serve-lib": "vue-cli-service build --modern --target lib --name vue-mapbox src/entry.js --dest dist/ --watch",
+    "serve-lib": "vue-cli-service build --target lib --report --name vue-mapbox src/entry.js --dest dist/ --watch",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "styleguide": "vue-cli-service styleguidist",
     "styleguide:build": "vue-cli-service  styleguidist:build --verbose",
     "build-lib": "npm run build-lib:library",
-    "build-lib:library": "vue-cli-service build --report --modern --target lib --name vue-mapbox src/entry.js --dest dist/",
+    "build-lib:library": "vue-cli-service build --report --target lib --name vue-mapbox src/entry.js --dest dist/",
     "publish": "npm publish --access public --tag beta"
   },
   "dependencies": {
@@ -59,6 +59,7 @@
     "@vue/cli-plugin-vuex": "~4.3.0",
     "@vue/cli-service": "^4.3.1",
     "@vue/eslint-config-standard": "^5.1.2",
+    "animejs": "^3.2.1",
     "axios": "^0.20.0",
     "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.2",
@@ -69,6 +70,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "minimist": "^1.2.5",
+    "popmotion": "^9.3.6",
     "rollup": "^2.7.3",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-terser": "^5.3.0",
@@ -78,6 +80,10 @@
     "vue": "^2.6.11",
     "vue-cli-plugin-styleguidist": "~4.19.0",
     "vue-template-compiler": "^2.6.11"
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
-
 }

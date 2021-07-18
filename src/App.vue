@@ -11,142 +11,20 @@
       hash="pos"
       mapStyle="mapbox://styles/mapbox/dark-v10" height="700px" width="900px" :images="images" >
 
-      <!-- <vmLayer name="myLayer"
-                        :source="{type:'geojson',  generateId:true, data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4' }"
-                        type="fill"
-                        :paint="{ 'fill-color': '#ff7700', 'fill-opacity': 0.6  }"
-                        :paint-hover="{ 'fill-color': '#ff7799', 'fill-opacity': 1  }"
-                        :paint-click="{ 'fill-color': 'blue', 'fill-opacity': 1   }"
-                        multipleFeatureSelectionOn="alt"
-                        >
 
-               <template #popupHover="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >`
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-
-                </vm-popup>
-             </template>
-              <template #popupClick="slotProps">
-                <vm-popup v-if="slotProps.features"
-                    max-width="200px"
-                    max-height="290px"
-                    color="#2E2D2D"
-                    text-color="white"
-                    >
-                    <h5 style="font-size: 12px; color: #FFFFFF66; letter-spacing: 0; margin: 0;"> {{ slotProps.features[0].properties }} </h5>
-
-                </vm-popup>
-             </template>
-      </vmLayer> -->
-
-      <!-- <vmLayerArc
-          key="arclayer"
-          name="arcLayer"
-          :data="fluxo"
-          sourcePosition="geom_origem.coordinates"
-          targetPosition="destinos[0].geom_destino.coordinates"
-      /> -->
-
-        <!-- <vm-image name="testeurl" url="/images/ambiente_construido_2.png" /> -->
-
-        <vm-image name="testesvg"
-                  width="55px">
-
-                  <recuperacao-energetica-icon :energiaPercent="0" :processamentoPercent="20"/>
-
-        </vm-image>
-        <vm-image name="testesvg2"
-                  width="55px">
-
-                  <recuperacao-energetica-icon :energiaPercent="50" :processamentoPercent="70"/>
-
-        </vm-image>
-
-        <!-- <vm-image name="testesvgcontent"
-                  width="25px"
-        url='<svg width="135" height="135" viewBox="0 0 135 135" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="67.5" cy="67.5" r="57" stroke="black" stroke-width="21" stroke-dasharray="300 300"/>
-                <g filter="url(#filter0_d)">
-                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" fill="#F21414"/>
-                <path d="M52 90H63V74L94 69L63 40L33 69L52 74V90Z" stroke="#F40000"/>
-                </g>
-                <defs>
-                <filter id="filter0_d" x="28.0141" y="39.31" width="71.0719" height="59.19" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-                <feOffset dy="4"/>
-                <feGaussianBlur stdDeviation="2"/>
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-                </filter>
-                </defs>
-      </svg>' /> -->
-
-        <vm-source v-if="show"
-        key="poligno-triangula"
-        name="poligno-triangula"
-        type="geojson" :options='{data:{ "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": {}, "geometry": { "type": "Polygon", "coordinates": [ [ [ -40.1220703125, -8.450638800331001 ], [ -48.9111328125, -3.601142320158722 ], [ -55.107421875, -6.053161295714067 ], [ -59.765625, -10.055402736564224 ], [ -59.150390625, -20.179723502765153 ], [ -52.5146484375, -24.806681353851978 ], [ -46.669921875, -25.60190226111573 ], [ -41.220703125, -16.762467717941593 ], [ -40.1220703125, -8.450638800331001 ] ] ] } } ] }}'>
-              <vm-layer
-                key="layer-vermelho"
-                name="layer-vermelho"
-                type="fill"
-                color="#ff0000"
-                :opacity="0.6"
-             >
-
+       <vm-source name="exampleSource" 
+                 type="geojson" 
+                 :options="{ data: 'https://servicodados.ibge.gov.br/api/v2/malhas/52?formato=application/vnd.geo+json&resolucao=5&qualidade=4'}" >
+            
+            <vm-layer name="myLayer"
+                    type="fill"
+                    @featureclick="featureenter"
+                    :paint="{ 'fill-color': '#ff0000', 'fill-opacity': 0.6  }"
+                    :paintHover="{ 'fill-opacity': 1  }"
+            >
             </vm-layer>
-      </vm-source>
 
-      <vm-source
-        key="source-energetico"
-        name="ponto estados"
-        type="geojson" :options="{data:geojson2}">
-              <vm-layer
-                key="layer-icon"
-                name="layer-icons"
-                type="symbol"
-                :icon-image='["coalesce", ["image", "testeurl"], ["image", "testesvg"], ["image", "testesvgcontent"] ,["image", "tema-1-marke"]]'
-             >
-            </vm-layer>
-      </vm-source>
-
-      <vm-source
-        v-if="!show"
-        key="poligno-triangula"
-        name="poligno-triangula"
-        type="geojson" :options='{data:{ "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": {}, "geometry": { "type": "Polygon", "coordinates": [ [ [ -40.1220703125, -8.450638800331001 ], [ -48.9111328125, -3.601142320158722 ], [ -55.107421875, -6.053161295714067 ], [ -59.765625, -10.055402736564224 ], [ -59.150390625, -20.179723502765153 ], [ -52.5146484375, -24.806681353851978 ], [ -46.669921875, -25.60190226111573 ], [ -41.220703125, -16.762467717941593 ], [ -40.1220703125, -8.450638800331001 ] ] ] } } ] }}'>
-              <vm-layer
-                key="layer-vermelho"
-                name="layer-vermelho"
-                type="fill"
-                color="#ff0000"
-                :opacity="0.6"
-             >
-
-            </vm-layer>
-      </vm-source>
-
-        <vm-source
-        key="poligno-triangula-z-index"
-        name="poligno-triangula-z-index"
-        type="geojson" :options='{data:{ "type": "FeatureCollection", "features": [ { "type": "Feature", "properties": { "stroke": "#555555", "stroke-width": 2, "stroke-opacity": 1, "fill": "#555555", "fill-opacity": 0.5 }, "geometry": { "type": "Polygon", "coordinates": [ [ [ -33.92578125, -6.970049417296218 ], [ -40.341796875, -7.667441482726056 ], [ -55.283203125, -10.876464994816283 ], [ -63.28125, -11.781325296112277 ], [ -67.2802734375, -12.554563528593656 ], [ -67.6318359375, -13.838079936422462 ], [ -67.8076171875, -14.944784875088372 ], [ -52.82226562499999, -13.325484885597936 ], [ -44.033203125, -12.254127737657369 ], [ -38.84765625, -10.876464994816283 ], [ -33.92578125, -9.232248799418674 ], [ -33.92578125, -6.970049417296218 ] ] ] } } ] }}'>
-              <vm-layer
-                key="layer-verde"
-                name="layer-verde"
-                type="fill"
-                color="#00FF00"
-                :opacity="1"
-                :z-index="zindex"
-             >
-
-            </vm-layer>
-      </vm-source>
+       </vm-source>
 
       </VueMapbox>
 
@@ -804,7 +682,7 @@ export default {
     },
     featureenter: function (e) {
 
-      // console.log(e)
+      console.log(e)
     },
     loaded: function (a, b) {
       window.map = b

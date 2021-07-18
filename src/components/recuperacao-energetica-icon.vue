@@ -1,398 +1,473 @@
 <template>
-  <div>
-    <svg
-      width="66"
-      height="66"
-      viewBox="0 0 66 66"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g filter="url(#filter0_d)">
-        <circle
-          cx="33"
-          cy="29"
-          r="26"
-          stroke="#08F0FF"
-          stroke-width="6"
-          stroke-linejoin="round"
-        />
-      </g>
-      <g filter="url(#filter1_d)">
-        <circle
-          cx="33"
-          cy="29"
-          r="19"
-          stroke="#FFBA08"
-          stroke-width="6"
-          stroke-linejoin="round"
-        />
-      </g>
-      <g filter="url(#filter2_d)">
-        <g opacity="0.9" filter="url(#filter3_d)">
-          <circle cx="32.7932" cy="28.7931" r="15" fill="black" />
-        </g>
-      </g>
-
-      <!--  color can test here https://change-svg-color.vercel.app/ -->
-      <g
-        id="tecnologias"
-        :style="`
-          transform: translate( calc(50% - 12px), calc(50% - 18px));
-          filter: invert(83%) sepia(68%) saturate(374%) hue-rotate(32deg) brightness(91%) contrast(94%);
-        `"
-      >
-        <g>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            v-html="(icons[tecnologia])"
-          ></svg>
-        </g>
-      </g>
-
-      <defs>
-        <filter
-          id="filter0_d"
-          x="0"
-          y="0"
-          width="66"
-          height="66"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="4" />
-          <feGaussianBlur stdDeviation="2" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-        <filter
-          id="filter1_d"
-          x="7"
-          y="7"
-          width="52"
-          height="52"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="4" />
-          <feGaussianBlur stdDeviation="2" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-        <filter
-          id="filter2_d"
-          x="14.8967"
-          y="13.7931"
-          width="36.2069"
-          height="36.2069"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="2.89655" />
-          <feGaussianBlur stdDeviation="1.44828" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-        <filter
-          id="filter3_d"
-          x="15.0777"
-          y="13.7931"
-          width="35.431"
-          height="35.431"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="2.71552" />
-          <feGaussianBlur stdDeviation="1.35776" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-      </defs>
-    </svg>
-
-    <svg
-      width="66"
-      height="66"
-      viewBox="0 0 66 66"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g filter="url(#filter0_d)">
-        <circle
-          cx="33"
-          cy="29"
-          r="26"
-          stroke="#08F0FF"
-          stroke-width="6"
-          stroke-linejoin="round"
-          style="transform: rotate( -90deg ); transform-origin: center center; transform-box: fill-box;"
-          :stroke-dasharray="
-            `${(2 * Math.PI * 26 * energiaPercent) / 100} ${2 * Math.PI * 26}`
-          "
-        />
-      </g>
-      <g filter="url(#filter1_d)">
-        <circle
-          cx="33"
-          cy="29"
-          r="19"
-          stroke="#FFBA08"
-          stroke-width="6"
-          stroke-linejoin="round"
-          style="transform: rotate( -90deg ); transform-origin: center center; transform-box: fill-box;"
-          :stroke-dasharray="
-            `${(2 * Math.PI * 26 * processamentoPercent) / 100} ${2 *
-              Math.PI *
-              26}`
-          "
-        />
-      </g>
-      <g filter="url(#filter2_d)">
-        <g opacity="0.9" filter="url(#filter3_d)">
-          <circle cx="32.7932" cy="28.7931" r="15" fill="black" />
-        </g>
-      </g>
-      <path
-        d="M27.3584 32.929C27.4087 33.1149 27.6012 33.2265 27.7871 33.1762L32.5199 31.9077C32.7058 31.8574 32.8173 31.6649 32.767 31.479L31.6801 27.422C31.6298 27.2361 31.4373 27.1246 31.2514 27.1749L29.563 27.6298L30.1054 29.6572L28.7538 30.0181L28.2114 27.9906L26.5208 28.4434C26.3349 28.4937 26.2233 28.6861 26.2736 28.872L27.3584 32.929ZM34.6589 24.7144C34.2717 24.7144 33.959 25.0272 33.959 25.4143V32.4916L26.3895 34.5562C26.2955 34.5825 26.2408 34.6787 26.2671 34.7706L26.5426 35.7832C26.5689 35.8772 26.6651 35.9319 26.757 35.9056L35.3675 33.5567C35.42 34.8646 36.4872 35.9122 37.8082 35.9122C39.162 35.9122 40.2577 34.8165 40.2577 33.4627V24.7144H34.6589ZM37.8082 34.5125C37.2287 34.5125 36.7584 34.0423 36.7584 33.4627C36.7584 32.8831 37.2287 32.4129 37.8082 32.4129C38.3878 32.4129 38.858 32.8831 38.858 33.4627C38.858 34.0423 38.3878 34.5125 37.8082 34.5125Z"
-        fill="#B8C884"
-      />
-      <defs>
-        <filter
-          id="filter0_d"
-          x="0"
-          y="0"
-          width="66"
-          height="66"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="4" />
-          <feGaussianBlur stdDeviation="2" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-        <filter
-          id="filter1_d"
-          x="7"
-          y="7"
-          width="52"
-          height="52"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="4" />
-          <feGaussianBlur stdDeviation="2" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-        <filter
-          id="filter2_d"
-          x="14.8967"
-          y="13.7931"
-          width="36.2069"
-          height="36.2069"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="2.89655" />
-          <feGaussianBlur stdDeviation="1.44828" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-        <filter
-          id="filter3_d"
-          x="15.0777"
-          y="13.7931"
-          width="35.431"
-          height="35.431"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          />
-          <feOffset dy="2.71552" />
-          <feGaussianBlur stdDeviation="1.35776" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-          />
-          <feBlend
-            mode="normal"
-            in2="BackgroundImageFix"
-            result="effect1_dropShadow"
-          />
-          <feBlend
-            mode="normal"
-            in="SourceGraphic"
-            in2="effect1_dropShadow"
-            result="shape"
-          />
-        </filter>
-      </defs>
-    </svg>
-  </div>
+	<div style="pointer-events: none" ref="container"  id="container">
+		<div id="inner"  ref="inner" :style="`width:${width}px; height:${height}px`">
+			<svg
+				:width="width"
+				:height="height"
+				:viewBox="`0 0 ${width} ${height}`"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<defs>
+					<mask :id="`${uniqueid}raio-processamento-mask`">
+						<circle
+							cx="33"
+							cy="33"
+							r="24"
+							fill="none"
+							stroke-width="4"
+							stroke="rgb(255, 255, 255)"
+							:stroke-dasharray="`${calculateDasheArrayInSegments( 24, 20 )}`"
+						/>
+					</mask>
+					<mask :id="`${uniqueid}raio-energia-mask`">
+						<circle
+							cx="33"
+							cy="33"
+							r="30"
+							fill="none"
+							stroke-width="4"
+							stroke="rgb(255, 255, 255)"
+							:stroke-dasharray="`${calculateDasheArrayInSegments( 30, 20 )}`"
+						/>
+					</mask>
+					<!-- FILTERS/SHADOWS -->
+					<filter :id="`${uniqueid}shadow`">
+						<feDropShadow
+							dx="0.2"
+							dy="0.4"
+							stdDeviation="2"
+							flood-opacity="0.4"
+						/>
+					</filter>
+					<filter
+						:id="`${uniqueid}shadow_circles`"
+						primitiveUnits="userSpaceOnUse"
+						width="130%"
+						height="130%"
+					>
+						<feDropShadow
+							dx="1"
+							dy="1"
+							stdDeviation="2"
+							flood-opacity="0.5"
+						/>
+					</filter>
+				</defs>
+				<!-- TEXTOS -->
+				<g :id="`${uniqueid}texto-informativoinformacao`" v-if="showInfo">
+					<g :id="`${uniqueid}label`">
+						<text
+							fill="#ffffff33"
+							style="white-space: pre"
+							font-family="Proxima Nova Alt Rg"
+							font-size="9"
+							letter-spacing="0.5px"
+							:filter="`url(#${uniqueid}shadow)`"
+						>
+							<tspan x="72" y="8">CAPACIDADE UTILIZADA</tspan>
+						</text>
+					</g>
+					<g :id="`${uniqueid}processamento-info`">
+						<g :id="`${uniqueid}num-processamento`">
+							<text
+								:filter="`url(#${uniqueid}shadow)`"
+								fill="#FFBA08"
+								style="white-space: pre"
+								font-family="Gilroy"
+								font-weight="bold"
+								font-size="18"
+								letter-spacing="0em"
+							>
+								<tspan x="68" y="26">
+									{{ myProcessamentoPercent }}
+								</tspan>
+							</text>
+						</g>
+						<g
+							:id="`${uniqueid}em processamento`"
+							:filter="`url(#${uniqueid}shadow)`"
+						>
+							<text
+								fill="#FFBA08"
+								style="white-space: pre"
+								font-family="Proxima Nova Alt Rg"
+								font-size="10"
+								font-weight="600"
+								letter-spacing="0.1px"
+							>
+								<tspan x="68" y="37">processamento</tspan>
+							</text>
+						</g>
+					</g>
+					<g
+						:id="`${uniqueid}energia-info`"
+						style="transform: translate(0, 3px)"
+					>
+						<g>
+							<text
+								fill="#08F0FF"
+								style="white-space: pre"
+								font-family="Proxima Nova Alt Rg"
+								font-size="10"
+								font-weight="bold"
+								letter-spacing="0.1px"
+							>
+								<tspan x="68" y="66">prod. energ&eacute;tica</tspan>
+							</text>
+						</g>
+						<g :id="`${uniqueid}num-recuperacao-ene`">
+							<text
+								fill="#08F0FF"
+								style="white-space: pre"
+								font-family="Gilroy"
+								font-weight="bold"
+								font-size="17"
+								letter-spacing="0em"
+							>
+								<tspan x="68" y="55.141">
+									{{ myEnergiaPercent }}
+								</tspan>
+							</text>
+						</g>
+					</g>
+				</g>
+				<!-- ICONE -->
+				<g :id="`${uniqueid}icone`">
+					<circle
+						:id="`${uniqueid}raio-energia-rail`"
+						cx="33"
+						cy="33"
+						r="30"
+						stroke="#00000033"
+						stroke-width="4"
+						:mask="`url(#${uniqueid}raio-energia-mask)`"
+					/>
+					<circle
+						:id="`${uniqueid}raio-processamento-rail`"
+						cx="33"
+						cy="33"
+						r="24"
+						stroke="#00000033"
+						stroke-width="4"
+						:mask="`url(#${uniqueid}raio-processamento-mask)`"
+						style="
+							transform: rotate(-90deg);
+							transform-origin: center center;
+							transform-box: fill-box;
+						"
+					/>
+					<circle
+						:id="`${uniqueid}raio-energia`"
+						cx="33"
+						cy="33"
+						r="30"
+						stroke="#08F0FF"
+						stroke-width="4"
+						stroke-linejoin="round"
+						:filter="`url(#${uniqueid}shadow_circles)`"
+						:mask="`url(#${uniqueid}raio-energia-mask)`"
+						style="
+							transform: rotate(-90deg);
+							transform-origin: center center;
+							transform-box: fill-box;
+						"
+						:stroke-dasharray="calculateDasheArray(30, energiaPercent)"
+					/>
+					<circle
+						:id="`${uniqueid}raio-energia-hover`"
+						cx="33"
+						cy="33"
+						r="30"
+						stroke="#08F0FF"
+						stroke-width="5"
+						stroke-linejoin="round"
+						:filter="`url(#${uniqueid}shadow_circles)`"
+						style="
+							transform: rotate(-90deg);
+							transform-origin: center center;
+							transform-box: fill-box;
+						"
+						:stroke-dasharray="raioEnergiaHoverDasshedArray"
+					/>
+					<circle
+						:id="`${uniqueid}raio-processamento`"
+						cx="33"
+						cy="33"
+						r="24"
+						stroke="#FFBA08"
+						stroke-width="4"
+						stroke-linejoin="round"
+						:filter="`url(#${uniqueid}shadow_circles)`"
+						:mask="`url(#${uniqueid}raio-processamento-mask)`"
+						:style="`
+							transform: rotate(-90deg);
+							transform-origin: center center;
+							transform-box: fill-box;
+						 `"
+						:stroke-dasharray="
+							calculateDasheArray(24, processamentoPercent)
+						"
+					/>
+					<circle
+						:id="`${uniqueid}raio-processamento-hover`"
+						cx="33"
+						cy="33"
+						r="24"
+						stroke="#FFBA08"
+						stroke-width="5"
+						stroke-linejoin="round"
+						:filter="`url(#${uniqueid}shadow_circles)`"
+						:style="`
+							transform: rotate(-90deg);
+							transform-origin: center center;
+							transform-box: fill-box;
+					  `"
+						:stroke-dasharray="raioProcessamentoHoverDasshedArray"
+					/>
+					<!-- CIRCULO MEIO -->
+					<circle
+						:id="`${uniqueid}circulo-meio`"
+						cx="33"
+						cy="33"
+						r="19"
+						:filter="`url(#${uniqueid}shadow_circles)`"
+						fill="#000000"
+					/>
+					<!-- ICONES TECNOLOGIAS -  filter to color can test here https://change-svg-color.vercel.app/ -->
+					<g
+						:id="`${uniqueid}tecnologias`"
+						:style="`width:33px; height:33px; transform: translate(21px, 20px) scale(1)`"
+					>
+						<svg
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+							v-html="icons[tecnologia]"
+						></svg>
+					</g>
+				</g>
+			</svg>
+		</div>
+	</div>
 </template>
 
 <script>
-import icons from './recuperacao-icons.js'
-export default {
-  props: {
-    processamentoPercent: {
-      type: Number,
-      default: 100
-    },
-    energiaPercent: {
-      type: Number,
-      default: 100
-    },
-    tecnologia: {
-      type: String,
-      default: 'Aterro Sanitário com Reciclagem'
-    }
-  },
+import icons from "./recuperacao-icons.js";
+import uniqueId from "lodash/uniqueId";
+// import anime from "animejs/lib/anime.es.js";
+import { animate, cubicBezier, toDecimal } from "popmotion";
 
-  data () {
-    return { icons }
-  }
-}
+export default {
+	props: {
+		processamentoPercent: {
+			type: Number,
+			default: 20,
+		},
+		energiaPercent: {
+			type: Number,
+			default: 30,
+		},
+		tecnologia: {
+			type: String,
+			default: "Aterro Sanitário com Reciclagem",
+		},
+		showInfo: {
+			type: Boolean,
+			default: false,
+		},
+		item: Object,
+	},
+
+	data() {
+		return {
+			icons,
+			numerointerno: 0,
+			animate: false,
+			myEnergiaPercent:0,
+			myProcessamentoPercent:0,
+			raioEnergiaHoverDasshedArray: "0, 900000",
+			raioProcessamentoHoverDasshedArray: "0, 9000000",
+		};
+	},
+
+	computed: {
+		width: function () {
+			// return 68;
+			return this.showInfo ? 160 : 68;
+		},
+		height: function () {
+			// return 68;
+			return this.showInfo ? 72 : 68;
+		},
+	},
+
+	created() {
+		this.uniqueid = uniqueId("icon_unidade_recuperacao");
+
+	},
+
+	mounted() {
+		if (this.showInfo === false) return;
+		this.$nextTick( ()=>{
+			this.animateInfos()	
+			this.setupMouseAnimations()
+		})
+	},
+
+	methods: {
+
+		setupMouseAnimations(){
+					
+					// Init
+						var container = this.$refs?.container,
+							inner = this.$refs?.inner;
+
+						// Mouse
+						var mouse = {
+							_x: 0,
+							_y: 0,
+							x: 0,
+							y: 0,
+							updatePosition: function(event) {
+								var e = event || window.event;
+								this.x = e.clientX - this._x;
+								this.y = (e.clientY - this._y) * -1;
+							},
+							setOrigin: function(e) {
+								this._x = e.offsetLeft + Math.floor(e.offsetWidth / 2);
+								this._y = e.offsetTop + Math.floor(e.offsetHeight / 2);
+							},
+							show: function() {
+								return "(" + this.x + ", " + this.y + ")";
+							}
+						};
+
+						// Track the mouse position relative to the center of the container.
+						mouse.setOrigin(container);
+
+						//-----------------------------------------
+
+						var counter = 0;
+						var updateRate = 10;
+						var isTimeToUpdate = function() {
+							return counter++ % updateRate === 0;
+						};
+
+						//-----------------------------------------
+
+						var onMouseEnterHandler = function(event) {
+							update(event);
+						};
+
+						var onMouseLeaveHandler = function() {
+							inner.style = "";
+						};
+
+						var onMouseMoveHandler = function(event) {
+							if (isTimeToUpdate()) {
+							update(event);
+							}
+						};
+
+						//-----------------------------------------
+
+						var update = function(event) {
+							mouse.updatePosition(event);
+							// updateTransformStyle( (mouse.y / inner.offsetHeight / 2).toFixed(2), (mouse.x / inner.offsetWidth / 2).toFixed(2) );
+							updateTransformStyle( (mouse.y / 72 / 2).toFixed(2), (mouse.x / 68 / 2).toFixed(2) );
+						};
+
+						var updateTransformStyle = function(x, y) {
+							var style = "rotateX(" + x + "deg) rotateY(" + y + "deg)";
+							inner.style.transform = style;
+							inner.style.webkitTransform = style;
+							inner.style.mozTransform = style;
+							inner.style.msTransform = style;
+							inner.style.oTransform = style;
+						};
+
+						//-----------------------------------------
+
+						window.onmouseenter = onMouseEnterHandler;
+						window.onmouseleave = onMouseLeaveHandler;
+						window.onmousemove = onMouseMoveHandler;
+		
+		},
+
+		animateInfos: function(){
+		
+			const easing = cubicBezier(0.22, 1, 0.36, 1);
+
+			//animate processamento
+			if (Number(this.processamentoPercent)) {
+				animate({
+					from: 0,
+					to: Number(this.processamentoPercent),
+					damping: 30,
+					onUpdate: (percent) => {
+						let percFinal = toDecimal(percent,0)
+						this.raioProcessamentoHoverDasshedArray = this.calculateDasheArray(24, percFinal);
+						this.myProcessamentoPercent = percFinal +" %"
+						// console.log(`raioAtual:${this.raioProcessamentoHoverDasshedArray}  ` )
+					},
+				});
+			} else{
+				this.myProcessamentoPercent = ' – '
+			}
+			
+			//animate energia
+			if (Number(this.energiaPercent)) {
+				animate({
+					from: 0,
+					to: Number(this.energiaPercent),
+					damping: 30,
+					onUpdate: (percent) => {
+						let percFinal = toDecimal(percent,0)
+						this.raioEnergiaHoverDasshedArray = this.calculateDasheArray(30, percFinal);
+						this.myEnergiaPercent = percFinal +" %"
+						// console.log(`raioAtual:${this.raioProcessamentoHoverDasshedArray}  ` )
+					},
+				});
+			} else{
+				this.myEnergiaPercent = ' – '
+			}
+		},
+
+		calculateDasheArrayInSegments: function (
+			radius = 20,
+			segments = 20,
+			dashSpace = 2
+		) {
+			let length = 2 * Math.PI * radius;
+			let dashedArray = "";
+			let segmentSize = length / segments - dashSpace;
+			return `${segmentSize}, ${dashSpace}`;
+		},
+
+		calculateDasheArray: function (radius = 20, percent = 100) {
+			let length = Math.round(2 * Math.PI * radius);
+			return `
+              ${(length * percent) / 100} 
+              ${length}
+            `;
+		},
+	},
+};
 </script>
+
+<style lang="stylus" scoped>
+		#container {
+			/* This will come into play later */
+			perspective: 40px;
+		}
+		#inner {
+			  transition: transform 0.5s;
+
+//   width: 20em;
+//   height: 18em;
+//   background-color: green;
+}
+</style>
