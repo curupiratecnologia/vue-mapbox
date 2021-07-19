@@ -431,13 +431,13 @@ export default {
     * Create/Update Source
     */
     addSource: function (id, type, options) {
-//debugger
+      // debugger
       // if source name exist, create a randow one
       if (this.map.getSource(id) && this.layersCanRaname) {
         id = uniqueId(id + type)
       }
 
-      if(type==='geojson' && ! options?.generateId ){
+      if (type === 'geojson' && !options?.generateId) {
         options.generateId = true
       }
 
@@ -616,7 +616,7 @@ export default {
         const component = layer.componentInstance || layer
         const id = get(component, '$data.layerId')
         if (!id) {
-//debugger
+          // debugger
         }
         let zIndex = get(component, '$props.zIndex')
         const index = i
@@ -729,12 +729,12 @@ export default {
       }
 
       if (this.map.hasImage(key) && imgElement) {
-          // this.map.updateImage(key, imgElement)
-          this.map.removeImage(key)
-          this.map.addImage(key, imgElement)
-          this.map.triggerRepaint()
-      }else if(imgElement){
-          this.map.addImage(key, imgElement)
+        // this.map.updateImage(key, imgElement)
+        this.map.removeImage(key)
+        this.map.addImage(key, imgElement)
+        this.map.triggerRepaint()
+      } else if (imgElement) {
+        this.map.addImage(key, imgElement)
       }
     },
 
@@ -764,6 +764,7 @@ export default {
           resolve(imgSource)
         } else if (imgSource?.constructor?.name === 'String' || imgSource?.constructor?.name === 'SVGSVGElement') {
           const newimg = new Image()
+          newimg.crossOrigin = 'Anonymous'
           newimg.onload = () => {
             resolve(newimg)
           }

@@ -140,6 +140,21 @@ module.exports = getRawTag;
 
 /***/ }),
 
+/***/ "0359":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("6ba3");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("38c97f84", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
 /***/ "03dd":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -799,30 +814,6 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__("499e").default
 var update = add("04f858a6", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
-/***/ "1bac":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGetAllKeys = __webpack_require__("7d1f"),
-    getSymbolsIn = __webpack_require__("a029"),
-    keysIn = __webpack_require__("9934");
-
-/**
- * Creates an array of own and inherited enumerable property names and
- * symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function getAllKeysIn(object) {
-  return baseGetAllKeys(object, keysIn, getSymbolsIn);
-}
-
-module.exports = getAllKeysIn;
-
 
 /***/ }),
 
@@ -1676,19 +1667,6 @@ module.exports = function createError(message, config, code, request, response) 
 
 /***/ }),
 
-/***/ "2dcb":
-/***/ (function(module, exports, __webpack_require__) {
-
-var overArg = __webpack_require__("91e9");
-
-/** Built-in value references. */
-var getPrototype = overArg(Object.getPrototypeOf, Object);
-
-module.exports = getPrototype;
-
-
-/***/ }),
-
 /***/ "2e67":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1968,6 +1946,17 @@ function baseIsNative(value) {
 
 module.exports = baseIsNative;
 
+
+/***/ }),
+
+/***/ "356b":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_05466ee5_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0359");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_05466ee5_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_05466ee5_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_05466ee5_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -2292,46 +2281,6 @@ module.exports = getMatchData;
 
 /***/ }),
 
-/***/ "41c3":
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__("1a8c"),
-    isPrototype = __webpack_require__("eac5"),
-    nativeKeysIn = __webpack_require__("ec8c");
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function baseKeysIn(object) {
-  if (!isObject(object)) {
-    return nativeKeysIn(object);
-  }
-  var isProto = isPrototype(object),
-      result = [];
-
-  for (var key in object) {
-    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = baseKeysIn;
-
-
-/***/ }),
-
 /***/ "4245":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2523,13 +2472,6 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-
-/***/ }),
-
-/***/ "4795":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("96cf");
 
 /***/ }),
 
@@ -3626,6 +3568,20 @@ module.exports = arrayReduce;
 
 /***/ }),
 
+/***/ "6ba3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".loader[data-v-05466ee5]{position:absolute;top:50%;left:50%;text-align:center}.map-layer[data-v-05466ee5]{position:absolute!important;left:0;top:0;bottom:0;right:0;width:100%}.map-layer .mapboxgl-canvas[data-v-05466ee5]{left:0}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
 /***/ "6da8":
 /***/ (function(module, exports) {
 
@@ -3878,50 +3834,6 @@ function toString(value) {
 }
 
 module.exports = toString;
-
-
-/***/ }),
-
-/***/ "77c1":
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayMap = __webpack_require__("7948"),
-    baseIteratee = __webpack_require__("badf"),
-    basePickBy = __webpack_require__("89d9"),
-    getAllKeysIn = __webpack_require__("1bac");
-
-/**
- * Creates an object composed of the `object` properties `predicate` returns
- * truthy for. The predicate is invoked with two arguments: (value, key).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Object
- * @param {Object} object The source object.
- * @param {Function} [predicate=_.identity] The function invoked per property.
- * @returns {Object} Returns the new object.
- * @example
- *
- * var object = { 'a': 1, 'b': '2', 'c': 3 };
- *
- * _.pickBy(object, _.isNumber);
- * // => { 'a': 1, 'c': 3 }
- */
-function pickBy(object, predicate) {
-  if (object == null) {
-    return {};
-  }
-  var props = arrayMap(getAllKeysIn(object), function(prop) {
-    return [prop];
-  });
-  predicate = baseIteratee(predicate);
-  return basePickBy(object, props, function(value, path) {
-    return predicate(value, path[0]);
-  });
-}
-
-module.exports = pickBy;
 
 
 /***/ }),
@@ -4270,43 +4182,27 @@ module.exports = mapCacheClear;
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "k", function() { return _index_js__WEBPACK_IMPORTED_MODULE_0__["VueMapbox"]; });
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 // Import vue components
  // install function executed by Vue.use()
 
-var install = function installVueMapbox(Vue) {
+const install = function installVueMapbox(Vue) {
   if (install.installed) return;
   install.installed = true;
-  Object.entries(_index_js__WEBPACK_IMPORTED_MODULE_0__).forEach(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        componentName = _ref2[0],
-        component = _ref2[1];
-
+  Object.entries(_index_js__WEBPACK_IMPORTED_MODULE_0__).forEach(([componentName, component]) => {
     Vue.component(componentName, component);
   });
 }; // Create module definition for Vue.use()
 
 
-var plugin = {
-  install: install
+const plugin = {
+  install
 }; // To auto-install on non-es builds, when vue is found
 // eslint-disable-next-line no-redeclare
 
 /* global window, global */
 
 if ('false' === Object({"NODE_ENV":"production","VUE_APP_MAPBOX_ACCESS_TOKEN":"pk.eyJ1IjoibGVjZWxlcyIsImEiOiJjajUyZXBzbXEwZjYxMnFwOWFxeHd5ZDY3In0.dftZ4LdgXBkdZI0_l7pcNA","BASE_URL":""}).ES_BUILD) {
-  var GlobalVue = null;
+  let GlobalVue = null;
 
   if (typeof window !== 'undefined') {
     GlobalVue = window.Vue;
@@ -4598,135 +4494,6 @@ function baseAssignValue(object, key, value) {
 }
 
 module.exports = baseAssignValue;
-
-
-/***/ }),
-
-/***/ "87da":
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".loader[data-v-e060bcaa]{position:fixed;top:50%;left:50%;text-align:center}.map-layer[data-v-e060bcaa]{position:absolute!important;left:0;top:0;bottom:0;right:0;width:100%}.map-layer .mapboxgl-canvas[data-v-e060bcaa]{left:0}", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ "8875":
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// addapted from the document.currentScript polyfill by Adam Miller
-// MIT license
-// source: https://github.com/amiller-gh/currentScript-polyfill
-
-// added support for Firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1620505
-
-(function (root, factory) {
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
-}(typeof self !== 'undefined' ? self : this, function () {
-  function getCurrentScript () {
-    if (document.currentScript) {
-      return document.currentScript
-    }
-  
-    // IE 8-10 support script readyState
-    // IE 11+ & Firefox support stack trace
-    try {
-      throw new Error();
-    }
-    catch (err) {
-      // Find the second match for the "at" string to get file src url from stack.
-      var ieStackRegExp = /.*at [^(]*\((.*):(.+):(.+)\)$/ig,
-        ffStackRegExp = /@([^@]*):(\d+):(\d+)\s*$/ig,
-        stackDetails = ieStackRegExp.exec(err.stack) || ffStackRegExp.exec(err.stack),
-        scriptLocation = (stackDetails && stackDetails[1]) || false,
-        line = (stackDetails && stackDetails[2]) || false,
-        currentLocation = document.location.href.replace(document.location.hash, ''),
-        pageSource,
-        inlineScriptSourceRegExp,
-        inlineScriptSource,
-        scripts = document.getElementsByTagName('script'); // Live NodeList collection
-  
-      if (scriptLocation === currentLocation) {
-        pageSource = document.documentElement.outerHTML;
-        inlineScriptSourceRegExp = new RegExp('(?:[^\\n]+?\\n){0,' + (line - 2) + '}[^<]*<script>([\\d\\D]*?)<\\/script>[\\d\\D]*', 'i');
-        inlineScriptSource = pageSource.replace(inlineScriptSourceRegExp, '$1').trim();
-      }
-  
-      for (var i = 0; i < scripts.length; i++) {
-        // If ready state is interactive, return the script tag
-        if (scripts[i].readyState === 'interactive') {
-          return scripts[i];
-        }
-  
-        // If src matches, return the script tag
-        if (scripts[i].src === scriptLocation) {
-          return scripts[i];
-        }
-  
-        // If inline source matches, return the script tag
-        if (
-          scriptLocation === currentLocation &&
-          scripts[i].innerHTML &&
-          scripts[i].innerHTML.trim() === inlineScriptSource
-        ) {
-          return scripts[i];
-        }
-      }
-  
-      // If no match, return null
-      return null;
-    }
-  };
-
-  return getCurrentScript
-}));
-
-
-/***/ }),
-
-/***/ "89d9":
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseGet = __webpack_require__("656b"),
-    baseSet = __webpack_require__("159a"),
-    castPath = __webpack_require__("e2e4");
-
-/**
- * The base implementation of  `_.pickBy` without support for iteratee shorthands.
- *
- * @private
- * @param {Object} object The source object.
- * @param {string[]} paths The property paths to pick.
- * @param {Function} predicate The function invoked per property.
- * @returns {Object} Returns the new object.
- */
-function basePickBy(object, paths, predicate) {
-  var index = -1,
-      length = paths.length,
-      result = {};
-
-  while (++index < length) {
-    var path = paths[index],
-        value = baseGet(object, path);
-
-    if (predicate(value, path)) {
-      baseSet(result, castPath(path, object), value);
-    }
-  }
-  return result;
-}
-
-module.exports = basePickBy;
 
 
 /***/ }),
@@ -5155,742 +4922,6 @@ module.exports = baseIsMatch;
 
 /***/ }),
 
-/***/ "96cf":
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var runtime = (function (exports) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  exports.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  IteratorPrototype[iteratorSymbol] = function () {
-    return this;
-  };
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
-        return this._invoke(method, arg);
-      };
-    });
-  }
-
-  exports.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  exports.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  exports.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator, PromiseImpl) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return PromiseImpl.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return PromiseImpl.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new PromiseImpl(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
-    return this;
-  };
-  exports.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-    if (PromiseImpl === void 0) PromiseImpl = Promise;
-
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList),
-      PromiseImpl
-    );
-
-    return exports.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  Gp[toStringTagSymbol] = "Generator";
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  exports.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  exports.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-
-  // Regardless of whether this script is executing as a CommonJS module
-  // or not, return the runtime object so that we can declare the variable
-  // regeneratorRuntime in the outer scope, which allows this module to be
-  // injected easily by `bin/regenerator --include-runtime script.js`.
-  return exports;
-
-}(
-  // If this script is executing as a CommonJS module, use module.exports
-  // as the regeneratorRuntime namespace. Otherwise create a new empty
-  // object. Either way, the resulting object will be used to initialize
-  // the regeneratorRuntime variable at the top of this file.
-   true ? module.exports : undefined
-));
-
-try {
-  regeneratorRuntime = runtime;
-} catch (accidentalStrictMode) {
-  // This module should not be running in strict mode, so the above
-  // assignment should always work unless something is misconfigured. Just
-  // in case runtime.js accidentally runs in strict mode, we can escape
-  // strict mode using a global Function call. This could conceivably fail
-  // if a Content Security Policy forbids using Function, but in that case
-  // the proper solution is to fix the accidental strict mode problem. If
-  // you've misconfigured your bundler to force strict mode and applied a
-  // CSP to forbid Function, and you're not willing to fix either of those
-  // problems, please detail your unique predicament in a GitHub issue.
-  Function("r", "regeneratorRuntime = r")(runtime);
-}
-
-
-/***/ }),
-
 /***/ "96f3":
 /***/ (function(module, exports) {
 
@@ -5977,45 +5008,6 @@ function uniqueId(prefix) {
 }
 
 module.exports = uniqueId;
-
-
-/***/ }),
-
-/***/ "9934":
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeKeys = __webpack_require__("6fcd"),
-    baseKeysIn = __webpack_require__("41c3"),
-    isArrayLike = __webpack_require__("30c9");
-
-/**
- * Creates an array of the own and inherited enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keysIn(new Foo);
- * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
- */
-function keysIn(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-
-module.exports = keysIn;
 
 
 /***/ }),
@@ -6167,38 +5159,6 @@ function baseFilter(collection, predicate) {
 }
 
 module.exports = baseFilter;
-
-
-/***/ }),
-
-/***/ "a029":
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayPush = __webpack_require__("087d"),
-    getPrototype = __webpack_require__("2dcb"),
-    getSymbols = __webpack_require__("32f4"),
-    stubArray = __webpack_require__("d327");
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeGetSymbols = Object.getOwnPropertySymbols;
-
-/**
- * Creates an array of the own and inherited enumerable symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of symbols.
- */
-var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
-  var result = [];
-  while (object) {
-    arrayPush(result, getSymbols(object));
-    object = getPrototype(object);
-  }
-  return result;
-};
-
-module.exports = getSymbolsIn;
 
 
 /***/ }),
@@ -6992,20 +5952,16 @@ __webpack_require__.d(__webpack_exports__, "VmMarkerDonut", function() { return 
 __webpack_require__.d(__webpack_exports__, "LoadingComponent", function() { return /* reexport */ LoadingComponent; });
 __webpack_require__.d(__webpack_exports__, "ErrorComponent", function() { return /* reexport */ ErrorComponent; });
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2c01c290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=e060bcaa&scoped=true&
-var VueMapboxvue_type_template_id_e060bcaa_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",staticStyle:{"position":"absolute","left":"0px","top":"0","bottom":"0","right":"0","width":"100%"},attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=template&id=05466ee5&scoped=true&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-mapbox",style:({ position:'relative', width: _vm.myWidth, height: _vm.myHeight })},[_c('div',{ref:"mapabaselayer",staticClass:"map-layer mapbox-map-container",staticStyle:{"position":"absolute","left":"0px","top":"0","bottom":"0","right":"0","width":"100%"},attrs:{"id":"mapaBaseLayer"}},[(_vm.mapLoaded)?_c('div',[_vm._t("default")],2):_vm._e(),(_vm.showLoader && !_vm.mapLoaded)?_c('div',{staticClass:"loader"},[_vm._t("loader")],2):_vm._e(),(_vm.devMode)?_c('div',{staticStyle:{"position":"absolute","bottom":"0","font-size":"9px","padding":"0.4em","z-index":"10","background":"#00000066","color":"white"}},[_vm._v(_vm._s(_vm.camera))]):_vm._e()])])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=e060bcaa&scoped=true&
-
-// EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__("4795");
-var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
+// CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=template&id=05466ee5&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/lodash/get.js
-var lodash_get = __webpack_require__("9b02");
-var get_default = /*#__PURE__*/__webpack_require__.n(lodash_get);
+var get = __webpack_require__("9b02");
+var get_default = /*#__PURE__*/__webpack_require__.n(get);
 
 // EXTERNAL MODULE: ./node_modules/lodash/has.js
 var has = __webpack_require__("3852");
@@ -7018,11 +5974,8 @@ var has_default = /*#__PURE__*/__webpack_require__.n(has);
  * Find If componente/Vnode has any children of type
 */
 
-/* harmony default export */ var findVNodeChildren = (function (Node, componentNameToFind) {
-  var depthLevel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-  var slots = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-  var scopedSlots = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
-  var foundInstances = []; // const findInstance = (theNodesChildren, currentDepth = 0) => {
+/* harmony default export */ var findVNodeChildren = (function (Node, componentNameToFind, depthLevel = 1, slots = [], scopedSlots = []) {
+  let foundInstances = []; // const findInstance = (theNodesChildren, currentDepth = 0) => {
   //   if (!theNodesChildren) return
   //   if (Array.isArray(theNodesChildren) === false) {
   //     theNodesChildren = [theNodesChildren]
@@ -7091,18 +6044,18 @@ var has_default = /*#__PURE__*/__webpack_require__.n(has);
   // check for it
   // findInstance(Node)
 
-  var findLayers = function findLayers(VNode, bag) {
+  const findLayers = (VNode, bag) => {
     bag = bag || [];
 
     if (Array.isArray(VNode)) {
-      VNode.forEach(function (node) {
+      VNode.forEach(node => {
         findLayers(node, bag);
       });
       return bag;
     } //   // I will allways get the component instance
 
 
-    var VNodeInstance;
+    let VNodeInstance;
 
     if (get_default()(VNode, 'componentInstance')) {
       VNodeInstance = get_default()(VNode, 'componentInstance');
@@ -7117,25 +6070,24 @@ var has_default = /*#__PURE__*/__webpack_require__.n(has);
     // if (!children) 
 
 
-    var children = get_default()(VNodeInstance, '$children') || get_default()(VNodeInstance, 'children');
+    const children = get_default()(VNodeInstance, '$children') || get_default()(VNodeInstance, 'children');
 
     if (Array.isArray(children)) {
-      children.forEach(function (node) {
+      children.forEach(node => {
         findLayers(node, bag);
       });
     }
 
     if (has_default()(VNodeInstance, '$slots')) {
-      var mySlots = Object.keys(VNodeInstance.$slots);
-      mySlots.forEach(function (slotName) {
+      const mySlots = Object.keys(VNodeInstance.$slots);
+      mySlots.forEach(slotName => {
         findLayers(VNodeInstance.$slots[slotName], bag);
       });
     }
 
     if (has_default()(VNodeInstance, '$scopedSlots')) {
-      var _mySlots = Object.keys(VNodeInstance.$scopedSlots);
-
-      _mySlots.forEach(function (slotName) {
+      const mySlots = Object.keys(VNodeInstance.$scopedSlots);
+      mySlots.forEach(slotName => {
         findLayers(VNodeInstance.$scopedSlots[slotName](), bag);
       });
     }
@@ -7160,105 +6112,43 @@ var uniqueId = __webpack_require__("98dc");
 var uniqueId_default = /*#__PURE__*/__webpack_require__.n(uniqueId);
 
 // CONCATENATED MODULE: ./src/utils/loadScriptsCss.js
+async function loadScripts(scripts) {
+  function get(source) {
+    return new Promise(function (resolve, reject) {
+      var el;
 
+      if (source.match(/js$/g)) {
+        el = document.createElement('script'); // TODO - get if script os link is already loaded, and if it is, resolve then - document.querySelector(`script[src='${source}']`) || 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+        el.async = false;
+        el.src = source;
+      } else if (source.match(/css$/g)) {
+        el = document.createElement('link'); // document.querySelector(`link[href='${source}']`)
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function loadScripts(_x) {
-  return _loadScripts.apply(this, arguments);
-}
-
-function _loadScripts() {
-  _loadScripts = _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee2(scripts) {
-    var get, myPromises;
-    return regenerator_default.a.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            get = function _get(source) {
-              return new Promise(function (resolve, reject) {
-                var el;
-
-                if (source.match(/js$/g)) {
-                  el = document.createElement('script'); // TODO - get if script os link is already loaded, and if it is, resolve then - document.querySelector(`script[src='${source}']`) || 
-
-                  el.async = false;
-                  el.src = source;
-                } else if (source.match(/css$/g)) {
-                  el = document.createElement('link'); // document.querySelector(`link[href='${source}']`)
-
-                  el.type = 'text/css';
-                  el.rel = 'stylesheet';
-                  el.href = source;
-                }
-
-                el.onload = function () {
-                  console.count('resolve -' + source);
-                  resolve(source);
-                };
-
-                el.onerror = function () {
-                  reject(source);
-                };
-
-                document.getElementsByTagName('body')[0].appendChild(el);
-              });
-            };
-
-            myPromises = scripts.map( /*#__PURE__*/function () {
-              var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee(script, index) {
-                return regenerator_default.a.wrap(function _callee$(_context) {
-                  while (1) {
-                    switch (_context.prev = _context.next) {
-                      case 0:
-                        _context.next = 2;
-                        return get(script);
-
-                      case 2:
-                        return _context.abrupt("return", _context.sent);
-
-                      case 3:
-                      case "end":
-                        return _context.stop();
-                    }
-                  }
-                }, _callee);
-              }));
-
-              return function (_x2, _x3) {
-                return _ref.apply(this, arguments);
-              };
-            }());
-            _context2.next = 4;
-            return Promise.all(myPromises);
-
-          case 4:
-            return _context2.abrupt("return", _context2.sent);
-
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
+        el.type = 'text/css';
+        el.rel = 'stylesheet';
+        el.href = source;
       }
-    }, _callee2);
-  }));
-  return _loadScripts.apply(this, arguments);
+
+      el.onload = function () {
+        console.count('resolve -' + source);
+        resolve(source);
+      };
+
+      el.onerror = function () {
+        reject(source);
+      };
+
+      document.getElementsByTagName('body')[0].appendChild(el);
+    });
+  }
+
+  const myPromises = scripts.map(async function (script, index) {
+    return await get(script);
+  });
+  return await Promise.all(myPromises);
 }
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueMapbox.vue?vue&type=script&lang=js&
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function VueMapboxvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function VueMapboxvue_type_script_lang_js_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { VueMapboxvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { VueMapboxvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -7288,7 +6178,7 @@ function VueMapboxvue_type_script_lang_js_asyncToGenerator(fn) { return function
 // import { MapboxLayer } from '@deck.gl/mapbox'
 // import mapBaseStyle from './styles/cgeestyle'
 
-var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouseout', 'mousedown', 'mouseup', 'contextmenu', 'wheel', 'touchstart', 'touchend', 'touchmove', 'touchcancel', 'movestart', 'move', 'moveend', 'dragstart', 'drag', 'dragend', 'zoomstart', 'zoom', 'zoomend', 'rotatestart', 'rotate', 'rotateend', 'pitchstart', 'pitch', 'pitchend', 'boxzoomstart', 'boxzoomend', 'boxzoomcancel', 'webglcontextlost', 'webglcontextrestored', 'load', 'render', 'idle', 'error', 'data', 'styledata', 'sourcedata', 'dataloading', 'styledataloading', 'sourcedataloading', 'styleimagemissing'];
+const nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouseout', 'mousedown', 'mouseup', 'contextmenu', 'wheel', 'touchstart', 'touchend', 'touchmove', 'touchcancel', 'movestart', 'move', 'moveend', 'dragstart', 'drag', 'dragend', 'zoomstart', 'zoom', 'zoomend', 'rotatestart', 'rotate', 'rotateend', 'pitchstart', 'pitch', 'pitchend', 'boxzoomstart', 'boxzoomend', 'boxzoomcancel', 'webglcontextlost', 'webglcontextrestored', 'load', 'render', 'idle', 'error', 'data', 'styledata', 'sourcedata', 'dataloading', 'styledataloading', 'sourcedataloading', 'styleimagemissing'];
 /* harmony default export */ var VueMapboxvue_type_script_lang_js_ = ({
   /* eslint-disable camelcase */
 
@@ -7378,9 +6268,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     */
     center: {
       type: Array,
-      default: function _default() {
-        return [-53.048889, -14.951209500045001];
-      }
+      default: () => [-53.048889, -14.951209500045001]
     },
 
     /**
@@ -7421,9 +6309,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     */
     otherOptions: {
       type: Object,
-      default: function _default() {
-        return {};
-      }
+      default: () => ({})
     },
 
     /**
@@ -7431,9 +6317,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     */
     images: {
       type: Object,
-      default: function _default() {
-        return {};
-      }
+      default: () => ({})
     },
     // {'name':url,'name2':url2}
 
@@ -7452,24 +6336,23 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     interactive: {
       type: Boolean,
       default: true
+    },
+    attributionControl: {
+      type: Boolean,
+      default: true
     } // {'name':url,'name2':url2}
 
   },
-  provide: function provide() {
-    var _this2 = this;
-
+  provide: function () {
     return {
-      getMap: function getMap() {
-        return _this2.map;
-      },
+      getMap: () => this.map,
       mapLoaded: this.mapLoaded,
-      mapboxgl: function mapboxgl() {
-        return _this2.mapboxgl;
-      },
+      mapboxgl: () => this.mapboxgl,
       MapboxVueInstance: this
     };
   },
-  data: function data() {
+
+  data() {
     return {
       /**
        *  Set When Map Style is Loaded
@@ -7481,73 +6364,48 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       camera: ''
     };
   },
-  beforeCreate: function beforeCreate() {},
-  created: function created() {
-    var _this3 = this;
 
-    return VueMapboxvue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-      var sources;
-      return regenerator_default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              if (window.mapboxgl) {
-                _context.next = 10;
-                break;
-              }
+  beforeCreate() {},
 
-              sources = ['https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js', 'https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css'];
-              _context.prev = 2;
-              _context.next = 5;
-              return loadScripts(sources);
+  async created() {
+    // ////console.log('created - vueMapbox')
+    if (!window.mapboxgl) {
+      const sources = ['https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js', 'https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css'];
 
-            case 5:
-              _context.next = 10;
-              break;
+      try {
+        await loadScripts(sources);
+      } catch (e) {
+        // //console.error(e)
+        throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ');
+      }
+    }
 
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](2);
-              throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ');
+    if (!window.mapboxgl) {
+      throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ');
+    }
 
-            case 10:
-              if (window.mapboxgl) {
-                _context.next = 12;
-                break;
-              }
+    this.mapboxgl = window.mapboxgl;
+    window.mapboxgl.prewarm();
+    this.sources = new Map(); // {id:{type,data,instance}}
 
-              throw new Error('Erro loading mapbox from its CDN. Please, make sure your internet is ok, insert mapbox manually in your html ');
+    this.layers = new Map(); //
 
-            case 12:
-              _this3.mapboxgl = window.mapboxgl;
-              window.mapboxgl.prewarm();
-              _this3.sources = new Map(); // {id:{type,data,instance}}
+    this.imagesMap = new Map(); //
+    // this.images = new Map() //
 
-              _this3.layers = new Map(); //
+    this.layersGroups = new Map(); //
 
-              _this3.imagesMap = new Map(); //
-              // this.images = new Map() //
+    this.eventsOnMap = new Map(); //
+    // make sure the html div to use in mapbox is loaded
 
-              _this3.layersGroups = new Map(); //
-
-              _this3.eventsOnMap = new Map(); //
-              // make sure the html div to use in mapbox is loaded
-
-              _this3.$nextTick(function () {
-                _this3.createMap();
-              });
-
-            case 20:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[2, 7]]);
-    }))();
+    this.$nextTick(() => {
+      this.createMap();
+    });
   },
+
   computed: {
-    myHeight: function myHeight() {
-      var h = this.height;
+    myHeight: function () {
+      let h = this.height;
 
       if (typeof h === 'number') {
         h += 'px';
@@ -7555,8 +6413,8 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
 
       return h;
     },
-    myWidth: function myWidth() {
-      var w = this.width;
+    myWidth: function () {
+      let w = this.width;
 
       if (typeof w === 'number') {
         w += 'px';
@@ -7566,44 +6424,44 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     }
   },
   watch: {
-    bounds: function bounds(val) {
-      // var newCameraTransform = this.map.cameraForBounds(val, {
-      //   padding: { top: 10, bottom: 25, left: 15, right: 5 }
-      // })
+    bounds: function (val) {
       this.map.fitBounds(val, {
         padding: this.padding
       });
     },
-    maxBounds: function maxBounds(val) {
+    maxBounds: function (val) {
       if (this.map) {
         this.map.setMaxBounds(val);
       }
     }
   },
-  beforeUpdated: function beforeUpdated() {// //console.log('beforeUpdated dom vueMapbox')
+
+  beforeUpdated() {// ////console.log('beforeUpdated dom vueMapbox')
   },
-  mounted: function mounted() {// //console.log('Mounted - Mounted dom vueMapbox')
+
+  mounted() {// ////console.log('Mounted - Mounted dom vueMapbox')
     // this.$nextTick(() => {
     //   this.updateLayerOrder()
     // })
   },
-  updated: function updated() {
-    // update mapbox
-    console.log('🚀 ~ file: VueMapbox.vue ~ line 329 ~ updated ~ update mapbox'); // this.$nextTick(() => {
 
+  updated() {
+    // update mapbox
+    // console.log('🚀 ~ file: VueMapbox.vue ~ line 329 ~ updated ~ update mapbox')
+    // this.$nextTick(() => {
     if (this.updateLayerTimeout) clearTimeout(this.updateLayerTimeout);
     this.updateLayerTimeout = setTimeout(this.updateLayerOrder, 400); // })
   },
-  beforeDestroy: function beforeDestroy() {
+
+  beforeDestroy() {
     if (this.map) {
       this.map.remove();
     }
   },
-  methods: {
-    createMap: function createMap() {
-      var _this4 = this;
 
-      // //console.log('createding map - vueMapbox')
+  methods: {
+    createMap: function () {
+      // ////console.log('createding map - vueMapbox')
       window.mapboxgl.prewarm();
 
       if (this.accessToken !== '') {
@@ -7612,7 +6470,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         window.mapboxgl.accessToken = "pk.eyJ1IjoibGVjZWxlcyIsImEiOiJjajUyZXBzbXEwZjYxMnFwOWFxeHd5ZDY3In0.dftZ4LdgXBkdZI0_l7pcNA";
       }
 
-      this.map = new window.mapboxgl.Map(_objectSpread(_objectSpread({}, this.otherOptions), {}, {
+      this.map = new window.mapboxgl.Map({ ...this.otherOptions,
         container: this.$refs.mapabaselayer,
         refreshExpiredTiles: false,
         antialias: true,
@@ -7624,49 +6482,49 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         maxBounds: this.maxBounds,
         minZoom: this.minZoom,
         maxZoom: this.maxZoom,
-        interactive: this.interactive // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
+        interactive: this.interactive,
+        attributionControl: this.attributionControl // maxBounds: [ -48.44732177294034, -16.638275455496753, -47.22472784587998, -14.904304916348181 ]
 
-      }));
+      });
       this.addPropsImages();
-      this.setupEvents(this.$listeners, this.map, nativeEventsTypes); // //console.log('setting mapa loaded')
+      this.setupEvents(this.$listeners, this.map, nativeEventsTypes); // ////console.log('setting mapa loaded')
 
-      this.map.on('load', function () {
-        var _this = _this4; // //console.log('mapa loaded fired')
+      this.map.on('load', () => {
+        const _this = this; // ////console.log('mapa loaded fired')
 
-        _this4.mapLoaded = true;
+
+        this.mapLoaded = true;
         /**
          * Load Event - When Maps Load
          *  @property {object} _this the component instance
           * @property {object} map the mapbox instance
          */
 
-        _this4.$emit('load', _this, _this4.map);
+        this.$emit('load', _this, this.map);
       }); // if (this.devMode) {
       //   this.map.on('moveend', () => {
       //     this.camera = this.map.getZoom()
       //   })
       // }
     },
-    getMap: function getMap() {
+    getMap: function () {
       return this.map;
     },
 
     /**
     * Automatic Setup Events from Mapbox Classes in Vue Instances
     */
-    setupEvents: function setupEvents(listners, MapboxElement, theEventsOfElement, layerId) {
-      var _this5 = this;
-
+    setupEvents: function (listners, MapboxElement, theEventsOfElement, layerId) {
       if (listners) {
-        Object.entries(listners).forEach(function (item) {
-          var eventName = item[0];
-          var eventFunction = item[1];
+        Object.entries(listners).forEach(item => {
+          let eventName = item[0];
+          const eventFunction = item[1];
 
-          var eventFinal = function eventFinal(e) {
-            eventFunction(e, _this5.map, _this5);
+          const eventFinal = e => {
+            eventFunction(e, this.map, this);
           };
 
-          var once = false;
+          let once = false;
 
           if (eventName.indexOf('~') === 0) {
             once = true;
@@ -7695,26 +6553,31 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     /**
     * Create/Update Source
     */
-    addSource: function addSource(id, type, options) {
-      debugger; // if source name exist, create a randow one
-
+    addSource: function (id, type, options) {
+      // debugger
+      // if source name exist, create a randow one
       if (this.map.getSource(id) && this.layersCanRaname) {
         id = uniqueId_default()(id + type);
       }
 
-      this.map.addSource(id, _objectSpread({
-        type: type
-      }, options));
-      var sourceObject = this.map.getSource(id);
+      if (type === 'geojson' && !(options === null || options === void 0 ? void 0 : options.generateId)) {
+        options.generateId = true;
+      }
+
+      this.map.addSource(id, {
+        type,
+        ...options
+      });
+      const sourceObject = this.map.getSource(id);
       this.sources.set(id, {
-        id: id,
-        type: type,
-        options: options,
+        id,
+        type,
+        options,
         instance: sourceObject
       });
       return this.sources.get(id);
     },
-    getSource: function getSource(id) {
+    getSource: function (id) {
       // if source name exist, create a randow one
       if (this.sources.has(id)) {
         return this.sources.get(id);
@@ -7726,7 +6589,7 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     /**
     * Remove Source
     */
-    removeSource: function removeSource(id) {// if (this.sources.has(id)) {
+    removeSource: function (id) {// if (this.sources.has(id)) {
       //   this.sources.delete(id)
       // }
       // if (this.map && this.map.getSource(id)) {
@@ -7737,42 +6600,41 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     /**
     * Update Source
     */
-    updateSource: function updateSource(sourceid, type, options) {
-      var _this$map$getStyle,
-          _this6 = this;
+    updateSource: function (sourceid, type, options) {
+      var _this$map$getStyle;
 
       if (this.sources.has(sourceid)) {
         this.sources.delete(sourceid);
       } // apago todos os layers que tem esse source
 
 
-      var layers = (_this$map$getStyle = this.map.getStyle()) === null || _this$map$getStyle === void 0 ? void 0 : _this$map$getStyle.layers;
+      const layers = (_this$map$getStyle = this.map.getStyle()) === null || _this$map$getStyle === void 0 ? void 0 : _this$map$getStyle.layers;
       if (!layers) return;
-      layers.forEach(function (layer) {
+      layers.forEach(layer => {
         if (layer.source === sourceid) {
-          _this6.map.removeLayer(layer.id);
+          this.map.removeLayer(layer.id);
         }
       }); // apago o source
 
       this.map.removeSource(sourceid); // adiciono o novo source no com mesmo is
 
-      var source = this.addSource(sourceid, type, options); // adiciono os layer novamente
+      const source = this.addSource(sourceid, type, options); // adiciono os layer novamente
 
-      layers.forEach(function (layer, i) {
+      layers.forEach((layer, i) => {
         if (layer.source === sourceid) {
-          var beforeLayer = layers === null || layers === void 0 ? void 0 : layers[i - 1];
+          const beforeLayer = layers === null || layers === void 0 ? void 0 : layers[i - 1];
 
           if (beforeLayer) {
-            _this6.map.addLayer(layer, beforeLayer.id);
+            this.map.addLayer(layer, beforeLayer.id);
           } else {
-            _this6.map.addLayer(layer);
+            this.map.addLayer(layer);
           }
         }
       });
       return source;
     },
-    getNewIdForLayer: function getNewIdForLayer(name) {
-      var id = name;
+    getNewIdForLayer: function (name) {
+      let id = name;
 
       if (this.map.getLayer(name) && this.layersCanRaname) {
         id = uniqueId_default()('autoNamelayer_' + name);
@@ -7786,31 +6648,31 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     /**
     * Create/Update Layer
     */
-    addLayerTemp: function addLayerTemp(options) {
+    addLayerTemp: function (options) {
       this.map.addLayer(options);
     },
 
     /**
     * Create/Update Layer
     */
-    addLayer: function addLayer(options, zIndex) {
+    addLayer: function (options, zIndex) {
       var _options$source, _options$source$const;
 
       // // if layer name exist, create a randow one
-      var id = options.id;
+      let id = options.id;
 
       if (this.map.getLayer(id)) {
         this.removeLayer(id);
       } // TODO - get the before layer
 
 
-      var beforeId = this.updateLayerOrder(id);
+      let beforeId = this.updateLayerOrder(id);
 
       if ((options === null || options === void 0 ? void 0 : (_options$source = options.source) === null || _options$source === void 0 ? void 0 : (_options$source$const = _options$source.constructor) === null || _options$source$const === void 0 ? void 0 : _options$source$const.name) === 'Object') {
         var _options$source$id, _options$source2;
 
         // check if we have a id
-        var sourceId = (_options$source$id = options === null || options === void 0 ? void 0 : (_options$source2 = options.source) === null || _options$source2 === void 0 ? void 0 : _options$source2.id) !== null && _options$source$id !== void 0 ? _options$source$id : id;
+        const sourceId = (_options$source$id = options === null || options === void 0 ? void 0 : (_options$source2 = options.source) === null || _options$source2 === void 0 ? void 0 : _options$source2.id) !== null && _options$source$id !== void 0 ? _options$source$id : id;
 
         if (this.map.getSource(sourceId)) {
           options.id = uniqueId_default()('new' + sourceId);
@@ -7829,26 +6691,24 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
       this.map.addLayer(options, beforeId); // const sourceObject = this.map.getLayer(options.id)
 
       this.layers.set(id, {
-        id: id
+        id
       });
       this.updateLayerOrder();
       return options.id;
     },
-    findLayers: function findLayers(VNode, bag) {
-      var _this7 = this;
-
+    findLayers: function (VNode, bag) {
       // TODO - put in a utility. See why the current util dont work
       bag = bag || [];
 
       if (Array.isArray(VNode)) {
-        VNode.forEach(function (node) {
-          _this7.findLayers(node, bag);
+        VNode.forEach(node => {
+          this.findLayers(node, bag);
         });
         return bag;
       } // I will allways get the component instance
 
 
-      var VNodeInstance;
+      let VNodeInstance;
 
       if (get_default()(VNode, 'componentInstance')) {
         VNodeInstance = get_default()(VNode, 'componentInstance');
@@ -7860,11 +6720,11 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         bag.push(VNodeInstance);
       }
 
-      var children = get_default()(VNodeInstance, '$children');
+      const children = get_default()(VNodeInstance, '$children');
 
       if (Array.isArray(children)) {
-        children.forEach(function (node) {
-          _this7.findLayers(node, bag);
+        children.forEach(node => {
+          this.findLayers(node, bag);
         });
       }
 
@@ -7875,128 +6735,119 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     * Update All Layers Order
     */
     // TODO IPORTANTE - complete refactory layer order
-    updateLayerOrder: function updateLayerOrder(setLayerNameToReturnItBeforeLayerID) {
+    updateLayerOrder: function (setLayerNameToReturnItBeforeLayerID) {
       var _this$map$getStyle$la, _this$map, _this$map$getStyle2;
 
-      console.count('===============================updateLayerOrder');
-      console.count(setLayerNameToReturnItBeforeLayerID);
-      console.time('updateLayerOrder');
-      var currentLayers = (_this$map$getStyle$la = (_this$map = this.map) === null || _this$map === void 0 ? void 0 : (_this$map$getStyle2 = _this$map.getStyle()) === null || _this$map$getStyle2 === void 0 ? void 0 : _this$map$getStyle2.layers) !== null && _this$map$getStyle$la !== void 0 ? _this$map$getStyle$la : undefined;
-      var layerInstances = this.findLayers(this.$slots.default);
-      console.log('find layer vNode tree');
-      console.timeLog('updateLayerOrder'); // check if i have layers in map or in vNodTree
+      // console.count('===============================updateLayerOrder')
+      // console.count(setLayerNameToReturnItBeforeLayerID)
+      // console.time('updateLayerOrder')
+      const currentLayers = (_this$map$getStyle$la = (_this$map = this.map) === null || _this$map === void 0 ? void 0 : (_this$map$getStyle2 = _this$map.getStyle()) === null || _this$map$getStyle2 === void 0 ? void 0 : _this$map$getStyle2.layers) !== null && _this$map$getStyle$la !== void 0 ? _this$map$getStyle$la : undefined;
+      const layerInstances = this.findLayers(this.$slots.default); // console.log('find layer vNode tree')
+      // console.timeLog('updateLayerOrder')
+      // check if i have layers in map or in vNodTree
 
       if (!currentLayers || !layerInstances) {
-        console.warn('Map or layer in vNode not exist');
-        console.timeEnd('updateLayerOrder');
+        // console.warn('Map or layer in vNode not exist')
+        // console.timeEnd('updateLayerOrder')
         return;
-      }
+      } // console.log('======= All LAYERS IN MAPBOX')
+      // console.table(currentLayers)
+      // make layers with order
 
-      console.log('======= All LAYERS IN MAPBOX');
-      console.table(currentLayers); // make layers with order
 
-      var layersId = layerInstances.map(function (layer, i) {
-        var component = layer.componentInstance || layer;
-        var id = get_default()(component, '$data.layerId');
+      let layersId = layerInstances.map((layer, i) => {
+        const component = layer.componentInstance || layer;
+        const id = get_default()(component, '$data.layerId');
 
-        if (!id) {
-          debugger;
+        if (!id) {// debugger
         }
 
-        var zIndex = get_default()(component, '$props.zIndex');
-        var index = i;
+        let zIndex = get_default()(component, '$props.zIndex');
+        const index = i;
 
         if (zIndex) {
           zIndex = Number(zIndex); // + (index / 10)
         }
 
         return {
-          id: id,
-          index: index,
-          zIndex: zIndex
+          id,
+          index,
+          zIndex
         };
       });
-      layersId = orderBy_default()(layersId, ['index'], ['asc']);
-      console.log('======= ORDER  INDEX');
-      console.table(layersId);
+      layersId = orderBy_default()(layersId, ['index'], ['asc']); // console.log('======= ORDER  INDEX')
+      // console.table(layersId)
 
-      for (var to = 0; to < layersId.length; to++) {
+      for (let to = 0; to < layersId.length; to++) {
         if (!layersId[to].zIndex) {
           layersId[to].zIndex = to;
         }
       }
 
-      layersId = orderBy_default()(layersId, ['zIndex'], ['asc']);
-      console.log('======= ORDER Z INDEX');
-      console.table(layersId);
-      console.log('order vnode layers');
-      console.timeLog('updateLayerOrder'); // create a object with layer id and topLayer id
+      layersId = orderBy_default()(layersId, ['zIndex'], ['asc']); // console.log('======= ORDER Z INDEX')
+      // console.table(layersId)
+      // console.log('order vnode layers')
+      // console.timeLog('updateLayerOrder')
+      // create a object with layer id and topLayer id
 
-      var currentLayersByID = {};
-      currentLayers.forEach(function (layer, index, array) {
+      const currentLayersByID = {};
+      currentLayers.forEach((layer, index, array) => {
         var _currentLayers;
 
-        var obj = {
+        const obj = {
           id: layer.id,
           topLayerId: undefined
         };
         obj.topLayerId = currentLayers === null || currentLayers === void 0 ? void 0 : (_currentLayers = currentLayers[index + 1]) === null || _currentLayers === void 0 ? void 0 : _currentLayers.id;
         currentLayersByID[layer.id] = obj;
-      });
-      console.log('======= ORDER IN MAPBOX');
-      console.table(Object.values(currentLayersByID).filter(function (item) {
-        return item.id.indexOf('layer-') > -1;
-      }));
-      console.log('generate all layers topLayerId');
-      console.timeLog('updateLayerOrder'); // return before layer name
+      }); // console.log('======= ORDER IN MAPBOX')
+      // console.table(Object.values(currentLayersByID).filter(item => item.id.indexOf('layer-') > -1))
+      // console.log('generate all layers topLayerId')
+      // console.timeLog('updateLayerOrder')
+      // return before layer name
 
       if (setLayerNameToReturnItBeforeLayerID) {
-        console.timeEnd('updateLayerOrder');
-        console.warn('return before layer name');
+        // console.timeEnd('updateLayerOrder')
+        // console.warn('return before layer name')
         return currentLayersByID === null || currentLayersByID === void 0 ? void 0 : currentLayersByID[setLayerNameToReturnItBeforeLayerID];
       } // Invert loop layers to set they order
 
 
-      for (var i = layersId.length; i != -1; i--) {
+      for (let i = layersId.length; i != -1; i--) {
         var _layersId, _layersId$i, _layersId2, _layersId3, _currentLayersByID$cu;
 
-        var topLayer = (_layersId = layersId) === null || _layersId === void 0 ? void 0 : (_layersId$i = _layersId[i]) === null || _layersId$i === void 0 ? void 0 : _layersId$i.id;
-        var currentLayer = (_layersId2 = layersId) === null || _layersId2 === void 0 ? void 0 : (_layersId3 = _layersId2[i - 1]) === null || _layersId3 === void 0 ? void 0 : _layersId3.id; // if we dont have layer im map, go to next one
+        const topLayer = (_layersId = layersId) === null || _layersId === void 0 ? void 0 : (_layersId$i = _layersId[i]) === null || _layersId$i === void 0 ? void 0 : _layersId$i.id;
+        const currentLayer = (_layersId2 = layersId) === null || _layersId2 === void 0 ? void 0 : (_layersId3 = _layersId2[i - 1]) === null || _layersId3 === void 0 ? void 0 : _layersId3.id; // if we dont have layer im map, go to next one
 
-        if (!(currentLayersByID === null || currentLayersByID === void 0 ? void 0 : currentLayersByID[currentLayer])) continue;
-        console.log("check currentLayer:".concat(currentLayer, " topLayer:").concat(topLayer));
+        if (!(currentLayersByID === null || currentLayersByID === void 0 ? void 0 : currentLayersByID[currentLayer])) continue; // console.log(`check currentLayer:${currentLayer} topLayer:${topLayer}`)
 
         if ((currentLayersByID === null || currentLayersByID === void 0 ? void 0 : (_currentLayersByID$cu = currentLayersByID[currentLayer]) === null || _currentLayersByID$cu === void 0 ? void 0 : _currentLayersByID$cu.topLayerId) !== topLayer) {
-          console.log("moving layers ".concat(currentLayer, " to before layer ").concat(topLayer));
+          // console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
           this.map.moveLayer(currentLayer, topLayer);
         }
-      }
+      } // console.log('loop and move layers')
+      // console.timeLog('updateLayerOrder')
+      // console.timeEnd('updateLayerOrder')
 
-      console.log('loop and move layers');
-      console.timeLog('updateLayerOrder');
-      console.timeEnd('updateLayerOrder');
     },
 
     /**
     * Update Layers Index
     */
-    moveLayer: function moveLayer(id, zIndex) {// // if layer name exist, create a randow one
+    moveLayer: function (id, zIndex) {// // if layer name exist, create a randow one
     },
 
     /**
     Adde images in map
     * @params {object} images.
     */
-    addPropsImages: function addPropsImages(images) {
-      var _this8 = this;
-
+    addPropsImages: function (images) {
       if (!this.map) return;
       images = images || this.images;
-      Object.entries(images).forEach(function (item) {
-        var key = item[0];
-        var value = item[1];
-
-        _this8.addImage(key, value);
+      Object.entries(images).forEach(item => {
+        const key = item[0];
+        const value = item[1];
+        this.addImage(key, value);
       });
     },
 
@@ -8004,189 +6855,115 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
     Add images in map
     * @params {object} images.
     */
-    addImage: function () {
-      var _addImage = VueMapboxvue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee2(key, url) {
-        var forceUpdate,
-            width,
-            bytesPerPixel,
-            data,
-            imgElement,
-            _args2 = arguments;
-        return regenerator_default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                forceUpdate = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : false;
+    addImage: async function (key, url, forceUpdate = false) {
+      var _this$map2;
 
-                if (this.map) {
-                  _context2.next = 3;
-                  break;
-                }
+      if (!(this === null || this === void 0 ? void 0 : (_this$map2 = this.map) === null || _this$map2 === void 0 ? void 0 : _this$map2.hasImage)) return; // if already have the image on map, and not force update, return
 
-                return _context2.abrupt("return");
+      if (forceUpdate === false && this.imagesMap.has(key)) {
+        return;
+      } // create empety image to be avaliable to styles before loading the actual image
+      // var width = 24 // The image will be 64 pixels square
+      // var bytesPerPixel = 4 // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
+      // var data = new Uint8Array(width * width * bytesPerPixel)
+      // if (!this.map.hasImage(key)) this.map.addImage(key, { width: width, height: width, data: data })
+      // set image before it is loading, because if a have another node after
 
-              case 3:
-                if (!(forceUpdate === false && this.imagesMap.has(key))) {
-                  _context2.next = 5;
-                  break;
-                }
 
-                return _context2.abrupt("return");
+      this.imagesMap.set(key, true); // now load the real image
 
-              case 5:
-                // create empety image to be avaliable to styles before loading the actual image
-                width = 24; // The image will be 64 pixels square
+      let imgElement;
 
-                bytesPerPixel = 4; // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
-
-                data = new Uint8Array(width * width * bytesPerPixel);
-                if (!this.map.hasImage(key)) this.map.addImage(key, {
-                  width: width,
-                  height: width,
-                  data: data
-                }); // set image before it is loading, because if a have another node after
-
-                this.imagesMap.set(key, true); // now load the real image
-
-                _context2.prev = 10;
-                _context2.next = 13;
-                return this.processImage(url);
-
-              case 13:
-                imgElement = _context2.sent;
-                _context2.next = 18;
-                break;
-
-              case 16:
-                _context2.prev = 16;
-                _context2.t0 = _context2["catch"](10);
-
-              case 18:
-                if (this.map.hasImage(key) && imgElement) {
-                  this.map.removeImage(key);
-                  this.map.addImage(key, imgElement);
-                }
-
-              case 19:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[10, 16]]);
-      }));
-
-      function addImage(_x, _x2) {
-        return _addImage.apply(this, arguments);
+      try {
+        imgElement = await this.processImage(url);
+      } catch (e) {// //console.error(`image ${key}:${url} loading error`)
+        // //console.error(e)
       }
 
-      return addImage;
-    }(),
+      if (this.map.hasImage(key) && imgElement) {
+        // this.map.updateImage(key, imgElement)
+        this.map.removeImage(key);
+        this.map.addImage(key, imgElement);
+        this.map.triggerRepaint();
+      } else if (imgElement) {
+        this.map.addImage(key, imgElement);
+      }
+    },
 
     /**
     Remove an image of map
     * @params {object} images.
     */
-    removeImage: function () {
-      var _removeImage = VueMapboxvue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee3(key) {
-        return regenerator_default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                if (this.map) {
-                  _context3.next = 2;
-                  break;
-                }
+    removeImage: async function (key) {
+      if (!this.map) return;
 
-                return _context3.abrupt("return");
-
-              case 2:
-                if (this.map.hasImage(key)) {
-                  this.map.removeImage(key);
-                  this.imagesMap.delete(key);
-                }
-
-              case 3:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function removeImage(_x3) {
-        return _removeImage.apply(this, arguments);
+      if (this.map.hasImage(key)) {
+        this.map.removeImage(key);
+        this.imagesMap.delete(key);
       }
-
-      return removeImage;
-    }(),
+    },
 
     /**
     Creat a html image element from a url or a svg
     * @params {object} images.
     */
-    processImage: function () {
-      var _processImage = VueMapboxvue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee4(imgSource) {
-        return regenerator_default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                return _context4.abrupt("return", new Promise(function (resolve, reject) {
-                  var _imgSource, _imgSource$constructo, _imgSource2, _imgSource2$construct, _imgSource3, _imgSource3$construct;
+    processImage: async function (imgSource) {
+      return new Promise((resolve, reject) => {
+        var _imgSource, _imgSource$constructo, _imgSource2, _imgSource2$construct, _imgSource3, _imgSource3$construct;
 
-                  if (!imgSource) {
-                    reject(new Error('img empty'));
-                  } else if (((_imgSource = imgSource) === null || _imgSource === void 0 ? void 0 : (_imgSource$constructo = _imgSource.constructor) === null || _imgSource$constructo === void 0 ? void 0 : _imgSource$constructo.name) === 'HTMLImageElement') {
-                    resolve(imgSource);
-                  } else if (((_imgSource2 = imgSource) === null || _imgSource2 === void 0 ? void 0 : (_imgSource2$construct = _imgSource2.constructor) === null || _imgSource2$construct === void 0 ? void 0 : _imgSource2$construct.name) === 'String' || ((_imgSource3 = imgSource) === null || _imgSource3 === void 0 ? void 0 : (_imgSource3$construct = _imgSource3.constructor) === null || _imgSource3$construct === void 0 ? void 0 : _imgSource3$construct.name) === 'SVGSVGElement') {
-                    var _imgSource4, _imgSource4$construct, _imgSource5, _imgSource5$construct;
+        if (!imgSource) {
+          reject(new Error('img empty'));
+        } else if (((_imgSource = imgSource) === null || _imgSource === void 0 ? void 0 : (_imgSource$constructo = _imgSource.constructor) === null || _imgSource$constructo === void 0 ? void 0 : _imgSource$constructo.name) === 'HTMLImageElement') {
+          resolve(imgSource);
+        } else if (((_imgSource2 = imgSource) === null || _imgSource2 === void 0 ? void 0 : (_imgSource2$construct = _imgSource2.constructor) === null || _imgSource2$construct === void 0 ? void 0 : _imgSource2$construct.name) === 'String' || ((_imgSource3 = imgSource) === null || _imgSource3 === void 0 ? void 0 : (_imgSource3$construct = _imgSource3.constructor) === null || _imgSource3$construct === void 0 ? void 0 : _imgSource3$construct.name) === 'SVGSVGElement') {
+          var _imgSource4, _imgSource4$construct, _imgSource5, _imgSource5$construct;
 
-                    var newimg = new Image();
+          const newimg = new Image();
+          newimg.crossOrigin = 'Anonymous';
 
-                    newimg.onload = function () {
-                      resolve(newimg);
-                    };
+          newimg.onload = () => {
+            resolve(newimg);
+          };
 
-                    newimg.onerror = function (e) {
-                      reject(e);
-                    }; // check if is a svg as string o html element
+          newimg.onerror = e => {
+            console.warn('convert/load image error:');
+            console.warn(e);
+            reject(e);
+          }; // check if is a svg as string o html element
 
 
-                    // check if is a svg as string o html element
-                    if (((_imgSource4 = imgSource) === null || _imgSource4 === void 0 ? void 0 : (_imgSource4$construct = _imgSource4.constructor) === null || _imgSource4$construct === void 0 ? void 0 : _imgSource4$construct.name) === 'String' && imgSource.match(/<\s*svg/g) || ((_imgSource5 = imgSource) === null || _imgSource5 === void 0 ? void 0 : (_imgSource5$construct = _imgSource5.constructor) === null || _imgSource5$construct === void 0 ? void 0 : _imgSource5$construct.name) === 'SVGSVGElement') {
-                      var _imgSource$outerHTML, _imgSource6;
+          if (((_imgSource4 = imgSource) === null || _imgSource4 === void 0 ? void 0 : (_imgSource4$construct = _imgSource4.constructor) === null || _imgSource4$construct === void 0 ? void 0 : _imgSource4$construct.name) === 'String' && imgSource.match(/<\s*svg/g) || ((_imgSource5 = imgSource) === null || _imgSource5 === void 0 ? void 0 : (_imgSource5$construct = _imgSource5.constructor) === null || _imgSource5$construct === void 0 ? void 0 : _imgSource5$construct.name) === 'SVGSVGElement') {
+            var _imgSource$outerHTML, _imgSource6;
 
-                      imgSource = 'data:image/svg+xml;base64,' + window.btoa((_imgSource$outerHTML = (_imgSource6 = imgSource) === null || _imgSource6 === void 0 ? void 0 : _imgSource6.outerHTML) !== null && _imgSource$outerHTML !== void 0 ? _imgSource$outerHTML : imgSource);
-                    }
-
-                    newimg.src = imgSource;
-                  } else {
-                    reject(new Error('Not compatibility image. Please set source as an url, a svg string, a svg element or img element'));
-                  }
-                }));
-
-              case 1:
-              case "end":
-                return _context4.stop();
-            }
+            imgSource = this.convertSvgToBase64((_imgSource$outerHTML = (_imgSource6 = imgSource) === null || _imgSource6 === void 0 ? void 0 : _imgSource6.outerHTML) !== null && _imgSource$outerHTML !== void 0 ? _imgSource$outerHTML : imgSource);
           }
-        }, _callee4);
-      }));
 
-      function processImage(_x4) {
-        return _processImage.apply(this, arguments);
-      }
+          newimg.src = imgSource;
+        } else {
+          reject(new Error('Not compatibility image. Please set source as an url, a svg string, a svg element or img element'));
+        }
+      });
+    },
+    convertSvgToBase64: function (content) {
+      // const converted = this.toBinary(content)
+      let encoded;
 
-      return processImage;
-    }(),
+      try {
+        encoded = window.btoa(unescape(encodeURIComponent(content)));
+      } catch (e) {
+        console.error(e);
+      } // console.log(encoded)
+
+
+      return 'data:image/svg+xml;base64,' + encoded;
+    },
 
     /**
     * Remove Layer
     */
-    removeLayer: function removeLayer(id) {
-      var _this9 = this;
-
+    removeLayer: function (id) {
       if (!this.map) return;
-      var map = this.getMap();
+      const map = this.getMap();
 
       if (this.layers.has(id)) {
         this.layers.delete(id);
@@ -8197,14 +6974,12 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
         if (map && map.getLayer(id)) {
           map.removeLayer(id);
         }
-      } catch (e) {/// /console.warn(e)
+      } catch (e) {/// ///console.warn(e)
       }
 
-      this.$nextTick(function () {
-        return _this9.updateLayerOrder();
-      });
+      this.$nextTick(() => this.updateLayerOrder());
     },
-    docEvents: function docEvents() {
+    docEvents: function () {
       this.$emit('click');
       this.$emit('dblclick');
       this.$emit('mouseenter');
@@ -8252,8 +7027,8 @@ var nativeEventsTypes = ['click', 'dblclick', 'mouseenter', 'mouseleave', 'mouse
 });
 // CONCATENATED MODULE: ./src/components/VueMapbox.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_VueMapboxvue_type_script_lang_js_ = (VueMapboxvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/components/VueMapbox.vue?vue&type=style&index=0&id=e060bcaa&lang=stylus&scoped=true&
-var VueMapboxvue_type_style_index_0_id_e060bcaa_lang_stylus_scoped_true_ = __webpack_require__("d565");
+// EXTERNAL MODULE: ./src/components/VueMapbox.vue?vue&type=style&index=0&id=05466ee5&lang=stylus&scoped=true&
+var VueMapboxvue_type_style_index_0_id_05466ee5_lang_stylus_scoped_true_ = __webpack_require__("356b");
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -8361,17 +7136,17 @@ function normalizeComponent (
 
 var VueMapbox_component = normalizeComponent(
   components_VueMapboxvue_type_script_lang_js_,
-  VueMapboxvue_type_template_id_e060bcaa_scoped_true_render,
+  render,
   staticRenderFns,
   false,
   null,
-  "e060bcaa",
+  "05466ee5",
   null
   
 )
 
 /* harmony default export */ var VueMapbox = (VueMapbox_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2c01c290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=template&id=eb4bc024&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=template&id=eb4bc024&
 var VmSourcevue_type_template_id_eb4bc024_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticStyle:{"display":"none"}},[_vm._t("default")],2)}
 var VmSourcevue_type_template_id_eb4bc024_staticRenderFns = []
 
@@ -8379,12 +7154,6 @@ var VmSourcevue_type_template_id_eb4bc024_staticRenderFns = []
 // CONCATENATED MODULE: ./src/components/VmSource.vue?vue&type=template&id=eb4bc024&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmSource.vue?vue&type=script&lang=js&
-function VmSourcevue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function VmSourcevue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { VmSourcevue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { VmSourcevue_type_script_lang_js_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { VmSourcevue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function VmSourcevue_type_script_lang_js_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -8394,7 +7163,7 @@ function VmSourcevue_type_script_lang_js_defineProperty(obj, key, value) { if (k
 /* harmony default export */ var VmSourcevue_type_script_lang_js_ = ({
   name: 'VmSource',
   inject: ['getMap', 'mapboxgl', 'MapboxVueInstance'],
-  provide: function provide() {
+  provide: function () {
     return {
       getSource: this.getSource
     };
@@ -8425,7 +7194,7 @@ function VmSourcevue_type_script_lang_js_defineProperty(obj, key, value) { if (k
       type: String,
       required: true,
       default: 'geojson',
-      validator: function validator(value) {
+      validator: function (value) {
         return ['vector', 'raster', 'raster-dem', 'geojson', 'image', 'video', 'canvas'].indexOf(value) !== -1;
       }
     },
@@ -8438,23 +7207,27 @@ function VmSourcevue_type_script_lang_js_defineProperty(obj, key, value) { if (k
       required: true
     }
   },
-  data: function data() {
+
+  data() {
     return {
       source: null // {id, type, options, instance}
 
     };
   },
+
   watch: {
-    '$props.options': function $propsOptions(val, oldval) {
+    '$props.options': function (val, oldval) {
       if (this.type === 'geojson' && val && val.data) {
         this.getMap().getSource(this.source.id).setData(val.data);
       } else if (JSON.stringify(val) !== JSON.stringify(oldval)) {
-        this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, VmSourcevue_type_script_lang_js_objectSpread({}, val));
+        this.source = this.MapboxVueInstance.updateSource(this.source.id, this.type, { ...val
+        });
       }
     }
   },
-  created: function created() {
-    var options = VmSourcevue_type_script_lang_js_objectSpread({}, this.$props.options);
+  created: function () {
+    const options = { ...this.$props.options
+    };
 
     if (this.unique && this.MapboxVueInstance.getSource(this.name)) {
       this.source = this.MapboxVueInstance.getSource(this.name);
@@ -8463,16 +7236,18 @@ function VmSourcevue_type_script_lang_js_defineProperty(obj, key, value) { if (k
     }
   },
   methods: {
-    getSource: function getSource() {
+    getSource: function () {
       return this.source;
     }
   },
-  beforeDestroy: function beforeDestroy() {
+
+  beforeDestroy() {
     if (this.source) {
       // this.MapboxVueInstance.removeSource(this.source.id)
       this.source = null;
     }
   }
+
 });
 // CONCATENATED MODULE: ./src/components/VmSource.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_VmSourcevue_type_script_lang_js_ = (VmSourcevue_type_script_lang_js_); 
@@ -8505,11 +7280,11 @@ Get only props with props with mapbox set to true, and with a value
 @returns (Object)
 */
 /* harmony default export */ var getOnlyMapboxProps = (function (VNode) {
-  var props = VNode.$props;
-  var mapboxProps = {};
-  Object.entries(props).forEach(function (item) {
-    var key = item[0];
-    var value = item[1];
+  const props = VNode.$props;
+  const mapboxProps = {};
+  Object.entries(props).forEach(item => {
+    let key = item[0];
+    const value = item[1];
 
     if (value !== undefined && VNode.$options.props[key].mapbox) {
       key = VNode.$options.props[key].name || key;
@@ -8518,27 +7293,21 @@ Get only props with props with mapbox set to true, and with a value
   });
   return mapboxProps;
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2c01c290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=template&id=10750f1e&
-var VmPopupvue_type_template_id_10750f1e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({ maxHeight:_vm.myMaxHeight, overflow:'auto'})},[_vm._t("default")],2)}
-var VmPopupvue_type_template_id_10750f1e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=template&id=881869f8&
+var VmPopupvue_type_template_id_881869f8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{style:({ maxHeight:_vm.myMaxHeight, overflow:'auto'})},[_vm._t("default")],2)}
+var VmPopupvue_type_template_id_881869f8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VmPopup.vue?vue&type=template&id=10750f1e&
+// CONCATENATED MODULE: ./src/components/VmPopup.vue?vue&type=template&id=881869f8&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmPopup.vue?vue&type=script&lang=js&
-
-
-function VmPopupvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function VmPopupvue_type_script_lang_js_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { VmPopupvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { VmPopupvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
 //
 //
 //
-var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
+const VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
 /* harmony default export */ var VmPopupvue_type_script_lang_js_ = ({
   name: 'VmPopup',
   inject: ['getMap', 'mapboxgl', 'MapboxVueInstance'],
@@ -8549,8 +7318,8 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
       */
     anchor: {
       type: String,
-      default: 'bottom',
-      validator: function validator(value) {
+      default: undefined,
+      validator: function (value) {
         return ['center', 'top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'].indexOf(value) !== -1;
       }
     },
@@ -8578,9 +7347,7 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
     */
     center: {
       type: Array,
-      default: function _default() {
-        return [0, 0];
-      }
+      default: () => [0, 0]
     },
 
     /**
@@ -8670,14 +7437,16 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
       type: String
     }
   },
-  data: function data() {
+
+  data() {
     return {
       popup: null
     };
   },
+
   computed: {
-    myMaxHeight: function myMaxHeight() {
-      var h = this.maxHeight;
+    myMaxHeight: function () {
+      let h = this.maxHeight;
 
       if (typeof h === 'number') {
         h += 'px';
@@ -8685,8 +7454,8 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
 
       return h;
     },
-    myMaxWidth: function myMaxWidth() {
-      var w = this.maxWidth;
+    myMaxWidth: function () {
+      let w = this.maxWidth;
 
       if (typeof w === 'number') {
         w += 'px';
@@ -8695,56 +7464,40 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
       return w;
     }
   },
-  mounted: function mounted() {
-    var _this = this;
 
-    return VmPopupvue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-      return regenerator_default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _this.$nextTick();
-
-            case 2:
-              _this.createPopup();
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+  async mounted() {
+    await this.$nextTick();
+    this.createPopup();
   },
+
   watch: {
-    center: function center(val) {
+    center: function (val) {
       this.setupPopup();
     },
-    open: function open(val) {
+    open: function (val) {
       this.setupPopup();
     },
-    trackPointer: function trackPointer(val) {
+    trackPointer: function (val) {
       this.setupPopup();
     },
-    maxWidth: function maxWidth(val) {
+    maxWidth: function (val) {
       this.setupPopup();
     },
-    color: function color(val) {
+    color: function (val) {
       this.setupPopup();
     }
   },
-  beforeDestroy: function beforeDestroy() {
+
+  beforeDestroy() {
     if (this.popup) {
       this.popup.remove();
     }
   },
-  methods: {
-    createPopup: function createPopup() {
-      var _this2 = this;
 
+  methods: {
+    createPopup: function () {
       //console.log('popup created!')
-      var options = {
+      const options = {
         closeButton: this.closeButton,
         closeOnMove: this.closeOnMove,
         closeOnClick: this.closeOnClick,
@@ -8754,24 +7507,24 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
         trackPointer: this.trackPointer,
         maxWidth: this.maxWidth
       };
-      var mapboxgl = this.mapboxgl();
+      const mapboxgl = this.mapboxgl();
       this.popup = new mapboxgl.Popup(options).setLngLat(this.center).setDOMContent(this.$el);
-      this.popup.on('open', function () {
+      this.popup.on('open', () => {
         /**
          * Update event. Can use .sync modifier to make 2 way data bind easer for the open props
          *  @property {boolean} open true or false
          */
-        _this2.$emit('update:open', true);
+        this.$emit('update:open', true);
       });
-      this.popup.on('close', function () {
-        _this2.$emit('update:open', false);
+      this.popup.on('close', () => {
+        this.$emit('update:open', false);
       });
-      this.popup.on('close', function () {//console.log('chamou fechou do popup')
+      this.popup.on('close', () => {//console.log('chamou fechou do popup')
       });
       this.setupPopup();
       this.MapboxVueInstance.setupEvents(this.$listeners, this.popup, VmPopupvue_type_script_lang_js_nativeEventsTypes);
     },
-    setupPopup: function setupPopup() {
+    setupPopup: function () {
       if (!this.popup) return;
 
       if (this.open) {
@@ -8794,17 +7547,17 @@ var VmPopupvue_type_script_lang_js_nativeEventsTypes = ['open', 'close'];
         this.popup.setMaxWidth(this.myMaxWidth);
       }
 
-      var popupElement = this.popup.getElement();
+      const popupElement = this.popup.getElement();
 
       if (popupElement) {
-        var content = popupElement.querySelector('.mapboxgl-popup-content');
-        var arrow = popupElement.querySelector('.mapboxgl-popup-tip');
+        const content = popupElement.querySelector('.mapboxgl-popup-content');
+        const arrow = popupElement.querySelector('.mapboxgl-popup-tip');
         content.style.backgroundColor = this.color;
         content.style.color = this.textColor;
         arrow.style.borderTopColor = this.arrowColor || this.color;
       }
     },
-    docEvents: function docEvents() {
+    docEvents: function () {
       this.$emit('open');
       this.$emit('close');
     }
@@ -8826,8 +7579,8 @@ var VmPopupvue_type_style_index_0_lang_stylus_ = __webpack_require__("11ec");
 
 var VmPopup_component = normalizeComponent(
   components_VmPopupvue_type_script_lang_js_,
-  VmPopupvue_type_template_id_10750f1e_render,
-  VmPopupvue_type_template_id_10750f1e_staticRenderFns,
+  VmPopupvue_type_template_id_881869f8_render,
+  VmPopupvue_type_template_id_881869f8_staticRenderFns,
   false,
   null,
   null,
@@ -8841,18 +7594,6 @@ var set = __webpack_require__("0f5c");
 var set_default = /*#__PURE__*/__webpack_require__.n(set);
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmMarker.vue?vue&type=script&lang=js&
-
-
-function VmMarkervue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function VmMarkervue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { VmMarkervue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { VmMarkervue_type_script_lang_js_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { VmMarkervue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function VmMarkervue_type_script_lang_js_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function VmMarkervue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function VmMarkervue_type_script_lang_js_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { VmMarkervue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { VmMarkervue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 // TODO - refatorar logica. confuso demais em casos onde adiciono ou removo v-slots/chilcher no marker
 // Exemplo
@@ -8876,7 +7617,7 @@ function VmMarkervue_type_script_lang_js_asyncToGenerator(fn) { return function 
 
 
 
-var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'dragend'];
+const VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'dragend'];
 /* harmony default export */ var VmMarkervue_type_script_lang_js_ = ({
   /**
    * The only true button.
@@ -8896,9 +7637,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
       */
     center: {
       type: Array,
-      default: function _default() {
-        return [0, 0];
-      },
+      default: () => [0, 0],
       required: true
     },
 
@@ -8909,7 +7648,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
     anchor: {
       type: String,
       default: 'bottom',
-      validator: function validator(value) {
+      validator: function (value) {
         return ['center', 'top', 'bottom', 'left', 'right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'].indexOf(value) !== -1;
       },
       mapbox: true
@@ -8968,7 +7707,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
     */
     pitchAlignment: {
       type: String,
-      validator: function validator(value) {
+      validator: function (value) {
         // O valor precisa corresponder a alguma dessas Strings
         return ['map', 'viewport', 'auto'].indexOf(value) !== -1;
       },
@@ -8981,7 +7720,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
     */
     rotationAlignment: {
       type: String,
-      validator: function validator(value) {
+      validator: function (value) {
         // O valor precisa corresponder a alguma dessas Strings
         return ['map', 'viewport', 'auto'].indexOf(value) !== -1;
       },
@@ -9010,15 +7749,17 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
       default: 0.2
     }
   },
-  data: function data() {
+
+  data() {
     return {
       marker: null,
       popupOpen: null,
       visible: false
     };
   },
+
   computed: {},
-  created: function created() {
+  created: function () {
     //console.count('marker created')
     this.popup = null;
     this.markerElement = null;
@@ -9031,84 +7772,72 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
       this.getMap().on('zoom', this.markerVisibility);
     }
   },
-  mounted: function mounted() {
-    var _this = this;
 
+  mounted() {
     // console.count('marker mounted')
-    this.$nextTick(function () {
-      return _this.createMarker();
-    });
+    this.$nextTick(() => this.createMarker());
   },
-  updated: function updated() {// //console.log('marker updated')
+
+  async updated() {// //console.log('marker updated')
     // await this.$nextTick()
     // this.setupMarker()
     // this.$nextTick(() => this.setupMarker())
-
-    return VmMarkervue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-      return regenerator_default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
   },
+
   watch: {
-    visible: function visible(val, oldval) {
+    visible: function (val, oldval) {
       if (val === false && oldval === true && this.popupOpen === 'hover') {
         this.popupOpen = false;
       }
     },
-    center: function center(val) {
+    center: function (val) {
       if (this.marker) {
         this.marker.setLngLat(val);
       }
     },
-    draggable: function draggable(val) {
+    draggable: function (val) {
       if (this.marker) {
         this.marker.setDraggable(val);
       }
     },
-    color: function color(val) {
+    color: function (val) {
       if (this.marker) {
         this.setupMarker();
       }
     },
-    anchor: function anchor(val) {
+    anchor: function (val) {
       if (this.marker) {
         this.setupMarker();
       }
     },
-    offset: function offset(val) {
+    offset: function (val) {
       if (this.marker) {
         this.marker.setOffset(val);
       }
     },
-    rotation: function rotation(val) {
+    rotation: function (val) {
       if (this.marker) {
         this.marker.setRotation(val);
       }
     },
-    rotationAlignment: function rotationAlignment(val) {
+    rotationAlignment: function (val) {
       if (this.marker) {
         this.marker.setRotationAlignment(val);
       }
     },
-    pitchAlignment: function pitchAlignment(val) {
+    pitchAlignment: function (val) {
       if (this.marker) {
         this.marker.setPitchAlignment(val);
       }
     },
-    popUpContent: function popUpContent(val) {
+    popUpContent: function (val) {
       if (this.marker) {
         this.updateHtmlContent();
       }
     }
   },
-  beforeDestroy: function beforeDestroy() {
+
+  beforeDestroy() {
     // console.count('remove marker')
     this.getMap().off('zoom', this.markerVisibility);
 
@@ -9118,30 +7847,27 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
     } else {// console.count('no marker to remove')
     }
   },
+
   // updated () {
   //   this.$nextTick(() => this.updateHtmlContent())
   // },
   methods: {
-    createMarker: function createMarker() {
-      var _this2 = this;
-
+    createMarker: function () {
       //console.log('setupMarker')
-      var options = getOnlyMapboxProps(this);
+      const options = getOnlyMapboxProps(this);
       if (this.marker) this.marker.remove();
 
       if (this.$slots.marker) {
         options.element = this.$refs.marker;
       }
 
-      var mapboxgl = this.mapboxgl();
+      const mapboxgl = this.mapboxgl();
       this.marker = new mapboxgl.Marker(options).setLngLat(this.center);
       this.MapboxVueInstance.setupEvents(this.$listeners, this.marker, VmMarkervue_type_script_lang_js_nativeEventsTypes);
       this.setupMarkerEvents();
-      this.$nextTick(function () {
-        return _this2.setupMarker();
-      });
+      this.$nextTick(() => this.setupMarker());
     },
-    setupMarker: function setupMarker() {
+    setupMarker: function () {
       this.markerElement = this.marker.getElement();
       this.markerVisibility();
       this.setupPopupEvents(); // if have a instance of popup, check iff is props is open, so we set
@@ -9150,18 +7876,16 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         this.popupOpen = 'click';
       }
     },
-    setupMarkerEvents: function setupMarkerEvents() {
-      var _this3 = this;
-
+    setupMarkerEvents: function () {
       if (!this.marker) return;
       this.markerElement = this.marker.getElement();
-      Object.entries(this.$listeners).forEach(function (item) {
-        var eventName = item[0];
-        var func = item[1];
-        var once = false;
-        var capture = false;
-        var passive = false;
-        var modifier = eventName.substr(0, 2).replace(/[^a-z]/, '');
+      Object.entries(this.$listeners).forEach(item => {
+        let eventName = item[0];
+        const func = item[1];
+        let once = false;
+        let capture = false;
+        let passive = false;
+        const modifier = eventName.substr(0, 2).replace(/[^a-z]/, '');
 
         if (modifier === '~') {
           once = true;
@@ -9181,18 +7905,15 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         }
 
         eventName = eventName.replace(/^[^a-z]/, '');
-        var eventFunc = func;
-
-        _this3.markerElement.addEventListener(eventName, function (e) {
-          return eventFunc(e);
-        }, {
-          capture: capture,
-          once: once,
-          passive: passive
+        const eventFunc = func;
+        this.markerElement.addEventListener(eventName, e => eventFunc(e), {
+          capture,
+          once,
+          passive
         });
       });
     },
-    setupPopupEvents: function setupPopupEvents() {
+    setupPopupEvents: function () {
       this.markerElement = this.marker.getElement();
 
       if (this.hasPopupHover()) {
@@ -9210,7 +7931,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         });
       }
     },
-    markerEventHover: function markerEventHover(e) {
+    markerEventHover: function (e) {
       e.stopPropagation();
       clearTimeout(this.closeTimeout);
       this.closeTimeout = null;
@@ -9219,16 +7940,14 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         this.popupOpen = 'hover';
       }
     },
-    markerEventLeave: function markerEventLeave(e) {
-      var _this4 = this;
-
+    markerEventLeave: function (e) {
       if (this.popupOpen === 'hover') {
-        this.closeTimeout = setTimeout(function () {
-          _this4.popupOpen = false;
+        this.closeTimeout = setTimeout(() => {
+          this.popupOpen = false;
         }, 100);
       }
     },
-    markerEventClick: function markerEventClick(e) {
+    markerEventClick: function (e) {
       e.stopPropagation();
 
       if (this.popupOpen === 'click') {
@@ -9237,11 +7956,11 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         this.popupOpen = 'click';
       }
     },
-    markerVisibility: function markerVisibility() {
+    markerVisibility: function () {
       // if (!this.minZoom && !this.maxZoom) return
-      var minZoom = this.minZoom ? this.minZoom : 0;
-      var maxZoom = this.maxZoom ? this.maxZoom : 24;
-      var zoom = this.getMap().getZoom();
+      const minZoom = this.minZoom ? this.minZoom : 0;
+      const maxZoom = this.maxZoom ? this.maxZoom : 24;
+      const zoom = this.getMap().getZoom();
 
       if (zoom >= minZoom && zoom <= maxZoom && this.visible === false) {
         this.marker.addTo(this.getMap());
@@ -9251,7 +7970,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         this.visible = false;
       }
     },
-    getPopupHover: function getPopupHover() {
+    getPopupHover: function () {
       if (has_default()(this.$scopedSlots, 'popupHover')) {
         return this.$scopedSlots.popupHover({
           metadata: this.metadata
@@ -9262,8 +7981,8 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
 
       return false;
     },
-    getPopupClick: function getPopupClick() {
-      var popupFind = findVNodeChildren(this.$slots.default, 'VmPopup');
+    getPopupClick: function () {
+      const popupFind = findVNodeChildren(this.$slots.default, 'VmPopup');
 
       if (has_default()(this.$scopedSlots, 'popupClick')) {
         return this.$scopedSlots.popupClick({
@@ -9279,15 +7998,15 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
 
       return false;
     },
-    hasPopupHover: function hasPopupHover() {
+    hasPopupHover: function () {
       if (has_default()(this.$scopedSlots, 'popupHover') || has_default()(this.$slots, 'popupHover')) {
         return true;
       }
 
       return false;
     },
-    hasPopupClick: function hasPopupClick() {
-      var popupFind = findVNodeChildren(this.$slots.default, 'VmPopup');
+    hasPopupClick: function () {
+      const popupFind = findVNodeChildren(this.$slots.default, 'VmPopup');
 
       if (has_default()(this.$scopedSlots, 'popupClick') || has_default()(this.$slots, 'popupClick') || popupFind) {
         return true;
@@ -9295,7 +8014,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
 
       return false;
     },
-    docEvents: function docEvents() {
+    docEvents: function () {
       /**
       *  @property {object} _this the component instance
       *  @property {object} map the mapbox instance
@@ -9310,21 +8029,20 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
       this.$emit('**alldivmouseevents**');
     }
   },
-  render: function render(h) {
-    var _this5 = this;
 
-    var minZoom = this.minZoom ? this.minZoom : 0;
-    var maxZoom = this.maxZoom ? this.maxZoom : 24;
-    var zoom = this.getMap().getZoom(); // if (zoom < minZoom || zoom > maxZoom) {
+  render(h) {
+    const minZoom = this.minZoom ? this.minZoom : 0;
+    const maxZoom = this.maxZoom ? this.maxZoom : 24;
+    const zoom = this.getMap().getZoom(); // if (zoom < minZoom || zoom > maxZoom) {
     //     return null
     // }
     //   this.rendered = true
 
-    var childrens = [];
-    var popup;
-    var popupKey;
-    var popupProps = {};
-    var popupInstance;
+    const childrens = [];
+    let popup;
+    let popupKey;
+    let popupProps = {};
+    let popupInstance;
 
     if (this.marker) {
       if (this.hasPopupClick()) {
@@ -9358,7 +8076,7 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
 
     if (popup) {
       // check if popup is the content type of popup, if not create one
-      var popupFind = findVNodeChildren(popup, 'VmPopup');
+      const popupFind = findVNodeChildren(popup, 'VmPopup');
       popupInstance = popupFind ? popupFind[0] : h(VmPopup, [popup]); // TODO - verificar pq quando recebe o vnode e quando recebe a instancia.
       // as vezes consigo reutilizar a instancia
 
@@ -9368,8 +8086,8 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
 
       popupInstance.key = popupKey; // set default offset of popup
 
-      var markerHeight = this.markerElement.getBoundingClientRect().height;
-      var popupYOffset;
+      const markerHeight = this.markerElement.getBoundingClientRect().height;
+      let popupYOffset;
 
       if (this.anchor.indexOf('bottom') > -1) {
         popupYOffset = markerHeight + 15;
@@ -9380,14 +8098,16 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
       }
 
       popupProps.offset = [0, -popupYOffset];
-      popupInstance.componentOptions.propsData = VmMarkervue_type_script_lang_js_objectSpread(VmMarkervue_type_script_lang_js_objectSpread({}, popupProps), popupInstance.componentOptions.propsData); // if close popup, updade opemn props
+      popupInstance.componentOptions.propsData = { ...popupProps,
+        ...popupInstance.componentOptions.propsData
+      }; // if close popup, updade opemn props
 
       if (this.popupOpen === 'click') {
-        var closeFunc = get_default()(popupInstance, 'componentOptions.listeners.close');
-        set_default()(popupInstance.componentOptions, 'listeners.close', function (e) {
+        const closeFunc = get_default()(popupInstance, 'componentOptions.listeners.close');
+        set_default()(popupInstance.componentOptions, 'listeners.close', e => {
           // just call close function if popup is close by user, not by min or max zoom removing it
-          if (_this5.visible === true) {
-            _this5.popupOpen = false;
+          if (this.visible === true) {
+            this.popupOpen = false;
 
             if (closeFunc) {
               closeFunc(e);
@@ -9414,27 +8134,28 @@ var VmMarkervue_type_script_lang_js_nativeEventsTypes = ['dragstart', 'drag', 'd
         display: 'none',
         opacity: Number(this.opacity)
       }
-    }, [].concat(childrens));
+    }, [...childrens]);
     this.markerVisibility(); // just for documentatio
 
     /**
     @slot use to define a custom marker
     */
 
-    var m = this.$slots.marker;
+    const m = this.$slots.marker;
     /**
     @slot popup to show when hover a marker. Can be used with popupClick too.
       with Scoped slot receives a metadata properties
     */
 
-    var y = this.$slots.popupHover;
+    const y = this.$slots.popupHover;
     /**
     @slot popup to show when click a marker. Can be used with popupClick too.
       with Scoped slot receives a metadata properties
     */
 
-    var z = this.$slots.popupClick;
+    const z = this.$slots.popupClick;
   }
+
 });
 // CONCATENATED MODULE: ./src/components/VmMarker.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_VmMarkervue_type_script_lang_js_ = (VmMarkervue_type_script_lang_js_); 
@@ -9458,9 +8179,6 @@ var VmMarker_component = normalizeComponent(
 )
 
 /* harmony default export */ var VmMarker = (VmMarker_component.exports);
-// EXTERNAL MODULE: ./node_modules/lodash/pickBy.js
-var pickBy = __webpack_require__("77c1");
-
 // EXTERNAL MODULE: ./node_modules/lodash/filter.js
 var filter = __webpack_require__("9380");
 var filter_default = /*#__PURE__*/__webpack_require__.n(filter);
@@ -9473,9 +8191,6 @@ var findIndex_default = /*#__PURE__*/__webpack_require__.n(findIndex);
 var kebabCase = __webpack_require__("375a");
 var kebabCase_default = /*#__PURE__*/__webpack_require__.n(kebabCase);
 
-// EXTERNAL MODULE: ./node_modules/lodash/camelCase.js
-var camelCase = __webpack_require__("bba4");
-
 // EXTERNAL MODULE: ./node_modules/lodash/startCase.js
 var startCase = __webpack_require__("e740");
 var startCase_default = /*#__PURE__*/__webpack_require__.n(startCase);
@@ -9485,7 +8200,7 @@ var axios = __webpack_require__("bc3a");
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
 // CONCATENATED MODULE: ./src/components/LayerMapboxProps.js
-var LAYER_DEFAULT_PROPS = {
+const LAYER_DEFAULT_PROPS = {
   'background-color': {
     paint: true,
     layerType: 'background'
@@ -9976,49 +8691,23 @@ var LAYER_DEFAULT_PROPS = {
   }
 }; // include especial -hover or -click props
 
-var FINAL_PROPS = {};
-Object.entries(LAYER_DEFAULT_PROPS).forEach(function (item) {
-  var key = item[0];
-  var value = item[1];
+const FINAL_PROPS = {};
+Object.entries(LAYER_DEFAULT_PROPS).forEach(item => {
+  const key = item[0];
+  const value = item[1];
   FINAL_PROPS[key] = value;
   FINAL_PROPS[key + '-hover'] = {
-    value: value,
+    value,
     hover: true
   };
   FINAL_PROPS[key + '-click'] = {
-    value: value,
+    value,
     click: true
   };
 });
 
 /* harmony default export */ var LayerMapboxProps = (FINAL_PROPS);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayer.vue?vue&type=script&lang=js&
-
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function VmLayervue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function VmLayervue_type_script_lang_js_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { VmLayervue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { VmLayervue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function VmLayervue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function VmLayervue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { VmLayervue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { VmLayervue_type_script_lang_js_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { VmLayervue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function VmLayervue_type_script_lang_js_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 
 /**
@@ -10039,9 +8728,7 @@ function VmLayervue_type_script_lang_js_defineProperty(obj, key, value) { if (ke
 
 
 
-
-
-var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mousemove', 'mouseenter', 'mouseleave', 'click', 'dblclick', 'contextmenu', 'touchstart', 'touchend', 'touchcancel'];
+const VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 'mouseover', 'mouseout', 'mousemove', 'mouseenter', 'mouseleave', 'click', 'dblclick', 'contextmenu', 'touchstart', 'touchend', 'touchcancel'];
 /* harmony default export */ var VmLayervue_type_script_lang_js_ = ({
   name: 'VmLayer',
   inject: {
@@ -10053,7 +8740,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       default: undefined
     }
   },
-  props: VmLayervue_type_script_lang_js_objectSpread({
+  props: {
     /**
        **ID/Name of the Layer.** If blank or not unique, will auto generate one for you
       */
@@ -10069,7 +8756,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     type: {
       type: String,
       required: true,
-      validator: function validator(value) {
+      validator: function (value) {
         return ['fill', 'line', 'symbol', 'circle', 'heatmap', 'fill-extrusion', 'raster', 'hillshade', 'background', 'custom'].indexOf(value) !== -1;
       }
     },
@@ -10104,9 +8791,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     */
     images: {
       type: Object,
-      default: function _default() {
-        return {};
-      }
+      default: () => ({})
     },
     // {'name':url,'name2':url2}
 
@@ -10172,9 +8857,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       */
     layout: {
       type: Object,
-      default: function _default() {
-        return {};
-      },
+      default: () => ({}),
       mapbox: true
     },
 
@@ -10255,7 +8938,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     classesValueInterpolation: {
       type: String,
       default: 'match',
-      validator: function validator(value) {
+      validator: function (value) {
         return ['match', 'step', 'interpolate'].indexOf(value) !== -1;
       }
     },
@@ -10274,7 +8957,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     multipleFeatureSelectionOn: {
       type: [String, Boolean],
       default: false,
-      validator: function validator(value) {
+      validator: function (value) {
         return ['shift', 'control', 'alt', true, false].indexOf(value) !== -1;
       }
     },
@@ -10297,9 +8980,27 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     dataJoinKey: {
       type: String,
       default: 'id'
-    }
-  }, LayerMapboxProps),
-  data: function data() {
+    },
+
+    /**
+    * Set if this layer is ignore when calculating the top most layer to see what we are hover
+    */
+    ignoreEvents: {
+      type: Boolean,
+      default: false
+    },
+
+    /**
+    * Set if this layer is ignore when calculating the top most layer to see what we are hover
+    */
+    ignoreOthersLayer: {
+      type: Boolean,
+      default: false
+    },
+    ...LayerMapboxProps
+  },
+
+  data() {
     return {
       featureState: {},
       layerId: null,
@@ -10319,36 +9020,31 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       keysExistInData: []
     };
   },
+
   computed: {
-    myPaintNormal: function myPaintNormal() {
+    myPaintNormal: function () {
       // hack to check props change to force computed
-      var allPaintLayout = JSON.stringify(this.$props);
       return this.getPaintLayoutForState('paint', '');
     },
-    myPaintHover: function myPaintHover() {
-      var allPaintLayout = JSON.stringify(this.$props);
+    myPaintHover: function () {
       return this.getPaintLayoutForState('paint', 'hover');
     },
-    myPaintClick: function myPaintClick() {
-      var allPaintLayout = JSON.stringify(this.$props);
+    myPaintClick: function () {
       return this.getPaintLayoutForState('paint', 'click');
     },
-    myLayoutNormal: function myLayoutNormal() {
-      var allPaintLayout = JSON.stringify(this.$props);
+    myLayoutNormal: function () {
       return this.getPaintLayoutForState('layout', '');
     },
-    myLayoutHover: function myLayoutHover() {
-      var allPaintLayout = JSON.stringify(this.$props);
+    myLayoutHover: function () {
       return this.getPaintLayoutForState('layout', 'hover');
     },
-    myLayoutClick: function myLayoutClick() {
-      var allPaintLayout = JSON.stringify(this.$props);
+    myLayoutClick: function () {
       return this.getPaintLayoutForState('layout', 'click');
     },
-    myPaint: function myPaint() {
-      var paint = this.myPaintNormal;
-      var paintHover = this.myPaintHover;
-      var paintClick = this.myPaintClick;
+    myPaint: function () {
+      let paint = this.myPaintNormal;
+      const paintHover = this.myPaintHover;
+      const paintClick = this.myPaintClick;
 
       if (this.hasFeatureHover || this.hasFeatureClick) {
         paint = this.getFinalFeatureStateForPaintOrLayout(paint, paintHover, paintClick);
@@ -10356,17 +9052,17 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       return paint;
     },
-    myLayout: function myLayout() {
-      var layout = this.myLayoutNormal;
-      var layoutHover = this.myPaintHover;
-      var layoutClick = this.myPaintClick;
+    myLayout: function () {
+      let layout = this.myLayoutNormal;
+      const layoutHover = this.myPaintHover;
+      const layoutClick = this.myPaintClick;
 
       if (this.hasFeatureHover || this.hasFeatureClick) {
         layout = this.getFinalFeatureStateForPaintOrLayout(layout, layoutHover, layoutClick);
       } // check hideOnOpacitu
 
 
-      var opacity = this.opacity;
+      const opacity = this.opacity;
       if (this.hideOnOpacity === false || opacity === undefined || opacity === null) return layout;
 
       if (opacity === 0 && this.hideOnOpacity) {
@@ -10378,90 +9074,81 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       return layout;
     },
-    layerInstance: function layerInstance() {
+    layerInstance: function () {
       return this.getMap().getLayer(this.id);
     }
   },
   watch: {
-    source: function source(val, oldval) {
-      if (_typeof(val) === 'object') {
+    source: function (val, oldval) {
+      if (typeof val === 'object') {
         if (JSON.stringify(val) !== JSON.stringify(oldval)) {
           var _this$getMap, _this$getMap$getLayer;
 
-          var source = this === null || this === void 0 ? void 0 : (_this$getMap = this.getMap()) === null || _this$getMap === void 0 ? void 0 : (_this$getMap$getLayer = _this$getMap.getLayer(this.layerId)) === null || _this$getMap$getLayer === void 0 ? void 0 : _this$getMap$getLayer.source;
+          const source = this === null || this === void 0 ? void 0 : (_this$getMap = this.getMap()) === null || _this$getMap === void 0 ? void 0 : (_this$getMap$getLayer = _this$getMap.getLayer(this.layerId)) === null || _this$getMap$getLayer === void 0 ? void 0 : _this$getMap$getLayer.source;
 
           if (source) {
-            this.MapboxVueInstance.updateSource(source, val.type, VmLayervue_type_script_lang_js_objectSpread({}, val));
+            this.MapboxVueInstance.updateSource(source, val.type, { ...val
+            });
           }
         }
       }
     },
-    minzoom: function minzoom(val) {
+    minzoom: function (val) {
       if (this.layerExist()) {
         this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom);
       }
     },
-    maxzoom: function maxzoom(val) {
+    maxzoom: function (val) {
       if (this.layerExist()) {
         this.getMap().setLayerZoomRange(this.layerId, this.minzoom, this.maxzoom);
       }
     },
-    zIndex: function zIndex(val) {
-      var _this = this;
-
-      // console.log(val)
-      this.$nextTick(function () {
-        return _this.MapboxVueInstance.updateLayerOrder();
-      });
+    zIndex: function (val) {
+      // // console.log(val)
+      this.$nextTick(() => this.MapboxVueInstance.updateLayerOrder());
     },
-    filter: function filter(val) {
+    filter: function (val) {
       this.getMap().setFilter(this.layerId, val);
     },
-    myPaint: function myPaint(newPaint, oldPaint) {
-      var _this2 = this;
-
-      Object.entries(newPaint).forEach(function (item) {
-        var key = item[0];
-        var value = item[1];
+    myPaint: function (newPaint, oldPaint) {
+      Object.entries(newPaint).forEach(item => {
+        const key = item[0];
+        const value = item[1];
 
         if (JSON.stringify(value) !== JSON.stringify(oldPaint[key])) {
-          if (_this2.layerExist()) {
-            _this2.getMap().setPaintProperty(_this2.layerId, key, value);
+          if (this.layerExist()) {
+            this.getMap().setPaintProperty(this.layerId, key, value);
           }
         }
       });
     },
-    myLayout: function myLayout(newLayout, oldLayout) {
-      var _this3 = this;
-
-      Object.entries(newLayout).forEach(function (item) {
-        var key = item[0];
-        var value = item[1];
+    myLayout: function (newLayout, oldLayout) {
+      Object.entries(newLayout).forEach(item => {
+        const key = item[0];
+        const value = item[1];
 
         if (JSON.stringify(value) !== JSON.stringify(oldLayout[key])) {
-          if (_this3.layerExist()) {
-            _this3.getMap().setLayoutProperty(_this3.layerId, key, value);
+          if (this.layerExist()) {
+            this.getMap().setLayoutProperty(this.layerId, key, value);
           }
         }
       });
     },
-    selectedFeatures: function selectedFeatures(val, oldVal) {
-      var _this4 = this;
-
-      var map = this.getMap();
-      oldVal.forEach(function (feature) {
+    selectedFeatures: function (val, oldVal) {
+      const map = this.getMap();
+      oldVal.forEach(feature => {
         map.setFeatureState({
-          source: _this4.sourceId,
-          sourceLayer: _this4.sourceLayer,
+          source: this.sourceId,
+          sourceLayer: this.sourceLayer,
           id: feature.id
         }, {
           click: false
         });
       });
-      val.forEach(function (feature) {
+      val.forEach(feature => {
         map.setFeatureState({
-          source: _this4.sourceId,
-          sourceLayer: _this4.sourceLayer,
+          source: this.sourceId,
+          sourceLayer: this.sourceLayer,
           id: feature.id
         }, {
           click: true
@@ -10474,19 +9161,16 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
        */
 
       this.$emit('featureselect', val);
-      this.$emit('featureselect', val);
       this.$emit('featureclick', val);
     },
-    hoverFeatures: function hoverFeatures(val, oldVal) {
-      var _this5 = this;
-
-      var map = this.getMap();
+    hoverFeatures: function (val, oldVal) {
+      const map = this.getMap();
 
       if (oldVal.length > 0) {
-        oldVal.forEach(function (feature) {
+        oldVal.forEach(feature => {
           map.setFeatureState({
-            source: _this5.sourceId,
-            sourceLayer: _this5.sourceLayer,
+            source: this.sourceId,
+            sourceLayer: this.sourceLayer,
             id: feature.id
           }, {
             hover: false
@@ -10494,10 +9178,10 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         });
       }
 
-      val.forEach(function (feature) {
+      val.forEach(feature => {
         map.setFeatureState({
-          source: _this5.sourceId,
-          sourceLayer: _this5.sourceLayer,
+          source: this.sourceId,
+          sourceLayer: this.sourceLayer,
           id: feature.id
         }, {
           hover: true
@@ -10512,8 +9196,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       this.$emit('featurehover', val);
     },
     // DATA JOIN WATCHERS
-    myData: function myData(val, oldval) {
-      /// /debugger;
+    myData: function (val, oldval) {
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
@@ -10527,44 +9210,60 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       this.addDataJoin();
     },
-    dataJoin: function dataJoin(val, oldval) {
-      /// /debugger
+    dataJoin: function (val, oldval) {
       // if (Array.isArray(val) && Array.isArray(oldval)) {
       //   if (JSON.stringify(val) === JSON.stringify(oldval)) {
       //     return
       //   }
       // }
       this.loadData();
-    } // dataJoinKey: function () {
+    },
+    // dataJoinKey: function () {
     //   this.addDataJoin()
     // },
     // dataJoinDataPath: function () {
     //   this.addDataJoin()
     // }
-
+    myPaintClick: function (val) {
+      if (val) {
+        this.setupLayerFeaturesEvents();
+      }
+    },
+    myPaintHover: function (val) {
+      if (val) {
+        this.setupLayerFeaturesEvents();
+      }
+    },
+    myLayoutHover: function (val) {
+      if (val) {
+        this.setupLayerFeaturesEvents();
+      }
+    },
+    myLayoutClick: function (val) {
+      if (val) {
+        this.setupLayerFeaturesEvents();
+      }
+    }
   },
-  beforeUpdated: function beforeUpdated() {// debugger;
-    // //console.log('beforeUpdated dom vueMapbox')
+  beforeUpdated: function () {// debugger;
+    // //// console.log('beforeUpdated dom vueMapbox')
   },
-  updated: function updated() {// debugger
+  updated: function () {// debugger
     // update layer
-    // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
+    // // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer')
     // this.$nextTick(() => {
-    //   console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer nextTick')
+    //   // console.log('🚀 ~ file: VmLayer.vue ~ line 509 ~ update layer nextTick')
     //   this.updateLayerOrder()
     // })
   },
-  created: function created() {
-    var _options$source,
-        _options$source$const,
-        _this6 = this;
+  created: function () {
+    var _options$source, _options$source$const;
 
-    // debugger
     this.popupOpen = false;
-    var options = getOnlyMapboxProps(this);
+    const options = getOnlyMapboxProps(this);
 
     if (!options.source) {
-      var source = this.getSource && this.getSource();
+      const source = this.getSource && this.getSource();
 
       if (source && source.id) {
         options.source = source.id;
@@ -10577,14 +9276,16 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     if ((options === null || options === void 0 ? void 0 : (_options$source = options.source) === null || _options$source === void 0 ? void 0 : (_options$source$const = _options$source.constructor) === null || _options$source$const === void 0 ? void 0 : _options$source$const.name) === 'Object') {
       var _options$source2, _options$source3;
 
-      var sourceid = ((_options$source2 = options.source) === null || _options$source2 === void 0 ? void 0 : _options$source2.id) || ((_options$source3 = options.source) === null || _options$source3 === void 0 ? void 0 : _options$source3.name);
+      const sourceid = ((_options$source2 = options.source) === null || _options$source2 === void 0 ? void 0 : _options$source2.id) || ((_options$source3 = options.source) === null || _options$source3 === void 0 ? void 0 : _options$source3.name);
 
       if (sourceid) {
         if (this.MapboxVueInstance.getSource(sourceid) === false) {
-          this.MapboxVueInstance.addSource(sourceid, options.source.type, VmLayervue_type_script_lang_js_objectSpread({}, options.source));
+          this.MapboxVueInstance.addSource(sourceid, options.source.type, { ...options.source
+          });
         } else {
           // update source
-          this.MapboxVueInstance.updateSource(sourceid, options.source.type, VmLayervue_type_script_lang_js_objectSpread({}, options.source));
+          this.MapboxVueInstance.updateSource(sourceid, options.source.type, { ...options.source
+          });
         }
 
         options.source = sourceid;
@@ -10602,12 +9303,11 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
           this.addLayer();
         } else {
           // add layer when a source with name is added in future
-          var func = function func(e) {
-            // console.log(e)
-            if (e.dataType === 'source' && e.sourceId === _this6.options.source) {
-              _this6.addLayer();
-
-              _this6.getMap().off('sourcedata', func);
+          const func = e => {
+            // // console.log(e)
+            if (e.dataType === 'source' && e.sourceId === this.options.source) {
+              this.addLayer();
+              this.getMap().off('sourcedata', func);
             }
           };
 
@@ -10624,207 +9324,135 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       this.MapboxVueInstance.addPropsImages(this.images);
     }
   },
-  mounted: function () {
-    var _mounted = VmLayervue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-      return regenerator_default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.$nextTick();
+  mounted: async function () {
+    await this.$nextTick();
+    this.setupLayerFeaturesEvents();
+  },
 
-            case 2:
-              this.setupLayerFeaturesEvents();
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function mounted() {
-      return _mounted.apply(this, arguments);
-    }
-
-    return mounted;
-  }(),
-  destroyed: function destroyed() {
+  destroyed() {
     if (this.layerId) {
-      // console.log('destroying ' + this.layerId)
+      // // console.log('destroying ' + this.layerId)
       this.MapboxVueInstance.removeLayer(this.layerId); // check if the source of layer is a Object/ownSource,and remove it too
 
-      if (_typeof(this.source) === 'object') {// TODO - not removing sourve because others can be using it, but make this logic better
+      if (typeof this.source === 'object') {// TODO - not removing sourve because others can be using it, but make this logic better
         // this.getMap().removeSource(this.sourceId)
       }
     }
   },
+
   methods: {
-    layerExist: function layerExist() {
-      var layer = this.getMap().getLayer(this.layerId);
+    layerExist: function () {
+      const layer = this.getMap().getLayer(this.layerId);
       if (!layer) return false;
       return true;
     },
-    addLayer: function addLayer() {
+    addLayer: function () {
       try {
         if (this.customLayer) {
-          var mylayer = this.MapboxVueInstance.addLayer(this.customLayer);
+          const mylayer = this.MapboxVueInstance.addLayer(this.customLayer);
           this.layerId = mylayer;
         } else {
-          var id = this.MapboxVueInstance.getNewIdForLayer(this.name); // set the layerId before create layer, because can be time consumming the addLayer
+          const id = this.MapboxVueInstance.getNewIdForLayer(this.name); // set the layerId before create layer, because can be time consumming the addLayer
           // and if we set after the findLayer will get null the $data.layerId
 
           this.layerId = id;
-
-          var _mylayer = this.MapboxVueInstance.addLayer(VmLayervue_type_script_lang_js_objectSpread(VmLayervue_type_script_lang_js_objectSpread({}, this.options), {}, {
+          const mylayer = this.MapboxVueInstance.addLayer({ ...this.options,
             id: id,
             type: this.type,
             paint: this.myPaint,
             layout: this.myLayout
-          }));
+          }); // get source add after add layer, because of case where the source especification is set in props as option, withou an id
 
-          console.log("layerName:".concat(this.name, ", id:").concat(id, ", mylayer:").concat(_mylayer, ", this.layerId:").concat(this.layerId, " ")); // get source add after add layer, because of case where the source especification is set in props as option, withou an id
-
-          this.sourceId = this.getMap().getLayer(_mylayer).source; // bind listners set in component to mapbox events
+          this.sourceId = this.getMap().getLayer(mylayer).source; // bind listners set in component to mapbox events
 
           this.MapboxVueInstance.setupEvents(this.$listeners, this.getMap(), VmLayervue_type_script_lang_js_nativeEventsTypes, this.layerId, this.created_at, this.zIndex);
           this.loadData();
         }
       } catch (e) {
-        // console.error('========================== Error adding Layer ' + this.name)
-        console.error('Error adding Layer:' + this.name); // console.log(this.myPaint)
-
-        console.error(e); // this.$destroy()
+        console.error('Error adding Layer:' + this.name);
+        console.error(e);
       }
     },
-    removeDataJoin: function removeDataJoin(vals) {
-      var _this7 = this;
-
+    removeDataJoin: function (vals) {
       if (Array.isArray(vals)) {
-        var map = this.getMap();
-        vals.forEach(function (feature) {
+        const map = this.getMap();
+        vals.forEach(feature => {
           var _feature$constructor;
 
           // check object and if we have an id
           if ((feature === null || feature === void 0 ? void 0 : (_feature$constructor = feature.constructor) === null || _feature$constructor === void 0 ? void 0 : _feature$constructor.name) !== 'Object') return;
-          var id = feature === null || feature === void 0 ? void 0 : feature[_this7.dataJoinKey];
-          if (id === undefined) return;
+          const id = feature === null || feature === void 0 ? void 0 : feature[this.dataJoinKey];
+          if (id === undefined) return; // TODO - important - include feature_state in same source for varius layer
+
           map.removeFeatureState({
-            source: _this7.sourceId,
-            sourceLayer: _this7.sourceLayer,
-            id: id
+            source: this.sourceId,
+            sourceLayer: this.sourceLayer,
+            id
           });
         });
       }
     },
-    addDataJoin: function addDataJoin() {
-      var _this8 = this;
-
+    addDataJoin: function () {
       if (Array.isArray(this.myData)) {
-        var map = this.getMap();
-        this.myData.forEach(function (feature) {
+        const map = this.getMap();
+        this.myData.forEach(feature => {
           var _feature$constructor2;
 
           // check object and if we have an id
           if ((feature === null || feature === void 0 ? void 0 : (_feature$constructor2 = feature.constructor) === null || _feature$constructor2 === void 0 ? void 0 : _feature$constructor2.name) !== 'Object') return;
-          var id = feature === null || feature === void 0 ? void 0 : feature[_this8.dataJoinKey];
+          const id = feature === null || feature === void 0 ? void 0 : feature[this.dataJoinKey];
           if (id === undefined) return;
           map.setFeatureState({
-            source: _this8.sourceId,
-            sourceLayer: _this8.sourceLayer,
-            id: id
-          }, VmLayervue_type_script_lang_js_objectSpread({}, feature));
+            source: this.sourceId,
+            sourceLayer: this.sourceLayer,
+            id
+          }, { ...feature
+          });
         });
       }
     },
-    loadData: function () {
-      var _loadData = VmLayervue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee2() {
-        var _this$dataJoin, _this$dataJoin$constr;
+    loadData: async function () {
+      var _this$dataJoin, _this$dataJoin$constr;
 
-        var res, url, _res, path, data;
+      let res = false;
 
-        return regenerator_default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                res = false;
+      if (Array.isArray(this.dataJoin)) {
+        res = [...this.dataJoin];
+      } else if (((_this$dataJoin = this.dataJoin) === null || _this$dataJoin === void 0 ? void 0 : (_this$dataJoin$constr = _this$dataJoin.constructor) === null || _this$dataJoin$constr === void 0 ? void 0 : _this$dataJoin$constr.name) === 'String') {
+        try {
+          const url = new URL(this.dataJoin);
+          const res = await axios_default.a.get(url);
+          const path = this.dataJoinDataPath ? 'data' + this.dataJoinDataPath : 'data';
+          const data = get_default()(res, path);
 
-                if (!Array.isArray(this.dataJoin)) {
-                  _context2.next = 5;
-                  break;
-                }
-
-                res = _toConsumableArray(this.dataJoin);
-                _context2.next = 21;
-                break;
-
-              case 5:
-                if (!(((_this$dataJoin = this.dataJoin) === null || _this$dataJoin === void 0 ? void 0 : (_this$dataJoin$constr = _this$dataJoin.constructor) === null || _this$dataJoin$constr === void 0 ? void 0 : _this$dataJoin$constr.name) === 'String')) {
-                  _context2.next = 21;
-                  break;
-                }
-
-                _context2.prev = 6;
-                url = new URL(this.dataJoin);
-                _context2.next = 10;
-                return axios_default.a.get(url);
-
-              case 10:
-                _res = _context2.sent;
-                path = this.dataJoinDataPath ? 'data' + this.dataJoinDataPath : 'data';
-                data = get_default()(_res, path);
-
-                if (!Array.isArray(data)) {
-                  _context2.next = 17;
-                  break;
-                }
-
-                return _context2.abrupt("return", _toConsumableArray(data));
-
-              case 17:
-                _context2.next = 21;
-                break;
-
-              case 19:
-                _context2.prev = 19;
-                _context2.t0 = _context2["catch"](6);
-
-              case 21:
-                this.myData = res;
-                return _context2.abrupt("return", res);
-
-              case 23:
-              case "end":
-                return _context2.stop();
-            }
+          if (Array.isArray(data)) {
+            return [...data];
+          } else {// console.error('dataJoin url dont return an Array in path:' + path)
           }
-        }, _callee2, this, [[6, 19]]);
-      }));
-
-      function loadData() {
-        return _loadData.apply(this, arguments);
+        } catch (e) {// console.error(e)
+        }
       }
 
-      return loadData;
-    }(),
+      this.myData = res;
+      return res;
+    },
     //* * EVENTS SETUP */
-    setupLayerFeaturesEvents: function setupLayerFeaturesEvents() {
-      if (this.$listeners.featurehover || this.paintHover || this.layoutHover || has_default()(this.$scopedSlots, 'popupHover') || has_default()(this.$slots, 'popupHover')) {
+    setupLayerFeaturesEvents: function () {
+      if (this.$listeners.featurehover || this.myPaintHover || this.myLayoutHover || has_default()(this.$scopedSlots, 'popupHover') || has_default()(this.$slots, 'popupHover')) {
         this.hasFeatureHover = true;
       } else {
         this.hasFeatureHover = false;
       }
 
-      if (this.$listeners.featurehover || this.$listeners.featureclick || this.paintClick || this.layoutClick || has_default()(this.$scopedSlots, 'popupClick') || has_default()(this.$slots, 'popupClick')) {
+      if (this.$listeners.featureclick || this.$listeners.featureselect || this.myPaintClick || this.myLayoutClick || has_default()(this.$scopedSlots, 'popupClick') || has_default()(this.$slots, 'popupClick')) {
         this.hasFeatureClick = true;
       } else {
         this.hasFeatureClick = false;
       }
 
-      var map = this.getMap();
+      const map = this.getMap();
 
-      if (this.hasFeatureHover || this.hasFeatureClick) {
+      if (this.hasFeatureHover) {
         map.off('mousemove', this.layerId, this.featureMouseMoveEvent);
         map.off('mouseleave', this.layerId, this.featureMouseLeaveEvent);
         map.on('mousemove', this.layerId, this.featureMouseMoveEvent);
@@ -10837,20 +9465,43 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
         map.off('click', this.layerMouseClickOutEvent);
         map.on('click', this.layerMouseClickOutEvent);
+      }
+
+      if (this.$listeners.loading) {
+        map.off('render', this.layerId, this.layerLoading);
+        map.on('render', this.layerId, this.layerLoading);
       } // CUSTON EVENTS
       // featureHover
       // featureClick
       // featureLeave
 
     },
-    featureMouseMoveEvent: function featureMouseMoveEvent(e) {
+    layerLoading: function (e) {
+      if (this.loading === undefined) {
+        this.loading = true; // console.log('🚀 ~ file: VmLayer.vue ~ line 727 ~ map.on ~ this.loading', this.loading)
+
+        this.$emit('loading', true);
+        console.log('emit init', true);
+      }
+
+      if (e === null || e === void 0 ? void 0 : e.target) {
+        const loading = !e.target.loaded(); // console.log('🚀 ~ file: VmLayer.vue ~ line 732 ~ map.on ~ loading', loading)
+
+        if (this.loading !== loading) {
+          this.$emit('loading', loading);
+          console.log('emit loading change', loading);
+          this.loading = loading;
+        }
+      }
+    },
+    featureMouseMoveEvent: function (e) {
       // if click popup is open, i stop hover events
       if (this.popupOpen) return false; // check if im the top most layer
       // TODO - create event in mapbox instance to detect .capture.stop propagations etc, and implement this logic in the events
 
-      var features = this.getMap().queryRenderedFeatures(e.point);
+      const features = this.getMap().queryRenderedFeatures(e.point); // // console.log("🚀 ~ file: VmLayer.vue ~ line 732 ~ features", features)
 
-      if (get_default()(features, '[0].layer.id') !== this.layerId) {
+      if (this.ignoreOthersLayer === false && get_default()(features, '[0].layer.id') !== this.layerId) {
         this.featureMouseLeaveEvent(e);
         return false;
       }
@@ -10858,12 +9509,10 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       this.lastHover = e;
 
       if (e.features.length > 0) {
+        var _this$hoverFeatures;
+
         // if hovering the same feature, just return
-        if (this.hoverFeatures.map(function (f) {
-          return f.id;
-        }).join('') === e.features.map(function (f) {
-          return f.id;
-        }).join('')) {
+        if ((this === null || this === void 0 ? void 0 : (_this$hoverFeatures = this.hoverFeatures) === null || _this$hoverFeatures === void 0 ? void 0 : _this$hoverFeatures.length) > 0 && this.hoverFeatures.map(f => f.id).join('') === e.features.map(f => f.id).join('')) {
           return false;
         }
 
@@ -10877,7 +9526,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         }
       }
     },
-    featureMouseLeaveEvent: function featureMouseLeaveEvent(e) {
+    featureMouseLeaveEvent: function (e) {
       if (this.hasFeatureClick) {
         // if have click events, change cursor
         this.getMap().getCanvas().style.removeProperty('cursor');
@@ -10886,10 +9535,8 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       if (this.popupOpen) return false;
       this.hoverFeatures = [];
     },
-    featureMouseClickEvent: function featureMouseClickEvent(e) {
-      var _this9 = this;
-
-      var features = this.getMap().queryRenderedFeatures(e.point); // if clicked in another top most layer, is like clicking outside this
+    featureMouseClickEvent: function (e) {
+      const features = this.getMap().queryRenderedFeatures(e.point); // if clicked in another top most layer, is like clicking outside this
 
       if (get_default()(features, '[0].layer.id') !== this.layerId) {
         this.selectedFeatures = [];
@@ -10897,14 +9544,12 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       }
 
       this.lastClick = e;
-
-      var featuresSelected = _toConsumableArray(this.selectedFeatures);
-
-      var featuresToAdd = []; // [...this.selectedFeatures]
+      var featuresSelected = [...this.selectedFeatures];
+      let featuresToAdd = []; // [...this.selectedFeatures]
 
       if (e.features.length > 0) {
-        e.features.forEach(function (feature) {
-          var selectedFeatureIndex = findIndex_default()(_this9.selectedFeatures, {
+        e.features.forEach(feature => {
+          const selectedFeatureIndex = findIndex_default()(this.selectedFeatures, {
             id: feature.id
           });
 
@@ -10918,7 +9563,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       } // check if multiple selection
 
 
-      var multiple = false;
+      let multiple = false;
 
       if (this.multipleFeatureSelectionOn === true) {
         multiple = true;
@@ -10939,10 +9584,10 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       this.selectedFeatures = featuresToAdd;
     },
-    layerMouseClickOutEvent: function layerMouseClickOutEvent(e) {
-      var map = this.getMap();
+    layerMouseClickOutEvent: function (e) {
+      const map = this.getMap();
       if (this.layerId === null) return;
-      var features = map.queryRenderedFeatures(e.point, {
+      const features = map.queryRenderedFeatures(e.point, {
         layers: [this.layerId]
       });
 
@@ -10951,31 +9596,31 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       }
     },
     //* * PAINT AND LAYOUT SETUPS */
-    getFinalFeatureStateForPaintOrLayout: function getFinalFeatureStateForPaintOrLayout(normal, hover, click) {
-      var _this10 = this;
-
-      var result = VmLayervue_type_script_lang_js_objectSpread({}, normal);
+    getFinalFeatureStateForPaintOrLayout: function (normal, hover, click) {
+      const result = { ...normal
+      };
 
       if (this.hasFeatureHover || this.hasFeatureClick || this.hasChildPopup) {
-        Object.entries(result).forEach(function (item) {
+        Object.entries(result).forEach(item => {
           var _value$, _value$2;
 
-          var key = item[0];
-          var value = item[1];
-          var pp = value; // Check if we use zoom level, because it can be used only as tope level
+          const key = item[0];
+          const value = item[1];
+          let pp = value; // Check if we use zoom level, because it can be used only as tope level
           // treat interpolate and step diferent because the usually use zoom as input, and zoom input only work in toplevel
 
           if ((value === null || value === void 0 ? void 0 : value[0]) === 'interpolate' && (value === null || value === void 0 ? void 0 : (_value$ = value[2]) === null || _value$ === void 0 ? void 0 : _value$[0]) === 'zoom' || (value === null || value === void 0 ? void 0 : value[0]) === 'step' && (value === null || value === void 0 ? void 0 : (_value$2 = value[1]) === null || _value$2 === void 0 ? void 0 : _value$2[0]) === 'zoom') {
-            var _this10$opacity;
+            var _this$opacity;
 
-            var exprType = value === null || value === void 0 ? void 0 : value[0];
-            var exprStart = exprType === 'interpolate' ? value.splice(0, 4) : value.splice(0, 2);
-            var opacity = (_this10$opacity = _this10.opacity) !== null && _this10$opacity !== void 0 ? _this10$opacity : 1;
+            const exprType = value === null || value === void 0 ? void 0 : value[0];
+            const exprStart = exprType === 'interpolate' ? value.splice(0, 4) : value.splice(0, 2);
+            const opacity = (_this$opacity = this.opacity) !== null && _this$opacity !== void 0 ? _this$opacity : 1;
 
-            for (var i = 0; i < value.length; i += 2) {
+            for (let i = 0; i < value.length; i += 2) {
               value[i] *= opacity;
 
               if (hover && hover[key]) {
+                // console.log('🚀 ~ file: VmLayer.vue ~ line 853 ~ map.on ~ this.$emit', this.$emit)
                 value[i] = ['case', ['boolean', ['feature-state', 'hover'], false], hover[key] * opacity, value[i]];
               }
 
@@ -11007,66 +9652,58 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     /* @params kind | layout or paint
     /* @params state | '', click or hover
     */
-    getPaintLayoutForState: function getPaintLayoutForState() {
-      var _this11 = this;
+    getPaintLayoutForState: function (kind = 'paint', state = '') {
+      const allPaintLayout = this.getAllPaintLayoutForKind(kind);
+      const removeStateRegex = new RegExp('-' + state + '$', 'g'); // GET WHAT IS DEFINED VIA NORMAL PROP (paint, layout, paintHove...)
 
-      var kind = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'paint';
-      var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      var allPaintLayout = this.getAllPaintLayoutForKind(kind);
-      var removeStateRegex = new RegExp('-' + state + '$', 'g'); // GET WHAT IS DEFINED VIA NORMAL PROP (paint, layout, paintHove...)
-
-      var paintLayoutObject = get_default()(this.$props, kind + startCase_default()(state), {});
-      var paintLayoutFinal = {};
-      Object.keys(paintLayoutObject).forEach(function (k) {
-        var kConvert = _this11.innerPaintPropConvert(k);
-
-        paintLayoutFinal[kConvert] = _this11.innerExpressionConverter(paintLayoutObject[k]);
+      const paintLayoutObject = get_default()(this.$props, kind + startCase_default()(state), {});
+      let paintLayoutFinal = {};
+      Object.keys(paintLayoutObject).forEach(k => {
+        const kConvert = this.innerPaintPropConvert(k);
+        paintLayoutFinal[kConvert] = this.innerExpressionConverter(paintLayoutObject[k]);
       }); // GET WHAT IS DEFINE LOOSELY IN PROPS (fill-color, fill-color-click .....)
 
-      Object.entries(this.$options.propsData).forEach(function (item) {
-        var key = _this11.innerPaintPropConvert(kebabCase_default()(item[0]));
-
-        var value = item[1];
+      Object.entries(this.$options.propsData).forEach(item => {
+        const key = this.innerPaintPropConvert(kebabCase_default()(item[0]));
+        const value = item[1];
         var keyNormalName = key.replace(removeStateRegex, '');
 
         if (state !== '' && key.indexOf('-' + state) > -1 && allPaintLayout.includes(keyNormalName)) {
-          paintLayoutFinal[keyNormalName] = _this11.innerExpressionConverter(value);
+          paintLayoutFinal[keyNormalName] = this.innerExpressionConverter(value);
         } else if (state === '' && allPaintLayout.includes(keyNormalName)) {
-          paintLayoutFinal[keyNormalName] = _this11.innerExpressionConverter(value);
+          paintLayoutFinal[keyNormalName] = this.innerExpressionConverter(value);
         }
       }); // GET WHAT IS DEFINE VIA CLASSES ([fill-color: red, property:vl_name, value:'df',...])
       // for each paint/layout props,
       // check if we find it in the classe and mount a expression for it
 
-      allPaintLayout.forEach(function (plKey) {
-        var plKeyState = state !== '' ? plKey + '-' + state : plKey;
-        var classesElementsWithPL = filter_default()(_this11.classes, function (elm) {
-          return has_default()(elm, plKeyState);
-        });
+      allPaintLayout.forEach(plKey => {
+        const plKeyState = state !== '' ? plKey + '-' + state : plKey;
+        const classesElementsWithPL = filter_default()(this.classes, elm => has_default()(elm, plKeyState));
 
         if (classesElementsWithPL.length > 0) {
           var _classesElementsWithP;
 
-          var expression = [];
-          var featureProperty = (_classesElementsWithP = classesElementsWithPL[0]) === null || _classesElementsWithP === void 0 ? void 0 : _classesElementsWithP.property; // TODO maybe put state here too
+          let expression = [];
+          const featureProperty = (_classesElementsWithP = classesElementsWithPL[0]) === null || _classesElementsWithP === void 0 ? void 0 : _classesElementsWithP.property; // TODO maybe put state here too
           // MATCH VALUES
 
-          if (_this11.classesValueInterpolation === 'match') {
-            var featureId = featureProperty === '_id';
+          if (this.classesValueInterpolation === 'match') {
+            const featureId = featureProperty === '_id';
             expression = featureId ? ['match', ['id']] : ['match', ['get', featureProperty]];
-            classesElementsWithPL.forEach(function (classeElm, i) {
-              expression.push(_this11.innerExpressionConverter(classeElm.value));
+            classesElementsWithPL.forEach((classeElm, i) => {
+              expression.push(this.innerExpressionConverter(classeElm.value));
               expression.push(get_default()(classeElm, plKeyState));
             });
             expression.push(paintLayoutFinal[plKey] || expression[expression.length - 1]); // STEP VALUES
-          } else if (_this11.classesValueInterpolation === 'step') {
+          } else if (this.classesValueInterpolation === 'step') {
             expression = ['step', ['to-number', ['get', featureProperty]]];
-            classesElementsWithPL.forEach(function (classeElm, i) {
+            classesElementsWithPL.forEach((classeElm, i) => {
               // TODO - i think need to test default value when is steped
               expression.push(get_default()(classeElm, plKeyState));
-              if (classeElm.value) expression.push(_this11.innerExpressionConverter(classeElm.value));
+              if (classeElm.value) expression.push(this.innerExpressionConverter(classeElm.value));
             }); // INTERPOLATE VALUES
-          } else if (_this11.classesValueInterpolation === 'interpolate') {
+          } else if (this.classesValueInterpolation === 'interpolate') {
             if (featureProperty.match(/color/g)) {
               // check if is color
               expression = ['interpolate-hcl', ['linear'], ['to-number', ['get', featureProperty]]];
@@ -11074,24 +9711,24 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
               expression = ['interpolate', ['linear'], ['to-number', ['get', featureProperty]]];
             }
 
-            classesElementsWithPL.forEach(function (classeElm, i) {
-              expression.push(_this11.innerExpressionConverter(classeElm.value));
+            classesElementsWithPL.forEach((classeElm, i) => {
+              expression.push(this.innerExpressionConverter(classeElm.value));
               expression.push(get_default()(classeElm, plKeyState));
             });
           }
 
-          paintLayoutFinal[_this11.innerPaintPropConvert(plKey)] = expression;
+          paintLayoutFinal[this.innerPaintPropConvert(plKey)] = expression;
         }
       }); // Zoom expression not work in hover or click states
       // it is a limitation of mapbox zoom only work as top level exp,
       // and if we set ir in phover or click, it will be uset in secundary moments
 
       if (state !== '') {
-        Object.entries(paintLayoutFinal).forEach(function (item) {
-          var key = item[0];
-          var value = item[1];
+        Object.entries(paintLayoutFinal).forEach(item => {
+          const key = item[0];
+          const value = item[1];
 
-          if (_this11.checkForZoomExp(value)) {
+          if (this.checkForZoomExp(value)) {
             // console.error('ZOOM expression can not be user in hover or click state due mapbox limitations. Default will be the last value')
             paintLayoutFinal[key] = value[value.length - 1]; // (value?.[0] === 'interpolate') ? value[value.length-1] : value?.[2] // default value if interpolate, or step
           }
@@ -11103,17 +9740,16 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
         paintLayoutFinal = this.processPaintOpacity(paintLayoutFinal);
       }
 
-      return VmLayervue_type_script_lang_js_objectSpread({}, paintLayoutFinal);
+      return { ...paintLayoutFinal
+      };
     },
 
     /** Treat opacity scale
     * opacity is a especial case, wher we scale all opacity set witth this value
     * opacity not set will be set to so we can fase a layout
     */
-    processPaintOpacity: function processPaintOpacity(paint) {
-      var _this12 = this;
-
-      var opacity = this.opacity;
+    processPaintOpacity: function (paint) {
+      const opacity = this.opacity;
 
       if (opacity === undefined || opacity === null) {
         return paint;
@@ -11121,11 +9757,9 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       // properties for this type of layer
 
 
-      var allPaintProperties = this.getAllPaintLayoutForKind('paint');
-      var opacityProps = allPaintProperties.filter(function (key) {
-        return key.indexOf('opacity') !== -1;
-      });
-      opacityProps.forEach(function (key) {
+      const allPaintProperties = this.getAllPaintLayoutForKind('paint');
+      const opacityProps = allPaintProperties.filter(key => key.indexOf('opacity') !== -1);
+      opacityProps.forEach(key => {
         var _value$constructor;
 
         if (!paint[key]) {
@@ -11133,23 +9767,23 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
           return;
         }
 
-        var value = paint[key];
+        const value = paint[key];
 
         if ((value === null || value === void 0 ? void 0 : (_value$constructor = value.constructor) === null || _value$constructor === void 0 ? void 0 : _value$constructor.name) === 'Number') {
           paint[key] = value * opacity;
         } else if (Array.isArray(value)) {
           // an expression
           //
-          if (_this12.checkForZoomExp(value)) {
-            var exprStart = value[0] === 'interpolate' ? value.splice(0, 4) : value.splice(0, 2);
+          if (this.checkForZoomExp(value)) {
+            const exprStart = value[0] === 'interpolate' ? value.splice(0, 4) : value.splice(0, 2);
 
-            for (var i = 0; i < value.length; i += 2) {
+            for (let i = 0; i < value.length; i += 2) {
               value[i] *= opacity;
             }
 
             paint[key] = exprStart.concat(value);
           } else {
-            paint[key] = ['*', _toConsumableArray(value), opacity];
+            paint[key] = ['*', [...value], opacity];
           }
         }
       });
@@ -11160,16 +9794,14 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     * Return all layout or paint that exist for this layer type
     /* @params kind | layout or paint
     */
-    getAllPaintLayoutForKind: function getAllPaintLayoutForKind(kind) {
-      var _this13 = this;
+    getAllPaintLayoutForKind: function (kind) {
+      const propertiesForKind = ['color']; // user shorhand for color for all layer types
 
-      var propertiesForKind = ['color']; // user shorhand for color for all layer types
+      Object.entries(this.$options.props).forEach(prop => {
+        const key = kebabCase_default()(prop[0]);
+        const value = prop[1];
 
-      Object.entries(this.$options.props).forEach(function (prop) {
-        var key = kebabCase_default()(prop[0]);
-        var value = prop[1];
-
-        if (get_default()(value, kind) && get_default()(value, 'layerType') === _this13.type) {
+        if (get_default()(value, kind) && get_default()(value, 'layerType') === this.type) {
           if (key.indexOf('-hover') === -1 && key.indexOf('-click') === -1) {
             propertiesForKind.push(key); // propertiesForKind.push(key + '-transition') //disable transition for now
           }
@@ -11182,13 +9814,12 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     * convert raw properties values with custom express,
     like using ['z',4,6,2,5] -> ['interpolate', ['linear'], ['zoom'], 4,6,2,5]
     */
-    innerExpressionConverter: function innerExpressionConverter(value) {
+    innerExpressionConverter: function (value) {
       if (Array.isArray(value)) {
         if ((value === null || value === void 0 ? void 0 : value[0]) === 'z') {
-          var valueFinal = _toConsumableArray(value);
-
+          let valueFinal = [...value];
           valueFinal.shift();
-          valueFinal = ['interpolate', ['linear'], ['zoom']].concat(_toConsumableArray(valueFinal));
+          valueFinal = ['interpolate', ['linear'], ['zoom'], ...valueFinal];
           return valueFinal;
         }
       }
@@ -11206,14 +9837,14 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     * convert generic key layouts props to the layer type,
     like using color:#fffff -> fill-color: #fffff  if type fill
     */
-    innerPaintPropConvert: function innerPaintPropConvert(prop) {
+    innerPaintPropConvert: function (prop) {
       if (['color', 'color-hover', 'color-click'].includes(prop)) {
         return this.type + '-' + prop;
       }
 
       return prop;
     },
-    checkForZoomExp: function checkForZoomExp(exp) {
+    checkForZoomExp: function (exp) {
       var _exp$, _exp$2;
 
       if ((exp === null || exp === void 0 ? void 0 : (_exp$ = exp[2]) === null || _exp$ === void 0 ? void 0 : _exp$[0]) === 'zoom' || (exp === null || exp === void 0 ? void 0 : (_exp$2 = exp[1]) === null || _exp$2 === void 0 ? void 0 : _exp$2[0]) === 'zoom') {
@@ -11222,7 +9853,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
 
       return false;
     },
-    docEvents: function docEvents() {
+    docEvents: function () {
       this.$emit('mousedown');
       this.$emit('mouseup');
       this.$emit('mouseover');
@@ -11238,21 +9869,20 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       this.$emit('touchcancel');
     }
   },
-  render: function render(h) {
-    var _this14 = this;
 
-    var emptyElm = null; // h('div')
+  render(h) {
+    const emptyElm = null; // h('div')
 
     if (this.hoverFeatures.length === 0 && this.selectedFeatures.length === 0 || !has_default()(this.$scopedSlots, 'popupHover') && !has_default()(this.$scopedSlots, 'popupClick') && !has_default()(this.$slots, 'popupHover') && !has_default()(this.$slots, 'popupClick')) {
       return emptyElm;
     } // create the popupElement
 
 
-    var popupOver;
-    var popupClick;
-    var popup;
-    var props = {};
-    var popupKey; // check for popupHover Slot
+    let popupOver;
+    let popupClick;
+    let popup;
+    let props = {};
+    let popupKey; // check for popupHover Slot
 
     if (has_default()(this.$scopedSlots, 'popupHover')) {
       popupOver = this.$scopedSlots.popupHover({
@@ -11299,9 +9929,9 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
       return emptyElm;
     }
 
-    var popupInstance; // check if popup is the content type of popup, if not create one
+    let popupInstance; // check if popup is the content type of popup, if not create one
 
-    var popupFind = findVNodeChildren(popup, 'VmPopup');
+    const popupFind = findVNodeChildren(popup, 'VmPopup');
 
     if (popupFind) {
       popupInstance = popupFind[0];
@@ -11310,16 +9940,18 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     } // setup popupinstance data
 
 
-    popupInstance.componentOptions.propsData = VmLayervue_type_script_lang_js_objectSpread(VmLayervue_type_script_lang_js_objectSpread({}, popupInstance.componentOptions.propsData), props);
+    popupInstance.componentOptions.propsData = { ...popupInstance.componentOptions.propsData,
+      ...props
+    };
 
     if (popupKey === 'layerPopupClick') {
       this.popupOpen = true; // when click in close of popup, deselect any selected layers
 
-      var closeFunc = get_default()(popupInstance, 'componentOptions.listeners.close');
-      set_default()(popupInstance.componentOptions, 'listeners.close', function (e) {
-        _this14.popupOpen = false;
-        _this14.selectedFeatures = [];
-        _this14.hoverFeatures = [];
+      const closeFunc = get_default()(popupInstance, 'componentOptions.listeners.close');
+      set_default()(popupInstance.componentOptions, 'listeners.close', e => {
+        this.popupOpen = false;
+        this.selectedFeatures = [];
+        this.hoverFeatures = [];
 
         if (closeFunc) {
           closeFunc(e);
@@ -11330,6 +9962,7 @@ var VmLayervue_type_script_lang_js_nativeEventsTypes = ['mousedown', 'mouseup', 
     popupInstance.key = popupKey + this.layerId;
     return h('div', [popupInstance]);
   }
+
 });
 // CONCATENATED MODULE: ./src/components/VmLayer.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_VmLayervue_type_script_lang_js_ = (VmLayervue_type_script_lang_js_); 
@@ -11353,20 +9986,14 @@ var VmLayer_component = normalizeComponent(
 )
 
 /* harmony default export */ var VmLayer = (VmLayer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2c01c290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayerArc.vue?vue&type=template&id=75d8096a&
-var VmLayerArcvue_type_template_id_75d8096a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.layerCreated)?_c('vm-layer',{attrs:{"name":'arc'+this.name,"customLayer":_vm.layer,"zIndex":_vm.zIndex,"type":"custom"}}):_vm._e()],1)}
-var VmLayerArcvue_type_template_id_75d8096a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayerArc.vue?vue&type=template&id=5503dc68&
+var VmLayerArcvue_type_template_id_5503dc68_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.layerCreated)?_c('vm-layer',{attrs:{"name":'arc'+this.name,"customLayer":_vm.layer,"zIndex":_vm.zIndex,"type":"custom"}}):_vm._e()],1)}
+var VmLayerArcvue_type_template_id_5503dc68_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VmLayerArc.vue?vue&type=template&id=75d8096a&
+// CONCATENATED MODULE: ./src/components/VmLayerArc.vue?vue&type=template&id=5503dc68&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VmLayerArc.vue?vue&type=script&lang=js&
-
-
-function VmLayerArcvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function VmLayerArcvue_type_script_lang_js_asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { VmLayerArcvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { VmLayerArcvue_type_script_lang_js_asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -11386,7 +10013,7 @@ function VmLayerArcvue_type_script_lang_js_asyncToGenerator(fn) { return functio
 
 
 
-var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://unpkg.com/@deck.gl/layers@8.4.16/dist.min.js', 'https://unpkg.com/@deck.gl/mapbox@8.4.16/dist.min.js'];
+const SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://unpkg.com/@deck.gl/layers@8.4.16/dist.min.js', 'https://unpkg.com/@deck.gl/mapbox@8.4.16/dist.min.js'];
 /* harmony default export */ var VmLayerArcvue_type_script_lang_js_ = ({
   name: 'VmLayerArc',
   inject: {
@@ -11462,13 +10089,15 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
       default: 'to'
     }
   },
-  data: function data() {
+
+  data() {
     return {
       layerCreated: false,
       id: false
     };
   },
-  destroyed: function destroyed() {
+
+  destroyed() {
     // if (this.getMap()) {
     //   if (this.getMap().getLayer(this.name)) {
     //     //console.log('destroying Arc Layer')
@@ -11477,85 +10106,52 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
     // }
     this.layer = null;
   },
-  created: function created() {
-    var _this = this;
 
-    return VmLayerArcvue_type_script_lang_js_asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-      return regenerator_default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _this.layer = null;
+  async created() {
+    this.layer = null;
 
-              if (window.deck) {
-                _context.next = 11;
-                break;
-              }
+    if (!window.deck) {
+      try {
+        await loadScripts(SOURCES);
+      } catch (e) {
+        console.error(e);
+        throw new Error('Erro loading for arc layer ');
+      }
+    }
 
-              _context.prev = 2;
-              _context.next = 5;
-              return loadScripts(SOURCES);
+    if (!window.deck) {
+      throw new Error('Erro loading for arc layer ');
+    }
 
-            case 5:
-              _context.next = 11;
-              break;
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](2);
-              console.error(_context.t0);
-              throw new Error('Erro loading for arc layer ');
-
-            case 11:
-              if (window.deck) {
-                _context.next = 13;
-                break;
-              }
-
-              throw new Error('Erro loading for arc layer ');
-
-            case 13:
-              _this.deck = window.deck;
-
-              _this.$nextTick(function () {
-                _this.addLayer();
-              });
-
-            case 15:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[2, 7]]);
-    }))();
+    this.deck = window.deck;
+    this.$nextTick(() => {
+      this.addLayer();
+    });
   },
-  mounted: function mounted() {},
+
+  mounted: function () {},
   watch: {
-    '$props.data': function $propsData(val, oldval) {
+    '$props.data': function (val, oldval) {
       if (this.layer) this.layer.setProps({
         data: this.data
       }); // if (this.decklayer) this.decklayer.setProps({ layers: this.createLayer() })
     },
-    '$props.width': function $propsWidth(val, oldval) {
-      var _this2 = this;
-
+    '$props.width': function (val, oldval) {
       if (this.layer) this.layer.setProps({
-        getWidth: function getWidth(d) {
-          return _this2.getWidth(d);
-        }
+        getWidth: d => this.getWidth(d)
       }); // if (this.decklayer) this.decklayer.setProps({ layers: this.createLayer() })
     }
   },
   methods: {
-    addLayer: function addLayer() {
-      var _this3 = this;
-
+    addLayer: function () {
       this.id = this.MapboxVueInstance.getNewIdForLayer(this.name); // this.decklayer = new Deck({
       //   gl: this.MapboxVueInstance.getMap().painter.context.gl,
       //   layers: this.createLayer()
       // })
 
-      var MapboxLayer = window.deck.MapboxLayer;
+      const {
+        MapboxLayer
+      } = window.deck;
       this.layer = new MapboxLayer({
         id: this.id,
         type: window.deck.ArcLayer,
@@ -11563,27 +10159,17 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
         autoHighlight: true,
         pickable: true,
         // TODO
-        getWidth: function getWidth(d) {
-          return _this3.getWidth(d);
-        },
-        getSourcePosition: function getSourcePosition(d) {
-          return _this3.getSourcePositionFunc(d);
-        },
-        getTargetPosition: function getTargetPosition(d) {
-          return _this3.getTargetPositionFunc(d);
-        },
-        getSourceColor: function getSourceColor(d) {
-          return _this3.getSourceColorFunc(d);
-        },
-        getTargetColor: function getTargetColor(d) {
-          return _this3.getTargetColorFunc(d);
-        }
+        getWidth: d => this.getWidth(d),
+        getSourcePosition: d => this.getSourcePositionFunc(d),
+        getTargetPosition: d => this.getTargetPositionFunc(d),
+        getSourceColor: d => this.getSourceColorFunc(d),
+        getTargetColor: d => this.getTargetColorFunc(d)
       });
-      this.layerCreated = true; // debugger
+      this.layerCreated = true; //debugger
       // this.MapboxVueInstance.addLayer(this.layer)
       // this.getMap().addLayer(this.layer)
     },
-    getWidth: function getWidth(item) {
+    getWidth: function (item) {
       if (typeof this.witdh === 'function') {
         return this.witdh(item);
       } else if (isNaN(this.witdh)) {
@@ -11593,8 +10179,8 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
 
       return this.witdh;
     },
-    getSourcePositionFunc: function getSourcePositionFunc(item) {
-      var pos;
+    getSourcePositionFunc: function (item) {
+      let pos;
 
       if (typeof this.sourcePosition === 'function') {
         pos = this.sourcePosition(item);
@@ -11605,8 +10191,8 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
 
       return pos;
     },
-    getTargetPositionFunc: function getTargetPositionFunc(item) {
-      var pos;
+    getTargetPositionFunc: function (item) {
+      let pos;
 
       if (typeof this.targetPosition === 'function') {
         pos = this.targetPosition(item);
@@ -11617,8 +10203,8 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
 
       return pos;
     },
-    getSourceColorFunc: function getSourceColorFunc(item) {
-      var color;
+    getSourceColorFunc: function (item) {
+      let color;
 
       if (!this.sourceColor) {
         color = this.color;
@@ -11634,8 +10220,8 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
 
       return this.convertToArray(color);
     },
-    getTargetColorFunc: function getTargetColorFunc(item) {
-      var color;
+    getTargetColorFunc: function (item) {
+      let color;
 
       if (!this.targetColor) {
         color = this.color;
@@ -11661,9 +10247,7 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
       return result ? [parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)] : [0, 0, 0];
     }
   },
-  createLayer: function createLayer() {
-    var _this4 = this;
-
+  createLayer: function () {
     return [// new ArcLayer({
     new deck.ArcLayer({
       id: this.id,
@@ -11671,21 +10255,11 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
       autoHighlight: true,
       pickable: true,
       // TODO
-      getWidth: function getWidth(d) {
-        return _this4.getWidth(d);
-      },
-      getSourcePosition: function getSourcePosition(d) {
-        return _this4.getSourcePositionFunc(d);
-      },
-      getTargetPosition: function getTargetPosition(d) {
-        return _this4.getTargetPositionFunc(d);
-      },
-      getSourceColor: function getSourceColor(d) {
-        return _this4.getSourceColorFunc(d);
-      },
-      getTargetColor: function getTargetColor(d) {
-        return _this4.getTargetColorFunc(d);
-      }
+      getWidth: d => this.getWidth(d),
+      getSourcePosition: d => this.getSourcePositionFunc(d),
+      getTargetPosition: d => this.getTargetPositionFunc(d),
+      getSourceColor: d => this.getSourceColorFunc(d),
+      getTargetColor: d => this.getTargetColorFunc(d)
     })];
   }
 });
@@ -11701,8 +10275,8 @@ var SOURCES = ['https://unpkg.com/@deck.gl/core@8.4.16/dist.min.js', 'https://un
 
 var VmLayerArc_component = normalizeComponent(
   components_VmLayerArcvue_type_script_lang_js_,
-  VmLayerArcvue_type_template_id_75d8096a_render,
-  VmLayerArcvue_type_template_id_75d8096a_staticRenderFns,
+  VmLayerArcvue_type_template_id_5503dc68_render,
+  VmLayerArcvue_type_template_id_5503dc68_staticRenderFns,
   false,
   null,
   null,
@@ -11736,7 +10310,7 @@ var VmLayerArc_component = normalizeComponent(
     /**
      * When the url or content change, will change the image
      */
-    forceUpdate: {
+    updateOnChange: {
       type: Boolean,
       required: false,
       default: true
@@ -11750,26 +10324,38 @@ var VmLayerArc_component = normalizeComponent(
       required: false
     }
   },
-  created: function created() {
+  created: function () {
     var _this$$slots, _this$$slots$default;
 
     if (!((_this$$slots = this.$slots) === null || _this$$slots === void 0 ? void 0 : (_this$$slots$default = _this$$slots.default) === null || _this$$slots$default === void 0 ? void 0 : _this$$slots$default[0]) && !this.url) {
       throw new Error('VmImage - need to define a URL, or a img or svg content');
     }
   },
-  mounted: function mounted() {
-    var _this = this;
+  mounted: function () {
+    this.observer = new MutationObserver(() => {
+      console.log('🚀 ~ file: vm-image.vue ~ filho mudou)');
+      this.addImage();
+    }); // Options for the observer (which mutations to observe)
 
-    this.$nextTick(function () {
-      _this.addImage();
+    var config = {
+      attributes: true,
+      childList: true,
+      characterData: true,
+      subtree: true
+    };
+    this.$nextTick(() => {
+      // Start observing the target node for configured mutations
+      this.observer.observe(this.$el, config);
+      this.addImage();
     });
   },
-  updated: function updated(v, ov) {
+  updated: function (v, ov) {
     this.addImage();
   },
-  render: function render(h) {
+  render: function (h) {
     var _this$$slots2, _this$$slots2$default;
 
+    //debugger;
     if ((_this$$slots2 = this.$slots) === null || _this$$slots2 === void 0 ? void 0 : (_this$$slots2$default = _this$$slots2.default) === null || _this$$slots2$default === void 0 ? void 0 : _this$$slots2$default[0]) {
       var _this$$slots3;
 
@@ -11780,25 +10366,32 @@ var VmLayerArc_component = normalizeComponent(
 
     return null;
   },
-  destroyed: function destroyed() {// this.MapboxVueInstance.removeImage(this.name)
+
+  beforeDestroy() {
+    var _this$observer;
+
+    this === null || this === void 0 ? void 0 : (_this$observer = this.observer) === null || _this$observer === void 0 ? void 0 : _this$observer.disconnect();
+  },
+
+  destroyed: function () {
+    this.MapboxVueInstance.removeImage(this.name);
   },
   methods: {
-    addImage: function addImage() {
-      var _this2 = this;
-
-      this.$nextTick(function () {
+    addImage: function () {
+      this.$nextTick(() => {
         var _tagElm, _tagElm$constructor, _tagElm2, _tagElm2$constructor, _tagElm3, _tagElm3$constructor;
 
-        var tagElm = _this2 === null || _this2 === void 0 ? void 0 : _this2.$el; // if not root, find children
+        if (!(this === null || this === void 0 ? void 0 : this.MapboxVueInstance)) return;
+        let tagElm = this === null || this === void 0 ? void 0 : this.$el; // if not root, find children
 
         if (((_tagElm = tagElm) === null || _tagElm === void 0 ? void 0 : (_tagElm$constructor = _tagElm.constructor) === null || _tagElm$constructor === void 0 ? void 0 : _tagElm$constructor.name) === 'HTMLDivElement') {
-          tagElm = _this2.$el.querySelector('svg') || _this2.$el.querySelector('img');
+          tagElm = this.$el.querySelector('svg') || this.$el.querySelector('img');
         }
 
         if (((_tagElm2 = tagElm) === null || _tagElm2 === void 0 ? void 0 : (_tagElm2$constructor = _tagElm2.constructor) === null || _tagElm2$constructor === void 0 ? void 0 : _tagElm2$constructor.name) === 'SVGSVGElement' || ((_tagElm3 = tagElm) === null || _tagElm3 === void 0 ? void 0 : (_tagElm3$constructor = _tagElm3.constructor) === null || _tagElm3$constructor === void 0 ? void 0 : _tagElm3$constructor.name) === 'HTMLImageElement') {
-          _this2.MapboxVueInstance.addImage(_this2.name, tagElm, _this2.forceUpdate);
+          this.MapboxVueInstance.addImage(this.name, tagElm, this.updateOnChange);
         } else {
-          _this2.MapboxVueInstance.addImage(_this2.name, _this2.url, _this2.forceUpdate);
+          this.MapboxVueInstance.addImage(this.name, this.url, this.updateOnChange);
         }
       });
     }
@@ -11839,10 +10432,11 @@ var VmImage_component = normalizeComponent(
   name: 'VmLayerVector',
   inject: ['getMap', 'mapboxgl', 'MapboxVueInstance', 'getSource'],
   props: {},
-  created: function created() {// get props not set, we eill use it to pass for VmLayer Base component
+  created: function () {// get props not set, we eill use it to pass for VmLayer Base component
     // const props = this.$attrs
   },
-  data: function data() {
+
+  data() {
     return {
       layerId: null,
       sourceId: null,
@@ -11852,9 +10446,11 @@ var VmImage_component = normalizeComponent(
       lastClick: null
     };
   },
-  render: function render(h) {
+
+  render(h) {
     return null;
   }
+
 });
 // CONCATENATED MODULE: ./src/components/Layers/VmLayerVector.vue?vue&type=script&lang=js&
  /* harmony default export */ var Layers_VmLayerVectorvue_type_script_lang_js_ = (VmLayerVectorvue_type_script_lang_js_); 
@@ -11886,16 +10482,16 @@ Function that calculate the current value from a zoom,value array
 @returns {number}
 */
 /* harmony default export */ var getValueFromZoomArray = (function (zoomScale, zoom) {
-  var zoomStart;
-  var zoomEnd;
-  var valueStart;
-  var valueEnd;
-  var currentScale = 1;
+  let zoomStart;
+  let zoomEnd;
+  let valueStart;
+  let valueEnd;
+  let currentScale = 1;
 
   if (zoomScale.length == 2) {
     currentScale = zoomScale[1];
   } else {
-    for (var i = 0; i < zoomScale.length - 2; i += 2) {
+    for (let i = 0; i < zoomScale.length - 2; i += 2) {
       zoomStart = zoomScale[i];
       zoomEnd = zoomScale[i + 2];
       valueStart = zoomScale[i + 1];
@@ -11916,12 +10512,6 @@ Function that calculate the current value from a zoom,value array
   return currentScale;
 });
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Markers/VmMarkerDonut.vue?vue&type=script&lang=js&
-function VmMarkerDonutvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function VmMarkerDonutvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { VmMarkerDonutvue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { VmMarkerDonutvue_type_script_lang_js_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { VmMarkerDonutvue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 
 
@@ -11961,9 +10551,7 @@ function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { 
     */
     dataSet: {
       type: Array,
-      default: function _default() {
-        return [4, 7, 40];
-      }
+      default: () => [4, 7, 40]
     },
 
     /**
@@ -11971,9 +10559,7 @@ function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { 
     */
     dataColor: {
       type: Array,
-      default: function _default() {
-        return ['red', 'green', 'blue'];
-      }
+      default: () => ['red', 'green', 'blue']
     },
 
     /**
@@ -12005,42 +10591,43 @@ function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { 
       type: [String, Number]
     }
   },
-  data: function data() {
+
+  data() {
     return {
       currentZoom: null
     };
   },
+
   computed: {
-    myradius: function myradius() {
+    myradius: function () {
       return Number(this.radius);
     }
   },
-  created: function created() {
+  created: function () {
     if (this.zoomScale && this.getMap()) {
       this.getMap().on('zoom', this.scaleMarker);
     }
   },
-  mounted: function mounted() {
-    var _this = this;
 
-    this.$nextTick(function () {
-      return _this.scaleMarker();
-    });
+  mounted() {
+    this.$nextTick(() => this.scaleMarker());
   },
-  beforeDestroy: function beforeDestroy() {
+
+  beforeDestroy() {
     if (this.zoomScale && this.getMap()) {
       this.getMap().off('zoom', this.scaleMarker);
     }
   },
+
   methods: {
-    scaleMarker: function scaleMarker(e) {
+    scaleMarker: function (e) {
       if (!this.zoomScale) return;
-      var zoom = this.getMap().getZoom();
-      var currentScale = getValueFromZoomArray(this.zoomScale, zoom);
-      this.$refs.marker.style.transform = "scale(".concat(currentScale, ")");
+      const zoom = this.getMap().getZoom();
+      const currentScale = getValueFromZoomArray(this.zoomScale, zoom);
+      this.$refs.marker.style.transform = `scale(${currentScale})`;
       this.$refs.marker.style.transformOrigin = 'center';
     },
-    createDonutChart: function createDonutChart(dataSet, dataColor, raio, chartWidth, fontSize) {
+    createDonutChart: function (dataSet, dataColor, raio, chartWidth, fontSize) {
       var offsets = [];
       var counts = dataSet;
       var total = 0;
@@ -12070,7 +10657,7 @@ function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { 
       html += '<circle cx="' + r + '" cy="' + r + '" r="' + r0 + '" fill="white" /><text dominant-baseline="central" transform="translate(' + r + ', ' + r + ')">' + total.toLocaleString() + '</text></svg></div>';
       return html;
     },
-    donutSegment: function donutSegment(start, end, r, r0, color) {
+    donutSegment: function (start, end, r, r0, color) {
       if (end - start === 1) end -= 0.00001;
       var a0 = 2 * Math.PI * (start - 0.25);
       var a1 = 2 * Math.PI * (end - 0.25);
@@ -12082,10 +10669,11 @@ function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { 
       return ['<path d="M', r + r0 * x0, r + r0 * y0, 'L', r + r * x0, r + r * y0, 'A', r, r, 0, largeArc, 1, r + r * x1, r + r * y1, 'L', r + r0 * x1, r + r0 * y1, 'A', r0, r0, 0, largeArc, 0, r + r0 * x0, r + r0 * y0, '" fill="' + color + '" />'].join(' ');
     }
   },
-  render: function render(h) {
-    var svg = this.createDonutChart(this.dataSet, this.dataColor, this.myradius, this.chartWidth, parseInt(this.fontSize));
-    var children = [];
-    var markerDonut = h('div', {
+
+  render(h) {
+    const svg = this.createDonutChart(this.dataSet, this.dataColor, this.myradius, this.chartWidth, parseInt(this.fontSize));
+    const children = [];
+    const markerDonut = h('div', {
       style: {
         position: 'relative',
         textAlign: 'center'
@@ -12098,9 +10686,9 @@ function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { 
       }
     }), this.$slots.marker]);
     children.push(markerDonut);
-    Object.entries(this.$slots).forEach(function (item) {
-      var key = item[0];
-      var value = item[1];
+    Object.entries(this.$slots).forEach(item => {
+      const key = item[0];
+      const value = item[1];
       if (key === 'marker') return; // set(value,'data.slot',key)
 
       children.push(h('div', {
@@ -12111,13 +10699,16 @@ function VmMarkerDonutvue_type_script_lang_js_defineProperty(obj, key, value) { 
 
     return h(VmMarker, {
       key: this.key + "marker",
-      props: VmMarkerDonutvue_type_script_lang_js_objectSpread(VmMarkerDonutvue_type_script_lang_js_objectSpread(VmMarkerDonutvue_type_script_lang_js_objectSpread({}, this.$attrs), this.$props), {}, {
+      props: { ...this.$attrs,
+        ...this.$props,
         opacity: this.opacity,
         anchor: this.anchor
-      }),
-      on: VmMarkerDonutvue_type_script_lang_js_objectSpread({}, this.$listeners)
-    }, [].concat(children, [this.$slots.default]));
+      },
+      on: { ...this.$listeners
+      }
+    }, [...children, this.$slots.default]);
   }
+
 });
 // CONCATENATED MODULE: ./src/components/Markers/VmMarkerDonut.vue?vue&type=script&lang=js&
  /* harmony default export */ var Markers_VmMarkerDonutvue_type_script_lang_js_ = (VmMarkerDonutvue_type_script_lang_js_); 
@@ -12149,7 +10740,7 @@ var VmMarkerDonut_component = normalizeComponent(
 if (typeof VmMarkerDonutvue_type_custom_index_0_blockType_docs_default.a === 'function') VmMarkerDonutvue_type_custom_index_0_blockType_docs_default()(VmMarkerDonut_component)
 
 /* harmony default export */ var VmMarkerDonut = (VmMarkerDonut_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2c01c290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/LoadingComponent.vue?vue&type=template&id=1911e249&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/LoadingComponent.vue?vue&type=template&id=1911e249&
 var LoadingComponentvue_type_template_id_1911e249_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('center',[_vm._v(" Carregando... ")])}
 var LoadingComponentvue_type_template_id_1911e249_staticRenderFns = []
 
@@ -12158,13 +10749,13 @@ var LoadingComponentvue_type_template_id_1911e249_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/LoadingComponent.vue
 
-var LoadingComponent_script = {}
+var script = {}
 
 
 /* normalize component */
 
 var LoadingComponent_component = normalizeComponent(
-  LoadingComponent_script,
+  script,
   LoadingComponentvue_type_template_id_1911e249_render,
   LoadingComponentvue_type_template_id_1911e249_staticRenderFns,
   false,
@@ -12175,7 +10766,7 @@ var LoadingComponent_component = normalizeComponent(
 )
 
 /* harmony default export */ var LoadingComponent = (LoadingComponent_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2c01c290-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ErrorComponent.vue?vue&type=template&id=1cd642d2&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19f0d16-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/ErrorComponent.vue?vue&type=template&id=1cd642d2&
 var ErrorComponentvue_type_template_id_1cd642d2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('center',{staticClass:"alert alert-danger"},[_c('b',[_vm._v("ERROR")])])}
 var ErrorComponentvue_type_template_id_1cd642d2_staticRenderFns = []
 
@@ -12303,42 +10894,6 @@ function baseIteratee(value) {
 }
 
 module.exports = baseIteratee;
-
-
-/***/ }),
-
-/***/ "bba4":
-/***/ (function(module, exports, __webpack_require__) {
-
-var capitalize = __webpack_require__("e9a7"),
-    createCompounder = __webpack_require__("b20a");
-
-/**
- * Converts `string` to [camel case](https://en.wikipedia.org/wiki/CamelCase).
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category String
- * @param {string} [string=''] The string to convert.
- * @returns {string} Returns the camel cased string.
- * @example
- *
- * _.camelCase('Foo Bar');
- * // => 'fooBar'
- *
- * _.camelCase('--foo-bar--');
- * // => 'fooBar'
- *
- * _.camelCase('__FOO_BAR__');
- * // => 'fooBar'
- */
-var camelCase = createCompounder(function(result, word, index) {
-  word = word.toLowerCase();
-  return result + (index ? capitalize(word) : word);
-});
-
-module.exports = camelCase;
 
 
 /***/ }),
@@ -13446,17 +12001,6 @@ module.exports = baseSortBy;
 
 /***/ }),
 
-/***/ "d565":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_e060bcaa_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ec7d");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_e060bcaa_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_e060bcaa_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_11_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_3_node_modules_stylus_loader_index_js_ref_11_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VueMapbox_vue_vue_type_style_index_0_id_e060bcaa_lang_stylus_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
 /***/ "d612":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14185,36 +12729,6 @@ module.exports = startCase;
 
 /***/ }),
 
-/***/ "e9a7":
-/***/ (function(module, exports, __webpack_require__) {
-
-var toString = __webpack_require__("76dd"),
-    upperFirst = __webpack_require__("8103");
-
-/**
- * Converts the first character of `string` to upper case and the remaining
- * to lower case.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category String
- * @param {string} [string=''] The string to capitalize.
- * @returns {string} Returns the capitalized string.
- * @example
- *
- * _.capitalize('FRED');
- * // => 'Fred'
- */
-function capitalize(string) {
-  return upperFirst(toString(string).toLowerCase());
-}
-
-module.exports = capitalize;
-
-
-/***/ }),
-
 /***/ "ea72":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14322,48 +12836,6 @@ function keys(object) {
 }
 
 module.exports = keys;
-
-
-/***/ }),
-
-/***/ "ec7d":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("87da");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("499e").default
-var update = add("4115e3b8", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
-/***/ "ec8c":
-/***/ (function(module, exports) {
-
-/**
- * This function is like
- * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
- * except that it includes inherited enumerable properties.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function nativeKeysIn(object) {
-  var result = [];
-  if (object != null) {
-    for (var key in Object(object)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-module.exports = nativeKeysIn;
 
 
 /***/ }),
@@ -14700,15 +13172,7 @@ __webpack_require__.d(__webpack_exports__, "ErrorComponent", function() { return
 
 if (typeof window !== 'undefined') {
   var currentScript = window.document.currentScript
-  if (true) {
-    var getCurrentScript = __webpack_require__("8875")
-    currentScript = getCurrentScript()
-
-    // for backward compatibility, because previously we directly included the polyfill
-    if (!('currentScript' in document)) {
-      Object.defineProperty(document, 'currentScript', { get: getCurrentScript })
-    }
-  }
+  if (false) { var getCurrentScript; }
 
   var src = currentScript && currentScript.src.match(/(.+\/)[^/]+\.js(\?.*)?$/)
   if (src) {
