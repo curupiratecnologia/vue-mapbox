@@ -422,18 +422,24 @@ export default {
 
     selectedFeatures: function (val, oldVal) {
       const map = this.getMap()
+      let hasChanges = false
       oldVal.forEach(feature => {
-        map.setFeatureState(
-          { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
-          { click: false }
-        )
+        if (feature?.id) {
+                hasChanges = true
+          map.setFeatureState(
+            { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+            { click: false }
+          )
+        }
       })
 
       val.forEach(feature => {
-        map.setFeatureState(
-          { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
-          { click: true }
-        )
+        if (feature?.id) {
+          map.setFeatureState(
+            { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+            { click: true }
+          )
+        }
       })
       /**
        * Triggers when features selectes clicking on it
@@ -445,28 +451,37 @@ export default {
     },
 
     hoverFeatures: function (val, oldVal) {
+      let hasChanges = false
       const map = this.getMap()
       if (oldVal.length > 0) {
         oldVal.forEach(feature => {
-          map.setFeatureState(
-            { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
-            { hover: false }
-          )
+          if (feature?.id) {
+                  hasChanges = true
+            hasChanges = true
+            map.setFeatureState(
+              { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+              { hover: false }
+            )
+          }
         })
       }
 
       val.forEach(feature => {
-        map.setFeatureState(
-          { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
-          { hover: true }
-        )
+        if (feature?.id) {
+           hasChanges = true
+          map.setFeatureState(
+            { source: this.sourceId, sourceLayer: this.sourceLayer, id: feature.id },
+            { hover: true }
+          )
+        }
       })
       /**
        * Triggers when features ar hover
        *
        * @property {array} features array with all features selected
        */
-      this.$emit('featurehover', val)
+      if( hasChanges)
+        this.$emit('featurehover', val)
     },
 
     // DATA JOIN WATCHERS
@@ -531,6 +546,9 @@ export default {
   },
 
   created: function () {
+
+
+
     this.popupOpen = false
 
     const options = getOnlyMapboxProps(this)
@@ -586,6 +604,7 @@ export default {
     if (this.images) {
       this.MapboxVueInstance.addPropsImages(this.images)
     }
+   
   },
 
   mounted: async function () {
@@ -736,14 +755,14 @@ export default {
         this.loading = true
         // console.log('🚀 ~ file: VmLayer.vue ~ line 727 ~ map.on ~ this.loading', this.loading)
         this.$emit('loading', true)
-        console.log('emit init', true);
+        console.log('emit init', true)
       }
       if (e?.target) {
         const loading = !e.target.loaded()
         // console.log('🚀 ~ file: VmLayer.vue ~ line 732 ~ map.on ~ loading', loading)
         if (this.loading !== loading) {
           this.$emit('loading', loading)
-          console.log('emit loading change', loading);
+          console.log('emit loading change', loading)
           this.loading = loading
         }
       }

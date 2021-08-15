@@ -115,8 +115,8 @@ export default {
       default: ''
     },
     /**
-       * Allow layer nome to be rewrite, so layer with same name don't show error, and you can get than with ref in vm-layer
-       * Bur if your application need the exatc name of layer, so yo can get the exatc name, set it to false
+       * Allow layer name to be rewrite, so layer with same name don't show error, and you can get than with ref in vm-layer
+       * But if your application need the exatc name of layer, so yo can get the exatc name, set it to false
     */
     layersCanRaname: {
       type: Boolean,
@@ -314,15 +314,14 @@ export default {
 
   mounted () {
     // ////console.log('Mounted - Mounted dom vueMapbox')
-
-    // this.$nextTick(() => {
-    //   this.updateLayerOrder()
-    // })
+    this.$nextTick(() => {
+      this.updateLayerOrder()
+    })
   },
 
   updated () {
     // update mapbox
-    // console.log('🚀 ~ file: VueMapbox.vue ~ line 329 ~ updated ~ update mapbox')
+    console.log('🚀 ~ file: VueMapbox.vue ~ line 329 ~ updated ~ update mapbox')
     // this.$nextTick(() => {
     if (this.updateLayerTimeout) clearTimeout(this.updateLayerTimeout)
     this.updateLayerTimeout = setTimeout(this.updateLayerOrder, 400)
@@ -509,7 +508,7 @@ export default {
         id = uniqueId('autoNamelayer_' + name)
       }
       // TODO IMPORTANTISSIMO - refazer logica de nome de layer e source, pq layers com source objetos da meio que ruim
-      id = uniqueId('autoNamelayer_' + name)
+      // id = uniqueId('autoNamelayer_' + name)
       return id
     },
 
@@ -529,7 +528,8 @@ export default {
       if (this.map.getLayer(id)) {
         this.removeLayer(id)
       }
-      // TODO - get the before layer
+
+      // TODO - não esta funcionando, verificar
       let beforeId = this.updateLayerOrder(id)
 
       if (options?.source?.constructor?.name === 'Object') {
@@ -553,7 +553,9 @@ export default {
 
       this.layers.set(id, { id })
 
-      this.updateLayerOrder()
+      
+      // if (this.updateLayerTimeout) clearTimeout(this.updateLayerTimeout)
+      // this.updateLayerTimeout = setTimeout(this.updateLayerOrder, 200)
 
       return options.id
     },
@@ -577,7 +579,7 @@ export default {
       if ((get(VNodeInstance, '$options.name', get(VNodeInstance, 'componentOptions.Ctor.options.name')) === 'VmLayer')) {
         bag.push(VNodeInstance)
       }
-      const children = get(VNodeInstance, '$children')
+      const children = get(VNodeInstance, '$children', get(VNodeInstance, 'children'))
       if (Array.isArray(children)) {
         children.forEach(node => {
           this.findLayers(node, bag)
@@ -594,13 +596,12 @@ export default {
       // console.count('===============================updateLayerOrder')
       // console.count(setLayerNameToReturnItBeforeLayerID)
       // console.time('updateLayerOrder')
-
       const currentLayers = this.map?.getStyle()?.layers ?? undefined
 
       const layerInstances = this.findLayers(this.$slots.default)
       // console.log('find layer vNode tree')
       // console.timeLog('updateLayerOrder')
-
+debugger
       // check if i have layers in map or in vNodTree
       if (!currentLayers || !layerInstances) {
         // console.warn('Map or layer in vNode not exist')
@@ -616,7 +617,7 @@ export default {
         const component = layer.componentInstance || layer
         const id = get(component, '$data.layerId')
         if (!id) {
-          // debugger
+          debugger
         }
         let zIndex = get(component, '$props.zIndex')
         const index = i
@@ -640,12 +641,19 @@ export default {
       // console.log('order vnode layers')
       // console.timeLog('updateLayerOrder')
 
-      // create a object with layer id and topLayer id
+      // create a object with current layers id in map and topLayer id
       const currentLayersByID = {}
       currentLayers.forEach((layer, index, array) => {
         const obj = { id: layer.id, topLayerId: undefined }
         obj.topLayerId = currentLayers?.[index + 1]?.id
         currentLayersByID[layer.id] = obj
+      })
+     
+      const virtualLayerVNodeByID = {}
+      layersId.forEach((layer, index, array) => {
+        const obj = { id: layer.id, topLayerId: undefined }
+        obj.topLayerId = layersId?.[index + 1]?.id
+        virtualLayerVNodeByID[layer.id] = obj
       })
 
       // console.log('======= ORDER IN MAPBOX')
@@ -657,7 +665,11 @@ export default {
       if (setLayerNameToReturnItBeforeLayerID) {
         // console.timeEnd('updateLayerOrder')
         // console.warn('return before layer name')
-        return currentLayersByID?.[setLayerNameToReturnItBeforeLayerID]
+        let beforeId = currentLayersByID?.[setLayerNameToReturnItBeforeLayerID]
+        if(!beforeId)
+            beforeId = virtualLayerVNodeByID?.[setLayerNameToReturnItBeforeLayerID]
+        
+        return beforeId
       }
 
       // Invert loop layers to set they order
@@ -668,8 +680,10 @@ export default {
         if (!currentLayersByID?.[currentLayer]) continue
         // console.log(`check currentLayer:${currentLayer} topLayer:${topLayer}`)
         if (currentLayersByID?.[currentLayer]?.topLayerId !== topLayer) {
-          // console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
-          this.map.moveLayer(currentLayer, topLayer)
+          console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
+          // if (topLayer !== undefined) {
+            this.map.moveLayer(currentLayer, topLayer)
+          // }
         }
       }
       // console.log('loop and move layers')
@@ -820,6 +834,9 @@ export default {
       )
     },
 
+    /**
+    *
+    */
     docEvents: function () {
       this.$emit('click')
       this.$emit('dblclick')
