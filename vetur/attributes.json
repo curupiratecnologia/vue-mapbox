@@ -1,0 +1,2302 @@
+{
+  "vm-marker-donut/radius": {
+    "type": "number|string",
+    "description": "Radius in pixel. leave blank for automatic"
+  },
+  "VmMarkerDonut/radius": {
+    "type": "number|string",
+    "description": "Radius in pixel. leave blank for automatic"
+  },
+  "vm-marker-donut/chartWidth": {
+    "type": "number|string",
+    "description": "The width of the chart in pixel, or %"
+  },
+  "VmMarkerDonut/chartWidth": {
+    "type": "number|string",
+    "description": "The width of the chart in pixel, or %"
+  },
+  "vm-marker-donut/fontSize": {
+    "type": "number|string",
+    "description": "font size of total number in center of donut chart in pixel. leave blank for automatic"
+  },
+  "VmMarkerDonut/fontSize": {
+    "type": "number|string",
+    "description": "font size of total number in center of donut chart in pixel. leave blank for automatic"
+  },
+  "vm-marker-donut/dataSet": {
+    "type": "array",
+    "description": "Array contains the data of the chart."
+  },
+  "VmMarkerDonut/dataSet": {
+    "type": "array",
+    "description": "Array contains the data of the chart."
+  },
+  "vm-marker-donut/dataColor": {
+    "type": "array",
+    "description": "Array contains the colors bars of the chart in data. Must be equal of size of dataSet."
+  },
+  "VmMarkerDonut/dataColor": {
+    "type": "array",
+    "description": "Array contains the colors bars of the chart in data. Must be equal of size of dataSet."
+  },
+  "vm-marker-donut/zoomScale": {
+    "type": "array",
+    "description": "Array contains the zoom of map, an then the scale of element (from 0 to 1).\n\n    Example, [24, 0.2, 14, 0.7, 4, 1] will set at zoom 24 the scale to 0.2, in zoom 14 the scale to 0.7, and so on"
+  },
+  "VmMarkerDonut/zoomScale": {
+    "type": "array",
+    "description": "Array contains the zoom of map, an then the scale of element (from 0 to 1).\n\n    Example, [24, 0.2, 14, 0.7, 4, 1] will set at zoom 24 the scale to 0.2, in zoom 14 the scale to 0.7, and so on"
+  },
+  "vm-marker-donut/anchor": {
+    "type": "string"
+  },
+  "VmMarkerDonut/anchor": {
+    "type": "string"
+  },
+  "vm-marker-donut/opacity": {
+    "type": "number"
+  },
+  "VmMarkerDonut/opacity": {
+    "type": "number"
+  },
+  "vm-marker-donut/minZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "VmMarkerDonut/minZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "vm-marker-donut/maxZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "VmMarkerDonut/maxZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "vm-source-geo-json/name": {
+    "type": "string",
+    "description": "*Id/Name of the Source. If blank or not unique, will auto generate one for you**"
+  },
+  "VmSourceGeoJson/name": {
+    "type": "string",
+    "description": "*Id/Name of the Source. If blank or not unique, will auto generate one for you**"
+  },
+  "vm-source-geo-json/geoJsonData": {
+    "type": "string",
+    "description": "Url or GeoJsonObject (Dynamic)"
+  },
+  "VmSourceGeoJson/geoJsonData": {
+    "type": "string",
+    "description": "Url or GeoJsonObject (Dynamic)"
+  },
+  "vm-source-geo-json/attribution": {
+    "type": "string",
+    "description": "Contains an attribution to be displayed when the map is shown to a user."
+  },
+  "VmSourceGeoJson/attribution": {
+    "type": "string",
+    "description": "Contains an attribution to be displayed when the map is shown to a user."
+  },
+  "vm-source-geo-json/buffer": {
+    "type": "number",
+    "description": "Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance."
+  },
+  "VmSourceGeoJson/buffer": {
+    "type": "number",
+    "description": "Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance."
+  },
+  "vm-source-geo-json/cluster": {
+    "type": "boolean",
+    "description": "If the data is a collection of point features, setting this to true clusters the points by radius into groups. Cluster groups become new Point features in the source with additional properties. [more info](https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/#geojson)"
+  },
+  "VmSourceGeoJson/cluster": {
+    "type": "boolean",
+    "description": "If the data is a collection of point features, setting this to true clusters the points by radius into groups. Cluster groups become new Point features in the source with additional properties. [more info](https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/#geojson)"
+  },
+  "vm-source-geo-json/clusterMaxZoom": {
+    "type": "number",
+    "description": "Max zoom on which to cluster points if clustering is enabled. Defaults to one zoom less than maxzoom (so that last zoom features are not clustered)."
+  },
+  "VmSourceGeoJson/clusterMaxZoom": {
+    "type": "number",
+    "description": "Max zoom on which to cluster points if clustering is enabled. Defaults to one zoom less than maxzoom (so that last zoom features are not clustered)."
+  },
+  "vm-source-geo-json/clusterRadius": {
+    "type": "number",
+    "description": "Radius of each cluster if clustering is enabled. A value of 512 indicates a radius equal to the width of a tile. Default 50"
+  },
+  "VmSourceGeoJson/clusterRadius": {
+    "type": "number",
+    "description": "Radius of each cluster if clustering is enabled. A value of 512 indicates a radius equal to the width of a tile. Default 50"
+  },
+  "vm-source-geo-json/generateId": {
+    "type": "boolean",
+    "description": "Whether to generate ids for the geojson features. When enabled, the feature.id property will be auto assigned based on its index in the features array, over-writing any previous values."
+  },
+  "VmSourceGeoJson/generateId": {
+    "type": "boolean",
+    "description": "Whether to generate ids for the geojson features. When enabled, the feature.id property will be auto assigned based on its index in the features array, over-writing any previous values."
+  },
+  "vm-source-geo-json/promoteId": {
+    "type": "string|object",
+    "description": "A property to use as a feature id (for feature state). Either a property name, or an object of the form {<sourceLayer>: <propertyName>}."
+  },
+  "VmSourceGeoJson/promoteId": {
+    "type": "string|object",
+    "description": "A property to use as a feature id (for feature state). Either a property name, or an object of the form {<sourceLayer>: <propertyName>}."
+  },
+  "vm-source-geo-json/maxzoom": {
+    "type": "number",
+    "description": "Maximum zoom level at which to create vector tiles (higher means greater detail at high zoom levels)."
+  },
+  "VmSourceGeoJson/maxzoom": {
+    "type": "number",
+    "description": "Maximum zoom level at which to create vector tiles (higher means greater detail at high zoom levels)."
+  },
+  "vm-source-geo-json/tolerance": {
+    "type": "number",
+    "description": "Douglas-Peucker simplification tolerance (higher means simpler geometries and faster performance)."
+  },
+  "VmSourceGeoJson/tolerance": {
+    "type": "number",
+    "description": "Douglas-Peucker simplification tolerance (higher means simpler geometries and faster performance)."
+  },
+  "vm-image/url": {
+    "type": "string",
+    "description": "URL of the image\ncam be url or a svg string"
+  },
+  "VmImage/url": {
+    "type": "string",
+    "description": "URL of the image\ncam be url or a svg string"
+  },
+  "vm-image/name": {
+    "type": "string",
+    "description": "Name of image"
+  },
+  "VmImage/name": {
+    "type": "string",
+    "description": "Name of image"
+  },
+  "vm-image/updateOnChange": {
+    "type": "boolean",
+    "description": "When the url or content change, will change the image"
+  },
+  "VmImage/updateOnChange": {
+    "type": "boolean",
+    "description": "When the url or content change, will change the image"
+  },
+  "vm-image/witdh": {
+    "type": "number|string"
+  },
+  "VmImage/witdh": {
+    "type": "number|string"
+  },
+  "vm-image/height": {
+    "type": "number|string"
+  },
+  "VmImage/height": {
+    "type": "number|string"
+  },
+  "vm-layer/name": {
+    "type": "string",
+    "description": "*ID/Name of the Layer.** If blank or not unique, will auto generate one for you"
+  },
+  "VmLayer/name": {
+    "type": "string",
+    "description": "*ID/Name of the Layer.** If blank or not unique, will auto generate one for you"
+  },
+  "vm-layer/type": {
+    "type": "string",
+    "description": "Type of the Layer.",
+    "options": [
+      "\"fill\"",
+      "\"line\"",
+      "\"symbol\"",
+      "\"circle\"",
+      "\"heatmap\"",
+      "\"fill-extrusion\"",
+      "\"raster\"",
+      "\"hillshade\"",
+      "\"background\"."
+    ]
+  },
+  "VmLayer/type": {
+    "type": "string",
+    "description": "Type of the Layer.",
+    "options": [
+      "\"fill\"",
+      "\"line\"",
+      "\"symbol\"",
+      "\"circle\"",
+      "\"heatmap\"",
+      "\"fill-extrusion\"",
+      "\"raster\"",
+      "\"hillshade\"",
+      "\"background\"."
+    ]
+  },
+  "vm-layer/source": {
+    "type": "string|object",
+    "description": "The data source for the layer. If blank will find a parent Source component.  Reference a source that has already been defined using the source's unique id. Reference a new source using a source object (as defined in the Mapbox Style Specification ) directly."
+  },
+  "VmLayer/source": {
+    "type": "string|object",
+    "description": "The data source for the layer. If blank will find a parent Source component.  Reference a source that has already been defined using the source's unique id. Reference a new source using a source object (as defined in the Mapbox Style Specification ) directly."
+  },
+  "vm-layer/customLayer": {
+    "type": "object",
+    "description": "The data source for the layer. If blank will find a parent Source component.  Reference a source that has already been defined using the source's unique id. Reference a new source using a source object (as defined in the Mapbox Style Specification ) directly."
+  },
+  "VmLayer/customLayer": {
+    "type": "object",
+    "description": "The data source for the layer. If blank will find a parent Source component.  Reference a source that has already been defined using the source's unique id. Reference a new source using a source object (as defined in the Mapbox Style Specification ) directly."
+  },
+  "vm-layer/sourceLayer": {
+    "type": "string",
+    "description": "The name of the source layer within the specified layer.source to use for this style layer. This is only applicable for vector tile sources and is required when layer.source is of the type vector ."
+  },
+  "VmLayer/sourceLayer": {
+    "type": "string",
+    "description": "The name of the source layer within the specified layer.source to use for this style layer. This is only applicable for vector tile sources and is required when layer.source is of the type vector ."
+  },
+  "vm-layer/images": {
+    "type": "object",
+    "description": "Object with images to load in format {'imagename':url,'image2name':url2}"
+  },
+  "VmLayer/images": {
+    "type": "object",
+    "description": "Object with images to load in format {'imagename':url,'image2name':url2}"
+  },
+  "vm-layer/opacity": {
+    "type": "number",
+    "description": "A abstract scale to opacity.\n if opacity is 1, it will use the layer opacity definition, if 0.5, it will reduce the current opacity in 50%.\nit is greate to control all opacity in one time"
+  },
+  "VmLayer/opacity": {
+    "type": "number",
+    "description": "A abstract scale to opacity.\n if opacity is 1, it will use the layer opacity definition, if 0.5, it will reduce the current opacity in 50%.\nit is greate to control all opacity in one time"
+  },
+  "vm-layer/color": {
+    "type": "string",
+    "description": "A shorthand to set color, in any type.\nexample, for layer type fill, will set fill-color, in circle, will set"
+  },
+  "VmLayer/color": {
+    "type": "string",
+    "description": "A shorthand to set color, in any type.\nexample, for layer type fill, will set fill-color, in circle, will set"
+  },
+  "vm-layer/colorHover": {
+    "type": "string",
+    "description": "A shorthand to set color, in any type.\nexample, for layer type fill, will set fill-color, in circle, will set"
+  },
+  "VmLayer/colorHover": {
+    "type": "string",
+    "description": "A shorthand to set color, in any type.\nexample, for layer type fill, will set fill-color, in circle, will set"
+  },
+  "vm-layer/colorClick": {
+    "type": "string",
+    "description": "A shorthand to set color, in any type.\nexample, for layer type fill, will set fill-color, in circle, will set"
+  },
+  "VmLayer/colorClick": {
+    "type": "string",
+    "description": "A shorthand to set color, in any type.\nexample, for layer type fill, will set fill-color, in circle, will set"
+  },
+  "vm-layer/hideOnOpacity": {
+    "type": "boolean",
+    "description": "With hideOnOpacity, when opacity is 0, the visibilit of layer will be hidden, else, will be show"
+  },
+  "VmLayer/hideOnOpacity": {
+    "type": "boolean",
+    "description": "With hideOnOpacity, when opacity is 0, the visibilit of layer will be hidden, else, will be show"
+  },
+  "vm-layer/filter": {
+    "type": "array",
+    "description": "(Dynamic) Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance."
+  },
+  "VmLayer/filter": {
+    "type": "array",
+    "description": "(Dynamic) Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance."
+  },
+  "vm-layer/paint": {
+    "type": "object",
+    "description": "(Dynamic) Paint properties for the layer. Available paint properties vary by layer.type . A full list of paint properties for each layer type is available in the Mapbox Style Specification . If no paint properties are specified, default values will be used."
+  },
+  "VmLayer/paint": {
+    "type": "object",
+    "description": "(Dynamic) Paint properties for the layer. Available paint properties vary by layer.type . A full list of paint properties for each layer type is available in the Mapbox Style Specification . If no paint properties are specified, default values will be used."
+  },
+  "vm-layer/layout": {
+    "type": "object",
+    "description": "(Dynamic) Layout properties for the layer. Available layout properties vary by layer.type . A full list of layout properties for each layer type is available in the Mapbox Style Specification . If no layout properties are specified, default values will be used."
+  },
+  "VmLayer/layout": {
+    "type": "object",
+    "description": "(Dynamic) Layout properties for the layer. Available layout properties vary by layer.type . A full list of layout properties for each layer type is available in the Mapbox Style Specification . If no layout properties are specified, default values will be used."
+  },
+  "vm-layer/maxzoom": {
+    "type": "number",
+    "description": "(Dynamic)  Max zoom on which to cluster points if clustering is enabled. Defaults to one zoom less than maxzoom (so that last zoom features are not clustered)."
+  },
+  "VmLayer/maxzoom": {
+    "type": "number",
+    "description": "(Dynamic)  Max zoom on which to cluster points if clustering is enabled. Defaults to one zoom less than maxzoom (so that last zoom features are not clustered)."
+  },
+  "vm-layer/minzoom": {
+    "type": "number",
+    "description": "(Dynamic) The minimum zoom level for the layer. At zoom levels less than the minzoom, the layer will be hidden. The value can be any number between 0 and 24 (inclusive). If no minzoom is provided, the layer will be visible at all zoom levels for which there are tiles available."
+  },
+  "VmLayer/minzoom": {
+    "type": "number",
+    "description": "(Dynamic) The minimum zoom level for the layer. At zoom levels less than the minzoom, the layer will be hidden. The value can be any number between 0 and 24 (inclusive). If no minzoom is provided, the layer will be visible at all zoom levels for which there are tiles available."
+  },
+  "vm-layer/metadata": {
+    "type": "object",
+    "description": "Arbitrary properties useful to track with the layer, but do not influence rendering."
+  },
+  "VmLayer/metadata": {
+    "type": "object",
+    "description": "Arbitrary properties useful to track with the layer, but do not influence rendering."
+  },
+  "vm-layer/paintHover": {
+    "type": "object",
+    "description": "(Dynamic) Paint of the feature in witch the mouse are over"
+  },
+  "VmLayer/paintHover": {
+    "type": "object",
+    "description": "(Dynamic) Paint of the feature in witch the mouse are over"
+  },
+  "vm-layer/paintClick": {
+    "type": "object",
+    "description": "(Dynamic) Paint of the feature in witch we click"
+  },
+  "VmLayer/paintClick": {
+    "type": "object",
+    "description": "(Dynamic) Paint of the feature in witch we click"
+  },
+  "vm-layer/layoutHover": {
+    "type": "object",
+    "description": "(Dynamic) Layout of the feature in witch we hover"
+  },
+  "VmLayer/layoutHover": {
+    "type": "object",
+    "description": "(Dynamic) Layout of the feature in witch we hover"
+  },
+  "vm-layer/layoutClick": {
+    "type": "object",
+    "description": "(Dynamic) Layout of the feature in witch we click"
+  },
+  "VmLayer/layoutClick": {
+    "type": "object",
+    "description": "(Dynamic) Layout of the feature in witch we click"
+  },
+  "vm-layer/zIndex": {
+    "type": "number|string",
+    "description": "(Dynamic) If Number, is order of the layer. Can set the Name of the layer to put after"
+  },
+  "VmLayer/zIndex": {
+    "type": "number|string",
+    "description": "(Dynamic) If Number, is order of the layer. Can set the Name of the layer to put after"
+  },
+  "vm-layer/classes": {
+    "type": "array",
+    "description": "Classes are array that defines paint and layout properties on value.\nit is a short hand for expresion",
+    "options": [
+      "[{'fill-color':'#fe0000'",
+      "'fill-opacity':0.3",
+      "value:1",
+      "property:\"vlr_classe\"",
+      "'label':\"Área Artificial\"",
+      "}",
+      "{'fill-color':'#ebe628'",
+      "'fill-opacity':'0.3'",
+      "value:2",
+      "property:\"vlr_classe\"",
+      "'label':\"Área Agrícola\"",
+      "}]"
+    ]
+  },
+  "VmLayer/classes": {
+    "type": "array",
+    "description": "Classes are array that defines paint and layout properties on value.\nit is a short hand for expresion",
+    "options": [
+      "[{'fill-color':'#fe0000'",
+      "'fill-opacity':0.3",
+      "value:1",
+      "property:\"vlr_classe\"",
+      "'label':\"Área Artificial\"",
+      "}",
+      "{'fill-color':'#ebe628'",
+      "'fill-opacity':'0.3'",
+      "value:2",
+      "property:\"vlr_classe\"",
+      "'label':\"Área Agrícola\"",
+      "}]"
+    ]
+  },
+  "vm-layer/classesValueInterpolation": {
+    "type": "string",
+    "description": "How to interpolate the values in classes",
+    "options": [
+      "match",
+      "step",
+      "interpolate"
+    ]
+  },
+  "VmLayer/classesValueInterpolation": {
+    "type": "string",
+    "description": "How to interpolate the values in classes",
+    "options": [
+      "match",
+      "step",
+      "interpolate"
+    ]
+  },
+  "vm-layer/multipleFeatureSelectionOn": {
+    "type": "string|boolean",
+    "description": "Set with multiple feature selection is possible, if pressing any control keys or automatic with set to true\n If click outside the layer, or click over a selected feature, it will desselected\n\n    // TODO Dinamic",
+    "options": [
+      "'shift'",
+      "'control'",
+      "'alt'",
+      "true",
+      "false"
+    ]
+  },
+  "VmLayer/multipleFeatureSelectionOn": {
+    "type": "string|boolean",
+    "description": "Set with multiple feature selection is possible, if pressing any control keys or automatic with set to true\n If click outside the layer, or click over a selected feature, it will desselected\n\n    // TODO Dinamic",
+    "options": [
+      "'shift'",
+      "'control'",
+      "'alt'",
+      "true",
+      "false"
+    ]
+  },
+  "vm-layer/dataJoin": {
+    "type": "array|string",
+    "description": "array of values to join the features using setState\nso we can easy use it on expression or show in popup id"
+  },
+  "VmLayer/dataJoin": {
+    "type": "array|string",
+    "description": "array of values to join the features using setState\nso we can easy use it on expression or show in popup id"
+  },
+  "vm-layer/dataJoinDataPath": {
+    "type": "string",
+    "description": "If dataJoin is a url, and the items is not in root, here we define the path of the itens, like this \"items\" os \"items.result\"\n    (lodash get like)"
+  },
+  "VmLayer/dataJoinDataPath": {
+    "type": "string",
+    "description": "If dataJoin is a url, and the items is not in root, here we define the path of the itens, like this \"items\" os \"items.result\"\n    (lodash get like)"
+  },
+  "vm-layer/dataJoinKey": {
+    "type": "string"
+  },
+  "VmLayer/dataJoinKey": {
+    "type": "string"
+  },
+  "vm-layer/ignoreEvents": {
+    "type": "boolean",
+    "description": "Set if this layer is ignore when calculating the top most layer to see what we are hover"
+  },
+  "VmLayer/ignoreEvents": {
+    "type": "boolean",
+    "description": "Set if this layer is ignore when calculating the top most layer to see what we are hover"
+  },
+  "vm-layer/ignoreOthersLayer": {
+    "type": "boolean",
+    "description": "Set if this layer is ignore when calculating the top most layer to see what we are hover"
+  },
+  "VmLayer/ignoreOthersLayer": {
+    "type": "boolean",
+    "description": "Set if this layer is ignore when calculating the top most layer to see what we are hover"
+  },
+  "vm-layer/background-color": {
+    "type": ""
+  },
+  "VmLayer/background-color": {
+    "type": ""
+  },
+  "vm-layer/background-opacity": {
+    "type": ""
+  },
+  "VmLayer/background-opacity": {
+    "type": ""
+  },
+  "vm-layer/background-pattern": {
+    "type": ""
+  },
+  "VmLayer/background-pattern": {
+    "type": ""
+  },
+  "vm-layer/fill-antialias": {
+    "type": ""
+  },
+  "VmLayer/fill-antialias": {
+    "type": ""
+  },
+  "vm-layer/fill-color": {
+    "type": ""
+  },
+  "VmLayer/fill-color": {
+    "type": ""
+  },
+  "vm-layer/fill-opacity": {
+    "type": ""
+  },
+  "VmLayer/fill-opacity": {
+    "type": ""
+  },
+  "vm-layer/fill-outline-color": {
+    "type": ""
+  },
+  "VmLayer/fill-outline-color": {
+    "type": ""
+  },
+  "vm-layer/fill-pattern": {
+    "type": ""
+  },
+  "VmLayer/fill-pattern": {
+    "type": ""
+  },
+  "vm-layer/fill-sort-key": {
+    "type": ""
+  },
+  "VmLayer/fill-sort-key": {
+    "type": ""
+  },
+  "vm-layer/fill-translate": {
+    "type": ""
+  },
+  "VmLayer/fill-translate": {
+    "type": ""
+  },
+  "vm-layer/fill-translate-anchor": {
+    "type": ""
+  },
+  "VmLayer/fill-translate-anchor": {
+    "type": ""
+  },
+  "vm-layer/line-blur": {
+    "type": ""
+  },
+  "VmLayer/line-blur": {
+    "type": ""
+  },
+  "vm-layer/line-cap": {
+    "type": ""
+  },
+  "VmLayer/line-cap": {
+    "type": ""
+  },
+  "vm-layer/line-color": {
+    "type": ""
+  },
+  "VmLayer/line-color": {
+    "type": ""
+  },
+  "vm-layer/line-dasharray": {
+    "type": ""
+  },
+  "VmLayer/line-dasharray": {
+    "type": ""
+  },
+  "vm-layer/line-gap-width": {
+    "type": ""
+  },
+  "VmLayer/line-gap-width": {
+    "type": ""
+  },
+  "vm-layer/line-gradient": {
+    "type": ""
+  },
+  "VmLayer/line-gradient": {
+    "type": ""
+  },
+  "vm-layer/line-join": {
+    "type": ""
+  },
+  "VmLayer/line-join": {
+    "type": ""
+  },
+  "vm-layer/line-miter-limit": {
+    "type": ""
+  },
+  "VmLayer/line-miter-limit": {
+    "type": ""
+  },
+  "vm-layer/line-offset": {
+    "type": ""
+  },
+  "VmLayer/line-offset": {
+    "type": ""
+  },
+  "vm-layer/line-opacity": {
+    "type": ""
+  },
+  "VmLayer/line-opacity": {
+    "type": ""
+  },
+  "vm-layer/line-pattern": {
+    "type": ""
+  },
+  "VmLayer/line-pattern": {
+    "type": ""
+  },
+  "vm-layer/line-round-limit": {
+    "type": ""
+  },
+  "VmLayer/line-round-limit": {
+    "type": ""
+  },
+  "vm-layer/line-sort-key": {
+    "type": ""
+  },
+  "VmLayer/line-sort-key": {
+    "type": ""
+  },
+  "vm-layer/line-translate": {
+    "type": ""
+  },
+  "VmLayer/line-translate": {
+    "type": ""
+  },
+  "vm-layer/line-translate-anchor": {
+    "type": ""
+  },
+  "VmLayer/line-translate-anchor": {
+    "type": ""
+  },
+  "vm-layer/line-width": {
+    "type": ""
+  },
+  "VmLayer/line-width": {
+    "type": ""
+  },
+  "vm-layer/icon-allow-overlap": {
+    "type": ""
+  },
+  "VmLayer/icon-allow-overlap": {
+    "type": ""
+  },
+  "vm-layer/icon-anchor": {
+    "type": ""
+  },
+  "VmLayer/icon-anchor": {
+    "type": ""
+  },
+  "vm-layer/icon-color": {
+    "type": ""
+  },
+  "VmLayer/icon-color": {
+    "type": ""
+  },
+  "vm-layer/icon-halo-blur": {
+    "type": ""
+  },
+  "VmLayer/icon-halo-blur": {
+    "type": ""
+  },
+  "vm-layer/icon-halo-color": {
+    "type": ""
+  },
+  "VmLayer/icon-halo-color": {
+    "type": ""
+  },
+  "vm-layer/icon-halo-width": {
+    "type": ""
+  },
+  "VmLayer/icon-halo-width": {
+    "type": ""
+  },
+  "vm-layer/icon-ignore-placement": {
+    "type": ""
+  },
+  "VmLayer/icon-ignore-placement": {
+    "type": ""
+  },
+  "vm-layer/icon-image": {
+    "type": ""
+  },
+  "VmLayer/icon-image": {
+    "type": ""
+  },
+  "vm-layer/icon-keep-upright": {
+    "type": ""
+  },
+  "VmLayer/icon-keep-upright": {
+    "type": ""
+  },
+  "vm-layer/icon-offset": {
+    "type": ""
+  },
+  "VmLayer/icon-offset": {
+    "type": ""
+  },
+  "vm-layer/icon-opacity": {
+    "type": ""
+  },
+  "VmLayer/icon-opacity": {
+    "type": ""
+  },
+  "vm-layer/icon-optional": {
+    "type": ""
+  },
+  "VmLayer/icon-optional": {
+    "type": ""
+  },
+  "vm-layer/icon-padding": {
+    "type": ""
+  },
+  "VmLayer/icon-padding": {
+    "type": ""
+  },
+  "vm-layer/icon-pitch-alignment": {
+    "type": ""
+  },
+  "VmLayer/icon-pitch-alignment": {
+    "type": ""
+  },
+  "vm-layer/icon-rotate": {
+    "type": ""
+  },
+  "VmLayer/icon-rotate": {
+    "type": ""
+  },
+  "vm-layer/icon-rotation-alignment": {
+    "type": ""
+  },
+  "VmLayer/icon-rotation-alignment": {
+    "type": ""
+  },
+  "vm-layer/icon-size": {
+    "type": ""
+  },
+  "VmLayer/icon-size": {
+    "type": ""
+  },
+  "vm-layer/icon-text-fit": {
+    "type": ""
+  },
+  "VmLayer/icon-text-fit": {
+    "type": ""
+  },
+  "vm-layer/icon-text-fit-padding": {
+    "type": ""
+  },
+  "VmLayer/icon-text-fit-padding": {
+    "type": ""
+  },
+  "vm-layer/icon-translate": {
+    "type": ""
+  },
+  "VmLayer/icon-translate": {
+    "type": ""
+  },
+  "vm-layer/icon-translate-anchor": {
+    "type": ""
+  },
+  "VmLayer/icon-translate-anchor": {
+    "type": ""
+  },
+  "vm-layer/symbol-avoid-edges": {
+    "type": ""
+  },
+  "VmLayer/symbol-avoid-edges": {
+    "type": ""
+  },
+  "vm-layer/symbol-placement": {
+    "type": ""
+  },
+  "VmLayer/symbol-placement": {
+    "type": ""
+  },
+  "vm-layer/symbol-sort-key": {
+    "type": ""
+  },
+  "VmLayer/symbol-sort-key": {
+    "type": ""
+  },
+  "vm-layer/symbol-spacing": {
+    "type": ""
+  },
+  "VmLayer/symbol-spacing": {
+    "type": ""
+  },
+  "vm-layer/symbol-z-order": {
+    "type": ""
+  },
+  "VmLayer/symbol-z-order": {
+    "type": ""
+  },
+  "vm-layer/text-allow-overlap": {
+    "type": ""
+  },
+  "VmLayer/text-allow-overlap": {
+    "type": ""
+  },
+  "vm-layer/text-anchor": {
+    "type": ""
+  },
+  "VmLayer/text-anchor": {
+    "type": ""
+  },
+  "vm-layer/text-color": {
+    "type": ""
+  },
+  "VmLayer/text-color": {
+    "type": ""
+  },
+  "vm-layer/text-field": {
+    "type": ""
+  },
+  "VmLayer/text-field": {
+    "type": ""
+  },
+  "vm-layer/text-font": {
+    "type": ""
+  },
+  "VmLayer/text-font": {
+    "type": ""
+  },
+  "vm-layer/text-halo-blur": {
+    "type": ""
+  },
+  "VmLayer/text-halo-blur": {
+    "type": ""
+  },
+  "vm-layer/text-halo-color": {
+    "type": ""
+  },
+  "VmLayer/text-halo-color": {
+    "type": ""
+  },
+  "vm-layer/text-halo-width": {
+    "type": ""
+  },
+  "VmLayer/text-halo-width": {
+    "type": ""
+  },
+  "vm-layer/text-ignore-placement": {
+    "type": ""
+  },
+  "VmLayer/text-ignore-placement": {
+    "type": ""
+  },
+  "vm-layer/text-justify": {
+    "type": ""
+  },
+  "VmLayer/text-justify": {
+    "type": ""
+  },
+  "vm-layer/text-keep-upright": {
+    "type": ""
+  },
+  "VmLayer/text-keep-upright": {
+    "type": ""
+  },
+  "vm-layer/text-letter-spacing": {
+    "type": ""
+  },
+  "VmLayer/text-letter-spacing": {
+    "type": ""
+  },
+  "vm-layer/text-line-height": {
+    "type": ""
+  },
+  "VmLayer/text-line-height": {
+    "type": ""
+  },
+  "vm-layer/text-max-angle": {
+    "type": ""
+  },
+  "VmLayer/text-max-angle": {
+    "type": ""
+  },
+  "vm-layer/text-max-width": {
+    "type": ""
+  },
+  "VmLayer/text-max-width": {
+    "type": ""
+  },
+  "vm-layer/text-offset": {
+    "type": ""
+  },
+  "VmLayer/text-offset": {
+    "type": ""
+  },
+  "vm-layer/text-opacity": {
+    "type": ""
+  },
+  "VmLayer/text-opacity": {
+    "type": ""
+  },
+  "vm-layer/text-optional": {
+    "type": ""
+  },
+  "VmLayer/text-optional": {
+    "type": ""
+  },
+  "vm-layer/text-padding": {
+    "type": ""
+  },
+  "VmLayer/text-padding": {
+    "type": ""
+  },
+  "vm-layer/text-pitch-alignment": {
+    "type": ""
+  },
+  "VmLayer/text-pitch-alignment": {
+    "type": ""
+  },
+  "vm-layer/text-radial-offset": {
+    "type": ""
+  },
+  "VmLayer/text-radial-offset": {
+    "type": ""
+  },
+  "vm-layer/text-rotate": {
+    "type": ""
+  },
+  "VmLayer/text-rotate": {
+    "type": ""
+  },
+  "vm-layer/text-rotation-alignment": {
+    "type": ""
+  },
+  "VmLayer/text-rotation-alignment": {
+    "type": ""
+  },
+  "vm-layer/text-size": {
+    "type": ""
+  },
+  "VmLayer/text-size": {
+    "type": ""
+  },
+  "vm-layer/text-transform": {
+    "type": ""
+  },
+  "VmLayer/text-transform": {
+    "type": ""
+  },
+  "vm-layer/text-translate": {
+    "type": ""
+  },
+  "VmLayer/text-translate": {
+    "type": ""
+  },
+  "vm-layer/text-translate-anchor": {
+    "type": ""
+  },
+  "VmLayer/text-translate-anchor": {
+    "type": ""
+  },
+  "vm-layer/text-variable-anchor": {
+    "type": ""
+  },
+  "VmLayer/text-variable-anchor": {
+    "type": ""
+  },
+  "vm-layer/text-writing-mode": {
+    "type": ""
+  },
+  "VmLayer/text-writing-mode": {
+    "type": ""
+  },
+  "vm-layer/raster-brightness-max": {
+    "type": ""
+  },
+  "VmLayer/raster-brightness-max": {
+    "type": ""
+  },
+  "vm-layer/raster-brightness-min": {
+    "type": ""
+  },
+  "VmLayer/raster-brightness-min": {
+    "type": ""
+  },
+  "vm-layer/raster-contrast": {
+    "type": ""
+  },
+  "VmLayer/raster-contrast": {
+    "type": ""
+  },
+  "vm-layer/raster-fade-duration": {
+    "type": ""
+  },
+  "VmLayer/raster-fade-duration": {
+    "type": ""
+  },
+  "vm-layer/raster-hue-rotate": {
+    "type": ""
+  },
+  "VmLayer/raster-hue-rotate": {
+    "type": ""
+  },
+  "vm-layer/raster-opacity": {
+    "type": ""
+  },
+  "VmLayer/raster-opacity": {
+    "type": ""
+  },
+  "vm-layer/raster-resampling": {
+    "type": ""
+  },
+  "VmLayer/raster-resampling": {
+    "type": ""
+  },
+  "vm-layer/raster-saturation": {
+    "type": ""
+  },
+  "VmLayer/raster-saturation": {
+    "type": ""
+  },
+  "vm-layer/circle-blur": {
+    "type": ""
+  },
+  "VmLayer/circle-blur": {
+    "type": ""
+  },
+  "vm-layer/circle-color": {
+    "type": ""
+  },
+  "VmLayer/circle-color": {
+    "type": ""
+  },
+  "vm-layer/circle-opacity": {
+    "type": ""
+  },
+  "VmLayer/circle-opacity": {
+    "type": ""
+  },
+  "vm-layer/circle-pitch-alignment": {
+    "type": ""
+  },
+  "VmLayer/circle-pitch-alignment": {
+    "type": ""
+  },
+  "vm-layer/circle-pitch-scale": {
+    "type": ""
+  },
+  "VmLayer/circle-pitch-scale": {
+    "type": ""
+  },
+  "vm-layer/circle-radius": {
+    "type": ""
+  },
+  "VmLayer/circle-radius": {
+    "type": ""
+  },
+  "vm-layer/circle-sort-key": {
+    "type": ""
+  },
+  "VmLayer/circle-sort-key": {
+    "type": ""
+  },
+  "vm-layer/circle-stroke-color": {
+    "type": ""
+  },
+  "VmLayer/circle-stroke-color": {
+    "type": ""
+  },
+  "vm-layer/circle-stroke-opacity": {
+    "type": ""
+  },
+  "VmLayer/circle-stroke-opacity": {
+    "type": ""
+  },
+  "vm-layer/circle-stroke-width": {
+    "type": ""
+  },
+  "VmLayer/circle-stroke-width": {
+    "type": ""
+  },
+  "vm-layer/circle-translate": {
+    "type": ""
+  },
+  "VmLayer/circle-translate": {
+    "type": ""
+  },
+  "vm-layer/circle-translate-anchor": {
+    "type": ""
+  },
+  "VmLayer/circle-translate-anchor": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-base": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-base": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-color": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-color": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-height": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-height": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-opacity": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-opacity": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-pattern": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-pattern": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-translate": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-translate": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-translate-anchor": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-translate-anchor": {
+    "type": ""
+  },
+  "vm-layer/fill-extrusion-vertical-gradient": {
+    "type": ""
+  },
+  "VmLayer/fill-extrusion-vertical-gradient": {
+    "type": ""
+  },
+  "vm-layer/heatmap-color": {
+    "type": ""
+  },
+  "VmLayer/heatmap-color": {
+    "type": ""
+  },
+  "vm-layer/heatmap-intensity": {
+    "type": ""
+  },
+  "VmLayer/heatmap-intensity": {
+    "type": ""
+  },
+  "vm-layer/heatmap-opacity": {
+    "type": ""
+  },
+  "VmLayer/heatmap-opacity": {
+    "type": ""
+  },
+  "vm-layer/heatmap-radius": {
+    "type": ""
+  },
+  "VmLayer/heatmap-radius": {
+    "type": ""
+  },
+  "vm-layer/heatmap-weight": {
+    "type": ""
+  },
+  "VmLayer/heatmap-weight": {
+    "type": ""
+  },
+  "vm-layer/hillshade-accent-color": {
+    "type": ""
+  },
+  "VmLayer/hillshade-accent-color": {
+    "type": ""
+  },
+  "vm-layer/hillshade-exaggeration": {
+    "type": ""
+  },
+  "VmLayer/hillshade-exaggeration": {
+    "type": ""
+  },
+  "vm-layer/hillshade-highlight-color": {
+    "type": ""
+  },
+  "VmLayer/hillshade-highlight-color": {
+    "type": ""
+  },
+  "vm-layer/hillshade-illumination-anchor": {
+    "type": ""
+  },
+  "VmLayer/hillshade-illumination-anchor": {
+    "type": ""
+  },
+  "vm-layer/hillshade-illumination-direction": {
+    "type": ""
+  },
+  "VmLayer/hillshade-illumination-direction": {
+    "type": ""
+  },
+  "vm-layer/hillshade-shadow-color": {
+    "type": ""
+  },
+  "VmLayer/hillshade-shadow-color": {
+    "type": ""
+  },
+  "vm-layer/visibility": {
+    "type": ""
+  },
+  "VmLayer/visibility": {
+    "type": ""
+  },
+  "vm-layer-arc/name": {
+    "type": "string",
+    "description": "Unique Name of the layers"
+  },
+  "VmLayerArc/name": {
+    "type": "string",
+    "description": "Unique Name of the layers"
+  },
+  "vm-layer-arc/zIndex": {
+    "type": "number|string",
+    "description": "(Dynamic) If Number, is order of the layer. Can set the Name of the layer to put after"
+  },
+  "VmLayerArc/zIndex": {
+    "type": "number|string",
+    "description": "(Dynamic) If Number, is order of the layer. Can set the Name of the layer to put after"
+  },
+  "vm-layer-arc/data": {
+    "type": "array",
+    "description": "Data Item",
+    "options": [
+      "Array of object item that have key for from point and to point",
+      "as weel as colors",
+      "with"
+    ]
+  },
+  "VmLayerArc/data": {
+    "type": "array",
+    "description": "Data Item",
+    "options": [
+      "Array of object item that have key for from point and to point",
+      "as weel as colors",
+      "with"
+    ]
+  },
+  "vm-layer-arc/witdh": {
+    "type": "number|function",
+    "description": "With Arcs",
+    "options": [
+      "number or function thad will get item from data"
+    ]
+  },
+  "VmLayerArc/witdh": {
+    "type": "number|function",
+    "description": "With Arcs",
+    "options": [
+      "number or function thad will get item from data"
+    ]
+  },
+  "vm-layer-arc/color": {
+    "type": "string",
+    "description": "color",
+    "options": [
+      "color to use. If sourceColor os destinationColor defined",
+      "this will be ignore"
+    ]
+  },
+  "VmLayerArc/color": {
+    "type": "string",
+    "description": "color",
+    "options": [
+      "color to use. If sourceColor os destinationColor defined",
+      "this will be ignore"
+    ]
+  },
+  "vm-layer-arc/sourceColor": {
+    "type": "string|function",
+    "description": "sourceColor",
+    "options": [
+      "number or function thad will get item from data"
+    ]
+  },
+  "VmLayerArc/sourceColor": {
+    "type": "string|function",
+    "description": "sourceColor",
+    "options": [
+      "number or function thad will get item from data"
+    ]
+  },
+  "vm-layer-arc/targetColor": {
+    "type": "string|function",
+    "description": "sourceColor",
+    "options": [
+      "number or function thad will get item from data"
+    ]
+  },
+  "VmLayerArc/targetColor": {
+    "type": "string|function",
+    "description": "sourceColor",
+    "options": [
+      "number or function thad will get item from data"
+    ]
+  },
+  "vm-layer-arc/sourcePosition": {
+    "type": "string|function",
+    "description": "getSourcePosition",
+    "options": [
+      "function or path thad will get item from data"
+    ]
+  },
+  "VmLayerArc/sourcePosition": {
+    "type": "string|function",
+    "description": "getSourcePosition",
+    "options": [
+      "function or path thad will get item from data"
+    ]
+  },
+  "vm-layer-arc/targetPosition": {
+    "type": "string|function",
+    "description": "getSourcePosition",
+    "options": [
+      "function or path thad will get item from data"
+    ]
+  },
+  "VmLayerArc/targetPosition": {
+    "type": "string|function",
+    "description": "getSourcePosition",
+    "options": [
+      "function or path thad will get item from data"
+    ]
+  },
+  "vm-marker/center": {
+    "type": "array",
+    "description": "(Dynamic) Center of Marker"
+  },
+  "VmMarker/center": {
+    "type": "array",
+    "description": "(Dynamic) Center of Marker"
+  },
+  "vm-marker/anchor": {
+    "type": "string",
+    "description": "(Dynamic) Anchor of the marker",
+    "options": [
+      "center",
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "top-left",
+      "top-right",
+      "bottom-left",
+      "and bottom-right"
+    ]
+  },
+  "VmMarker/anchor": {
+    "type": "string",
+    "description": "(Dynamic) Anchor of the marker",
+    "options": [
+      "center",
+      "top",
+      "bottom",
+      "left",
+      "right",
+      "top-left",
+      "top-right",
+      "bottom-left",
+      "and bottom-right"
+    ]
+  },
+  "vm-marker/color": {
+    "type": "string",
+    "description": "(Dynamic) Color of the default marker, if default slot is not set (Dynamic)"
+  },
+  "VmMarker/color": {
+    "type": "string",
+    "description": "(Dynamic) Color of the default marker, if default slot is not set (Dynamic)"
+  },
+  "vm-marker/offset": {
+    "type": "array",
+    "description": "(Dynamic) Offset of market in pixels"
+  },
+  "VmMarker/offset": {
+    "type": "array",
+    "description": "(Dynamic) Offset of market in pixels"
+  },
+  "vm-marker/draggable": {
+    "type": "boolean",
+    "description": "(Dynamic) Offset of market in pixels"
+  },
+  "VmMarker/draggable": {
+    "type": "boolean",
+    "description": "(Dynamic) Offset of market in pixels"
+  },
+  "vm-marker/rotation": {
+    "type": "number",
+    "description": "(Dynamic) The rotation angle of the marker in degrees, relative to its respective rotationAlignment setting. A positive value will rotate the marker clockwise."
+  },
+  "VmMarker/rotation": {
+    "type": "number",
+    "description": "(Dynamic) The rotation angle of the marker in degrees, relative to its respective rotationAlignment setting. A positive value will rotate the marker clockwise."
+  },
+  "vm-marker/minZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "VmMarker/minZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "vm-marker/maxZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "VmMarker/maxZoom": {
+    "type": "string|number",
+    "description": "(Dynamic) min zoom of map tha will show the marker"
+  },
+  "vm-marker/pitchAlignment": {
+    "type": "string",
+    "description": "(Dynamic) map aligns the Marker to the plane of the map. viewport aligns the Marker to the plane of the viewport. auto automatically matches the value of rotationAlignment",
+    "options": [
+      "map",
+      "viewport",
+      "auto"
+    ]
+  },
+  "VmMarker/pitchAlignment": {
+    "type": "string",
+    "description": "(Dynamic) map aligns the Marker to the plane of the map. viewport aligns the Marker to the plane of the viewport. auto automatically matches the value of rotationAlignment",
+    "options": [
+      "map",
+      "viewport",
+      "auto"
+    ]
+  },
+  "vm-marker/rotationAlignment": {
+    "type": "string",
+    "description": "(Dynamic) map aligns the Marker 's rotation relative to the map, maintaining a bearing as the map rotates. viewport aligns the Marker 's rotation relative to the viewport, agnostic to map rotations. auto is equivalent to viewport .",
+    "options": [
+      "map",
+      "viewport",
+      "auto"
+    ]
+  },
+  "VmMarker/rotationAlignment": {
+    "type": "string",
+    "description": "(Dynamic) map aligns the Marker 's rotation relative to the map, maintaining a bearing as the map rotates. viewport aligns the Marker 's rotation relative to the viewport, agnostic to map rotations. auto is equivalent to viewport .",
+    "options": [
+      "map",
+      "viewport",
+      "auto"
+    ]
+  },
+  "vm-marker/popUpContent": {
+    "type": "string",
+    "description": "(Dynamic) The PopUp Content - If set via slot, this will be ignored"
+  },
+  "VmMarker/popUpContent": {
+    "type": "string",
+    "description": "(Dynamic) The PopUp Content - If set via slot, this will be ignored"
+  },
+  "vm-marker/metadata": {
+    "type": "object",
+    "description": "Metadata, that can be used in popup scoped slots"
+  },
+  "VmMarker/metadata": {
+    "type": "object",
+    "description": "Metadata, that can be used in popup scoped slots"
+  },
+  "vm-marker/opacity": {
+    "type": "number",
+    "description": "opacidade"
+  },
+  "VmMarker/opacity": {
+    "type": "number",
+    "description": "opacidade"
+  },
+  "vm-popup/anchor": {
+    "type": "string",
+    "description": "A string indicating the part of the Popup that should be positioned closest to the coordinate set via Popup#setLngLat",
+    "options": [
+      "'center'",
+      "'top'",
+      "'bottom'",
+      "'left'",
+      "'right'",
+      "'top-left'",
+      "'top-right'",
+      "'bottom-left'",
+      "and 'bottom-right' ."
+    ]
+  },
+  "VmPopup/anchor": {
+    "type": "string",
+    "description": "A string indicating the part of the Popup that should be positioned closest to the coordinate set via Popup#setLngLat",
+    "options": [
+      "'center'",
+      "'top'",
+      "'bottom'",
+      "'left'",
+      "'right'",
+      "'top-left'",
+      "'top-right'",
+      "'bottom-left'",
+      "and 'bottom-right' ."
+    ]
+  },
+  "vm-popup/open": {
+    "type": "boolean",
+    "description": "If true , show or open popup. use with .sync Modifier to change parent (Dynamic)"
+  },
+  "VmPopup/open": {
+    "type": "boolean",
+    "description": "If true , show or open popup. use with .sync Modifier to change parent (Dynamic)"
+  },
+  "vm-popup/global": {
+    "type": "boolean",
+    "description": "TODO\n      If we use the global popup of the map. if true, any new VmPopup instance will use the same popup, so a new poup will remove any previues.\n      If false, will create a new Popup."
+  },
+  "VmPopup/global": {
+    "type": "boolean",
+    "description": "TODO\n      If we use the global popup of the map. if true, any new VmPopup instance will use the same popup, so a new poup will remove any previues.\n      If false, will create a new Popup."
+  },
+  "vm-popup/center": {
+    "type": "array",
+    "description": "Center of Popup (Dynamic)"
+  },
+  "VmPopup/center": {
+    "type": "array",
+    "description": "Center of Popup (Dynamic)"
+  },
+  "vm-popup/closeButton": {
+    "type": "boolean",
+    "description": "If true , a close button will appear in the top right corner of the popup."
+  },
+  "VmPopup/closeButton": {
+    "type": "boolean",
+    "description": "If true , a close button will appear in the top right corner of the popup."
+  },
+  "vm-popup/closeOnClick": {
+    "type": "boolean",
+    "description": "If true , the popup will closed when the map is clicked."
+  },
+  "VmPopup/closeOnClick": {
+    "type": "boolean",
+    "description": "If true , the popup will closed when the map is clicked."
+  },
+  "vm-popup/closeOnMove": {
+    "type": "boolean",
+    "description": "If true , the popup will closed when the map moves."
+  },
+  "VmPopup/closeOnMove": {
+    "type": "boolean",
+    "description": "If true , the popup will closed when the map moves."
+  },
+  "vm-popup/offset": {
+    "type": "number|array",
+    "description": "pixel offset applied to the popup's location specified as:"
+  },
+  "VmPopup/offset": {
+    "type": "number|array",
+    "description": "pixel offset applied to the popup's location specified as:"
+  },
+  "vm-popup/className": {
+    "type": "string",
+    "description": "Space-separated CSS class names to add to popup container"
+  },
+  "VmPopup/className": {
+    "type": "string",
+    "description": "Space-separated CSS class names to add to popup container"
+  },
+  "vm-popup/maxWidth": {
+    "type": "number|string",
+    "description": "A string that sets the CSS property of the popup's maximum width, eg '300px' . To ensure the popup resizes to fit its content, set this property to 'none' ."
+  },
+  "VmPopup/maxWidth": {
+    "type": "number|string",
+    "description": "A string that sets the CSS property of the popup's maximum width, eg '300px' . To ensure the popup resizes to fit its content, set this property to 'none' ."
+  },
+  "vm-popup/maxHeight": {
+    "type": "number|string",
+    "description": "A string that sets the CSS property of the popup's maximum width, eg '300px' . To ensure the popup resizes to fit its content, set this property to 'none' ."
+  },
+  "VmPopup/maxHeight": {
+    "type": "number|string",
+    "description": "A string that sets the CSS property of the popup's maximum width, eg '300px' . To ensure the popup resizes to fit its content, set this property to 'none' ."
+  },
+  "vm-popup/trackPointer": {
+    "type": "boolean",
+    "description": "Tracks the popup anchor to the cursor position on screens with a pointer device (it will be hidden on touchscreens). Replaces the setLngLat behavior. For most use cases, set closeOnClick and closeButton to false."
+  },
+  "VmPopup/trackPointer": {
+    "type": "boolean",
+    "description": "Tracks the popup anchor to the cursor position on screens with a pointer device (it will be hidden on touchscreens). Replaces the setLngLat behavior. For most use cases, set closeOnClick and closeButton to false."
+  },
+  "vm-popup/color": {
+    "type": "string",
+    "description": "The color or background of the popup"
+  },
+  "VmPopup/color": {
+    "type": "string",
+    "description": "The color or background of the popup"
+  },
+  "vm-popup/textColor": {
+    "type": "string",
+    "description": "The color of the popup"
+  },
+  "VmPopup/textColor": {
+    "type": "string",
+    "description": "The color of the popup"
+  },
+  "vm-popup/arrowColor": {
+    "type": "string",
+    "description": "In cases you want to set  a diferente color for the arrow. if null, will use the color propr"
+  },
+  "VmPopup/arrowColor": {
+    "type": "string",
+    "description": "In cases you want to set  a diferente color for the arrow. if null, will use the color propr"
+  },
+  "vm-source/name": {
+    "type": "string",
+    "description": "Id/Name of the Source. If blank or not unique, will auto generate one for you"
+  },
+  "VmSource/name": {
+    "type": "string",
+    "description": "Id/Name of the Source. If blank or not unique, will auto generate one for you"
+  },
+  "vm-source/unique": {
+    "type": "boolean"
+  },
+  "VmSource/unique": {
+    "type": "boolean"
+  },
+  "vm-source/type": {
+    "type": "string",
+    "description": "Type of the Source.",
+    "options": [
+      "vector",
+      "raster",
+      "raster-dem",
+      "geojson",
+      "image",
+      "video",
+      "canvas"
+    ]
+  },
+  "VmSource/type": {
+    "type": "string",
+    "description": "Type of the Source.",
+    "options": [
+      "vector",
+      "raster",
+      "raster-dem",
+      "geojson",
+      "image",
+      "video",
+      "canvas"
+    ]
+  },
+  "vm-source/options": {
+    "type": "object",
+    "description": "Object contains the options for each type of source"
+  },
+  "VmSource/options": {
+    "type": "object",
+    "description": "Object contains the options for each type of source"
+  },
+  "vue-mapbox/width": {
+    "type": "number|string",
+    "description": "Mapa Width. In px or percent"
+  },
+  "VueMapbox/width": {
+    "type": "number|string",
+    "description": "Mapa Width. In px or percent"
+  },
+  "vue-mapbox/height": {
+    "type": "number|string",
+    "description": "Mapa Height. In px or percent"
+  },
+  "VueMapbox/height": {
+    "type": "number|string",
+    "description": "Mapa Height. In px or percent"
+  },
+  "vue-mapbox/showLoader": {
+    "type": "boolean",
+    "description": "Show a Loader"
+  },
+  "VueMapbox/showLoader": {
+    "type": "boolean",
+    "description": "Show a Loader"
+  },
+  "vue-mapbox/accessToken": {
+    "type": "string",
+    "description": "AcceToken for your account for mapbox, if you are uing it for server tiles. Can be blank if you use anothers sources.\nIf you set to the vue client an process.env.VUE_APP_MAPBOX_ACCESS_TOKEN, it will be used too"
+  },
+  "VueMapbox/accessToken": {
+    "type": "string",
+    "description": "AcceToken for your account for mapbox, if you are uing it for server tiles. Can be blank if you use anothers sources.\nIf you set to the vue client an process.env.VUE_APP_MAPBOX_ACCESS_TOKEN, it will be used too"
+  },
+  "vue-mapbox/layersCanRaname": {
+    "type": "boolean",
+    "description": "Allow layer name to be rewrite, so layer with same name don't show error, and you can get than with ref in vm-layer\nBut if your application need the exatc name of layer, so yo can get the exatc name, set it to false"
+  },
+  "VueMapbox/layersCanRaname": {
+    "type": "boolean",
+    "description": "Allow layer name to be rewrite, so layer with same name don't show error, and you can get than with ref in vm-layer\nBut if your application need the exatc name of layer, so yo can get the exatc name, set it to false"
+  },
+  "vue-mapbox/mapStyle": {
+    "type": "string|object",
+    "description": "The map's Mapbox style. Can be a URL or the STYLE OBJECT itself . example mapbox://styles/mapbox/streets-v11.  more info at https://mapbox.com/mapbox-gl-style-spec/"
+  },
+  "VueMapbox/mapStyle": {
+    "type": "string|object",
+    "description": "The map's Mapbox style. Can be a URL or the STYLE OBJECT itself . example mapbox://styles/mapbox/streets-v11.  more info at https://mapbox.com/mapbox-gl-style-spec/"
+  },
+  "vue-mapbox/minZoom": {
+    "type": "number",
+    "description": "The minimum zoom level of the map (0-24)."
+  },
+  "VueMapbox/minZoom": {
+    "type": "number",
+    "description": "The minimum zoom level of the map (0-24)."
+  },
+  "vue-mapbox/maxZoom": {
+    "type": "number",
+    "description": "The maximun zoom level of the map (0-24)."
+  },
+  "VueMapbox/maxZoom": {
+    "type": "number",
+    "description": "The maximun zoom level of the map (0-24)."
+  },
+  "vue-mapbox/zoom": {
+    "type": "number",
+    "description": "Define Zoom level (0-24)."
+  },
+  "VueMapbox/zoom": {
+    "type": "number",
+    "description": "Define Zoom level (0-24)."
+  },
+  "vue-mapbox/center": {
+    "type": "array",
+    "description": "Define center array."
+  },
+  "VueMapbox/center": {
+    "type": "array",
+    "description": "Define center array."
+  },
+  "vue-mapbox/hash": {
+    "type": "boolean|string",
+    "description": "If true , the map's position (zoom, center latitude, center longitude, bearing, and pitch) will be synced with the hash fragment of the page's URL. For example, http://path/to/my/page.html#2.59/39.26/53.07/-24.1/60 . An additional string may optionally be provided to indicate a parameter-styled hash, e.g. http://path/to/my/page.html#map=2.59/39.26/53.07/-24.1/60&foo=bar , where foo is a custom parameter and bar is an arbitrary hash distinct from the map hash."
+  },
+  "VueMapbox/hash": {
+    "type": "boolean|string",
+    "description": "If true , the map's position (zoom, center latitude, center longitude, bearing, and pitch) will be synced with the hash fragment of the page's URL. For example, http://path/to/my/page.html#2.59/39.26/53.07/-24.1/60 . An additional string may optionally be provided to indicate a parameter-styled hash, e.g. http://path/to/my/page.html#map=2.59/39.26/53.07/-24.1/60&foo=bar , where foo is a custom parameter and bar is an arbitrary hash distinct from the map hash."
+  },
+  "vue-mapbox/bounds": {
+    "type": "array",
+    "description": "The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options."
+  },
+  "VueMapbox/bounds": {
+    "type": "array",
+    "description": "The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options."
+  },
+  "vue-mapbox/maxBounds": {
+    "type": "array",
+    "description": "The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options."
+  },
+  "VueMapbox/maxBounds": {
+    "type": "array",
+    "description": "The initial bounds of the map. If bounds is specified, it overrides center and zoom constructor options."
+  },
+  "vue-mapbox/padding": {
+    "type": "object|number",
+    "description": "camera padding. will be user for all bounds, fly etc",
+    "options": [
+      "number or {top",
+      "left",
+      "right",
+      "bottom}"
+    ]
+  },
+  "VueMapbox/padding": {
+    "type": "object|number",
+    "description": "camera padding. will be user for all bounds, fly etc",
+    "options": [
+      "number or {top",
+      "left",
+      "right",
+      "bottom}"
+    ]
+  },
+  "vue-mapbox/otherOptions": {
+    "type": "object",
+    "description": "Other options to pass to mapbox. Will be merged here. See https://docs.mapbox.com/mapbox-gl-js/api/#map for all options."
+  },
+  "VueMapbox/otherOptions": {
+    "type": "object",
+    "description": "Other options to pass to mapbox. Will be merged here. See https://docs.mapbox.com/mapbox-gl-js/api/#map for all options."
+  },
+  "vue-mapbox/images": {
+    "type": "object",
+    "description": "Object with images to load in format {'imagename':url,'image2name':url2}"
+  },
+  "VueMapbox/images": {
+    "type": "object",
+    "description": "Object with images to load in format {'imagename':url,'image2name':url2}"
+  },
+  "vue-mapbox/devMode": {
+    "type": "boolean",
+    "description": "show cameras attributes"
+  },
+  "VueMapbox/devMode": {
+    "type": "boolean",
+    "description": "show cameras attributes"
+  },
+  "vue-mapbox/interactive": {
+    "type": "boolean",
+    "description": "show cameras attributes"
+  },
+  "VueMapbox/interactive": {
+    "type": "boolean",
+    "description": "show cameras attributes"
+  },
+  "vue-mapbox/attributionControl": {
+    "type": "boolean"
+  },
+  "VueMapbox/attributionControl": {
+    "type": "boolean"
+  },
+  "filho/numero": {
+    "type": "number"
+  },
+  "Filho/numero": {
+    "type": "number"
+  },
+  "recuperacao-energetica-icon/processamentoPercent": {
+    "type": "number"
+  },
+  "RecuperacaoEnergeticaIcon/processamentoPercent": {
+    "type": "number"
+  },
+  "recuperacao-energetica-icon/energiaPercent": {
+    "type": "number"
+  },
+  "RecuperacaoEnergeticaIcon/energiaPercent": {
+    "type": "number"
+  },
+  "recuperacao-energetica-icon/tecnologia": {
+    "type": "string"
+  },
+  "RecuperacaoEnergeticaIcon/tecnologia": {
+    "type": "string"
+  },
+  "recuperacao-energetica-icon/showInfo": {
+    "type": "boolean"
+  },
+  "RecuperacaoEnergeticaIcon/showInfo": {
+    "type": "boolean"
+  },
+  "recuperacao-energetica-icon/item": {
+    "type": "object"
+  },
+  "RecuperacaoEnergeticaIcon/item": {
+    "type": "object"
+  },
+  "fluxo-lines/dataInput": {
+    "type": "undefined"
+  },
+  "FluxoLines/dataInput": {
+    "type": "undefined"
+  },
+  "fluxo-lines/type": {
+    "type": "string"
+  },
+  "FluxoLines/type": {
+    "type": "string"
+  },
+  "fluxo-lines/getSourcePosition": {
+    "type": "function"
+  },
+  "FluxoLines/getSourcePosition": {
+    "type": "function"
+  },
+  "fluxo-lines/getTargetPosition": {
+    "type": "function"
+  },
+  "FluxoLines/getTargetPosition": {
+    "type": "function"
+  },
+  "fluxo-lines/getStrokeWidth": {
+    "type": "function"
+  },
+  "FluxoLines/getStrokeWidth": {
+    "type": "function"
+  },
+  "fluxo-lines/getSourceColor": {
+    "type": "function"
+  },
+  "FluxoLines/getSourceColor": {
+    "type": "function"
+  },
+  "fluxo-lines/getTargetColor": {
+    "type": "function"
+  },
+  "FluxoLines/getTargetColor": {
+    "type": "function"
+  },
+  "fluxo-lines/opacity": {
+    "type": "number"
+  },
+  "FluxoLines/opacity": {
+    "type": "number"
+  },
+  "mapbox-fill/name": {
+    "type": ""
+  },
+  "MapboxFill/name": {
+    "type": ""
+  },
+  "mapbox-fill/pangea": {
+    "type": "boolean"
+  },
+  "MapboxFill/pangea": {
+    "type": "boolean"
+  },
+  "mapbox-fill/mvt": {
+    "type": "boolean"
+  },
+  "MapboxFill/mvt": {
+    "type": "boolean"
+  },
+  "mapbox-fill/legends": {
+    "type": "boolean"
+  },
+  "MapboxFill/legends": {
+    "type": "boolean"
+  },
+  "mapbox-fill/layer": {
+    "type": "boolean"
+  },
+  "MapboxFill/layer": {
+    "type": "boolean"
+  },
+  "mapbox-fill/geoJSON": {
+    "type": "boolean"
+  },
+  "MapboxFill/geoJSON": {
+    "type": "boolean"
+  },
+  "mapbox-fill/zoomMin": {
+    "type": "number"
+  },
+  "MapboxFill/zoomMin": {
+    "type": "number"
+  },
+  "mapbox-fill/zoomMax": {
+    "type": "number"
+  },
+  "MapboxFill/zoomMax": {
+    "type": "number"
+  },
+  "mapbox-fill/zIndex": {
+    "type": "number"
+  },
+  "MapboxFill/zIndex": {
+    "type": "number"
+  },
+  "mapbox-fill/layerStyle": {
+    "type": "boolean"
+  },
+  "MapboxFill/layerStyle": {
+    "type": "boolean"
+  },
+  "mapbox-fill/fillColorKey": {
+    "type": "string"
+  },
+  "MapboxFill/fillColorKey": {
+    "type": "string"
+  },
+  "mapbox-fill/fillColor": {
+    "type": "string"
+  },
+  "MapboxFill/fillColor": {
+    "type": "string"
+  },
+  "mapbox-fill/fillOutlineColorKey": {
+    "type": "string"
+  },
+  "MapboxFill/fillOutlineColorKey": {
+    "type": "string"
+  },
+  "mapbox-fill/fillOutlineColor": {
+    "type": "string"
+  },
+  "MapboxFill/fillOutlineColor": {
+    "type": "string"
+  },
+  "mapbox-fill/fillAntialias": {
+    "type": "boolean"
+  },
+  "MapboxFill/fillAntialias": {
+    "type": "boolean"
+  },
+  "mapbox-fill/opacityKey": {
+    "type": "string"
+  },
+  "MapboxFill/opacityKey": {
+    "type": "string"
+  },
+  "mapbox-fill/opacity": {
+    "type": "number"
+  },
+  "MapboxFill/opacity": {
+    "type": "number"
+  },
+  "mapbox-geojson/name": {
+    "type": "undefined"
+  },
+  "MapboxGeojson/name": {
+    "type": "undefined"
+  },
+  "mapbox-geojson/layerStyle": {
+    "type": "undefined"
+  },
+  "MapboxGeojson/layerStyle": {
+    "type": "undefined"
+  },
+  "mapbox-geojson/geoJSON": {
+    "type": "undefined"
+  },
+  "MapboxGeojson/geoJSON": {
+    "type": "undefined"
+  },
+  "mapbox-geojson/mvt": {
+    "type": "undefined"
+  },
+  "MapboxGeojson/mvt": {
+    "type": "undefined"
+  },
+  "mapbox-geojson/layer": {
+    "type": "undefined"
+  },
+  "MapboxGeojson/layer": {
+    "type": "undefined"
+  },
+  "mapbox-line/name": {
+    "type": ""
+  },
+  "MapboxLine/name": {
+    "type": ""
+  },
+  "mapbox-line/pangea": {
+    "type": "boolean"
+  },
+  "MapboxLine/pangea": {
+    "type": "boolean"
+  },
+  "mapbox-line/mvt": {
+    "type": "boolean"
+  },
+  "MapboxLine/mvt": {
+    "type": "boolean"
+  },
+  "mapbox-line/layer": {
+    "type": "boolean"
+  },
+  "MapboxLine/layer": {
+    "type": "boolean"
+  },
+  "mapbox-line/geoJSON": {
+    "type": "boolean"
+  },
+  "MapboxLine/geoJSON": {
+    "type": "boolean"
+  },
+  "mapbox-line/zoomMin": {
+    "type": "number"
+  },
+  "MapboxLine/zoomMin": {
+    "type": "number"
+  },
+  "mapbox-line/zoomMax": {
+    "type": "number"
+  },
+  "MapboxLine/zoomMax": {
+    "type": "number"
+  },
+  "mapbox-line/zIndex": {
+    "type": "number"
+  },
+  "MapboxLine/zIndex": {
+    "type": "number"
+  },
+  "mapbox-line/layerStyle": {
+    "type": "boolean"
+  },
+  "MapboxLine/layerStyle": {
+    "type": "boolean"
+  },
+  "mapbox-line/lineColorKey": {
+    "type": "string"
+  },
+  "MapboxLine/lineColorKey": {
+    "type": "string"
+  },
+  "mapbox-line/lineColor": {
+    "type": "string"
+  },
+  "MapboxLine/lineColor": {
+    "type": "string"
+  },
+  "mapbox-line/lineWidthKey": {
+    "type": "string"
+  },
+  "MapboxLine/lineWidthKey": {
+    "type": "string"
+  },
+  "mapbox-line/line-width": {
+    "type": "number"
+  },
+  "MapboxLine/line-width": {
+    "type": "number"
+  },
+  "mapbox-line/fillAntialias": {
+    "type": "boolean"
+  },
+  "MapboxLine/fillAntialias": {
+    "type": "boolean"
+  },
+  "mapbox-line/opacityKey": {
+    "type": "string"
+  },
+  "MapboxLine/opacityKey": {
+    "type": "string"
+  },
+  "mapbox-line/opacity": {
+    "type": "number"
+  },
+  "MapboxLine/opacity": {
+    "type": "number"
+  },
+  "mapbox-popup/layer": {
+    "type": "string"
+  },
+  "MapboxPopup/layer": {
+    "type": "string"
+  },
+  "mapbox-popup/on": {
+    "type": "string"
+  },
+  "MapboxPopup/on": {
+    "type": "string"
+  },
+  "mapbox-popup/off": {
+    "type": "string"
+  },
+  "MapboxPopup/off": {
+    "type": "string"
+  },
+  "mapbox-popup/popupPosition": {
+    "type": "string"
+  },
+  "MapboxPopup/popupPosition": {
+    "type": "string"
+  },
+  "mapbox-popup/closeButton": {
+    "type": "boolean"
+  },
+  "MapboxPopup/closeButton": {
+    "type": "boolean"
+  },
+  "mapbox-popup/closeOnClick": {
+    "type": "boolean"
+  },
+  "MapboxPopup/closeOnClick": {
+    "type": "boolean"
+  },
+  "mapbox-popup/className": {
+    "type": "string"
+  },
+  "MapboxPopup/className": {
+    "type": "string"
+  },
+  "mapbox-wms/url": {
+    "type": "string"
+  },
+  "MapboxWms/url": {
+    "type": "string"
+  },
+  "mapbox-wms/name": {
+    "type": "string"
+  },
+  "MapboxWms/name": {
+    "type": "string"
+  },
+  "mapbox-wms/zoomMin": {
+    "type": "number"
+  },
+  "MapboxWms/zoomMin": {
+    "type": "number"
+  },
+  "mapbox-wms/zoomMax": {
+    "type": "number"
+  },
+  "MapboxWms/zoomMax": {
+    "type": "number"
+  },
+  "mapbox-wms/legends": {
+    "type": "boolean"
+  },
+  "MapboxWms/legends": {
+    "type": "boolean"
+  },
+  "mapbox-wms/zIndex": {
+    "type": "number"
+  },
+  "MapboxWms/zIndex": {
+    "type": "number"
+  },
+  "mapbox-wms/opacity": {
+    "type": "number"
+  },
+  "MapboxWms/opacity": {
+    "type": "number"
+  },
+  "mapbox-wms/opacityKey": {
+    "type": "string"
+  },
+  "MapboxWms/opacityKey": {
+    "type": "string"
+  },
+  "mapbox-wms/raster-hue-rotate": {
+    "type": "number"
+  },
+  "MapboxWms/raster-hue-rotate": {
+    "type": "number"
+  },
+  "mapbox-wms/raster-hue-rotate-key": {
+    "type": "string"
+  },
+  "MapboxWms/raster-hue-rotate-key": {
+    "type": "string"
+  },
+  "mapbox-wms/raster-saturation": {
+    "type": "number"
+  },
+  "MapboxWms/raster-saturation": {
+    "type": "number"
+  },
+  "mapbox-wms/raster-saturation-key": {
+    "type": "string"
+  },
+  "MapboxWms/raster-saturation-key": {
+    "type": "string"
+  },
+  "mapbox-wms/raster-contrast": {
+    "type": "number"
+  },
+  "MapboxWms/raster-contrast": {
+    "type": "number"
+  },
+  "mapbox-wms/raster-contrast-key": {
+    "type": "string"
+  },
+  "MapboxWms/raster-contrast-key": {
+    "type": "string"
+  }
+}

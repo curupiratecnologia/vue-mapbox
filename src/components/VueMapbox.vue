@@ -529,8 +529,10 @@ export default {
         this.removeLayer(id)
       }
 
-      // TODO - não esta funcionando, verificar
       let beforeId = this.updateLayerOrder(id)
+      console.log('beforeId')
+      console.log(beforeId)
+
 
       if (options?.source?.constructor?.name === 'Object') {
         // check if we have a id
@@ -601,7 +603,7 @@ export default {
       const layerInstances = this.findLayers(this.$slots.default)
       // console.log('find layer vNode tree')
       // console.timeLog('updateLayerOrder')
-debugger
+
       // check if i have layers in map or in vNodTree
       if (!currentLayers || !layerInstances) {
         // console.warn('Map or layer in vNode not exist')
@@ -617,7 +619,7 @@ debugger
         const component = layer.componentInstance || layer
         const id = get(component, '$data.layerId')
         if (!id) {
-          debugger
+          // debugger
         }
         let zIndex = get(component, '$props.zIndex')
         const index = i
@@ -669,7 +671,7 @@ debugger
         if(!beforeId)
             beforeId = virtualLayerVNodeByID?.[setLayerNameToReturnItBeforeLayerID]
         
-        return beforeId
+        return beforeId?.topLayerId
       }
 
       // Invert loop layers to set they order
@@ -682,7 +684,9 @@ debugger
         if (currentLayersByID?.[currentLayer]?.topLayerId !== topLayer) {
           console.log(`moving layers ${currentLayer} to before layer ${topLayer}`)
           // if (topLayer !== undefined) {
+            if(this.map.getLayer(currentLayer) && this.map.getLayer(topLayer)){
             this.map.moveLayer(currentLayer, topLayer)
+            }
           // }
         }
       }
